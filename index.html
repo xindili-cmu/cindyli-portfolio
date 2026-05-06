@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Cindy Li | Portfolio</title>
+<meta name="description" content="Xindi (Cindy) Li | CMU MISM graduate bridging healthcare, AI/NLP, and climate finance. Portfolio showcasing data-driven research, ESG analysis, and full-stack projects.">
+<meta name="author" content="Xindi Li">
+<meta property="og:title" content="Cindy Li | Portfolio">
+<meta property="og:description" content="Healthcare × AI × Climate Finance | CMU MISM graduate building end-to-end data pipelines and LLM-powered research agents.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cindy Li | Portfolio">
+<meta name="twitter:description" content="Healthcare × AI × Climate Finance | CMU MISM graduate building end-to-end data pipelines and LLM-powered research agents.">
+<meta name="theme-color" content="#000000">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+img{-webkit-transform:translateZ(0);transform:translateZ(0)}
+:root{--bg:#000;--fg:#fff;--muted:rgba(255,255,255,0.45);
+  --accent:#c8a2ff;--accent2:#7dd3fc;
+  --serif:'Playfair Display',serif;--sans:'Inter',sans-serif}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--fg)}
+body{font-family:var(--sans);overflow-x:hidden;cursor:none}
+@media(max-width:768px){body{cursor:auto}}
+::selection{background:var(--accent);color:#000}
+
+/* CURSOR */
+.cursor-circle{position:fixed;z-index:9999;pointer-events:none;
+  width:240px;height:240px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,0.12);
+  transform:translate(-50%,-50%);transition:opacity .3s,width .25s,height .25s}
+.cursor-dot{position:fixed;z-index:9999;pointer-events:none;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+  transform:translate(-50%,-50%);transition:transform .15s}
+
+/* GRID */
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.04}
+.grid-bg canvas{width:100%;height:100%}
+
+
+.img-expand{position:fixed!important;top:50%!important;left:50%!important;transform:translate(-50%,-50%) rotate(0deg)!important;width:80vw!important;max-width:900px!important;z-index:9999!important;float:none!important;border-radius:12px!important;box-shadow:0 24px 80px rgba(0,0,0,0.8)!important;opacity:1!important;cursor:zoom-out!important}
+/* HERO */
+.hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.data-rain{position:absolute;inset:0;z-index:1;pointer-events:none}
+/* HERO TRIPTYCH */
+.hero-triptych{position:relative;z-index:2;display:flex;align-items:center;justify-content:center}
+.hero-triptych .floating-icons{position:absolute;inset:-80px -40px 0 -40px;z-index:5;pointer-events:none}
+.hero-triptych .triptych-inner{display:flex;align-items:center;justify-content:center;gap:0}
+
+.floating-icons{position:absolute;z-index:3;inset:0;pointer-events:none}
+.float-icon{position:absolute;filter:drop-shadow(0 8px 28px rgba(200,162,255,0.2))}
+.float-icon img{width:100%;height:100%;object-fit:contain}
+.icon-medkit{width:clamp(55px,7vw,100px);top:-40px;left:12%}
+.icon-laptop{width:clamp(70px,9vw,130px);top:-55px;left:50%;transform:translateX(-50%)}
+.icon-bulb{width:clamp(65px,8vw,110px);top:-35px;right:12%}
+@keyframes floatA{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-18px) rotate(2deg)}}
+@keyframes floatB{0%,100%{transform:translateY(0) rotate(1deg) translateX(-50%)}50%{transform:translateY(-14px) rotate(-2deg) translateX(-50%)}}
+@keyframes floatC{0%,100%{transform:translateY(0) rotate(2deg)}50%{transform:translateY(-20px) rotate(-1deg)}}
+.icon-medkit{animation:floatA 4.2s ease-in-out infinite}
+.icon-laptop{animation:floatB 3.6s ease-in-out infinite .4s}
+.icon-bulb{animation:floatC 4.8s ease-in-out infinite .8s}
+
+.echo{position:fixed;z-index:4;pointer-events:none;border:1.5px solid rgba(200,162,255,0.2);
+  border-radius:50%;width:240px;height:240px;transform:translate(-50%,-50%);animation:echoFade .6s ease-out forwards}
+@keyframes echoFade{0%{opacity:.4;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)}}
+
+/* Hero UI */
+.hero-ui{position:absolute;z-index:20;pointer-events:none}
+.hero-ui *{pointer-events:auto}
+.hero-name{top:48px;left:56px;line-height:1.1;letter-spacing:-.02em}
+.hero-name .full{font-family:var(--serif);font-size:clamp(2.8rem,6vw,5rem);font-weight:700;display:block}
+.hero-name .nick{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:400;font-style:italic;display:block;color:var(--muted);margin-top:4px}
+.hero-nav{top:48px;right:56px;display:flex;gap:28px;align-items:center}
+.hero-nav a{font-size:clamp(.72rem,1vw,.88rem);letter-spacing:.12em;text-transform:uppercase;
+  text-decoration:none;color:var(--muted);cursor:none;position:relative;transition:color .3s}
+.hero-nav a:hover{color:var(--fg)}
+.hero-nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--fg);transition:width .3s}
+.hero-nav a:hover::after{width:100%}
+.hero-socials{bottom:48px;right:56px;display:flex;gap:20px}
+.hero-socials a{display:block;width:28px;height:28px;color:var(--fg);cursor:none;transition:color .3s}
+.hero-socials a:hover{color:var(--accent)}
+.hero-socials a svg{width:100%;height:100%;fill:currentColor}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:20;
+  display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase}
+.hero-scroll .arrow{width:1px;height:40px;background:linear-gradient(to bottom,var(--muted),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+.tri-card{position:relative;width:clamp(160px,20vw,260px);aspect-ratio:9/16;overflow:hidden;
+  border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.6);transition:transform .4s ease;flex-shrink:0}
+.tri-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.tri-card .tri-reveal{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;
+  -webkit-mask-image:radial-gradient(circle 140px,#000 75%,transparent 100%);mask-image:radial-gradient(circle 140px,#000 75%,transparent 100%);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:-9999px -9999px;mask-position:-9999px -9999px}
+.tri-card:nth-child(1){transform:rotate(-5deg) translateX(20px);z-index:1}
+.tri-card:nth-child(2){z-index:3;transform:scale(1.08)}
+.tri-card:nth-child(3){transform:rotate(5deg) translateX(-20px);z-index:1}
+.tri-card:nth-child(1):hover{transform:rotate(-3deg) translateX(20px) scale(1.03)}
+.tri-card:nth-child(3):hover{transform:rotate(3deg) translateX(-20px) scale(1.03)}
+.tri-card:nth-child(2):hover{transform:scale(1.12)}
+.tri-label{position:absolute;bottom:0;left:0;right:0;z-index:5;padding:20px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.7));pointer-events:none}
+.tri-label span{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.7)}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 auto}
+.section-label{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-weight:500}
+.section-title{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:700;margin-bottom:48px;line-height:1.15}
+.section-divider{width:60px;height:1px;background:linear-gradient(to right,var(--accent),transparent);margin-bottom:48px}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.about-text{font-size:1.05rem;line-height:1.85;color:rgba(255,255,255,0.75);font-weight:300}
+.about-text strong{color:var(--fg);font-weight:500}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.stat{padding:24px 0;border-top:1px solid rgba(255,255,255,0.08)}
+.stat-num{font-family:var(--serif);font-size:2.4rem;font-weight:700;color:var(--accent);line-height:1}
+.stat-label{font-size:.8rem;color:var(--muted);margin-top:8px;letter-spacing:.05em}
+
+
+.project-card img.active{position:fixed!important;top:50%;left:50%;transform:translate(-50%,-50%) rotate(0deg)!important;
+  width:80vw!important;max-width:900px;z-index:999;border-radius:12px!important;box-shadow:0 20px 60px rgba(0,0,0,0.8)!important;
+  float:none!important;margin:0!important;cursor:zoom-out}
+.project-card img.active::before{content:'';position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:-1}
+/* EXPERIENCE */
+.exp-item{display:grid;grid-template-columns:200px 1fr;gap:48px;padding:40px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.exp-item.has-gallery{grid-template-columns:200px 1fr 140px}
+.exp-item:first-child{border-top:1px solid rgba(255,255,255,0.06)}
+.exp-period{font-size:.85rem;color:var(--muted);padding-top:4px}
+.exp-role{font-size:1.15rem;font-weight:600;margin-bottom:4px}
+.exp-company{font-size:.95rem;color:var(--accent);margin-bottom:12px;font-weight:400}
+.exp-desc{font-size:.9rem;line-height:1.75;color:rgba(255,255,255,0.6);font-weight:300}
+
+/* Mini photo album */
+.exp-album{position:relative;width:140px;height:180px;align-self:center;flex-shrink:0}
+.exp-album img{position:absolute;width:120px;height:160px;object-fit:cover;border-radius:8px;
+  border:1px solid rgba(255,255,255,0.1);cursor:none;transition:all .4s ease;box-shadow:0 4px 16px rgba(0,0,0,0.4)}
+.exp-album img:nth-child(1){top:0;left:0;z-index:2;transform:rotate(-3deg)}
+.exp-album img:nth-child(2){top:8px;left:16px;z-index:1;transform:rotate(3deg)}
+.exp-album img:nth-child(3){top:4px;left:8px;z-index:0;transform:rotate(0deg)}
+.exp-album:hover img:nth-child(1){transform:rotate(-6deg) translate(-12px,-4px);z-index:3}
+.exp-album:hover img:nth-child(2){transform:rotate(6deg) translate(12px,-4px);z-index:2}
+.exp-album:hover img:nth-child(3){transform:rotate(0deg) translate(0,8px);z-index:1}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:32px}
+.project-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+  border-radius:16px;padding:36px;transition:border-color .3s,transform .3s;cursor:none}
+.project-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+.project-tag{display:inline-block;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;
+  padding:4px 12px;border-radius:100px;border:1px solid rgba(200,162,255,0.25);color:var(--accent);margin-bottom:16px}
+.project-name{font-family:var(--serif);font-size:1.25rem;font-weight:600;margin-bottom:10px}
+.project-desc{font-size:.88rem;line-height:1.7;color:rgba(255,255,255,0.55);font-weight:300}
+.project-tech{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.project-tech span{font-size:.7rem;padding:3px 10px;border-radius:100px;background:rgba(255,255,255,0.05);color:var(--muted)}
+
+/* SKILLS */
+.skills-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+.skill-group h3{font-size:.95rem;font-weight:600;margin-bottom:20px}
+.skill-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.skill-list li{font-size:.88rem;color:rgba(255,255,255,0.6);font-weight:300;padding-left:16px;position:relative}
+.skill-list li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+
+/* EDUCATION */
+.edu-item{padding:32px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.edu-item:first-child{border-top:1px solid rgba(255,255,255,0.06)}
+.edu-degree{font-size:1.1rem;font-weight:600}
+.edu-school{font-size:.95rem;color:var(--accent);margin-top:2px}
+.edu-detail{font-size:.85rem;color:var(--muted);margin-top:8px;line-height:1.6}
+
+/* CONTACT */
+.contact-section{text-align:center;padding:160px 8vw}
+.contact-section .section-title{margin-bottom:24px}
+.contact-sub{font-size:1.05rem;color:var(--muted);font-weight:300;margin-bottom:40px}
+.contact-links{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+.contact-links a{font-size:.9rem;color:var(--fg);text-decoration:none;padding:12px 28px;
+  border:1px solid rgba(255,255,255,0.15);border-radius:100px;transition:all .3s;cursor:none}
+.contact-links a:hover{border-color:var(--accent);color:var(--accent)}
+
+/* FADE-IN */
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ═══ TABLET ═══ */
+@media(max-width:1024px){
+  .skills-cols{grid-template-columns:repeat(2,1fr) !important;gap:32px}
+  .projects-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+  .about-grid{gap:40px}
+  .exp-item.has-gallery{grid-template-columns:160px 1fr 120px}
+}
+
+/* ═══ MOBILE ═══ */
+@media(max-width:768px){
+  /* Disable custom cursor on touch devices */
+  body{cursor:auto}
+  .cursor-circle,.cursor-dot{display:none !important}
+  a,.project-card,.exp-album img{cursor:auto !important}
+
+  /* Hero layout */
+  .hero{height:auto;min-height:100vh;padding:20px 0}
+  .hero-name{top:16px;left:16px}
+  .hero-name .full{font-size:clamp(1.8rem,8vw,2.8rem)}
+  .hero-name .nick{font-size:clamp(1rem,4vw,1.4rem)}
+
+  /* Nav → hamburger-style collapsible */
+  .hero-nav{position:fixed!important;top:0!important;right:0!important;z-index:10000!important;
+    flex-direction:column;align-items:flex-end;gap:0;
+    background:rgba(0,0,0,0.95);backdrop-filter:blur(12px);
+    padding:60px 24px 24px;border-radius:0 0 0 16px;
+    max-width:200px;width:200px;pointer-events:auto!important;
+    transform:translateX(100%)!important;transition:transform .35s ease!important}
+  .hero-nav.open{transform:translateX(0)!important}
+  .hero-nav a{font-size:.85rem;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:100%;cursor:pointer!important;pointer-events:auto!important}
+  .hero-nav a:last-child{border-bottom:none}
+
+  /* Hamburger button (injected via JS) */
+  .nav-toggle{position:fixed;top:16px;right:16px;z-index:10001;
+    width:36px;height:36px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;
+    background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.12);
+    border-radius:8px;cursor:pointer;pointer-events:auto!important;-webkit-tap-highlight-color:transparent}
+  .nav-toggle span{display:block;width:18px;height:1.5px;background:var(--fg);transition:all .3s}
+  .nav-toggle.active span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+  .nav-toggle.active span:nth-child(2){opacity:0}
+  .nav-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+
+  /* Triptych */
+  .tri-card{width:clamp(100px,28vw,160px)}
+  .tri-card:nth-child(1){transform:translateX(10px)}
+  .tri-card:nth-child(2){transform:none}
+  .tri-card:nth-child(3){transform:translateX(-10px)}
+  .tri-label span{font-size:.6rem}
+
+  /* Floating icons smaller on mobile */
+  .icon-medkit{width:clamp(40px,6vw,55px);top:-25px}
+  .icon-laptop{width:clamp(50px,7vw,70px);top:-35px}
+  .icon-bulb{width:clamp(45px,6.5vw,60px);top:-20px}
+
+  /* Hero socials & scroll */
+  .hero-socials{bottom:20px;right:20px;gap:14px}
+  .hero-socials a{width:22px;height:22px}
+  .hero-scroll{bottom:20px;font-size:.6rem}
+  .hero-scroll .arrow{height:28px}
+
+  /* Sections */
+  section{padding:60px 5vw}
+  .section-title{font-size:clamp(1.6rem,6vw,2.2rem);margin-bottom:32px}
+  .section-divider{margin-bottom:32px}
+
+  /* About */
+  .about-grid{grid-template-columns:1fr;gap:32px}
+  .about-text{font-size:.95rem;line-height:1.75}
+  .about-stats{grid-template-columns:1fr 1fr;gap:20px}
+  .stat-num{font-size:1.8rem}
+
+  /* Experience */
+  .exp-item{grid-template-columns:1fr;gap:8px;padding:28px 0}
+  .exp-item.has-gallery{grid-template-columns:1fr}
+  .exp-period{font-size:.78rem;margin-bottom:4px}
+  .exp-role{font-size:1.05rem}
+  .exp-album{margin-top:16px;width:100px;height:140px}
+  .exp-album img{width:90px;height:120px;transform:none!important}
+
+  /* Projects */
+  .projects-grid{grid-template-columns:1fr}
+  .project-card{padding:24px}
+  .project-card img{width:60px !important;height:60px !important;transform:none!important;float:none!important;margin:8px 0 0!important}
+
+  /* Skills */
+  .skills-cols{grid-template-columns:1fr !important;gap:28px}
+
+  /* Education */
+  .edu-item{padding:24px 0}
+
+  /* Contact */
+  .contact-section{padding:80px 5vw}
+  .contact-links{flex-direction:column;align-items:center;gap:16px}
+  .contact-links a{width:100%;max-width:280px;text-align:center}
+
+  /* Image expand - fullscreen on mobile */
+  .img-expand,.project-card img.active{width:92vw !important;max-width:none !important}
+}
+
+/* ═══ SMALL PHONE ═══ */
+@media(max-width:400px){
+  .tri-card{width:clamp(80px,26vw,120px)}
+  .hero-name .full{font-size:1.6rem}
+  .about-stats{grid-template-columns:1fr}
+  .stat{padding:16px 0}
+}
+
+/* ═══ MANIFESTO ═══ */
+.manifesto{position:relative;padding:15vh 8vw;overflow:hidden;min-height:100vh;display:flex;align-items:center}
+.manifesto-inner{width:100%;perspective:1000px}
+.manifesto-row{position:relative;transform-style:preserve-3d;margin-bottom:0.1em}
+.manifesto-text{font-family:var(--serif);font-size:clamp(20px,4.5vw,64px);font-weight:700;
+  line-height:1.2;color:var(--fg);transform-origin:50% 100%;will-change:transform;
+  white-space:nowrap}
+.manifesto-text .accent-word{color:var(--accent)}
+.manifesto-back{position:absolute;bottom:0;left:0;width:100%;height:0;
+  background:linear-gradient(to bottom,rgba(200,162,255,0.06),transparent);
+  pointer-events:none;transform-origin:50% 0%;border-radius:0 0 8px 8px}
+@media(max-width:768px){
+  .manifesto{padding:10vh 5vw;min-height:80vh}
+  .manifesto-text{font-size:clamp(18px,5vw,36px);white-space:normal}
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"><canvas id="gridCanvas"></canvas></div>
+<div class="cursor-circle" id="cursorCircle"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero">
+  <canvas class="data-rain" id="dataRain"></canvas>
+  <div class="hero-triptych" id="heroTriptych">
+    <div class="floating-icons">
+      <div class="float-icon icon-medkit" data-depth="0.03"><img id="iconMedkit" alt=""></div>
+      <div class="float-icon icon-laptop" data-depth="0.025"><img id="iconLaptop" alt=""></div>
+      <div class="float-icon icon-bulb" data-depth="0.035"><img id="iconBulb" alt=""></div>
+    </div>
+    <div class="triptych-inner">
+      <div class="tri-card" data-tri="0">
+        <img class="tri-base" id="triBase0" alt="">
+        <div class="tri-reveal"><img class="tri-rev-img" id="triRev0" alt=""></div>
+        <div class="tri-label"><span>Healthcare</span></div>
+      </div>
+      <div class="tri-card" data-tri="1">
+        <img class="tri-base" id="triBase1" alt="">
+        <div class="tri-reveal"><img class="tri-rev-img" id="triRev1" alt=""></div>
+        <div class="tri-label"><span>Motorsport</span></div>
+      </div>
+      <div class="tri-card" data-tri="2">
+        <img class="tri-base" id="triBase2" alt="">
+        <div class="tri-reveal"><img class="tri-rev-img" id="triRev2" alt=""></div>
+        <div class="tri-label"><span>Business</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-ui hero-name" id="nameEl"><span class="full">Xindi Li</span><span class="nick">(Cindy)</span></div>
+  <nav class="hero-ui hero-nav" id="navEl">
+    <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a>
+    <a href="#skills">Skills</a><a href="#research">Research</a><a href="#education">Education</a><a href="#contact">Contact</a>
+  </nav>
+  <div class="hero-ui hero-socials" id="socialsEl">
+    <a href="https://instagram.com" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+    <a href="https://twitter.com" target="_blank" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    <a href="https://linkedin.com/in/cindy-li333" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="arrow"></div></div>
+</section>
+
+<!-- ═══ MANIFESTO ═══ -->
+<section class="manifesto" id="manifesto">
+  <div class="manifesto-inner">
+    <div class="manifesto-row"><div class="manifesto-text">From <span class="accent-word">clinical healing</span> room</div><div class="manifesto-back"></div></div>
+    <div class="manifesto-row"><div class="manifesto-text">to <span class="accent-word">algorithmic</span> frontiers.</div><div class="manifesto-back"></div></div>
+    <div class="manifesto-row"><div class="manifesto-text">I decode <span class="accent-word">complexity</span></div><div class="manifesto-back"></div></div>
+    <div class="manifesto-row"><div class="manifesto-text">into actionable <span class="accent-word">intelligence.</span></div><div class="manifesto-back"></div></div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="fade-in">
+    <span class="section-label">01 / About</span>
+    <h2 class="section-title">From Sports Medicine to Data Science<br>A Cross-Disciplinary Journey</h2>
+    <div class="section-divider"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>MSPPM-DA candidate at <strong>Carnegie Mellon University's Heinz College</strong> (Class of 2027), with <strong>Dean's List</strong> honors. Trained as a <strong>physical therapist</strong> at Beijing Sport University, with clinical experience at Shanghai Disney Resort, national-level sports training centers, and rehabilitation hospitals and clinics. Transitioned into <strong>international health insurance</strong> at MSH China, serving 5,000+ clients and achieving 239% KPI, while also building a background in <strong>private equity due diligence</strong> across Asia & UK.</p><br>
+      </div>
+      <div class="about-stats">
+        <div class="stat"><div class="stat-num">5000+</div><div class="stat-label">Clients Served (MSH)</div></div>
+        <div class="stat"><div class="stat-num">239%</div><div class="stat-label">KPI Achievement 2024</div></div>
+        <div class="stat"><div class="stat-num">95%</div><div class="stat-label">RAG Pipeline Accuracy</div></div>
+        <div class="stat"><div class="stat-num">150+</div><div class="stat-label">Patients Treated</div></div>
+      </div>
+    </div>
+    <div style="margin-top:32px;max-width:100%;color:var(--fg);font-size:1.05rem;line-height:1.8;font-family:var(--sans)">
+      <p>Now as an <strong>ESG CFA holder</strong> and a member of <strong>CMU Energy Club</strong>, I'm focused on <strong>climate finance</strong>, <strong>NLP/AI systems</strong>, and <strong>data-driven policy analysis</strong>. I build end-to-end pipelines, from SEC EDGAR ingestion to LLM-powered research agents, and translate complex data into actionable intelligence.</p><br>
+      <p style="color:var(--accent)">Naturally <strong>curious, optimistic, and creative</strong>, I've been a self-driven learner since childhood, always eager to identify problems and find solutions. I thrive in <strong>collaborative environments</strong>, leveraging my own strengths alongside others' to create shared value. With <strong>wide-ranging interests</strong> and a strong work ethic, I embrace pressure, stay persistent, and see every task through to the end.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience">
+  <div class="fade-in">
+    <span class="section-label">02 / Experience</span>
+    <h2 class="section-title">Where I've Made Impact</h2>
+    <div class="section-divider"></div>
+    <div class="exp-item"><div class="exp-period">2026</div><div><div class="exp-role">Climate Finance Intern</div><div class="exp-company">Fusion Park · Financial Advisory</div><div class="exp-desc">Supporting deSPAC transaction analysis for NuCube (SMR company). Building intelligence systems using n8n, SEC EDGAR API, NewsAPI, and PostgreSQL.</div></div></div>
+    <div class="exp-item"><div class="exp-period">2026</div><div><div class="exp-role">IR Associate</div><div class="exp-company">Atlas Coalition (WeTheAtlas)</div><div class="exp-desc">Built unified master investor database of 2,181 contacts, interactive network visualization tool, and automated event guest database consolidation via Google Apps Script.</div></div></div>
+    <div class="exp-item"><div class="exp-period">2025</div><div><div class="exp-role">Data Analyst Intern</div><div class="exp-company">Thiele Law PLLC · Pittsburgh, PA</div><div class="exp-desc">Managed HubSpot CRM database with 3,500+ leads, integrating Mailchimp for targeted email campaigns achieving 18% open rate; conducted data cleaning, segmentation, and lead scoring to optimize client acquisition funnel. Analyzed 10+ competitor consultation models across legal directory platforms (Avvo, FindLaw, Justia); developed organic growth strategy with projected 21% traffic growth. Built an AI-powered CRM analytics agent integrating HubSpot API and Claude API, automating weekly data extraction, trend analysis, and report generation, reducing manual reporting by ~3 hours/week.</div></div></div>
+    <div class="exp-item"><div class="exp-period">2023 – 2025</div><div><div class="exp-role">Business Development Manager (Full-Time)</div><div class="exp-company">MSH China (万欣和) · International Health Insurance</div><div class="exp-desc">Exceeded annual targets by 239%, generating over $1M in new business through strategic client acquisition and data-driven market positioning. Managed a global portfolio of 2,000+ high-net-worth and corporate clients, delivering tailored medical insurance solutions leveraging comprehensive knowledge of China's tiered healthcare network. Analyzed group insurance client portfolios, synthesizing claims trends, utilization patterns, and risk profiles across 50K+ insured lives to inform underwriting decisions and renewal strategy. Led end-to-end design of a customized corporate insurance plan for an enterprise with 50K+ employees, partnering with actuarial teams on risk assessment, pricing, and product structuring.</div></div></div>
+        <div class="exp-item"><div class="exp-period">2024 – 2025</div><div><div class="exp-role">Consulting Intern, Growth X</div><div class="exp-company">Illuminera Marketing Strategy Consulting (an IQVIA business) · Shanghai</div><div class="exp-desc">Analyzed customer engagement data for brand-marketing projects, delivering data-driven insights contributing to a projected 15% increase in engagement for a major consumer goods client. Automated social-media data extraction (Chanmama) and conducted statistical analysis using Python, uncovering a high-value consumer segment responsible for 30% of client revenue. Conducted secondary research using corporate filings (10-K/20-F) and industry reports, co-authored 4 market-trend papers with senior consultants; led 10+ expert interviews shaping project strategy.</div></div></div>
+<div class="exp-item"><div class="exp-period">2025</div><div><div class="exp-role">PE Due Diligence Analyst</div><div class="exp-company">Multiple Firms · China, SE Asia, UK</div><div class="exp-desc">Led commercial due diligence across TMT, automotive, and waste-to-energy. Market sizing, competitive mapping, management interviews across Asia and UK.</div></div></div>
+    <div class="exp-item has-gallery"><div class="exp-period">2023</div><div><div class="exp-role">Sports Medicine Intern</div><div class="exp-company">Beijing United Family Hospital (怡德医院) · Beijing</div><div class="exp-desc">Managed 60+ patient case records, operated hospital registration system independently. Processed 30+ commercial insurance pre-authorizations. Delivered rehabilitation training to Chinese and international patients.</div></div><div class="exp-album" onclick="toggleAlbum(event)"><img src="exp_beijing_united_1.jpg"><img src="exp_beijing_united_2.jpg" alt="Eden Hospital Team" alt="Medical Station"></div></div>
+    <div class="exp-item has-gallery"><div class="exp-period">2023</div><div><div class="exp-role">Sports Protection Specialist & AED Consultant</div><div class="exp-company">FuDao Health Consulting · Beijing & Shanghai</div><div class="exp-desc">Earned first-aid instructor certification. Authored 10 original WeChat articles on AED policy achieving 5,000+ views and 200+ shares. Managed B2B client outreach for 5+ enterprises in Beijing. Specialized in lower-limb biomechanics testing and orthotic assessment.</div></div><div class="exp-album" onclick="toggleAlbum(event)"><img src="fudoo.JPG"><img src="公众号.JPG"></div></div>
+    <div class="exp-item has-gallery"><div class="exp-period">2023</div><div><div class="exp-role">Research Staff (Intern)</div><div class="exp-company">National Winter Sports Training & Research Center · Beijing</div><div class="exp-desc">Delivered rehabilitation training and treatment for national-level athletes. Managed athlete recovery archives and filed condition reports. Operated ultrasound, infrared, high-energy laser, short-wave, and electrotherapy equipment. Proficient in physiological function testing (Isokinetic dynamometer, body composition analyzer).</div></div><div class="exp-album" onclick="toggleAlbum(event)"><img src="exp_research_center_1.jpg" alt="Research Center"><img src="exp_research_center_2.jpg" alt="Balance testing"><img src="exp_research_center_3.jpg" alt="BSU Gym Rehab"></div></div>
+    <div class="exp-item has-gallery"><div class="exp-period">2022 – 2023</div><div><div class="exp-role">Athletic Trainer (Intern)</div><div class="exp-company">Shanghai Disney Resort · Shanghai</div><div class="exp-desc">Collaborated with senior athletic trainers and performance management teams. Analyzed acute and chronic performer injuries, designed targeted conditioning programs to reduce injury risk. Delivered rehabilitation and first-aid support to cast members. Maintained injury data and developed preventive training protocols.</div></div><div class="exp-album" onclick="toggleAlbum(event)"><img src="disney.jpg" alt="Disney farewell"></div></div>
+    <div class="exp-item"><div class="exp-period">2022 – 2023</div><div><div class="exp-role">Physical Therapist (Intern)</div><div class="exp-company">Spine & Pain Rehabilitation Center (施柏恩) · Shanghai</div><div class="exp-desc">Assessed physiological function and mobility data for 60+ patients. Co-designed physical therapy prescriptions with physicians. Independently managed 30+ patient cases through full treatment cycles.</div></div></div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects">
+  <div class="fade-in">
+    <span class="section-label">03 / Projects</span>
+    <h2 class="section-title">Selected Work</h2>
+    <div class="section-divider"></div>
+    <div class="projects-grid">
+      <div class="project-card"><span class="project-tag">AI / NLP</span><div class="project-name">Climate Finance Research Agent</div><div class="project-desc">LLM-powered agent for climate finance research. Tavily search, Claude Sonnet, Chroma Cloud vector DB with Streamlit interface.</div><div class="project-tech"><span>Python</span><span>Claude API</span><span>Chroma</span><span>Streamlit</span></div><a href="https://climate-finance-agent-3si7owfgvopjqrgcqc9wg8.streamlit.app/" target="_blank" style="display:inline-block;margin-top:12px;font-size:.78rem;color:var(--accent);text-decoration:none;border:1px solid rgba(200,162,255,0.3);padding:6px 16px;border-radius:100px;cursor:none;transition:all .3s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='rgba(200,162,255,0.3)'">View Live Demo →</a></div>
+      <div class="project-card"><span class="project-tag">NLP / RAG</span><div class="project-name">Hybrid RAG Pipeline (CMU 11-711)</div><div class="project-desc">BM25 + FAISS hybrid retrieval with Qwen2.5-3B-Instruct, achieving 95% accuracy. Deployed on AWS EC2.</div><div class="project-tech"><span>Python</span><span>FAISS</span><span>HuggingFace</span><span>AWS</span></div><img src="3.png" class="project-thumb" style="width:16.6%;border-radius:6px;float:right;margin:-60px 0 10px 16px;transform:rotate(1.5deg);border:1px solid rgba(255,255,255,0.1);opacity:0.9;box-shadow:0 4px 16px rgba(0,0,0,0.4);cursor:pointer" alt="RAG Pipeline" onclick="showLightbox(this.src)"></div>
+      <div class="project-card"><span class="project-tag">Data Viz</span><div class="project-name">U.S. Power Generation Dashboard</div><div class="project-desc">Interactive county-level dashboard combining EIA, EPA eGRID, and CDC PLACES data for energy-health nexus analysis.</div><div class="project-tech"><span>R</span><span>Posit</span><span>EIA API</span><span>eGRID</span></div><a href="https://xindili-pa-electric-station.share.connect.posit.cloud/" target="_blank" style="display:inline-block;margin-top:12px;font-size:.78rem;color:var(--accent);text-decoration:none;border:1px solid rgba(200,162,255,0.3);padding:6px 16px;border-radius:100px;cursor:none;transition:all .3s">View Live Dashboard →</a></div>
+      <div class="project-card"><span class="project-tag">Automation</span><div class="project-name">Fusion Park Intel System</div><div class="project-desc">Automated deal intelligence pipeline using n8n, SEC EDGAR API, and NewsAPI for climate/energy deSPAC monitoring.</div><div class="project-tech"><span>n8n</span><span>PostgreSQL</span><span>EDGAR</span><span>NewsAPI</span></div><img src="2.png" class="project-thumb" style="width:16.6%;border-radius:6px;float:right;margin:-60px 0 10px 16px;transform:rotate(-2deg);border:1px solid rgba(255,255,255,0.1);opacity:0.9;box-shadow:0 4px 16px rgba(0,0,0,0.4);cursor:pointer" alt="n8n Workflow" onclick="showLightbox(this.src)"></div>
+      <div class="project-card"><span class="project-tag">CRM</span><div class="project-name">AI-Powered CRM Analytics System</div><div class="project-desc">AI-powered CRM analytics agent integrating HubSpot API and Claude API. Automated weekly data extraction, trend analysis, and business report generation, reducing manual reporting by ~3 hours/week. Outputs to Tableau dashboards for 3,500+ leads.</div><div class="project-tech"><span>HubSpot</span><span>Claude API</span><span>Tableau</span></div><img src="1.png" class="project-thumb" style="width:16.6%;border-radius:6px;float:right;margin:-60px 0 10px 16px;transform:rotate(2deg);border:1px solid rgba(255,255,255,0.1);opacity:0.9;box-shadow:0 4px 16px rgba(0,0,0,0.4);cursor:pointer" alt="CRM Pipeline" onclick="showLightbox(this.src)"></div>
+      <div class="project-card"><span class="project-tag">Research</span><div class="project-name">IRCoT Multi-Hop QA</div><div class="project-desc">Reproduced IRCoT baseline on HotpotQA. Debugged BM25 retriever, improved EM from 12.0% to 21.8%.</div><div class="project-tech"><span>Python</span><span>BM25</span><span>HotpotQA</span><!--img_removed src="proj_ircot.jpg" style="width:16.6%;border-radius:6px;float:right;margin-top:-60px;transform:rotate(2deg);border:1px solid rgba(255,255,255,0.1);opacity:0.85;box-shadow:0 4px 16px rgba(0,0,0,0.4);cursor:pointer" img_end--></div></div>
+      <div class="project-card"><span class="project-tag">Sales Analytics</span><div class="project-name">Insurance Enrollment Dashboard</div><div class="project-desc">Interactive HTML/Chart.js sales dashboard tracking 401 leads and 72.8% enrollment rate. Key insight: group chat engagement lifts conversion from 53% to 90%, informing outreach strategy optimization.</div><div class="project-tech"><span>HTML</span><span>Chart.js</span><span>Sales Analytics</span><span>CRM</span></div><a href="https://soft-moxie-5a3def.netlify.app/" target="_blank" rel="noopener" style="display:inline-block;margin-top:12px;font-size:.78rem;color:var(--accent);text-decoration:none;border:1px solid rgba(200,162,255,0.3);padding:6px 16px;border-radius:100px;cursor:none;transition:all .3s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='rgba(200,162,255,0.3)'">View Live Demo →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills">
+  <div class="fade-in">
+    <span class="section-label">04 / Skills</span>
+    <h2 class="section-title">Technical Toolkit</h2>
+    <div class="section-divider"></div>
+    <div class="skills-cols" style="grid-template-columns:repeat(4,1fr)">
+      <div class="skill-group"><h3>Languages & Analytics</h3><ul class="skill-list"><li>Python (Pandas, Scikit-learn, PyTorch)</li><li>R (Shiny, ggplot2, tidyverse)</li><li>SQL (PostgreSQL, MySQL)</li><li>JavaScript / HTML / CSS</li><li>Stata (Econometrics)</li></ul></div>
+      <div class="skill-group"><h3>AI / ML / NLP</h3><ul class="skill-list"><li>LLM APIs (Claude, OpenAI)</li><li>RAG Systems (FAISS, Chroma)</li><li>HuggingFace Transformers</li><li>NLP Pipelines (BM25, Embeddings)</li><li>Neural Networks & Vision Models</li></ul></div>
+      <div class="skill-group"><h3>Tools & Platforms</h3><ul class="skill-list"><li>Tableau / Power BI</li><li>AWS EC2 / Cloud Deploy</li><li>n8n / Workflow Automation</li><li>HubSpot / CRM Analytics</li><li>Git / GitHub</li></ul></div>
+      <div class="skill-group"><h3>Clinical & Sports Medicine</h3><ul class="skill-list"><li>Human Anatomy & Physiology</li><li>Biochemistry & Pathology</li><li>Rehabilitation Assessment</li><li>Musculoskeletal & Neurological Rehab</li><li>Cardiopulmonary & Chronic Disease Rehab</li><li>Exercise Therapy Principles</li><li>Sports Injury & Medical Supervision</li><li>Rehabilitation Psychology</li><li>Human Development & Biomechanics</li></ul></div>
+    </div>
+    <div style="margin-top:40px;padding:28px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px">
+        <div>
+          <div style="font-size:.85rem;color:var(--muted);margin-bottom:4px">2023 – 2025</div>
+          <div style="font-size:1.15rem;font-weight:600;margin-bottom:4px">Physical Therapist & Course Instructor</div>
+          <div style="font-size:.95rem;color:var(--accent);margin-bottom:12px">True Health Chiropractic (凯诺康美式整脊中心) · Shanghai</div>
+          <div style="font-size:.9rem;line-height:1.75;color:rgba(255,255,255,0.6);font-weight:300">Designed physical therapy protocols and delivered specialized courses (CPR, Hyperblade myofascial release, myofascial decompression). Proficient in thoracic spine thrust and cervical spine thrust manipulation techniques. Provided clinical PT services and course consulting part-time.</div>
+        </div>
+        <div style="display:flex;gap:12px;flex-shrink:0">
+          <img src="IMG_5795.GIF" style="height:120px;width:auto;border-radius:8px">
+          <img src="IMG_5796.GIF" style="height:120px;width:auto;border-radius:8px">
+          <img src="IMG_5797.GIF" style="height:120px;width:auto;border-radius:8px">
+          <img src="thrust_cropped.GIF" style="height:120px;width:auto;border-radius:8px">
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:28px;padding:28px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px">
+        <div>
+          <img src="shuttlecock.png" style="height:72px;width:auto;margin-bottom:2px">
+          <div style="font-size:1.15rem;font-weight:600;margin-bottom:4px">Badminton Coach</div>
+          <div style="font-size:.9rem;line-height:1.75;color:rgba(255,255,255,0.6);font-weight:300">Certified badminton referee (Level 3) with coaching experience. Provided technical training, match strategy guidance, and injury prevention advice to recreational and competitive players.</div>
+        </div>
+        <div style="display:flex;gap:12px;flex-shrink:0">
+          <img src="badminton1.JPG" style="height:120px;width:auto;border-radius:8px">
+          <img src="badminton2.jpg" style="height:120px;width:auto;border-radius:8px">
+          <img src="badminton3.JPG" style="height:120px;width:auto;border-radius:8px">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESEARCH ═══ -->
+<section id="research">
+  <div class="fade-in">
+    <span class="section-label">05 / Research & Publications</span>
+    <h2 class="section-title">Academic Research</h2>
+    <div class="section-divider"></div>
+
+    <div class="project-card" style="margin-bottom:32px">
+      <div style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+        <span class="project-tag">National Innovation Project</span>
+        <span class="project-tag" style="border-color:rgba(125,211,252,0.4);color:var(--accent2)">First Prize Paper</span>
+        <span class="project-tag" style="border-color:rgba(125,211,252,0.4);color:var(--accent2)">Core Journal</span>
+      </div>
+      <div class="project-name">Comparative Effects of Exercise Therapies on Flexible Flatfoot in College Students</div>
+      <div class="project-name" style="font-size:0.88rem;font-weight:400;color:var(--muted);margin-bottom:14px;font-family:var(--sans)">不同运动疗法对大学生柔性扁平足干预效果对比</div>
+      <div class="project-desc" style="margin-bottom:12px">Core member of this research project (2021–2022), which received <strong style="color:var(--fg)">national-level funding</strong> under China's College Student Innovation & Entrepreneurship Program. The study was awarded <strong style="color:var(--fg)">First Prize for Outstanding Paper</strong> at the 2022 Chinese Association of Rehabilitation Medicine Annual Conference.</div>
+      <div class="project-desc">Published in <strong style="color:var(--fg)">Chinese Journal of Sports Medicine</strong> (中国运动医学杂志), 2024 Vol.9, a core Chinese academic journal (CNKI indexed).</div>
+      <div class="project-tech" style="margin-top:16px">
+        <span>DOI: 10.16038/j.1000-6710.2024.09.010</span>
+        <span>CNKI: 10.26914/c.cnkihy.2023.001876</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+        <span class="project-tag">Thesis · Outstanding</span>
+        <span class="project-tag" style="border-color:rgba(125,211,252,0.4);color:var(--accent2)">Case Study</span>
+      </div>
+      <div class="project-name">Chronic Low Back Pain Rehabilitation Case Study: Elite Youth Basketball Athlete</div>
+      <div class="project-name" style="font-size:0.88rem;font-weight:400;color:var(--muted);margin-bottom:14px;font-family:var(--sans)">优秀青少年篮球运动员慢性腰痛运动康复个案分析</div>
+      <div class="project-desc" style="margin-bottom:12px">Selected as <strong style="color:var(--fg)">Outstanding Undergraduate Thesis</strong> by the BSU School of Sports Medicine & Rehabilitation (Class of 2023). The athlete treated during this study went on to earn <strong style="color:var(--fg)">Most Valuable Player</strong> at the 2023 National U17 Women's Basketball League Top-16 Finals.</div>
+      <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+      <img src="elite athlete·.JPG" style="height:150px;width:auto;border-radius:8px;cursor:pointer" alt="Elite Athlete Case Study" onclick="showLightbox(this.src)">
+      <img src="thesis_main.jpg" style="height:150px;width:auto;border-radius:8px;cursor:pointer" alt="Basketball rehabilitation"><img src="thesis_basketball.jpg" style="height:150px;width:auto;border-radius:8px;cursor:pointer" alt="Thesis defense">
+      </div>
+      </div>
+      </div>
+</section>
+
+<!-- ═══ EDUCATION ═══ -->
+<section id="education">
+  <div class="fade-in">
+    <span class="section-label">06 / Education</span>
+    <h2 class="section-title">Academic Foundation</h2>
+    <div class="section-divider"></div>
+    <div class="edu-item"><div style="display:flex;align-items:flex-start;gap:20px"><img src="edu_cmu.png" style="width:56px;height:56px;border-radius:50%;flex-shrink:0;margin-top:2px" alt="CMU"><div><div class="edu-degree">M.S. Public Policy & Management, Data Analytics</div><div class="edu-school">Carnegie Mellon University · Heinz College</div><div class="edu-detail">Class of 2027 · Dean's List · STEM-designated<br>Advanced NLP, ML Foundations, Applied Econometrics, Decision Analysis, Operations Research</div></div></div>
+    <div class="edu-item"><div style="display:flex;align-items:flex-start;gap:20px"><img src="edu_bsu.png" style="width:56px;height:56px;border-radius:50%;flex-shrink:0;margin-top:2px" alt="BSU"><div><div class="edu-degree">B.S. Sports Rehabilitation / Exercise Science</div><div class="edu-school">Beijing Sport University (北京体育大学) · School of Sports Medicine & Rehabilitation</div><div class="edu-detail">Head of Rehabilitation Division, Student Union (2019–2022), organized campus rehabilitation skills competitions and coordinated first-aid coverage for all campus sporting events (100+ events)<br>Head of Emergency Response, School of Sports Medicine (2020–2022), led first-aid teams for annual campus athletics as chief emergency coordinator<br><span style="color:var(--accent)">4-year Consecutive Scholarship Recipient · 4-year Outstanding Student (三好学生)</span><br><span style="color:var(--accent)">University of Sydney, Doctor of Physiotherapy (DPT) Offer Holder</span><div style="margin-top:16px"><img src="edu_sydney.jpg" style="width:25%;border-radius:8px;border:1px solid rgba(255,255,255,0.08);opacity:0.85" alt="Sydney DPT Offer"></div></div></div></div>
+
+    <div style="margin-top:56px">
+      <h3 style="font-size:.95rem;font-weight:600;margin-bottom:24px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;font-family:var(--sans)">Certifications</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start">
+        <span class="project-tech" style="margin:0"><span>ESG CFA Holder</span></span>
+        <span class="project-tech" style="margin:0"><span>Chinese Red Cross First Aid Certificate</span></span>
+        <span class="project-tech" style="margin:0"><span>AHA Heartsaver Certified</span></span>
+        <span class="project-tech" style="margin:0"><span>AHA-HS Instructor Certified</span></span>
+        <span class="project-tech" style="margin:0"><span>Sports Agent Level 3</span></span>
+        <span class="project-tech" style="margin:0"><span>Tennis Referee Level 3</span></span>
+        <span class="project-tech" style="margin:0"><span>Badminton Referee Level 3</span></span>
+        <span class="project-tech" style="margin:0"><span>Table Tennis Referee Level 3</span></span>
+        <span class="project-tech" style="margin:0"><span>WSET Level 2 (Pass with Distinction)</span></span>
+        <span class="project-tech" style="margin:0"><span>Motorcycle License</span></span>
+      </div>
+      <style>
+        @keyframes scroll-left {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      </style>
+      <div style="overflow:hidden;margin-top:24px;width:100%">
+        <div style="display:flex;gap:24px;animation:scroll-left 20s linear infinite;width:max-content" onmouseenter="this.style.animationPlayState='paused'" onmouseleave="this.style.animationPlayState='running'">
+          <img src="esg cfa.png" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img src="claude certificate.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img src="aha certified.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img src="wset.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img src="esg cfa.png" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img src="claude certificate.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img src="aha certified.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img src="wset.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:48px">
+      <h3 style="font-size:.95rem;font-weight:600;margin-bottom:24px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;font-family:var(--sans)">Volunteer · 200+ hours</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <span class="project-tech" style="margin:0"><span>2019 FIS Snowboard Big Air World Cup, Beijing</span></span>
+        <span class="project-tech" style="margin:0"><span>2021 National Food Safety Competition</span></span>
+        <span class="project-tech" style="margin:0"><span>2023 Shanghai Marathon</span></span>
+        <span class="project-tech" style="margin:0"><span>2023 Spartan DEKA Medical Volunteer</span></span>
+        <span class="project-tech" style="margin:0"><span>2024 Paris Olympic Qualifier (Shanghai)</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="contact-section" id="contact">
+  <div class="fade-in">
+    <span class="section-label">07 / Connect</span>
+    <h2 class="section-title">Let's Build Something Together</h2>
+    <p class="contact-sub">Open to opportunities in climate finance, data analytics, healthcare tech, and AI/ML engineering.</p>
+    <div class="contact-links">
+      <a href="mailto:cindylips2001@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/cindy-li333" target="_blank">LinkedIn</a>
+      <a href="https://github.com/xindili-cmu" target="_blank">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<div style="text-align:center;padding:60px 0 80px;font-family:var(--serif);font-size:clamp(1.2rem,2.5vw,1.8rem);font-style:italic;color:var(--muted);letter-spacing:.05em;opacity:0.6">
+  to be continued...
+</div>
+
+<script>
+document.getElementById('iconLaptop').src='icon_laptop.png';
+document.getElementById('iconMedkit').src='icon_medkit.png';
+document.getElementById('iconBulb').src='icon_bulb.png';
+document.getElementById('triBase0').src='22070137a0675c9a19215c2a121509b5.jpg';
+/* OLD_TRIBASE0_REMOVED: 'tri_base0.jpg'; */
+document.getElementById('triRev0').src='a3acf861148f2eff266ebd3303d08a5c.jpg';
+/* OLD_TRIREV0_REMOVED: 'tri_rev0.jpg'; */
+document.getElementById('triBase1').src='tri_base1.jpg';
+document.getElementById('triRev1').src='tri_rev1.jpg';
+document.getElementById('triBase2').src='tri_base2.jpg';
+document.getElementById('triRev2').src='tri_rev2.jpg';
+
+// ═══ STATE ═══
+const mouse={x:innerWidth/2,y:innerHeight/2};
+const cursor={x:mouse.x,y:mouse.y};
+const dot={x:mouse.x,y:mouse.y};
+let prev={x:cursor.x,y:cursor.y};
+let lastEcho=0;
+
+const cursorCircle=document.getElementById('cursorCircle');
+const cursorDot=document.getElementById('cursorDot');
+const nameEl=document.getElementById('nameEl');
+const navEl=document.getElementById('navEl');
+const socialsEl=document.getElementById('socialsEl');
+const floatIcons=document.querySelectorAll('.float-icon');
+const heroSection=document.getElementById('hero');
+const triCards=document.querySelectorAll('.tri-card');
+
+// ═══ DATA RAIN ═══
+const drCanvas=document.getElementById('dataRain');
+const drCtx=drCanvas.getContext('2d');
+const dataChars='01{}[]<>/$#%&=+-.,:;_|~@!?πΣΔλ→←↑↓∞≈∫∂√';
+const particles=[];
+const PARTICLE_COUNT=220;
+const REPEL_RADIUS=140;
+const REPEL_FORCE=6;
+
+function resizeDR(){
+  drCanvas.width=heroSection.offsetWidth;
+  drCanvas.height=heroSection.offsetHeight;
+}
+resizeDR();
+addEventListener('resize',resizeDR);
+
+class Particle{
+  constructor(){this.reset(true)}
+  reset(init){
+    this.x=Math.random()*drCanvas.width;
+    this.y=init?Math.random()*drCanvas.height:-20;
+    this.char=dataChars[Math.floor(Math.random()*dataChars.length)];
+    this.size=Math.random()*120+60;
+    this.alpha=Math.random()*0.3+0.06;
+    this.vy=Math.random()*0.8+0.2;
+    this.vx=(Math.random()-0.5)*0.4;
+    this.ox=this.x;this.oy=this.y;
+    this.rotation=(Math.random()-0.5)*0.5;
+    this.rot=Math.random()*Math.PI*2;
+    this.pulse=Math.random()*Math.PI*2;
+    this.pulseSpeed=Math.random()*0.02+0.005;
+    this.color=Math.random()>0.7?'rgba(200,162,255,':'rgba(125,211,252,';
+    if(Math.random()>0.5)this.color='rgba(255,255,255,';
+  }
+  update(mx,my){
+    this.pulse+=this.pulseSpeed;
+    const a=this.alpha*(0.7+0.3*Math.sin(this.pulse));
+    this.y+=this.vy;
+    this.x+=this.vx;
+    this.rot+=this.rotation*0.01;
+    // repel from cursor
+    const dx=this.x-mx,dy=this.y-my;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<REPEL_RADIUS&&dist>0){
+      const force=((REPEL_RADIUS-dist)/REPEL_RADIUS)*REPEL_FORCE;
+      this.x+=dx/dist*force;
+      this.y+=dy/dist*force;
+      this.alpha=Math.min(this.alpha+0.02,0.5);
+    }
+    if(this.y>drCanvas.height+30||this.x<-30||this.x>drCanvas.width+30)this.reset(false);
+    return a;
+  }
+  draw(ctx,a){
+    ctx.save();
+    ctx.translate(this.x,this.y);
+    ctx.rotate(this.rot);
+    ctx.font=this.size+'px monospace';
+    ctx.fillStyle=this.color+a+')';
+    ctx.fillText(this.char,0,0);
+    ctx.restore();
+  }
+}
+
+for(let i=0;i<PARTICLE_COUNT;i++)particles.push(new Particle());
+
+function drawDataRain(mx,my){
+  drCtx.clearRect(0,0,drCanvas.width,drCanvas.height);
+  for(const p of particles){
+    const a=p.update(mx,my);
+    p.draw(drCtx,a);
+  }
+}
+
+// ═══ GRID ═══
+const gc=document.getElementById('gridCanvas');
+const ctx=gc.getContext('2d');
+function resizeG(){gc.width=innerWidth;gc.height=innerHeight}
+resizeG();addEventListener('resize',resizeG);
+function drawGrid(mx,my){
+  ctx.clearRect(0,0,gc.width,gc.height);
+  const sp=70;ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=0.5;
+  for(let i=0;i<=gc.width/sp+1;i++){const bx=i*sp,dx=(mx-bx)/gc.width*5;ctx.beginPath();ctx.moveTo(bx+dx,0);ctx.lineTo(bx-dx,gc.height);ctx.stroke()}
+  for(let j=0;j<=gc.height/sp+1;j++){const by=j*sp,dy=(my-by)/gc.height*5;ctx.beginPath();ctx.moveTo(0,by+dy);ctx.lineTo(gc.width,by-dy);ctx.stroke()}
+}
+
+document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
+
+function spawnEcho(x,y){
+  const el=document.createElement('div');el.className='echo';
+  el.style.left=x+'px';el.style.top=y+'px';
+  document.body.appendChild(el);el.addEventListener('animationend',()=>el.remove());
+}
+
+// ═══ SCROLL OBSERVER ═══
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.15});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+// ═══ TRIPTYCH REVEAL ═══
+function updateTriReveal(card, cx, cy){
+  const rect=card.getBoundingClientRect();
+  const rev=card.querySelector('.tri-reveal');
+  if(!rev)return;
+  // Check if cursor is near the card
+  const localX=cx-rect.left;
+  const localY=cy-rect.top;
+  const inBounds=localX>-80&&localX<rect.width+80&&localY>-80&&localY<rect.height+80;
+  if(inBounds){
+    rev.style.webkitMaskPosition=`${localX-140}px ${localY-140}px`;
+    rev.style.maskPosition=`${localX-140}px ${localY-140}px`;
+  }else{
+    rev.style.webkitMaskPosition='-9999px -9999px';
+    rev.style.maskPosition='-9999px -9999px';
+  }
+}
+
+
+// ═══ MANIFESTO FOLD ═══
+(function(){
+  gsap.registerPlugin(ScrollTrigger);
+  const rows=document.querySelectorAll('.manifesto-row');
+  const targetAngle=88;
+  rows.forEach(function(row){
+    const text=row.querySelector('.manifesto-text');
+    const back=row.querySelector('.manifesto-back');
+    const originalHTML=text.innerHTML;
+    const originalText=text.textContent;
+    ScrollTrigger.create({
+      trigger:row,
+      start:'top 85%',
+      end:'top 15%',
+      scrub:true,
+      onUpdate:function(self){
+        var p=self.progress;
+        // fold angle: 0 → targetAngle as you scroll past
+        var angle=targetAngle*p;
+        gsap.set(text,{rotationX:angle,transformOrigin:'50% 100%'});
+        // fade out as it folds
+        gsap.set(text,{opacity:1-p*0.7});
+        // truncate characters
+        var charCount=Math.max(1,Math.floor(originalText.length*(1-p)));
+        // Rebuild with accent spans intact up to charCount
+        var plainIndex=0;var result='';var inTag=false;
+        for(var i=0;i<originalHTML.length;i++){
+          if(originalHTML[i]==='<'){inTag=true;result+=originalHTML[i];continue;}
+          if(originalHTML[i]==='>'){inTag=false;result+=originalHTML[i];continue;}
+          if(inTag){result+=originalHTML[i];continue;}
+          plainIndex++;
+          if(plainIndex<=charCount){result+=originalHTML[i];}
+        }
+        text.innerHTML=result;
+        // shadow behind fold
+        if(back){
+          var h=p*40;
+          back.style.height=h+'px';
+          back.style.opacity=p*0.8;
+        }
+      }
+    });
+  });
+})();
+
+// ═══ LIGHTBOX ═══
+function showLightbox(src){
+  let overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:pointer';
+  let img=document.createElement('img');
+  img.src=src;
+  img.style.cssText='max-width:90vw;max-height:85vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.6)';
+  overlay.appendChild(img);
+  overlay.onclick=function(){document.body.removeChild(overlay)};
+  document.body.appendChild(overlay);
+}
+
+// ═══ ALBUM CLICK ═══
+function toggleAlbum(e){
+  const img = e.target;
+  if(img.tagName!=='IMG')return;
+  showLightbox(img.src);
+}
+
+// ═══ PROJECT IMAGE CLICK ═══
+document.querySelectorAll('.project-card img').forEach(img=>{
+  img.addEventListener('click',function(){
+    if(this.classList.contains('active')){
+      this.classList.remove('active');
+      const ov=document.getElementById('imgOverlay');
+      if(ov)ov.remove();
+    } else {
+      this.classList.add('active');
+      const ov=document.createElement('div');
+      ov.id='imgOverlay';
+      ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:998;cursor:pointer';
+      ov.onclick=()=>{this.classList.remove('active');ov.remove()};
+      document.body.appendChild(ov);
+    }
+  });
+});
+
+// ═══ ANIMATE ═══
+function animate(){
+  cursor.x+=(mouse.x-cursor.x)*0.08;
+  cursor.y+=(mouse.y-cursor.y)*0.08;
+  dot.x+=(mouse.x-dot.x)*0.25;
+  dot.y+=(mouse.y-dot.y)*0.25;
+
+  const heroRect=heroSection.getBoundingClientRect();
+  const inHero=heroRect.top<innerHeight&&heroRect.bottom>0;
+
+  // Triptych reveal
+  triCards.forEach(card=>updateTriReveal(card,cursor.x,cursor.y));
+
+  cursorCircle.style.left=cursor.x+'px';cursorCircle.style.top=cursor.y+'px';
+  cursorDot.style.left=dot.x+'px';cursorDot.style.top=dot.y+'px';
+
+  const dx=cursor.x-prev.x,dy=cursor.y-prev.y;
+  const spd=Math.sqrt(dx*dx+dy*dy);
+  const now=performance.now();
+  if(spd>14&&now-lastEcho>90){spawnEcho(cursor.x,cursor.y);lastEcho=now}
+  prev.x=cursor.x;prev.y=cursor.y;
+
+  drawGrid(cursor.x,cursor.y);
+
+  if(inHero){
+    const cx=mouse.x-innerWidth/2,cy=mouse.y-innerHeight/2;
+    nameEl.style.transform=`translate(${-cx*.015}px,${-cy*.015}px)`;
+    navEl.style.transform=`translate(${-cx*.01}px,${-cy*.01}px)`;
+    socialsEl.style.transform=`translate(${-cx*.01}px,${-cy*.01}px)`;
+    floatIcons.forEach(icon=>{
+      const d=parseFloat(icon.dataset.depth)||0.02;
+      icon.style.marginLeft=(-cx*d)+'px';icon.style.marginTop=(-cy*d)+'px';
+    });
+    // Data rain - pass cursor relative to hero
+    drawDataRain(cursor.x-heroRect.left,cursor.y-heroRect.top);
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+
+document.addEventListener('mouseleave',()=>{cursorCircle.style.opacity='0';cursorDot.style.opacity='0'});
+document.addEventListener('mouseenter',()=>{cursorCircle.style.opacity='1';cursorDot.style.opacity='1'});
+document.querySelectorAll('a,.project-card,.tri-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursorCircle.style.width='60px';cursorCircle.style.height='60px';cursorDot.style.transform='translate(-50%,-50%) scale(2)'});
+  el.addEventListener('mouseleave',()=>{cursorCircle.style.width='240px';cursorCircle.style.height='240px';cursorDot.style.transform='translate(-50%,-50%) scale(1)'});
+});
+
+// ═══ MOBILE NAV TOGGLE ═══
+(function(){
+  if(window.innerWidth>768) return;
+  var nav=document.getElementById('navEl');
+  // Remove hero-ui class on mobile to avoid pointer-events:none conflict
+  nav.classList.remove('hero-ui');
+  var toggle=document.createElement('button');
+  toggle.className='nav-toggle';
+  toggle.setAttribute('aria-label','Menu');
+  toggle.innerHTML='<span></span><span></span><span></span>';
+  document.body.appendChild(toggle);
+  var isOpen=false;
+  var justToggled=false;
+  function openMenu(){isOpen=true;toggle.classList.add('active');nav.classList.add('open');}
+  function closeMenu(){isOpen=false;toggle.classList.remove('active');nav.classList.remove('open');}
+  toggle.addEventListener('click',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    justToggled=true;
+    setTimeout(function(){justToggled=false;},100);
+    if(isOpen){closeMenu();}else{openMenu();}
+  });
+  toggle.addEventListener('touchend',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    justToggled=true;
+    setTimeout(function(){justToggled=false;},100);
+    if(isOpen){closeMenu();}else{openMenu();}
+  },{passive:false});
+  // Close on tap outside
+  document.addEventListener('click',function(e){
+    if(justToggled) return;
+    if(isOpen && !nav.contains(e.target) && !toggle.contains(e.target)){closeMenu();}
+  });
+  document.addEventListener('touchend',function(e){
+    if(justToggled) return;
+    if(isOpen && !nav.contains(e.target) && !toggle.contains(e.target)){closeMenu();}
+  });
+  // Close when a link is clicked
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',closeMenu);
+  });
+  // Re-check on resize
+  window.addEventListener('resize',()=>{
+    if(window.innerWidth>768){
+      toggle.style.display='none';
+      nav.classList.remove('open');
+      nav.style.transform='';
+    } else {
+      toggle.style.display='flex';
+    }
+  });
+})();
+
+// ═══ DISABLE DATA RAIN ON MOBILE (performance) ═══
+if(window.innerWidth<=768){
+  drCanvas.style.opacity='0.3';
+}
+</script>
+</body>
+</html>
