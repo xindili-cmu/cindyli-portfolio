@@ -769,7 +769,7 @@ function updateTriReveal(card, cx, cy){
         var angle=targetAngle*currentProgress;
         gsap.set(text,{rotationX:angle,transformOrigin:'50% 100%'});
         // char count: 0 → full → 0
-        var charCount=Math.max(0,Math.floor(originalText.length*(1-Math.abs(currentProgress))));
+        var charCount=Math.max(0,Math.round(originalText.length*(1-Math.abs(currentProgress)*0.95)));
         text.innerHTML=truncateHTML(originalHTML,originalText,charCount);
         // opacity
         gsap.set(text,{opacity:1-Math.abs(currentProgress)*0.6});
