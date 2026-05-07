@@ -733,42 +733,51 @@ function updateTriReveal(card, cx, cy){
 // ═══ MANIFESTO FOLD ═══
 (function(){
   gsap.registerPlugin(ScrollTrigger);
-  const rows=document.querySelectorAll('.manifesto-row');
-  const targetAngle=88;
+  var rows=document.querySelectorAll('.manifesto-row');
+  var targetAngle=90;
   rows.forEach(function(row){
-    const text=row.querySelector('.manifesto-text');
-    const back=row.querySelector('.manifesto-back');
-    const originalHTML=text.innerHTML;
-    const originalText=text.textContent;
+    var text=row.querySelector('.manifesto-text');
+    var back=row.querySelector('.manifesto-back');
+    var originalHTML=text.innerHTML;
+    var originalText=text.textContent;
+    function truncateHTML(html,plain,maxChars){
+      var pi=0,result='',inTag=false;
+      for(var i=0;i<html.length;i++){
+        if(html[i]==='<'){inTag=true;result+=html[i];continue;}
+        if(html[i]==='>'){inTag=false;result+=html[i];continue;}
+        if(inTag){result+=html[i];continue;}
+        pi++;
+        if(pi<=maxChars)result+=html[i];
+      }
+      return result;
+    }
     ScrollTrigger.create({
       trigger:row,
-      start:'top 85%',
-      end:'top 15%',
+      start:'top bottom',
+      end:'bottom top',
       scrub:true,
-      onUpdate:function(self){
-        var p=self.progress;
-        // fold angle: 0 → targetAngle as you scroll past
-        var angle=targetAngle*p;
+      onUpdate:function(){
+        var vh=window.innerHeight;
+        var rect=row.getBoundingClientRect();
+        var rowCenter=rect.top+rect.height/2;
+        var range=(vh+rect.height)/2;
+        // currentProgress: -1(entering) → 0(center) → +1(leaving)
+        var currentProgress=(range-rowCenter)/range;
+        // clamp
+        currentProgress=Math.max(-1,Math.min(1,currentProgress));
+        // rotation: -90° → 0° → +90°
+        var angle=targetAngle*currentProgress;
         gsap.set(text,{rotationX:angle,transformOrigin:'50% 100%'});
-        // fade out as it folds
-        gsap.set(text,{opacity:1-p*0.7});
-        // truncate characters
-        var charCount=Math.max(1,Math.floor(originalText.length*(1-p)));
-        // Rebuild with accent spans intact up to charCount
-        var plainIndex=0;var result='';var inTag=false;
-        for(var i=0;i<originalHTML.length;i++){
-          if(originalHTML[i]==='<'){inTag=true;result+=originalHTML[i];continue;}
-          if(originalHTML[i]==='>'){inTag=false;result+=originalHTML[i];continue;}
-          if(inTag){result+=originalHTML[i];continue;}
-          plainIndex++;
-          if(plainIndex<=charCount){result+=originalHTML[i];}
-        }
-        text.innerHTML=result;
-        // shadow behind fold
+        // char count: 0 → full → 0
+        var charCount=Math.max(0,Math.floor(originalText.length*(1-Math.abs(currentProgress))));
+        text.innerHTML=truncateHTML(originalHTML,originalText,charCount);
+        // opacity
+        gsap.set(text,{opacity:1-Math.abs(currentProgress)*0.6});
+        // shadow
         if(back){
-          var h=p*40;
+          var h=Math.abs(currentProgress)*40;
           back.style.height=h+'px';
-          back.style.opacity=p*0.8;
+          back.style.opacity=Math.abs(currentProgress)*0.8;
         }
       }
     });
