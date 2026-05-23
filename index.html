@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Cindy Li | Portfolio</title>
-<meta name="description" content="Xindi (Cindy) Li | CMU MSPPM-DA graduate bridging healthcare, AI/NLP, and climate finance. Portfolio showcasing data-driven research, ESG analysis, and full-stack projects.">
+<meta name="description" content="Xindi (Cindy) Li | CMU MISM graduate bridging healthcare, AI/NLP, and climate finance. Portfolio showcasing data-driven research, ESG analysis, and full-stack projects.">
 <meta name="author" content="Xindi Li">
 <meta property="og:title" content="Cindy Li | Portfolio">
-<meta property="og:description" content="Healthcare × AI × Climate Finance | CMU MSPPM-DA graduate building end-to-end data pipelines and LLM-powered research agents.">
+<meta property="og:description" content="Healthcare × AI × Climate Finance | CMU MISM graduate building end-to-end data pipelines and LLM-powered research agents.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cindy Li | Portfolio">
-<meta name="twitter:description" content="Healthcare × AI × Climate Finance | CMU MSPPM-DA graduate building end-to-end data pipelines and LLM-powered research agents.">
+<meta name="twitter:description" content="Healthcare × AI × Climate Finance | CMU MISM graduate building end-to-end data pipelines and LLM-powered research agents.">
 <meta name="theme-color" content="#000000">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -84,6 +84,23 @@ body{font-family:var(--sans);overflow-x:hidden;cursor:none}
 .hero-nav a:hover{color:var(--fg)}
 .hero-nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--fg);transition:width .3s}
 .hero-nav a:hover::after{width:100%}
+.hero-nav a.resume-cta{margin-left:22px;padding:9px 20px 9px 22px;border:none;border-radius:100px;
+  color:#1a0a2a;background:var(--accent);
+  font-weight:600;letter-spacing:.06em;
+  transition:background .3s,transform .25s,box-shadow .3s,color .3s;
+  display:inline-flex;align-items:center;gap:10px;
+  box-shadow:0 4px 24px rgba(200,162,255,0.35),0 0 0 0 rgba(200,162,255,0.6);
+  animation:resumePulse 2.6s ease-in-out infinite}
+.hero-nav a.resume-cta::after{display:none}
+.hero-nav a.resume-cta .dl{font-family:var(--serif);font-variation-settings:var(--serif-disp);
+  font-size:1.05rem;line-height:1;color:#1a0a2a;transition:transform .3s ease;font-weight:700}
+.hero-nav a.resume-cta:hover{background:var(--accent2);color:#3d1f08;transform:translateY(-2px);
+  box-shadow:0 6px 32px rgba(255,179,138,0.45)}
+.hero-nav a.resume-cta:hover .dl{transform:translateY(3px);color:#3d1f08}
+@keyframes resumePulse{
+  0%,100%{box-shadow:0 4px 24px rgba(200,162,255,0.35),0 0 0 0 rgba(200,162,255,0.5)}
+  50%    {box-shadow:0 4px 24px rgba(200,162,255,0.35),0 0 0 14px rgba(200,162,255,0)}
+}
 .hero-socials{bottom:48px;right:56px;display:flex;gap:20px}
 .hero-socials a{display:block;width:28px;height:28px;color:var(--fg);cursor:none;transition:color .3s}
 .hero-socials a:hover{color:var(--accent)}
@@ -108,6 +125,9 @@ body{font-family:var(--sans);overflow-x:hidden;cursor:none}
 .tri-label{position:absolute;bottom:0;left:0;right:0;z-index:5;padding:20px;
   background:linear-gradient(transparent,rgba(0,0,0,0.7));pointer-events:none}
 .tri-label span{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.7)}
+.tri-card.healthcare-card .tri-label span{color:var(--accent2)}
+.tri-card.motorsport-card .tri-label span{color:#fff}
+.tri-card.business-card .tri-label span{color:var(--accent)}
 
 /* SECTIONS */
 section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 auto}
@@ -117,7 +137,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 
 /* ABOUT */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
-.about-text{font-size:1.05rem;line-height:1.85;color:rgba(255,255,255,0.75);font-weight:300}
+.about-text{font-family:var(--serif);font-variation-settings:'opsz' 16,'SOFT' 50;font-size:1.1rem;line-height:1.72;color:rgba(255,255,255,0.78);font-weight:400;letter-spacing:-.005em}
 .about-text strong{color:var(--fg);font-weight:500}
 .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:32px}
 .stat{padding:24px 0;border-top:1px solid rgba(255,255,255,0.08);position:relative;overflow:hidden}
@@ -129,6 +149,8 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 .about-stats .stat:nth-child(4).counted::after{animation-delay:.45s}
 @keyframes statSweep{0%{width:0;left:0}60%{width:100%;left:0}100%{width:0;left:100%}}
 .stat-num{font-family:var(--serif);font-size:2.4rem;font-weight:700;color:var(--accent);line-height:1;font-variant-numeric:tabular-nums}
+.stat.peach .stat-num{color:var(--accent2)}
+.stat.peach::after{background:linear-gradient(to right,var(--accent2),transparent)}
 .stat-label{font-size:.8rem;color:var(--muted);margin-top:8px;letter-spacing:.05em}
 
 
@@ -136,14 +158,50 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   width:80vw!important;max-width:900px;z-index:999;border-radius:12px!important;box-shadow:0 20px 60px rgba(0,0,0,0.8)!important;
   float:none!important;margin:0!important;cursor:zoom-out}
 .project-card img.active::before{content:'';position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:-1}
-/* EXPERIENCE */
-.exp-item{display:grid;grid-template-columns:200px 1fr;gap:48px;padding:40px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+/* EXPERIENCE — editorial timeline */
+#experience .fade-in{position:relative}
+#experience .fade-in::before{content:'';position:absolute;left:200px;top:130px;bottom:0;width:1px;
+  background:linear-gradient(to bottom,rgba(200,162,255,0.4),rgba(200,162,255,0.05) 60%,transparent);pointer-events:none}
+.exp-item{display:grid;grid-template-columns:200px 1fr;gap:48px;padding:36px 0;border-bottom:1px solid rgba(255,255,255,0.06);position:relative;transition:background .35s ease}
 .exp-item.has-gallery{grid-template-columns:200px 1fr 140px}
-.exp-item:first-child{border-top:1px solid rgba(255,255,255,0.06)}
-.exp-period{font-size:.85rem;color:var(--muted);padding-top:4px}
-.exp-role{font-size:1.15rem;font-weight:600;margin-bottom:4px}
-.exp-company{font-size:.95rem;color:var(--accent);margin-bottom:12px;font-weight:400}
-.exp-desc{font-size:.9rem;line-height:1.75;color:rgba(255,255,255,0.6);font-weight:300}
+.exp-item:first-of-type{border-top:1px solid rgba(255,255,255,0.06)}
+.exp-item::before{content:'';position:absolute;left:196px;top:48px;width:9px;height:9px;border-radius:50%;
+  background:#0a0a0a;border:1.5px solid var(--accent);box-shadow:0 0 0 6px rgba(200,162,255,0.06);transition:all .35s ease;z-index:2}
+.exp-item:hover{background:linear-gradient(to right,rgba(200,162,255,0.02),transparent 60%)}
+.exp-item:hover::before{background:var(--accent);box-shadow:0 0 0 6px rgba(200,162,255,0.12),0 0 18px rgba(200,162,255,0.4)}
+
+/* Healthcare rows — peach palette */
+.exp-item.healthcare::before{border-color:var(--accent2);box-shadow:0 0 0 6px rgba(255,179,138,0.06)}
+.exp-item.healthcare:hover{background:linear-gradient(to right,rgba(255,179,138,0.025),transparent 60%)}
+.exp-item.healthcare:hover::before{background:var(--accent2);box-shadow:0 0 0 6px rgba(255,179,138,0.15),0 0 18px rgba(255,179,138,0.45)}
+.exp-item.healthcare .exp-company{color:var(--accent2)}
+.exp-item.healthcare .exp-desc .m{color:#ffd8a8;background:linear-gradient(transparent 70%,rgba(255,216,168,0.18) 70%);font-weight:600}
+.exp-item.healthcare .exp-desc .m-peach{color:#ffd8a8;background:linear-gradient(transparent 70%,rgba(255,216,168,0.18) 70%);font-weight:600}
+.exp-period{display:flex;flex-direction:column;justify-content:flex-start;padding-top:0;gap:8px}
+.exp-period .year{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-size:2.1rem;font-weight:700;color:var(--fg);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.exp-period .year .range{font-style:italic;font-weight:400;color:var(--muted);font-size:1.4rem;display:block;margin-top:2px}
+.exp-cat{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;font-weight:500;color:var(--accent2);margin-bottom:8px;display:inline-block}
+.exp-cat.finance{color:var(--accent2)}
+.exp-cat.data{color:var(--accent)}
+.exp-cat.consulting{color:#e0c4ff}
+.exp-cat.healthcare{color:var(--accent2-deep)}
+.exp-role{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-size:1.32rem;font-weight:600;margin-bottom:6px;letter-spacing:-.01em;line-height:1.2}
+.exp-company{font-size:.92rem;color:var(--accent);margin-bottom:14px;font-weight:400}
+.exp-co{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+.exp-co .exp-company{margin-bottom:0}
+.exp-logo{width:22px;height:22px;border-radius:50%;flex-shrink:0;background:#fff;
+  display:flex;align-items:center;justify-content:center;font-family:var(--serif);
+  font-variation-settings:var(--serif-disp);font-style:italic;font-size:11px;color:#1a0a2a;font-weight:700;
+  box-shadow:0 2px 8px rgba(0,0,0,0.45);overflow:hidden;letter-spacing:-.01em}
+.exp-logo img{width:100%;height:100%;object-fit:cover;display:block}
+.exp-desc{font-size:.92rem;line-height:1.78;color:rgba(255,255,255,0.65);font-weight:300}
+.exp-desc .m{color:#dfc9ff;font-weight:600;font-variant-numeric:tabular-nums;background:linear-gradient(transparent 70%,rgba(223,201,255,0.18) 70%);padding:0 2px}
+.exp-desc .m-peach{color:#dfc9ff;font-weight:600;font-variant-numeric:tabular-nums;background:linear-gradient(transparent 70%,rgba(223,201,255,0.18) 70%);padding:0 2px}
+.exp-desc strong{color:var(--fg);font-weight:500}
+.exp-desc ul.bullets{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.exp-desc ul.bullets li{position:relative;padding-left:18px;line-height:1.7}
+.exp-desc ul.bullets li::before{content:'';position:absolute;left:0;top:11px;width:10px;height:1px;background:var(--accent);border-radius:1px}
+.exp-item.healthcare .exp-desc ul.bullets li::before{background:var(--accent2)}
 
 /* Mini photo album */
 .exp-album{position:relative;width:140px;height:180px;align-self:center;flex-shrink:0}
@@ -161,6 +219,8 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 .project-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
   border-radius:16px;padding:36px;transition:border-color .3s,transform .3s;cursor:none}
 .project-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+.project-card.healthcare:hover{border-color:var(--accent2)}
+.project-card.healthcare .project-tag{border-color:rgba(255,179,138,0.35);color:var(--accent2)}
 .project-tag{display:inline-block;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;
   padding:4px 12px;border-radius:100px;border:1px solid rgba(200,162,255,0.25);color:var(--accent);margin-bottom:16px}
 .project-name{font-family:var(--serif);font-size:1.25rem;font-weight:600;margin-bottom:10px}
@@ -168,32 +228,205 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 .project-tech{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .project-tech span{font-size:.7rem;padding:3px 10px;border-radius:100px;background:rgba(255,255,255,0.05);color:var(--muted)}
 
-/* SKILLS */
-.skills-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
-.skill-group h3{font-size:.95rem;font-weight:600;margin-bottom:20px}
-.skill-list{list-style:none;display:flex;flex-direction:column;gap:12px}
-.skill-list li{font-size:.88rem;color:rgba(255,255,255,0.6);font-weight:300;padding-left:16px;position:relative}
-.skill-list li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+/* SKILLS — 2×2 mosaic of stat cards */
+.skills-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.skill-group{position:relative;padding:30px 30px 28px;border:1px solid rgba(255,255,255,0.06);border-radius:18px;background:linear-gradient(140deg,rgba(255,255,255,0.025),rgba(255,255,255,0.005));transition:border-color .35s ease,transform .35s ease,background .35s ease}
+.skill-group::before{content:attr(data-num);position:absolute;top:24px;right:28px;font-family:var(--serif);font-variation-settings:var(--serif-disp);font-style:italic;font-size:42px;font-weight:400;color:rgba(200,162,255,0.18);line-height:1;pointer-events:none;letter-spacing:-.02em}
+.skill-group.warm::before{color:rgba(255,179,138,0.22)}
+.skill-group:hover{border-color:rgba(200,162,255,0.25);transform:translateY(-3px);background:linear-gradient(140deg,rgba(200,162,255,0.045),rgba(255,255,255,0.005))}
+.skill-group.warm:hover{border-color:rgba(255,179,138,0.3);background:linear-gradient(140deg,rgba(255,179,138,0.05),rgba(255,255,255,0.005))}
+.skill-group .sg-tag{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.skill-group.warm .sg-tag{color:var(--accent2)}
+.skill-group .sg-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+.skill-group h3{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-size:1.35rem;font-weight:600;margin-bottom:22px;letter-spacing:-.01em;line-height:1.15;color:var(--fg)}
+.skill-pills{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0}
+.skill-pills li{font-family:var(--sans);font-size:.78rem;font-weight:400;color:rgba(255,255,255,0.72);padding:6px 13px;border-radius:100px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);line-height:1.3;transition:all .25s ease;letter-spacing:.005em}
+.skill-pills li:hover{background:rgba(200,162,255,0.1);border-color:rgba(200,162,255,0.3);color:var(--fg)}
+.skill-group.warm .skill-pills li:hover{background:rgba(255,179,138,0.1);border-color:rgba(255,179,138,0.3)}
+.skill-pills li.featured{background:rgba(200,162,255,0.08);border-color:rgba(200,162,255,0.25);color:var(--accent);font-weight:500}
+.skill-group.warm .skill-pills li.featured{background:rgba(255,179,138,0.08);border-color:rgba(255,179,138,0.3);color:var(--accent2)}
 
-/* EDUCATION */
-.edu-item{padding:32px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
-.edu-item:first-child{border-top:1px solid rgba(255,255,255,0.06)}
-.edu-degree{font-size:1.1rem;font-weight:600}
-.edu-school{font-size:.95rem;color:var(--accent);margin-top:2px}
-.edu-detail{font-size:.85rem;color:var(--muted);margin-top:8px;line-height:1.6}
+/* PRACTICE — side experience cards under skills */
+.practice-row{margin-top:36px}
+.practice-label{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;font-weight:500;color:var(--muted);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.practice-label::before{content:'—';color:var(--accent);font-weight:500;letter-spacing:0}
+.practice-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+.practice-card{position:relative;border:1px solid rgba(255,255,255,0.06);border-radius:18px;background:linear-gradient(140deg,rgba(255,255,255,0.025),rgba(255,255,255,0.005));overflow:hidden;transition:border-color .35s ease,transform .35s ease,background .35s ease;display:flex;flex-direction:column}
+.practice-card:hover{border-color:rgba(200,162,255,0.25);transform:translateY(-3px);background:linear-gradient(140deg,rgba(200,162,255,0.04),rgba(255,255,255,0.005))}
+.practice-card.warm:hover{border-color:rgba(255,179,138,0.3);background:linear-gradient(140deg,rgba(255,179,138,0.05),rgba(255,255,255,0.005))}
+.practice-card .pc-body{padding:26px 28px 22px;flex:1;display:flex;flex-direction:column;gap:6px}
+.practice-card .pc-meta{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--accent);margin-bottom:6px}
+.practice-card.warm .pc-meta{color:var(--accent2)}
+.practice-card .pc-role{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-size:1.28rem;font-weight:600;line-height:1.2;letter-spacing:-.01em;color:var(--fg)}
+.practice-card .pc-org{font-size:.86rem;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.5;margin-bottom:10px}
+.practice-card .pc-org em{font-style:normal;color:var(--fg-dim)}
+.practice-card .pc-desc{font-size:.86rem;line-height:1.7;color:rgba(255,255,255,0.6);font-weight:300}
+.practice-card .pc-media{display:flex;gap:0;padding:0 28px 26px}
+.practice-card .pc-media img{flex:1;min-width:0;height:120px;object-fit:cover;border-radius:6px;border:1px solid rgba(255,255,255,0.08);filter:saturate(.85);transition:filter .3s,transform .3s;cursor:pointer}
+.practice-card .pc-media img:not(:last-child){margin-right:6px}
+.practice-card .pc-media img:hover{filter:saturate(1.15);transform:translateY(-2px)}
+.practice-card.album .pc-media{position:relative;height:140px;padding:0 28px 28px}
+.practice-card.album .pc-media img{position:absolute;width:96px;height:120px;flex:none;transition:transform .35s ease,filter .3s}
+.practice-card.album .pc-media img:nth-child(1){left:28px;top:0;transform:rotate(-4deg);z-index:3}
+.practice-card.album .pc-media img:nth-child(2){left:108px;top:6px;transform:rotate(2deg);z-index:2}
+.practice-card.album .pc-media img:nth-child(3){left:188px;top:-4px;transform:rotate(5deg);z-index:1}
+.practice-card.album:hover .pc-media img:nth-child(1){transform:rotate(-7deg) translate(-8px,-4px)}
+.practice-card.album:hover .pc-media img:nth-child(2){transform:rotate(2deg) translateY(-4px)}
+.practice-card.album:hover .pc-media img:nth-child(3){transform:rotate(8deg) translate(8px,-4px)}
+@media(max-width:1024px){.practice-grid{grid-template-columns:1fr}}
 
-/* CONTACT */
-.contact-section{text-align:center;padding:160px 8vw}
-.contact-section .section-title{margin-bottom:24px}
-.contact-sub{font-size:1.05rem;color:var(--muted);font-weight:300;margin-bottom:40px}
-.contact-links{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
-.contact-links a{font-size:.9rem;color:var(--fg);text-decoration:none;padding:12px 28px;
-  border:1px solid rgba(255,255,255,0.15);border-radius:100px;transition:all .3s;cursor:none}
-.contact-links a:hover{border-color:var(--accent);color:var(--accent)}
+/* CERTS — grid of achievement cards */
+.certs-row{margin-top:64px;padding-top:42px;border-top:1px solid rgba(255,255,255,0.05)}
+.certs-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px;gap:20px;flex-wrap:wrap}
+.certs-head .lbl{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;font-weight:500;color:var(--muted);display:flex;align-items:center;gap:10px}
+.certs-head .lbl::before{content:'—';color:var(--accent);font-weight:500;letter-spacing:0}
+.certs-head .cnt{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-style:italic;font-size:1rem;color:var(--accent);font-weight:400}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.cert-card{position:relative;padding:18px 18px 16px;border:1px solid rgba(255,255,255,0.07);border-radius:12px;background:rgba(255,255,255,0.02);transition:all .3s ease;overflow:hidden}
+.cert-card::before{content:attr(data-cat);position:absolute;top:14px;right:14px;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:500;opacity:.8}
+.cert-card.peach::before{color:var(--accent2)}
+.cert-card:hover{border-color:rgba(200,162,255,0.3);background:linear-gradient(140deg,rgba(200,162,255,0.05),rgba(255,255,255,0.005));transform:translateY(-2px)}
+.cert-card.peach:hover{border-color:rgba(255,179,138,0.35);background:linear-gradient(140deg,rgba(255,179,138,0.06),rgba(255,255,255,0.005))}
+.cert-card.featured{background:linear-gradient(140deg,rgba(200,162,255,0.06),rgba(255,255,255,0.01));border-color:rgba(200,162,255,0.25)}
+.cert-card.featured.peach{background:linear-gradient(140deg,rgba(255,179,138,0.07),rgba(255,255,255,0.01));border-color:rgba(255,179,138,0.3)}
+.cert-card .c-name{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-size:1rem;font-weight:600;color:var(--fg);line-height:1.2;letter-spacing:-.005em;margin-top:18px;margin-bottom:6px}
+.cert-card .c-detail{font-size:.74rem;color:var(--muted);font-weight:300;line-height:1.5}
 
-/* FADE-IN */
-.fade-in{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+/* VOLUNTEER — editorial event list */
+.vol-row{margin-top:48px;padding-top:36px;border-top:1px solid rgba(255,255,255,0.05)}
+.vol-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px;gap:20px;flex-wrap:wrap}
+.vol-head .lbl{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;font-weight:500;color:var(--muted);display:flex;align-items:center;gap:10px}
+.vol-head .lbl::before{content:'—';color:var(--accent2);font-weight:500;letter-spacing:0}
+.vol-head .hrs{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-style:italic;font-size:1.6rem;color:var(--accent2);font-weight:400;letter-spacing:-.01em}
+.vol-head .hrs b{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums}
+.vol-list{margin-top:12px}
+.vol-row-item{display:grid;grid-template-columns:90px 1fr auto;align-items:center;gap:24px;padding:14px 4px;border-bottom:1px solid rgba(255,255,255,0.04);transition:background .3s ease,padding .3s ease}
+.vol-row-item:hover{background:linear-gradient(to right,rgba(255,179,138,0.025),transparent 70%);padding-left:14px;padding-right:14px}
+.vol-row-item .v-year{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-size:1.5rem;font-weight:700;color:var(--accent2);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.vol-row-item .v-name{font-family:var(--sans);font-size:.96rem;font-weight:400;color:var(--fg);line-height:1.4}
+.vol-row-item .v-tag{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:var(--muted);padding:4px 10px;border:1px solid rgba(255,255,255,0.1);border-radius:100px;white-space:nowrap}
+@media(max-width:680px){.vol-row-item{grid-template-columns:64px 1fr;gap:14px}.vol-row-item .v-tag{display:none}}
+
+/* Certs photo carousel — kept from original */
+.certs-gallery{margin-top:24px;padding-top:22px;border-top:1px solid rgba(255,255,255,0.04)}
+.certs-gallery > div{overflow:hidden;width:100%;mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent)}
+.certs-gallery img{height:140px !important;border-radius:8px;flex-shrink:0;filter:saturate(.85);transition:filter .3s}
+.certs-gallery img:hover{filter:saturate(1)}
+
+/* EDUCATION — editorial dual cards */
+.edu-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:8px}
+.edu-card{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:36px;
+  padding:34px 36px;border:1px solid rgba(255,255,255,0.07);border-radius:20px;
+  background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(255,255,255,0.005));
+  transition:all .35s ease;overflow:hidden;align-items:start}
+.edu-card.peach{background:linear-gradient(135deg,rgba(255,179,138,0.03),rgba(255,255,255,0.005))}
+.edu-card:hover{border-color:rgba(200,162,255,0.3);transform:translateY(-3px)}
+.edu-card.peach:hover{border-color:rgba(255,179,138,0.35)}
+.edu-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);opacity:0;transition:opacity .35s ease}
+.edu-card.peach::before{background:var(--accent2)}
+.edu-card:hover::before{opacity:1}
+
+.edu-seal-wrap{position:relative;width:86px;height:86px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.edu-seal-wrap::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px dashed rgba(200,162,255,0.25);animation:sealRotate 28s linear infinite;pointer-events:none}
+.edu-card.peach .edu-seal-wrap::after{border-color:rgba(255,179,138,0.3)}
+@keyframes sealRotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.edu-seal-img{width:74px;height:74px;border-radius:50%;object-fit:cover;background:#fff;padding:3px;box-shadow:0 4px 18px rgba(0,0,0,0.4)}
+
+.edu-body{min-width:0}
+.edu-period{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;font-weight:500;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.edu-card.peach .edu-period{color:var(--accent2)}
+.edu-period .sep{color:rgba(255,255,255,0.25)}
+.edu-degree{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-size:1.45rem;font-weight:600;margin-bottom:6px;letter-spacing:-.01em;line-height:1.18;color:var(--fg)}
+.edu-school{font-size:1rem;color:rgba(255,255,255,0.55);font-weight:300;line-height:1.4;margin-bottom:18px}
+.edu-school em{font-style:normal;color:var(--fg);font-weight:500}
+.edu-school .zh{font-style:normal;color:var(--muted);font-weight:300}
+
+.edu-honors{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.edu-honors .h-pill{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  padding:4px 11px;border-radius:100px;border:1px solid rgba(200,162,255,0.3);color:var(--accent);background:rgba(200,162,255,0.05)}
+.edu-card.peach .edu-honors .h-pill{border-color:rgba(255,179,138,0.35);color:var(--accent2);background:rgba(255,179,138,0.05)}
+
+.edu-roles{display:flex;flex-direction:column;gap:14px;font-size:.88rem;line-height:1.6;color:rgba(255,255,255,0.62);font-weight:300}
+.edu-roles .r{position:relative;padding-left:18px}
+.edu-roles .r::before{content:'';position:absolute;left:0;top:9px;width:8px;height:1px;background:var(--accent);border-radius:1px}
+.edu-card.peach .edu-roles .r::before{background:var(--accent2)}
+.edu-roles .r strong{color:var(--fg);font-weight:500}
+.edu-roles .r .m{color:var(--accent);font-weight:500;font-variant-numeric:tabular-nums}
+.edu-card.peach .edu-roles .r .m{color:var(--accent2)}
+.edu-coursework{font-size:.84rem;line-height:1.7;color:rgba(255,255,255,0.58);font-weight:300;margin-top:6px;padding:14px 16px;background:rgba(255,255,255,0.02);border-left:2px solid rgba(200,162,255,0.3);border-radius:0 8px 8px 0}
+.edu-coursework .lbl{display:block;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;font-weight:500}
+
+.edu-meta{display:flex;flex-direction:column;align-items:flex-end;gap:14px;flex-shrink:0;min-width:120px;text-align:right}
+.edu-meta .gpa-num{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-size:2.4rem;font-weight:700;color:var(--accent);line-height:1;letter-spacing:-.02em}
+.edu-card.peach .edu-meta .gpa-num{color:var(--accent2)}
+.edu-meta .gpa-lbl{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;font-weight:500;color:var(--muted)}
+.edu-meta .extra{margin-top:14px;width:88px}
+.edu-meta .extra img{width:100%;border-radius:6px;border:1px solid rgba(255,255,255,0.08);opacity:.85;transition:opacity .3s,transform .3s;cursor:pointer}
+.edu-meta .extra img:hover{opacity:1;transform:scale(1.04)}
+.edu-meta .extra-cap{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:500;line-height:1.3}
+
+@media(max-width:880px){
+  .edu-card{grid-template-columns:1fr;gap:18px;padding:26px 22px}
+  .edu-seal-wrap{width:64px;height:64px}
+  .edu-seal-img{width:54px;height:54px}
+  .edu-meta{align-items:flex-start;text-align:left;min-width:0}
+  .edu-degree{font-size:1.2rem}
+}
+
+/* CONTACT — editorial statement + magnetic CTA */
+.contact-section{text-align:left;padding:140px 8vw 120px;position:relative}
+.contact-section .section-title{display:none}
+.contact-statement{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-weight:400;font-size:clamp(34px,5vw,68px);line-height:1.06;letter-spacing:-.02em;margin:18px 0 56px;max-width:1100px}
+.contact-statement .line{display:block}
+.contact-statement em{font-style:italic;font-weight:400;color:var(--muted)}
+.contact-statement .ac{color:var(--accent);font-style:normal;font-weight:700}
+.contact-statement .ap{color:var(--accent2);font-style:normal;font-weight:700}
+.contact-statement .am{color:#e0c4ff;font-style:normal;font-weight:700}
+.contact-statement .dot{color:rgba(255,255,255,.35);font-weight:400}
+.contact-availability{display:inline-flex;align-items:center;gap:10px;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:var(--muted);margin-bottom:20px}
+.contact-availability .dotlive{width:8px;height:8px;border-radius:50%;background:var(--accent2);box-shadow:0 0 0 0 rgba(255,179,138,.6);animation:pulseLive 2.2s ease-out infinite}
+@keyframes pulseLive{0%{box-shadow:0 0 0 0 rgba(255,179,138,.5)}80%{box-shadow:0 0 0 12px rgba(255,179,138,0)}100%{box-shadow:0 0 0 0 rgba(255,179,138,0)}}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1100px}
+.contact-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:32px 32px 28px;border:1px solid rgba(255,255,255,0.07);border-radius:18px;text-decoration:none;background:rgba(255,255,255,0.015);transition:all .35s ease;overflow:hidden;color:var(--fg);min-height:180px;cursor:none}
+.contact-card::after{content:'→';position:absolute;right:28px;bottom:22px;font-family:var(--serif);font-variation-settings:var(--serif-disp);font-style:italic;font-size:46px;color:rgba(200,162,255,0.25);line-height:1;transition:all .4s ease;font-weight:400}
+.contact-card.peach::after{color:rgba(255,179,138,0.3)}
+.contact-card:hover{border-color:rgba(200,162,255,0.4);background:linear-gradient(135deg,rgba(200,162,255,0.08),rgba(255,255,255,0.005));transform:translateY(-4px)}
+.contact-card.peach:hover{border-color:rgba(255,179,138,0.4);background:linear-gradient(135deg,rgba(255,179,138,0.08),rgba(255,255,255,0.005))}
+.contact-card:hover::after{color:var(--accent);right:20px;transform:translateY(-4px)}
+.contact-card.peach:hover::after{color:var(--accent2)}
+.contact-card .cc-label{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;font-weight:500;color:var(--accent);margin-bottom:10px}
+.contact-card.peach .cc-label{color:var(--accent2)}
+.contact-card .cc-value{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-size:1.5rem;font-weight:600;letter-spacing:-.01em;line-height:1.15;color:var(--fg)}
+.contact-card .cc-handle{font-size:.84rem;color:var(--muted);font-weight:300;margin-top:6px;line-height:1.4}
+.contact-meta{display:flex;justify-content:space-between;align-items:center;margin-top:36px;padding-top:26px;border-top:1px solid rgba(255,255,255,0.06);max-width:1100px;flex-wrap:wrap;gap:18px}
+.contact-meta .loc{font-size:.78rem;color:var(--muted);font-weight:300;display:flex;align-items:center;gap:10px}
+.contact-meta .loc::before{content:'';width:5px;height:5px;background:var(--accent);border-radius:50%;display:inline-block}
+.contact-meta .sign{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-style:italic;font-size:1.05rem;color:var(--accent);font-weight:400}
+@media(max-width:768px){
+  .contact-section{padding:80px 5vw 60px;text-align:left}
+  .contact-grid{grid-template-columns:1fr;gap:12px}
+  .contact-card{padding:24px;min-height:0}
+  .contact-card::after{font-size:36px;right:24px;bottom:18px}
+  .contact-card .cc-value{font-size:1.2rem}
+}
+
+/* FADE-IN — section-level entry */
+.fade-in{opacity:0;transform:translateY(50px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* Header pieces stagger after section enters */
+.fade-in > .section-label,
+.fade-in > .section-title,
+.fade-in > .section-divider{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.fade-in.visible > .section-label{opacity:1;transform:none;transition-delay:.05s}
+.fade-in.visible > .section-title{opacity:1;transform:none;transition-delay:.18s}
+.fade-in.visible > .section-divider{opacity:1;transform:none;transition-delay:.32s}
+
+/* Per-item scroll reveal — applied via JS, triggers when item enters viewport */
+.scroll-reveal{opacity:0;transform:translateY(36px);filter:blur(4px);
+  transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1),filter .85s cubic-bezier(.16,1,.3,1);
+  will-change:opacity,transform,filter}
+.scroll-reveal.in{opacity:1;transform:translateY(0);filter:blur(0)}
 
 /* ═══ TABLET ═══ */
 @media(max-width:1024px){
@@ -286,9 +519,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   .edu-item{padding:24px 0}
 
   /* Contact */
-  .contact-section{padding:80px 5vw}
-  .contact-links{flex-direction:column;align-items:center;gap:16px}
-  .contact-links a{width:100%;max-width:280px;text-align:center}
+  .contact-section{padding:80px 5vw 60px}
 
   /* Image expand - fullscreen on mobile */
   .img-expand,.project-card img.active{width:92vw !important;max-width:none !important}
@@ -310,12 +541,41 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   line-height:1.2;color:var(--fg);transform-origin:50% 100%;will-change:transform;
   white-space:nowrap}
 .manifesto-text .accent-word{color:var(--accent)}
+.manifesto-text .accent-word.peach{color:var(--accent2)}
 .manifesto-back{position:absolute;bottom:0;left:0;width:100%;height:0;
   background:linear-gradient(to bottom,rgba(200,162,255,0.06),transparent);
   pointer-events:none;transform-origin:50% 0%;border-radius:0 0 8px 8px}
 @media(max-width:768px){
   .manifesto{padding:10vh 5vw;min-height:80vh}
   .manifesto-text{font-size:clamp(18px,5vw,36px);white-space:normal}
+}
+
+/* ═══ PERSONA CALLOUT — editorial pull-quote ═══ */
+.persona{position:relative;margin-top:40px;padding:36px 36px 36px 56px;
+  background:linear-gradient(135deg,rgba(200,162,255,0.04),rgba(255,179,138,0.025) 70%,transparent);
+  border:1px solid rgba(200,162,255,0.12);border-radius:16px;overflow:hidden}
+.persona::before{content:'\201C';position:absolute;top:-18px;left:18px;
+  font-family:var(--serif);font-variation-settings:var(--serif-disp);
+  font-size:140px;line-height:1;color:rgba(200,162,255,0.15);font-weight:700;pointer-events:none;user-select:none}
+.persona .traits{font-family:var(--serif);font-variation-settings:var(--serif-disp);
+  font-style:italic;font-size:clamp(28px,3.6vw,46px);font-weight:400;line-height:1.05;
+  letter-spacing:-.02em;margin-bottom:22px;color:var(--fg)}
+.persona .traits span{display:inline-block;margin-right:4px}
+.persona .traits .a1{color:var(--accent)}
+.persona .traits .a2{color:#e0c4ff}
+.persona .traits .a3{color:var(--accent2)}
+.persona .traits .punct{color:rgba(255,255,255,.35);font-style:normal;font-weight:400}
+.persona .body{font-family:var(--sans);font-size:.98rem;line-height:1.78;color:rgba(255,255,255,0.7);font-weight:300;max-width:680px}
+.persona .body strong{color:var(--fg);font-weight:500}
+.persona .body em{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-style:italic;font-weight:400;color:var(--accent);font-size:1.05em}
+.persona .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.06)}
+.persona .tag-mini{font-family:var(--sans);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  padding:5px 12px;border-radius:100px;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.55);font-weight:500;transition:border-color .3s,color .3s}
+.persona .tag-mini:hover{border-color:var(--accent);color:var(--accent)}
+@media(max-width:768px){
+  .persona{padding:28px 22px 28px 28px}
+  .persona::before{font-size:90px;top:-10px;left:8px}
+  .persona .traits{font-size:24px;margin-bottom:16px}
 }
 </style>
 </head>
@@ -334,27 +594,28 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
       <div class="float-icon icon-bulb" data-depth="0.035"><img id="iconBulb" alt=""></div>
     </div>
     <div class="triptych-inner">
-      <div class="tri-card" data-tri="0">
+      <div class="tri-card healthcare-card" data-tri="0">
         <img class="tri-base" id="triBase0" alt="">
         <div class="tri-reveal"><img class="tri-rev-img" id="triRev0" alt=""></div>
-        <div class="tri-label"><span>Healthcare</span></div>
+        <div class="tri-label"><span>Healing</span></div>
       </div>
-      <div class="tri-card" data-tri="1">
+      <div class="tri-card motorsport-card" data-tri="1">
         <img class="tri-base" id="triBase1" alt="">
         <div class="tri-reveal"><img class="tri-rev-img" id="triRev1" alt=""></div>
-        <div class="tri-label"><span>Motorsport</span></div>
+        <div class="tri-label"><span>Decoding</span></div>
       </div>
-      <div class="tri-card" data-tri="2">
+      <div class="tri-card business-card" data-tri="2">
         <img class="tri-base" id="triBase2" alt="">
         <div class="tri-reveal"><img class="tri-rev-img" id="triRev2" alt=""></div>
-        <div class="tri-label"><span>Business</span></div>
+        <div class="tri-label"><span>Investing</span></div>
       </div>
     </div>
   </div>
   <div class="hero-ui hero-name" id="nameEl"><span class="full">Xindi Li</span><span class="nick">(Cindy)</span></div>
   <nav class="hero-ui hero-nav" id="navEl">
     <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a>
-    <a href="#skills">Skills</a><a href="#research">Research</a><a href="#education">Education</a><a href="#contact">Contact</a>
+    <a href="#skills">Skills</a><a href="#research">Research</a>
+    <a class="resume-cta" href="assets/cindy-li-resume.pdf" download>Resume<span class="dl">↓</span></a>
   </nav>
   <div class="hero-ui hero-socials" id="socialsEl">
     <a href="https://instagram.com" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
@@ -367,7 +628,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 <!-- ═══ MANIFESTO ═══ -->
 <section class="manifesto" id="manifesto">
   <div class="manifesto-inner">
-    <div class="manifesto-row"><div class="manifesto-text">From <span class="accent-word">clinical healing</span> room</div><div class="manifesto-back"></div></div>
+    <div class="manifesto-row"><div class="manifesto-text">From <span class="accent-word peach">clinical healing</span> room</div><div class="manifesto-back"></div></div>
     <div class="manifesto-row"><div class="manifesto-text">to <span class="accent-word">algorithmic</span> frontiers.</div><div class="manifesto-back"></div></div>
     <div class="manifesto-row"><div class="manifesto-text">I decode <span class="accent-word">complexity</span></div><div class="manifesto-back"></div></div>
     <div class="manifesto-row"><div class="manifesto-text">into actionable <span class="accent-word">intelligence.</span></div><div class="manifesto-back"></div></div>
@@ -382,18 +643,31 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
     <div class="section-divider"></div>
     <div class="about-grid">
       <div class="about-text">
-        <p>MSPPM-DA candidate at <strong>Carnegie Mellon University's Heinz College</strong> (Class of 2027), with <strong>Dean's List</strong> honors. Trained as a <strong>physical therapist</strong> at Beijing Sport University, with clinical experience at Shanghai Disney Resort, national-level sports training centers, and rehabilitation hospitals and clinics. Transitioned into <strong>international health insurance</strong> at MSH China, serving 5,000+ clients and achieving 239% KPI, while also building a background in <strong>private equity due diligence</strong> across Asia & UK.</p><br>
+        <p>MSPPM-DA candidate at <strong>Carnegie Mellon University's Heinz College</strong> (Class of 2027), with <strong>Dean's List</strong> honors. Trained as a <strong>physical therapist</strong> at Beijing Sport University, with clinical experience at Shanghai Disney Resort, national-level sports training centers, and rehabilitation hospitals and clinics. Transitioned into <strong>international health insurance</strong> at MSH China, serving 5,000+ clients and achieving 239% KPI, while also building a background in <strong>private equity due diligence</strong> across Asia & UK.</p>
       </div>
       <div class="about-stats">
-        <div class="stat"><div class="stat-num"><span class="count" data-target="5000" data-suffix="+">0</span></div><div class="stat-label">Clients Served (MSH)</div></div>
-        <div class="stat"><div class="stat-num"><span class="count" data-target="239" data-suffix="%">0</span></div><div class="stat-label">KPI Achievement 2024</div></div>
+        <div class="stat peach"><div class="stat-num"><span class="count" data-target="5000" data-suffix="+">0</span></div><div class="stat-label">Clients Served (MSH)</div></div>
+        <div class="stat peach"><div class="stat-num"><span class="count" data-target="239" data-suffix="%">0</span></div><div class="stat-label">KPI Achievement 2024</div></div>
         <div class="stat"><div class="stat-num"><span class="count" data-target="95" data-suffix="%">0</span></div><div class="stat-label">RAG Pipeline Accuracy</div></div>
-        <div class="stat"><div class="stat-num"><span class="count" data-target="150" data-suffix="+">0</span></div><div class="stat-label">Patients Treated</div></div>
+        <div class="stat peach"><div class="stat-num"><span class="count" data-target="150" data-suffix="+">0</span></div><div class="stat-label">Patients Treated</div></div>
       </div>
     </div>
-    <div style="margin-top:32px;max-width:100%;color:var(--fg);font-size:1.05rem;line-height:1.8;font-family:var(--sans)">
-      <p>Now as an <strong>ESG CFA holder</strong> and a member of <strong>CMU Energy Club</strong>, I'm focused on <strong>climate finance</strong>, <strong>NLP/AI systems</strong>, and <strong>data-driven policy analysis</strong>. I build end-to-end pipelines, from SEC EDGAR ingestion to LLM-powered research agents, and translate complex data into actionable intelligence.</p><br>
-      <p style="color:var(--accent)">Naturally <strong>curious, optimistic, and creative</strong>, I've been a self-driven learner since childhood, always eager to identify problems and find solutions. I thrive in <strong>collaborative environments</strong>, leveraging my own strengths alongside others' to create shared value. With <strong>wide-ranging interests</strong> and a strong work ethic, I embrace pressure, stay persistent, and see every task through to the end.</p>
+    <div style="margin-top:20px;max-width:100%;font-family:var(--sans)">
+      <p style="font-family:var(--serif);font-variation-settings:'opsz' 16,'SOFT' 50;font-size:1.1rem;line-height:1.72;color:rgba(255,255,255,0.78);font-weight:400;letter-spacing:-.005em">Now as an <strong style="color:var(--fg);font-weight:500">ESG CFA holder</strong> and a member of <strong style="color:var(--fg);font-weight:500">CMU Energy Club</strong>, I'm focused on <strong style="color:var(--fg);font-weight:500">climate finance</strong>, <strong style="color:var(--fg);font-weight:500">NLP/AI systems</strong>, and <strong style="color:var(--fg);font-weight:500">data-driven policy analysis</strong>. I build end-to-end pipelines, from SEC EDGAR ingestion to LLM-powered research agents, and translate complex data into actionable intelligence.</p>
+      <div class="persona" style="margin-top:36px">
+        <div class="traits">
+          <span class="a1">Curious<span class="punct">,</span></span>
+          <span class="a2">optimistic<span class="punct">,</span></span>
+          <span class="a3">creative<span class="punct">.</span></span>
+        </div>
+        <div class="body">A <strong>self-driven learner since childhood</strong> — always eager to identify problems and find solutions. I thrive in <strong>collaborative environments</strong>, leveraging my own strengths alongside others' to create shared value. With <em>wide-ranging interests</em> and a strong work ethic, I embrace pressure, stay persistent, and <strong>see every task through to the end</strong>.</div>
+        <div class="tags">
+          <span class="tag-mini">Cross-Disciplinary</span>
+          <span class="tag-mini">Self-Starter</span>
+          <span class="tag-mini">Collaborative</span>
+          <span class="tag-mini">Persistent</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -404,17 +678,17 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
     <span class="section-label">02 / Experience</span>
     <h2 class="section-title">Where I've Made Impact</h2>
     <div class="section-divider"></div>
-    <div class="exp-item"><div class="exp-period">2026</div><div><div class="exp-role">Climate Finance Intern</div><div class="exp-company">Fusion Park · Financial Advisory</div><div class="exp-desc">Supporting deSPAC transaction analysis for NuCube (SMR company). Building intelligence systems using n8n, SEC EDGAR API, NewsAPI, and PostgreSQL.</div></div></div>
-    <div class="exp-item"><div class="exp-period">2026</div><div><div class="exp-role">IR Associate</div><div class="exp-company">Atlas Coalition (WeTheAtlas)</div><div class="exp-desc">Built unified master investor database of 2,181 contacts, interactive network visualization tool, and automated event guest database consolidation via Google Apps Script.</div></div></div>
-    <div class="exp-item"><div class="exp-period">2025</div><div><div class="exp-role">Data Analyst Intern</div><div class="exp-company">Thiele Law PLLC · Pittsburgh, PA</div><div class="exp-desc">Managed HubSpot CRM database with 3,500+ leads, integrating Mailchimp for targeted email campaigns achieving 18% open rate; conducted data cleaning, segmentation, and lead scoring to optimize client acquisition funnel. Analyzed 10+ competitor consultation models across legal directory platforms (Avvo, FindLaw, Justia); developed organic growth strategy with projected 21% traffic growth. Built an AI-powered CRM analytics agent integrating HubSpot API and Claude API, automating weekly data extraction, trend analysis, and report generation, reducing manual reporting by ~3 hours/week.</div></div></div>
-    <div class="exp-item"><div class="exp-period">2023 – 2025</div><div><div class="exp-role">Business Development Manager (Full-Time)</div><div class="exp-company">MSH China (万欣和) · International Health Insurance</div><div class="exp-desc">Exceeded annual targets by 239%, generating over $1M in new business through strategic client acquisition and data-driven market positioning. Managed a global portfolio of 2,000+ high-net-worth and corporate clients, delivering tailored medical insurance solutions leveraging comprehensive knowledge of China's tiered healthcare network. Analyzed group insurance client portfolios, synthesizing claims trends, utilization patterns, and risk profiles across 50K+ insured lives to inform underwriting decisions and renewal strategy. Led end-to-end design of a customized corporate insurance plan for an enterprise with 50K+ employees, partnering with actuarial teams on risk assessment, pricing, and product structuring.</div></div></div>
-        <div class="exp-item"><div class="exp-period">2024 – 2025</div><div><div class="exp-role">Consulting Intern, Growth X</div><div class="exp-company">Illuminera Marketing Strategy Consulting (an IQVIA business) · Shanghai</div><div class="exp-desc">Analyzed customer engagement data for brand-marketing projects, delivering data-driven insights contributing to a projected 15% increase in engagement for a major consumer goods client. Automated social-media data extraction (Chanmama) and conducted statistical analysis using Python, uncovering a high-value consumer segment responsible for 30% of client revenue. Conducted secondary research using corporate filings (10-K/20-F) and industry reports, co-authored 4 market-trend papers with senior consultants; led 10+ expert interviews shaping project strategy.</div></div></div>
-<div class="exp-item"><div class="exp-period">2025</div><div><div class="exp-role">PE Due Diligence Analyst</div><div class="exp-company">Multiple Firms · China, SE Asia, UK</div><div class="exp-desc">Led commercial due diligence across TMT, automotive, and waste-to-energy. Market sizing, competitive mapping, management interviews across Asia and UK.</div></div></div>
-    <div class="exp-item has-gallery"><div class="exp-period">2023</div><div><div class="exp-role">Sports Medicine Intern</div><div class="exp-company">Beijing United Family Hospital (怡德医院) · Beijing</div><div class="exp-desc">Managed 60+ patient case records, operated hospital registration system independently. Processed 30+ commercial insurance pre-authorizations. Delivered rehabilitation training to Chinese and international patients.</div></div><div class="exp-album" onclick="toggleAlbum(event)"><img src="exp_beijing_united_1.jpg"><img src="exp_beijing_united_2.jpg" alt="Eden Hospital Team" alt="Medical Station"></div></div>
-    <div class="exp-item has-gallery"><div class="exp-period">2023</div><div><div class="exp-role">Sports Protection Specialist & AED Consultant</div><div class="exp-company">FuDao Health Consulting · Beijing & Shanghai</div><div class="exp-desc">Earned first-aid instructor certification. Authored 10 original WeChat articles on AED policy achieving 5,000+ views and 200+ shares. Managed B2B client outreach for 5+ enterprises in Beijing. Specialized in lower-limb biomechanics testing and orthotic assessment.</div></div><div class="exp-album" onclick="toggleAlbum(event)"><img src="fudoo.JPG"><img src="公众号.JPG"></div></div>
-    <div class="exp-item has-gallery"><div class="exp-period">2023</div><div><div class="exp-role">Research Staff (Intern)</div><div class="exp-company">National Winter Sports Training & Research Center · Beijing</div><div class="exp-desc">Delivered rehabilitation training and treatment for national-level athletes. Managed athlete recovery archives and filed condition reports. Operated ultrasound, infrared, high-energy laser, short-wave, and electrotherapy equipment. Proficient in physiological function testing (Isokinetic dynamometer, body composition analyzer).</div></div><div class="exp-album" onclick="toggleAlbum(event)"><img src="exp_research_center_1.jpg" alt="Research Center"><img src="exp_research_center_2.jpg" alt="Balance testing"><img src="exp_research_center_3.jpg" alt="BSU Gym Rehab"></div></div>
-    <div class="exp-item has-gallery"><div class="exp-period">2022 – 2023</div><div><div class="exp-role">Athletic Trainer (Intern)</div><div class="exp-company">Shanghai Disney Resort · Shanghai</div><div class="exp-desc">Collaborated with senior athletic trainers and performance management teams. Analyzed acute and chronic performer injuries, designed targeted conditioning programs to reduce injury risk. Delivered rehabilitation and first-aid support to cast members. Maintained injury data and developed preventive training protocols.</div></div><div class="exp-album" onclick="toggleAlbum(event)"><img src="disney.jpg" alt="Disney farewell"></div></div>
-    <div class="exp-item"><div class="exp-period">2022 – 2023</div><div><div class="exp-role">Physical Therapist (Intern)</div><div class="exp-company">Spine & Pain Rehabilitation Center (施柏恩) · Shanghai</div><div class="exp-desc">Assessed physiological function and mobility data for 60+ patients. Co-designed physical therapy prescriptions with physicians. Independently managed 30+ patient cases through full treatment cycles.</div></div></div>
+    <div class="exp-item"><div class="exp-period"><span class="year">2026</span></div><div><div class="exp-role">Climate Finance Intern</div><div class="exp-co"><span class="exp-logo"><img src="assets/logo_fusion.png" alt="" onerror="this.style.display='none';this.parentElement.textContent='F'"/></span><div class="exp-company">Fusion Park · Financial Advisory</div></div><div class="exp-desc"><ul class="bullets"><li>Supporting <strong>deSPAC transaction analysis</strong> for NuCube (SMR company).</li><li>Building <strong>intelligence systems</strong> using n8n, SEC EDGAR API, NewsAPI, and PostgreSQL.</li></ul></div></div></div>
+    <div class="exp-item"><div class="exp-period"><span class="year">2026</span></div><div><div class="exp-role">IR Associate</div><div class="exp-co"><span class="exp-logo"><img src="assets/logo_atlas.png" alt="" onerror="this.style.display='none';this.parentElement.textContent='A'"/></span><div class="exp-company">Atlas Coalition (WeTheAtlas)</div></div><div class="exp-desc"><ul class="bullets"><li>Built unified <strong>master investor database</strong> of <b class="m">2,181</b> contacts across the coalition.</li><li>Designed an <strong>interactive network visualization tool</strong> to map investor relationships and overlap.</li><li>Automated <strong>event guest database consolidation</strong> via Google Apps Script.</li></ul></div></div></div>
+    <div class="exp-item"><div class="exp-period"><span class="year">2025</span></div><div><div class="exp-role">Data Analyst Intern</div><div class="exp-co"><span class="exp-logo"><img src="assets/logo_thiele.png" alt="" onerror="this.style.display='none';this.parentElement.textContent='T'"/></span><div class="exp-company">Thiele Law PLLC · Pittsburgh, PA</div></div><div class="exp-desc"><ul class="bullets"><li>Managed HubSpot CRM with <b class="m">3,500+ leads</b> and integrated Mailchimp campaigns (<b class="m">18% open rate</b>); ran cleaning, segmentation, and lead scoring to optimize the acquisition funnel.</li><li>Analyzed <b class="m">10+ competitor</b> consultation models across Avvo, FindLaw, and Justia; developed organic growth strategy with projected <b class="m">21% traffic growth</b>.</li><li>Built an <strong>AI-powered CRM analytics agent</strong> on HubSpot + Claude API, automating weekly extraction, trend analysis, and reporting — <b class="m">~3 hours/week</b> saved.</li></ul></div></div></div>
+    <div class="exp-item healthcare"><div class="exp-period"><span class="year">2023<span class="range">– 2025</span></span></div><div><div class="exp-role">Business Development Manager (Full-Time)</div><div class="exp-co"><span class="exp-logo"><img src="assets/logo_msh.png" alt="" onerror="this.style.display='none';this.parentElement.textContent='M'"/></span><div class="exp-company">MSH China (万欣和) · International Health Insurance</div></div><div class="exp-desc"><ul class="bullets"><li>Exceeded annual targets by <b class="m-peach">239%</b>, generating over <b class="m-peach">$1M</b> in new business through strategic client acquisition and data-driven market positioning.</li><li>Managed a global portfolio of <b class="m">2,000+</b> high-net-worth and corporate clients, delivering tailored medical insurance solutions to support retention and revenue growth, leveraging comprehensive knowledge of <strong>China's tiered healthcare network and provider landscape</strong>.</li><li>Analyzed group insurance client portfolios, synthesizing claims trends, utilization patterns, and risk profiles across <b class="m">50K+ insured lives</b> to inform underwriting and renewal strategy.</li><li>Led end-to-end design of a customized corporate insurance plan for an enterprise with <b class="m">50K+ employees</b>, partnering with actuarial teams on risk assessment, pricing, and product structuring.</li></ul></div></div></div>
+    <div class="exp-item"><div class="exp-period"><span class="year">2024<span class="range">– 2025</span></span></div><div><div class="exp-role">Consulting Intern, Growth X</div><div class="exp-co"><span class="exp-logo"><img src="assets/logo_illuminera.png" alt="" onerror="this.style.display='none';this.parentElement.textContent='I'"/></span><div class="exp-company">Illuminera Marketing Strategy Consulting (an IQVIA business) · Shanghai</div></div><div class="exp-desc"><ul class="bullets"><li>Analyzed customer engagement data for brand-marketing projects, contributing to a projected <b class="m">15% engagement lift</b> for a major consumer goods client.</li><li>Automated social-media data extraction (Chanmama) with Python; uncovered a <strong>high-value consumer segment</strong> responsible for <b class="m">30% of client revenue</b>.</li><li>Co-authored <b class="m">4 market-trend papers</b> with senior consultants using corporate filings (10-K/20-F); led <b class="m">10+ expert interviews</b> shaping strategy.</li></ul></div></div></div>
+    <div class="exp-item"><div class="exp-period"><span class="year">2025</span></div><div><div class="exp-role">PE Due Diligence Analyst</div><div class="exp-co"><span class="exp-logo">⊕</span><div class="exp-company">Multiple Firms · China, SE Asia, UK</div></div><div class="exp-desc"><ul class="bullets"><li>Conducted end-to-end <strong>analytical due diligence</strong> for <b class="m">3 cross-sector investment opportunities</b> — TMT, automotive overseas expansion, and waste-to-energy — evaluating market trends, operational metrics, and financial viability to identify demand patterns, regulatory drivers, and new investment theses.</li><li>Built and automated <strong>multi-scenario financial models (DCF, LBO)</strong> in Python, integrating data pipelines to execute valuation analytics and run risk simulations across <strong>Mainland China, Taiwan, Southeast Asia, and UK</strong>.</li><li>Produced and presented data-driven insights for <b class="m">4+ investment memorandums</b>, visualizing financial projections, key drivers, and valuation outcomes through <strong>Tableau dashboards</strong> to support investment decision-making.</li></ul></div></div></div>
+    <div class="exp-item has-gallery healthcare"><div class="exp-period"><span class="year">2023</span></div><div><div class="exp-role">Sports Medicine Intern</div><div class="exp-co"><span class="exp-logo"><img src="assets/logo_eden.png" alt="" onerror="this.style.display='none';this.parentElement.textContent='B'"/></span><div class="exp-company">Beijing Eden Hospital (怡德医院) · Beijing</div></div><div class="exp-desc"><ul class="bullets"><li>Managed <b class="m">60+ patient case records</b> and operated the hospital registration system independently.</li><li>Processed <b class="m">30+ commercial insurance pre-authorizations</b>.</li><li>Delivered <strong>rehabilitation training</strong> to Chinese and international patients.</li></ul></div></div><div class="exp-album" onclick="toggleAlbum(event)"><img src="exp_beijing_united_1.jpg" alt="Eden Hospital Team"><img src="exp_beijing_united_2.jpg" alt="Medical Station"></div></div>
+    <div class="exp-item has-gallery healthcare"><div class="exp-period"><span class="year">2023</span></div><div><div class="exp-role">Sports Protection Specialist &amp; AED Consultant</div><div class="exp-co"><span class="exp-logo"><img src="assets/logo_fudoo.png" alt="" onerror="this.style.display='none';this.parentElement.textContent='F'"/></span><div class="exp-company">FuDao Health Consulting · Beijing &amp; Shanghai</div></div><div class="exp-desc"><ul class="bullets"><li>Earned <strong>first-aid instructor certification</strong>.</li><li>Authored <b class="m">10 original WeChat articles</b> on AED policy — <b class="m">5,000+ views</b>, <b class="m">200+ shares</b>.</li><li>Managed B2B outreach for <b class="m">5+ enterprises</b> in Beijing.</li><li>Specialized in <strong>lower-limb biomechanics testing</strong> and orthotic assessment.</li></ul></div></div><div class="exp-album" onclick="toggleAlbum(event)"><img src="fudoo.JPG"><img src="公众号.JPG"></div></div>
+    <div class="exp-item has-gallery healthcare"><div class="exp-period"><span class="year">2023</span></div><div><div class="exp-role">Research Staff (Intern)</div><div class="exp-co"><span class="exp-logo"><img src="assets/logo_winter.png" alt="" onerror="this.style.display='none';this.parentElement.textContent='N'"/></span><div class="exp-company">National Winter Sports Training &amp; Research Center · Beijing</div></div><div class="exp-desc"><ul class="bullets"><li>Executed <strong>sports injury prevention protocols</strong> — athletic taping, cryotherapy interventions, pre-competition warm-ups, and post-event stretching protocols (<b class="m">300+ event coverage hours</b>).</li><li>Administered <strong>advanced modalities</strong>: therapeutic ultrasound, infrared therapy, high-intensity laser, shortwave diathermy, and interferential current therapy.</li><li>Performed <strong>physiological assessments</strong> using Biodex isokinetic dynamometers, InBody body composition analyzers, and equine movement simulation systems.</li></ul></div></div><div class="exp-album" onclick="toggleAlbum(event)"><img src="exp_research_center_1.jpg" alt="Research Center"><img src="exp_research_center_2.jpg" alt="Balance testing"><img src="exp_research_center_3.jpg" alt="BSU Gym Rehab"></div></div>
+    <div class="exp-item has-gallery healthcare"><div class="exp-period"><span class="year">2022<span class="range">– 2023</span></span></div><div><div class="exp-role">Athletic Trainer (Intern)</div><div class="exp-co"><span class="exp-logo"><img src="assets/logo_disney.png" alt="" onerror="this.style.display='none';this.parentElement.textContent='D'"/></span><div class="exp-company">Shanghai Disney Resort · Shanghai</div></div><div class="exp-desc"><ul class="bullets"><li>Collaborated with <strong>senior athletic trainers</strong> and performance management teams.</li><li>Leveraged <strong>Power BI and Excel</strong> to analyze injury incident data, identifying key risk factors and presenting data-driven insights to trainers and management.</li><li>Designed and implemented <strong>targeted intervention programs</strong> based on data analysis — <b class="m">70% reduction</b> in knee injury frequency.</li><li>Delivered <strong>rehabilitation and first-aid support</strong> to cast members.</li></ul></div></div><div class="exp-album" onclick="toggleAlbum(event)"><img src="disney.jpg" alt="Disney farewell"></div></div>
+    <div class="exp-item healthcare"><div class="exp-period"><span class="year">2022<span class="range">– 2023</span></span></div><div><div class="exp-role">Physical Therapist (Intern)</div><div class="exp-co"><span class="exp-logo"><img src="assets/logo_spine.png" alt="" onerror="this.style.display='none';this.parentElement.textContent='S'"/></span><div class="exp-company">Spine &amp; Pain Rehabilitation Center (施柏恩) · Shanghai</div></div><div class="exp-desc"><ul class="bullets"><li>Assessed <strong>physiological function and mobility data</strong> for <b class="m">60+ patients</b>.</li><li>Co-designed physical therapy prescriptions with physicians.</li><li>Independently managed <b class="m">30+ patient cases</b> through full treatment cycles.</li></ul></div></div></div>
   </div>
 </section>
 
@@ -427,11 +701,11 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
     <div class="projects-grid">
       <div class="project-card"><span class="project-tag">AI / NLP</span><div class="project-name">Climate Finance Research Agent</div><div class="project-desc">LLM-powered agent for climate finance research. Tavily search, Claude Sonnet, Chroma Cloud vector DB with Streamlit interface.</div><div class="project-tech"><span>Python</span><span>Claude API</span><span>Chroma</span><span>Streamlit</span></div><a href="https://climate-finance-agent-3si7owfgvopjqrgcqc9wg8.streamlit.app/" target="_blank" style="display:inline-block;margin-top:12px;font-size:.78rem;color:var(--accent);text-decoration:none;border:1px solid rgba(200,162,255,0.3);padding:6px 16px;border-radius:100px;cursor:none;transition:all .3s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='rgba(200,162,255,0.3)'">View Live Demo →</a></div>
       <div class="project-card"><span class="project-tag">NLP / RAG</span><div class="project-name">Hybrid RAG Pipeline (CMU 11-711)</div><div class="project-desc">BM25 + FAISS hybrid retrieval with Qwen2.5-3B-Instruct, achieving 95% accuracy. Deployed on AWS EC2.</div><div class="project-tech"><span>Python</span><span>FAISS</span><span>HuggingFace</span><span>AWS</span></div><img src="3.png" class="project-thumb" style="width:16.6%;border-radius:6px;float:right;margin:-60px 0 10px 16px;transform:rotate(1.5deg);border:1px solid rgba(255,255,255,0.1);opacity:0.9;box-shadow:0 4px 16px rgba(0,0,0,0.4);cursor:pointer" alt="RAG Pipeline" onclick="showLightbox(this.src)"></div>
-      <div class="project-card"><span class="project-tag">Data Viz</span><div class="project-name">U.S. Power Generation Dashboard</div><div class="project-desc">Interactive county-level dashboard combining EIA, EPA eGRID, and CDC PLACES data for energy-health nexus analysis.</div><div class="project-tech"><span>R</span><span>Posit</span><span>EIA API</span><span>eGRID</span></div><a href="https://xindili-pa-electric-station.share.connect.posit.cloud/" target="_blank" style="display:inline-block;margin-top:12px;font-size:.78rem;color:var(--accent);text-decoration:none;border:1px solid rgba(200,162,255,0.3);padding:6px 16px;border-radius:100px;cursor:none;transition:all .3s">View Live Dashboard →</a></div>
+      <div class="project-card healthcare"><span class="project-tag">Energy &amp; Health</span><div class="project-name">The Changing Landscape of U.S. Power Generation</div><div class="project-desc" style="margin-bottom:8px;color:rgba(255,255,255,0.5)">National Trends, Health and Environmental Impacts, and Pennsylvania's Energy Transition</div><div class="project-desc">Long-form policy analysis paired with an interactive county-level dashboard combining EIA, EPA eGRID, and CDC PLACES data for the energy–health nexus.</div><div class="project-tech"><span>R</span><span>Posit</span><span>EIA API</span><span>eGRID</span></div><a href="https://xindili-pa-electric-station.share.connect.posit.cloud/" target="_blank" style="display:inline-block;margin-top:12px;font-size:.78rem;color:var(--accent2);text-decoration:none;border:1px solid rgba(255,179,138,0.35);padding:6px 16px;border-radius:100px;cursor:none;transition:all .3s">View Live Dashboard →</a></div>
       <div class="project-card"><span class="project-tag">Automation</span><div class="project-name">Fusion Park Intel System</div><div class="project-desc">Automated deal intelligence pipeline using n8n, SEC EDGAR API, and NewsAPI for climate/energy deSPAC monitoring.</div><div class="project-tech"><span>n8n</span><span>PostgreSQL</span><span>EDGAR</span><span>NewsAPI</span></div><img src="2.png" class="project-thumb" style="width:16.6%;border-radius:6px;float:right;margin:-60px 0 10px 16px;transform:rotate(-2deg);border:1px solid rgba(255,255,255,0.1);opacity:0.9;box-shadow:0 4px 16px rgba(0,0,0,0.4);cursor:pointer" alt="n8n Workflow" onclick="showLightbox(this.src)"></div>
       <div class="project-card"><span class="project-tag">CRM</span><div class="project-name">AI-Powered CRM Analytics System</div><div class="project-desc">AI-powered CRM analytics agent integrating HubSpot API and Claude API. Automated weekly data extraction, trend analysis, and business report generation, reducing manual reporting by ~3 hours/week. Outputs to Tableau dashboards for 3,500+ leads.</div><div class="project-tech"><span>HubSpot</span><span>Claude API</span><span>Tableau</span></div><img src="1.png" class="project-thumb" style="width:16.6%;border-radius:6px;float:right;margin:-60px 0 10px 16px;transform:rotate(2deg);border:1px solid rgba(255,255,255,0.1);opacity:0.9;box-shadow:0 4px 16px rgba(0,0,0,0.4);cursor:pointer" alt="CRM Pipeline" onclick="showLightbox(this.src)"></div>
       <div class="project-card"><span class="project-tag">Research</span><div class="project-name">IRCoT Multi-Hop QA</div><div class="project-desc">Reproduced IRCoT baseline on HotpotQA. Debugged BM25 retriever, improved EM from 12.0% to 21.8%.</div><div class="project-tech"><span>Python</span><span>BM25</span><span>HotpotQA</span></div><img src="IRCoT Multi-Hop QA.png" class="project-thumb" style="width:16.6%;border-radius:6px;float:right;margin:-60px 0 10px 16px;transform:rotate(2deg);border:1px solid rgba(255,255,255,0.1);opacity:0.9;box-shadow:0 4px 16px rgba(0,0,0,0.4);cursor:pointer" alt="IRCoT" onclick="showLightbox(this.src)"></div>
-      <div class="project-card"><span class="project-tag">Sales Analytics</span><div class="project-name">Insurance Enrollment Dashboard</div><div class="project-desc">Interactive HTML/Chart.js sales dashboard tracking 401 leads and 72.8% enrollment rate. Key insight: group chat engagement lifts conversion from 53% to 90%, informing outreach strategy optimization.</div><div class="project-tech"><span>HTML</span><span>Chart.js</span><span>Sales Analytics</span><span>CRM</span></div><a href="https://soft-moxie-5a3def.netlify.app/" target="_blank" rel="noopener" style="display:inline-block;margin-top:12px;font-size:.78rem;color:var(--accent);text-decoration:none;border:1px solid rgba(200,162,255,0.3);padding:6px 16px;border-radius:100px;cursor:none;transition:all .3s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='rgba(200,162,255,0.3)'">View Live Demo →</a></div>
+      <div class="project-card healthcare"><span class="project-tag">Sales Analytics</span><div class="project-name">Health Insurance Enrollment Dashboard</div><div class="project-desc">Interactive HTML/Chart.js sales dashboard tracking 401 leads and 72.8% enrollment rate. Key insight: group chat engagement lifts conversion from 53% to 90%, informing outreach strategy optimization.</div><div class="project-tech"><span>HTML</span><span>Chart.js</span><span>Sales Analytics</span><span>CRM</span></div><a href="https://soft-moxie-5a3def.netlify.app/" target="_blank" rel="noopener" style="display:inline-block;margin-top:12px;font-size:.78rem;color:var(--accent2);text-decoration:none;border:1px solid rgba(255,179,138,0.35);padding:6px 16px;border-radius:100px;cursor:none;transition:all .3s">View Live Demo →</a></div>
     </div>
   </div>
 </section>
@@ -442,39 +716,87 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
     <span class="section-label">04 / Skills</span>
     <h2 class="section-title">Technical Toolkit</h2>
     <div class="section-divider"></div>
-    <div class="skills-cols" style="grid-template-columns:repeat(4,1fr)">
-      <div class="skill-group"><h3>Languages & Analytics</h3><ul class="skill-list"><li>Python (Pandas, Scikit-learn, PyTorch)</li><li>R (Shiny, ggplot2, tidyverse)</li><li>SQL (PostgreSQL, MySQL)</li><li>JavaScript / HTML / CSS</li><li>Stata (Econometrics)</li></ul></div>
-      <div class="skill-group"><h3>AI / ML / NLP</h3><ul class="skill-list"><li>LLM APIs (Claude, OpenAI)</li><li>RAG Systems (FAISS, Chroma)</li><li>HuggingFace Transformers</li><li>NLP Pipelines (BM25, Embeddings)</li><li>Neural Networks & Vision Models</li></ul></div>
-      <div class="skill-group"><h3>Tools & Platforms</h3><ul class="skill-list"><li>Tableau / Power BI</li><li>AWS EC2 / Cloud Deploy</li><li>n8n / Workflow Automation</li><li>HubSpot / CRM Analytics</li><li>Git / GitHub</li></ul></div>
-      <div class="skill-group"><h3>Clinical & Sports Medicine</h3><ul class="skill-list"><li>Human Anatomy & Physiology</li><li>Biochemistry & Pathology</li><li>Rehabilitation Assessment</li><li>Musculoskeletal & Neurological Rehab</li><li>Cardiopulmonary & Chronic Disease Rehab</li><li>Exercise Therapy Principles</li><li>Sports Injury & Medical Supervision</li><li>Rehabilitation Psychology</li><li>Human Development & Biomechanics</li></ul></div>
-    </div>
-    <div style="margin-top:40px;padding:28px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px">
-        <div>
-          <div style="font-size:.85rem;color:var(--muted);margin-bottom:4px">2023 – 2025</div>
-          <div style="font-size:1.15rem;font-weight:600;margin-bottom:4px">Physical Therapist & Course Instructor</div>
-          <div style="font-size:.95rem;color:var(--accent);margin-bottom:12px">True Health Chiropractic (凯诺康美式整脊中心) · Shanghai</div>
-          <div style="font-size:.9rem;line-height:1.75;color:rgba(255,255,255,0.6);font-weight:300">Designed physical therapy protocols and delivered specialized courses (CPR, Hyperblade myofascial release, myofascial decompression). Proficient in thoracic spine thrust and cervical spine thrust manipulation techniques. Provided clinical PT services and course consulting part-time.</div>
-        </div>
-        <div style="display:flex;gap:12px;flex-shrink:0">
-          <img src="IMG_5795.GIF" style="height:120px;width:auto;border-radius:8px">
-          <img src="IMG_5796.GIF" style="height:120px;width:auto;border-radius:8px">
-          <img src="IMG_5797.GIF" style="height:120px;width:auto;border-radius:8px">
-          <img src="thrust_cropped.GIF" style="height:120px;width:auto;border-radius:8px">
-        </div>
+    <div class="skills-cols">
+      <div class="skill-group" data-num="01">
+        <div class="sg-tag">Code</div>
+        <h3>Languages &amp; Analytics</h3>
+        <ul class="skill-pills">
+          <li class="featured">Python · Pandas, Scikit-learn, PyTorch</li>
+          <li>R · Shiny, ggplot2, tidyverse</li>
+          <li>SQL · PostgreSQL, MySQL</li>
+          <li>JavaScript / HTML / CSS</li>
+          <li>Stata · Econometrics</li>
+        </ul>
+      </div>
+      <div class="skill-group" data-num="02">
+        <div class="sg-tag">Intelligence</div>
+        <h3>AI / ML / NLP</h3>
+        <ul class="skill-pills">
+          <li class="featured">LLM APIs · Claude, OpenAI</li>
+          <li class="featured">RAG Systems · FAISS, Chroma</li>
+          <li>HuggingFace Transformers</li>
+          <li>NLP Pipelines · BM25, Embeddings</li>
+          <li>Neural Networks &amp; Vision Models</li>
+        </ul>
+      </div>
+      <div class="skill-group" data-num="03">
+        <div class="sg-tag">Stack</div>
+        <h3>Tools &amp; Platforms</h3>
+        <ul class="skill-pills">
+          <li>Tableau / Power BI</li>
+          <li>AWS EC2 / Cloud Deploy</li>
+          <li class="featured">n8n / Workflow Automation</li>
+          <li>HubSpot / CRM Analytics</li>
+          <li>Git / GitHub</li>
+        </ul>
+      </div>
+      <div class="skill-group warm" data-num="04">
+        <div class="sg-tag">Clinical</div>
+        <h3>Sports Medicine &amp; Rehabilitation</h3>
+        <ul class="skill-pills">
+          <li class="featured">Rehab Assessment</li>
+          <li>Anatomy &amp; Physiology</li>
+          <li>Biochem &amp; Pathology</li>
+          <li>Musculoskeletal Rehab</li>
+          <li>Neurological Rehab</li>
+          <li>Cardiopulmonary Rehab</li>
+          <li>Chronic Disease Rehab</li>
+          <li>Exercise Therapy</li>
+          <li>Sports Injury Mgmt</li>
+          <li>Rehab Psychology</li>
+          <li>Biomechanics</li>
+        </ul>
       </div>
     </div>
-    <div style="margin-top:28px;padding:28px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px">
-        <div>
-          <img src="shuttlecock.png" style="height:72px;width:auto;margin-bottom:2px">
-          <div style="font-size:1.15rem;font-weight:600;margin-bottom:4px">Badminton Coach</div>
-          <div style="font-size:.9rem;line-height:1.75;color:rgba(255,255,255,0.6);font-weight:300">Certified badminton referee (Level 3) with coaching experience. Provided technical training, match strategy guidance, and injury prevention advice to recreational and competitive players.</div>
+    <div class="practice-row">
+      <div class="practice-label">Also · Hands-on practice</div>
+      <div class="practice-grid">
+        <div class="practice-card warm">
+          <div class="pc-body">
+            <div class="pc-meta">2023 – 2025 · Shanghai</div>
+            <div class="pc-role">Physical Therapist &amp; Course Instructor</div>
+            <div class="pc-org">True Health Chiropractic <em>(凯诺康美式整脊中心)</em></div>
+            <div class="pc-desc">Designed physical therapy protocols and delivered specialized courses — <strong style="color:var(--fg);font-weight:500">CPR</strong>, <strong style="color:var(--fg);font-weight:500">Hyperblade myofascial release</strong>, myofascial decompression. Proficient in <strong style="color:var(--fg);font-weight:500">thoracic &amp; cervical spine thrust</strong> manipulation. Clinical PT services and course consulting, part-time.</div>
+          </div>
+          <div class="pc-media">
+            <img src="IMG_5795.GIF" alt="" onclick="showLightbox(this.src)">
+            <img src="IMG_5796.GIF" alt="" onclick="showLightbox(this.src)">
+            <img src="IMG_5797.GIF" alt="" onclick="showLightbox(this.src)">
+            <img src="thrust_cropped.GIF" alt="" onclick="showLightbox(this.src)">
+          </div>
         </div>
-        <div style="display:flex;gap:12px;flex-shrink:0">
-          <img src="badminton1.JPG" style="height:120px;width:auto;border-radius:8px">
-          <img src="badminton2.jpg" style="height:120px;width:auto;border-radius:8px">
-          <img src="badminton3.JPG" style="height:120px;width:auto;border-radius:8px">
+        <div class="practice-card album">
+          <div class="pc-body">
+            <div class="pc-meta">Side practice</div>
+            <div class="pc-role">Badminton Coach</div>
+            <div class="pc-org">Certified Referee · Level 3</div>
+            <div class="pc-desc">Coaching experience with <strong style="color:var(--fg);font-weight:500">recreational and competitive players</strong> — technical training, match strategy, and injury prevention.</div>
+          </div>
+          <div class="pc-media">
+            <img src="badminton1.JPG" alt="" onclick="showLightbox(this.src)">
+            <img src="badminton2.jpg" alt="" onclick="showLightbox(this.src)">
+            <img src="badminton3.JPG" alt="" onclick="showLightbox(this.src)">
+          </div>
         </div>
       </div>
     </div>
@@ -488,7 +810,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
     <h2 class="section-title">Academic Research</h2>
     <div class="section-divider"></div>
 
-    <div class="project-card" style="margin-bottom:32px">
+    <div class="project-card healthcare" style="margin-bottom:32px">
       <div style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap">
         <span class="project-tag">National Innovation Project</span>
         <span class="project-tag" style="border-color:rgba(255,179,138,0.4);color:var(--accent2)">First Prize Paper</span>
@@ -504,7 +826,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
       </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card healthcare">
       <div style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap">
         <span class="project-tag">Thesis · Outstanding</span>
         <span class="project-tag" style="border-color:rgba(255,179,138,0.4);color:var(--accent2)">Case Study</span>
@@ -526,24 +848,79 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
     <span class="section-label">06 / Education</span>
     <h2 class="section-title">Academic Foundation</h2>
     <div class="section-divider"></div>
-    <div class="edu-item"><div style="display:flex;align-items:flex-start;gap:20px"><img src="edu_cmu.png" style="width:56px;height:56px;border-radius:50%;flex-shrink:0;margin-top:2px" alt="CMU"><div><div class="edu-degree">M.S. Public Policy & Management, Data Analytics</div><div class="edu-school">Carnegie Mellon University · Heinz College</div><div class="edu-detail">Class of 2027 · Dean's List · STEM-designated<br>Advanced NLP, ML Foundations, Applied Econometrics, Decision Analysis, Operations Research</div></div></div>
-    <div class="edu-item"><div style="display:flex;align-items:flex-start;gap:20px"><img src="edu_bsu.png" style="width:56px;height:56px;border-radius:50%;flex-shrink:0;margin-top:2px" alt="BSU"><div><div class="edu-degree">B.S. Sports Rehabilitation / Exercise Science</div><div class="edu-school">Beijing Sport University (北京体育大学) · School of Sports Medicine & Rehabilitation</div><div class="edu-detail">Head of Rehabilitation Division, Student Union (2019–2022), organized campus rehabilitation skills competitions and coordinated first-aid coverage for all campus sporting events (100+ events)<br>Head of Emergency Response, School of Sports Medicine (2020–2022), led first-aid teams for annual campus athletics as chief emergency coordinator<br><span style="color:var(--accent)">4-year Consecutive Scholarship Recipient · 4-year Outstanding Student (三好学生)</span><br><span style="color:var(--accent)">University of Sydney, Doctor of Physiotherapy (DPT) Offer Holder</span><div style="margin-top:16px"><img src="edu_sydney.jpg" style="width:25%;border-radius:8px;border:1px solid rgba(255,255,255,0.08);opacity:0.85" alt="Sydney DPT Offer"></div></div></div></div>
-
-    <div style="margin-top:56px">
-      <h3 style="font-size:.95rem;font-weight:600;margin-bottom:24px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;font-family:var(--sans)">Certifications</h3>
-      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start">
-        <span class="project-tech" style="margin:0"><span>ESG CFA Holder</span></span>
-        <span class="project-tech" style="margin:0"><span>Chinese Red Cross First Aid Certificate</span></span>
-        <span class="project-tech" style="margin:0"><span>AHA Heartsaver Certified</span></span>
-        <span class="project-tech" style="margin:0"><span>AHA-HS Instructor Certified</span></span>
-        <span class="project-tech" style="margin:0"><span>Sports Agent Level 3</span></span>
-        <span class="project-tech" style="margin:0"><span>Tennis Referee Level 3</span></span>
-        <span class="project-tech" style="margin:0"><span>Badminton Referee Level 3</span></span>
-        <span class="project-tech" style="margin:0"><span>Table Tennis Referee Level 3</span></span>
-        <span class="project-tech" style="margin:0"><span>WSET Level 2 (Pass with Distinction)</span></span>
-        <span class="project-tech" style="margin:0"><span>Motorcycle License</span></span>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-seal-wrap"><img class="edu-seal-img" src="edu_cmu.png" alt="CMU"></div>
+        <div class="edu-body">
+          <div class="edu-period">Class of 2027 <span class="sep">·</span> Pittsburgh, PA <span class="sep">·</span> STEM-designated</div>
+          <div class="edu-degree">M.S. Public Policy &amp; Management, Data Analytics</div>
+          <div class="edu-school"><em>Carnegie Mellon University</em> · Heinz College of Information Systems &amp; Public Policy</div>
+          <div class="edu-honors">
+            <span class="h-pill">Dean's List</span>
+            <span class="h-pill">MSPPM-DA</span>
+          </div>
+          <div class="edu-coursework">
+            <span class="lbl">Coursework</span>
+            Advanced NLP · ML Foundations · Applied Econometrics · Decision Analysis · Operations Research
+          </div>
+        </div>
+        <div class="edu-meta">
+          <div>
+            <div class="gpa-num">2027</div>
+            <div class="gpa-lbl">Graduating</div>
+          </div>
+        </div>
       </div>
-      <style>
+
+      <div class="edu-card peach">
+        <div class="edu-seal-wrap"><img class="edu-seal-img" src="edu_bsu.png" alt="BSU" style="object-fit:contain;background:#fff;padding:6px"></div>
+        <div class="edu-body">
+          <div class="edu-period">2019 – 2023 <span class="sep">·</span> Beijing, China</div>
+          <div class="edu-degree">B.S. Sports Rehabilitation / Exercise Science</div>
+          <div class="edu-school"><em>Beijing Sport University</em> <span class="zh">(北京体育大学)</span> · School of Sports Medicine &amp; Rehabilitation</div>
+          <div class="edu-honors">
+            <span class="h-pill">4-Yr Scholarship</span>
+            <span class="h-pill">Outstanding Student ×4</span>
+            <span class="h-pill">USyd DPT Offer</span>
+          </div>
+          <div class="edu-roles">
+            <div class="r"><strong>Head of Rehabilitation Division</strong>, Student Union <span class="m">2019–2022</span> — organized campus rehab skills competitions; coordinated first-aid coverage for <span class="m">100+ sporting events</span>.</div>
+            <div class="r"><strong>Head of Emergency Response</strong>, School of Sports Medicine <span class="m">2020–2022</span> — led first-aid teams for annual campus athletics as chief emergency coordinator.</div>
+          </div>
+        </div>
+        <div class="edu-meta">
+          <div>
+            <div class="gpa-num">2023</div>
+            <div class="gpa-lbl">Graduated</div>
+          </div>
+          <div class="extra">
+            <img src="edu_sydney.jpg" alt="Sydney DPT Offer" onclick="showLightbox(this.src)">
+            <div class="extra-cap">USyd DPT<br>Offer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="certs-row">
+      <div class="certs-head">
+        <div class="lbl">Certifications</div>
+        <div class="cnt">— ten credentials, across finance, clinical, and sport</div>
+      </div>
+      <div class="certs-grid">
+        <div class="cert-card featured" data-cat="Finance"><div class="c-name">ESG CFA Holder</div><div class="c-detail">CFA Institute · Sustainability-focused</div></div>
+        <div class="cert-card peach featured" data-cat="Clinical"><div class="c-name">AHA-HS Instructor</div><div class="c-detail">American Heart Association · Heartsaver Instructor</div></div>
+        <div class="cert-card peach" data-cat="Clinical"><div class="c-name">AHA Heartsaver</div><div class="c-detail">CPR / AED Certified Responder</div></div>
+        <div class="cert-card peach" data-cat="Clinical"><div class="c-name">Red Cross First Aid</div><div class="c-detail">Chinese Red Cross Certification</div></div>
+        <div class="cert-card peach" data-cat="Sport"><div class="c-name">Sports Agent · L3</div><div class="c-detail">National Sports Agent License</div></div>
+        <div class="cert-card peach" data-cat="Sport"><div class="c-name">Tennis Referee · L3</div><div class="c-detail">National Referee Certification</div></div>
+        <div class="cert-card peach" data-cat="Sport"><div class="c-name">Badminton Referee · L3</div><div class="c-detail">National Referee Certification</div></div>
+        <div class="cert-card peach" data-cat="Sport"><div class="c-name">Table Tennis Referee · L3</div><div class="c-detail">National Referee Certification</div></div>
+        <div class="cert-card" data-cat="Wine"><div class="c-name">WSET Level 2</div><div class="c-detail">Pass with Distinction</div></div>
+        <div class="cert-card" data-cat="License"><div class="c-name">Motorcycle License</div><div class="c-detail">Class E · Road permit</div></div>
+      </div>
+
+      <div class="certs-gallery">
+<style>
         @keyframes scroll-left {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
@@ -561,18 +938,23 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
           <img src="wset.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
         </div>
       </div>
-    </div>
-
-    <div style="margin-top:48px">
-      <h3 style="font-size:.95rem;font-weight:600;margin-bottom:24px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;font-family:var(--sans)">Volunteer · 200+ hours</h3>
-      <div style="display:flex;flex-wrap:wrap;gap:12px">
-        <span class="project-tech" style="margin:0"><span>2019 FIS Snowboard Big Air World Cup, Beijing</span></span>
-        <span class="project-tech" style="margin:0"><span>2021 National Food Safety Competition</span></span>
-        <span class="project-tech" style="margin:0"><span>2023 Shanghai Marathon</span></span>
-        <span class="project-tech" style="margin:0"><span>2023 Spartan DEKA Medical Volunteer</span></span>
-        <span class="project-tech" style="margin:0"><span>2024 Paris Olympic Qualifier (Shanghai)</span></span>
       </div>
     </div>
+
+    <div class="vol-row">
+      <div class="vol-head">
+        <div class="lbl">Volunteer Service</div>
+        <div class="hrs"><b>200+</b> hours</div>
+      </div>
+      <div class="vol-list">
+        <div class="vol-row-item"><div class="v-year">2024</div><div class="v-name">Paris Olympic Qualifier — Shanghai</div><div class="v-tag">Sport</div></div>
+        <div class="vol-row-item"><div class="v-year">2023</div><div class="v-name">Spartan DEKA Medical Volunteer</div><div class="v-tag">Medical</div></div>
+        <div class="vol-row-item"><div class="v-year">2023</div><div class="v-name">Shanghai Marathon</div><div class="v-tag">Sport</div></div>
+        <div class="vol-row-item"><div class="v-year">2021</div><div class="v-name">National Food Safety Competition</div><div class="v-tag">Civic</div></div>
+        <div class="vol-row-item"><div class="v-year">2019</div><div class="v-name">FIS Snowboard Big Air World Cup — Beijing</div><div class="v-tag">Sport</div></div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -580,12 +962,42 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 <section class="contact-section" id="contact">
   <div class="fade-in">
     <span class="section-label">07 / Connect</span>
-    <h2 class="section-title">Let's Build Something Together</h2>
-    <p class="contact-sub">Open to opportunities in climate finance, data analytics, healthcare tech, and AI/ML engineering.</p>
-    <div class="contact-links">
-      <a href="/cdn-cgi/l/email-protection#8fece6e1ebf6e3e6fffcbdbfbfbecfe8e2eee6e3a1ece0e2">Email</a>
-      <a href="https://linkedin.com/in/cindy-li333" target="_blank">LinkedIn</a>
-      <a href="https://github.com/xindili-cmu" target="_blank">GitHub</a>
+
+    <div class="contact-availability"><span class="dotlive"></span>Open to opportunities · Spring 2026 onward</div>
+
+    <div class="contact-statement">
+      <span class="line">Let's build something <em>at the intersection of</em></span>
+      <span class="line"><span class="ac">AI/ML engineering</span><span class="dot">,</span> <span class="am">data analytics</span><span class="dot">,</span></span>
+      <span class="line">&amp; <span class="ap">healthcare tech</span><span class="dot">.</span></span>
+    </div>
+
+    <div class="contact-grid">
+      <a href="/cdn-cgi/l/email-protection#ec8f8582889580859c9fdedcdcddac8b818d8580c28f8381" class="contact-card">
+        <div class="cc-label">Email · primary</div>
+        <div>
+          <div class="cc-value"><span class="__cf_email__" data-cfemail="f2919b9c968b9e9b8281c0c2c2c3b2959f939b9edc919d9f">[email&#160;protected]</span></div>
+          <div class="cc-handle">Best for opportunities, collaborations, and research chats</div>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/cindy-li333" target="_blank" rel="noopener" class="contact-card peach">
+        <div class="cc-label">LinkedIn</div>
+        <div>
+          <div class="cc-value">/in/cindy-li333</div>
+          <div class="cc-handle">Professional network &amp; career updates</div>
+        </div>
+      </a>
+      <a href="https://github.com/xindili-cmu" target="_blank" rel="noopener" class="contact-card">
+        <div class="cc-label">GitHub</div>
+        <div>
+          <div class="cc-value">/xindili-cmu</div>
+          <div class="cc-handle">Open-source projects &amp; research code</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="contact-meta">
+      <div class="loc">Based in Pittsburgh · Open to Asia &amp; remote</div>
+      <div class="sign">— always a good time to talk.</div>
     </div>
   </div>
 </section>
@@ -728,8 +1140,39 @@ function spawnEcho(x,y){
 // ═══ SCROLL OBSERVER ═══
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:0.15});
+},{threshold:0.12, rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+// Per-item progressive reveal — each row fades in as you scroll past it
+const revealIO = new IntersectionObserver((entries, io) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.14, rootMargin: '0px 0px -6% 0px' });
+
+const REVEAL_SELECTOR = [
+  '.about-grid', '.about-stats .stat', '.persona',
+  '.exp-item',
+  '.project-card',
+  '.skill-group', '.practice-card',
+  '#research .project-card',
+  '.edu-card',
+  '.cert-card', '.vol-row-item', '.certs-gallery',
+  '.contact-availability', '.contact-statement', '.contact-card', '.contact-meta'
+].join(',');
+
+document.querySelectorAll('section').forEach(section => {
+  const items = section.querySelectorAll(REVEAL_SELECTOR);
+  items.forEach((el, i) => {
+    el.classList.add('scroll-reveal');
+    // stagger inside the section, capped so long sections don't pile too long
+    el.style.transitionDelay = (Math.min(i, 6) * 0.07) + 's';
+    revealIO.observe(el);
+  });
+});
 
 // ═══ TRIPTYCH REVEAL ═══
 function updateTriReveal(card, cx, cy){
