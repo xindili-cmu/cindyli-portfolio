@@ -1676,39 +1676,61 @@ const HangingRail = ({ items }) => {
     vp.scrollTo({ left: target, behavior: 'smooth' });
   }, []);
 
-  /* drag-to-scroll */
+  /* drag-to-scroll with momentum */
   useEffect(() => {
     const vp = viewportRef.current;
     if (!vp) return;
     let isDown = false, startX = 0, startScroll = 0, moved = false;
+    let lastX = 0, lastT = 0, velocity = 0, momentumRaf = 0;
+
+    const snapToNearest = () => {
+      const cards = trackRef.current.querySelectorAll('.exp-card');
+      const center = vp.scrollLeft + vp.clientWidth / 2;
+      let best = 0, bestDist = Infinity;
+      cards.forEach((el, i) => {
+        const c = el.offsetLeft + el.offsetWidth / 2;
+        const d = Math.abs(c - center);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      scrollToIndex(best);
+    };
+
+    const coastAndSnap = () => {
+      if (Math.abs(velocity) < 0.5) { snapToNearest(); return; }
+      vp.scrollLeft -= velocity;
+      velocity *= 0.92;
+      momentumRaf = requestAnimationFrame(coastAndSnap);
+    };
 
     const onDown = (e) => {
       isDown = true; moved = false;
+      cancelAnimationFrame(momentumRaf);
       const x = e.touches ? e.touches[0].clientX : e.clientX;
-      startX = x; startScroll = vp.scrollLeft;
+      startX = x; lastX = x; startScroll = vp.scrollLeft;
+      lastT = Date.now(); velocity = 0;
       vp.classList.add('is-grabbing');
+      vp.style.scrollBehavior = 'auto';
     };
     const onMove = (e) => {
       if (!isDown) return;
       const x = e.touches ? e.touches[0].clientX : e.clientX;
       const dx = x - startX;
       if (Math.abs(dx) > 4) moved = true;
+      const now = Date.now();
+      const dt = now - lastT || 1;
+      velocity = (x - lastX) / dt * 16;
+      lastX = x; lastT = now;
       vp.scrollLeft = startScroll - dx;
     };
     const onUp = () => {
       if (!isDown) return;
       isDown = false;
       vp.classList.remove('is-grabbing');
-      if (moved) {
-        const cards = trackRef.current.querySelectorAll('.exp-card');
-        const center = vp.scrollLeft + vp.clientWidth / 2;
-        let best = 0, bestDist = Infinity;
-        cards.forEach((el, i) => {
-          const c = el.offsetLeft + el.offsetWidth / 2;
-          const d = Math.abs(c - center);
-          if (d < bestDist) { bestDist = d; best = i; }
-        });
-        scrollToIndex(best);
+      vp.style.scrollBehavior = '';
+      if (moved && Math.abs(velocity) > 1.5) {
+        momentumRaf = requestAnimationFrame(coastAndSnap);
+      } else if (moved) {
+        snapToNearest();
       }
     };
 
@@ -1720,6 +1742,7 @@ const HangingRail = ({ items }) => {
     vp.addEventListener('touchend', onUp);
 
     return () => {
+      cancelAnimationFrame(momentumRaf);
       vp.removeEventListener('mousedown', onDown);
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseup', onUp);
