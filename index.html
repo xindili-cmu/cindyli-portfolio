@@ -785,27 +785,28 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   user-select: none;
 }
 
-.bend-svg {
+.bend-img {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 86px;
-  width: 100%;
+  left: 60px;
+  top: -40px;
+  width: 280px;
+  height: auto;
   z-index: 4;
   pointer-events: none;
-  /* drop shadow so the rail feels grounded */
   filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.55));
 }
-.bend-svg .stalk      { stroke-linecap: round; fill: none; }
-.bend-svg .stalk-base { stroke: #324f17; }
-.bend-svg .stalk-fill { stroke: #6a8f3f; }
-.bend-svg .stalk-shine{ stroke: rgba(255,255,255,0.35); }
-.bend-svg .stalk-shadow { stroke: rgba(0,0,0,0.4); }
-.bend-svg .node       { fill: #2a4a10; }
-.bend-svg .node-hi    { fill: #aedb78; opacity: 0.6; }
-.bend-svg .leaf       { fill: #6a8f3f; }
-.bend-svg .leaf-vein  { stroke: #2a4a10; stroke-width: 0.6; fill: none; }
+.rail-bamboo {
+  position: absolute;
+  left: 280px;
+  right: 0;
+  top: 26px;
+  height: 40px;
+  z-index: 3;
+  pointer-events: none;
+  background: url('assets/bamboo-horizontal.png') repeat-x left center;
+  background-size: auto 100%;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
+}
 
 /* ── Scrollable card track ─────────────────────────────────────── */
 .rail-viewport {
@@ -1515,55 +1516,11 @@ const CARD_META = [
     transition: 'ASS → RX' },
 ];
 
-/* The bend: an SVG showing the main trunk sprouting a node + side branch
-   that curves rightward into a horizontal rail. Lives at the top of
-   .rail-stage and is anchored visually to the bottom of the vertical
-   bamboo above (trunk center at x=132 in page-content coords). */
 const BambooBend = () => (
-  <svg
-    className="bend-svg"
-    viewBox="0 0 1200 90"
-    preserveAspectRatio="xMinYMid slice"
-    aria-hidden="true"
-  >
-    <defs>
-      <linearGradient id="bambooG" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0"   stopColor="#aedb78"/>
-        <stop offset="0.18" stopColor="#6a8f3f"/>
-        <stop offset="0.5"  stopColor="#3d5e1d"/>
-        <stop offset="0.82" stopColor="#6a8f3f"/>
-        <stop offset="1"    stopColor="#aedb78"/>
-      </linearGradient>
-    </defs>
-    {/* Dark outline behind the stalk */}
-    <path className="stalk stalk-base" d="M 132 -20 V 22 Q 132 50 168 50 H 1200" strokeWidth="26"/>
-    {/* Main bamboo stroke */}
-    <path className="stalk" stroke="url(#bambooG)" d="M 132 -20 V 22 Q 132 50 168 50 H 1200" strokeWidth="22"/>
-    {/* Highlight stripe along the stem */}
-    <path className="stalk stalk-shine" d="M 132 -20 V 22 Q 132 50 168 50 H 1200" strokeWidth="3"/>
-    {/* Subtle bottom shadow inside the rail */}
-    <path className="stalk stalk-shadow" d="M 168 56 H 1200" strokeWidth="3"/>
-
-    {/* Junction node — where side branch grows from trunk */}
-    <ellipse className="node" cx="132" cy="18" rx="14" ry="3.5"/>
-    <ellipse className="node-hi" cx="132" cy="16.5" rx="11" ry="1.2"/>
-
-    {/* Bamboo ring-nodes along the horizontal rail */}
-    {[230, 360, 490, 620, 750, 880, 1010, 1140].map((cx) => (
-      <g key={cx}>
-        <ellipse className="node" cx={cx} cy="50" rx="3" ry="13"/>
-        <ellipse className="node-hi" cx={cx - 0.6} cy="50" rx="1" ry="11"/>
-      </g>
-    ))}
-
-    {/* A couple of small leaves at the junction to sell the "branching" */}
-    <g>
-      <path className="leaf" d="M 108 12 Q 86 4 78 16 Q 96 22 112 14 Z"/>
-      <path className="leaf-vein" d="M 84 14 Q 100 16 110 13"/>
-      <path className="leaf" d="M 100 22 Q 78 22 74 32 Q 92 32 104 24 Z"/>
-      <path className="leaf-vein" d="M 80 28 Q 94 28 102 24"/>
-    </g>
-  </svg>
+  <>
+    <img className="bend-img" src="assets/bamboo-bend.png" alt="" aria-hidden="true"/>
+    <div className="rail-bamboo" aria-hidden="true"></div>
+  </>
 );
 
 const BinderClipPair = () => (
