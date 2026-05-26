@@ -635,7 +635,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 }
 /* ── experience timeline ── */
 .tl-wrap{position:relative;display:flex;flex-direction:column}
-.tl-vine{position:absolute;left:104px;top:0;width:56px;height:100%;pointer-events:none;z-index:0;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.4))}
+.tl-vine{display:none}
 
 .tl-item{position:relative;display:grid;grid-template-columns:80px 56px minmax(0,1fr);column-gap:24px;padding:0 0 56px;z-index:1}
 .tl-item.tl-last{padding-bottom:8px}
@@ -708,13 +708,15 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 
 /* mobile */
 @media (max-width:760px){
-  .tl-item{grid-template-columns:1fr;column-gap:0;padding-bottom:36px}
-  .tl-year{display:none}
-  .tl-rail{display:none}
-  .tl-vine{display:none}
-  .tl-climber{display:none}
+  .tl-item{grid-template-columns:62px 36px minmax(0,1fr);column-gap:12px;padding-bottom:48px}
+  .tl-year{padding-top:10px}
+  .tl-year-num{font-size:1.3rem}
+  .tl-year-range{font-size:0.9rem}
   .tl-role{font-size:1.05rem}
   .tl-card{padding:14px 16px 18px}
+  .tl-vine{left:62px;width:36px}
+  .tl-rail{width:36px}
+  .tl-flower{width:24px;height:24px}
 }
 </style>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
