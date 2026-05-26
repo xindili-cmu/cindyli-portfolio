@@ -1540,29 +1540,29 @@ const BambooBend = () => (
       </linearGradient>
     </defs>
     {/* Main bamboo stalk: vertical down then curve right */}
-    <path d="M 132 -20 V 18 Q 132 48 164 48 H 1200" stroke="#1e3a0e" strokeWidth="22.4" fill="none" strokeLinecap="round"/>
-    <path d="M 132 -20 V 18 Q 132 48 164 48 H 1200" stroke="url(#bambooG)" strokeWidth="19.2" fill="none" strokeLinecap="round"/>
-    <path d="M 132 -20 V 18 Q 132 48 164 48 H 1200" stroke="rgba(255,255,255,0.18)" strokeWidth="3.2" fill="none" strokeLinecap="round"/>
+    <path d="M 132 -20 V 0 Q 132 30 164 30 H 1200" stroke="#1e3a0e" strokeWidth="11.2" fill="none" strokeLinecap="round"/>
+    <path d="M 132 -20 V 0 Q 132 30 164 30 H 1200" stroke="url(#bambooG)" strokeWidth="9.6" fill="none" strokeLinecap="round"/>
+    <path d="M 132 -20 V 0 Q 132 30 164 30 H 1200" stroke="rgba(255,255,255,0.18)" strokeWidth="1.6" fill="none" strokeLinecap="round"/>
 
     {/* Junction node */}
-    <ellipse cx="132" cy="14" rx="13" ry="3.5" fill="#2a4a10"/>
-    <ellipse cx="132" cy="12.5" rx="10" ry="1.2" fill="#aedb78" opacity="0.5"/>
+    <ellipse cx="132" cy="-4" rx="7" ry="2" fill="#2a4a10"/>
+    <ellipse cx="132" cy="-5" rx="5.5" ry="0.8" fill="#aedb78" opacity="0.5"/>
 
     {/* Bamboo segment nodes along horizontal rail */}
     {[220, 340, 460, 580, 700, 820, 940, 1060].map((cx) => (
       <g key={cx}>
-        <ellipse cx={cx} cy="48" rx="2.8" ry="11.5" fill="#2a4a10"/>
-        <ellipse cx={cx - 0.5} cy="48" rx="1" ry="10" fill="#aedb78" opacity="0.45"/>
+        <ellipse cx={cx} cy="30" rx="1.5" ry="6" fill="#2a4a10"/>
+        <ellipse cx={cx - 0.3} cy="30" rx="0.6" ry="5" fill="#aedb78" opacity="0.45"/>
       </g>
     ))}
 
     {/* Leaves at the junction */}
-    <path d="M 106 10 Q 82 2 76 16 Q 96 20 110 12 Z" fill="url(#bambooLeaf)"/>
-    <path d="M 82 12 Q 98 14 108 11" stroke="#2a4a10" strokeWidth="0.6" fill="none"/>
-    <path d="M 98 20 Q 74 22 72 34 Q 92 32 102 22 Z" fill="url(#bambooLeaf)"/>
-    <path d="M 78 28 Q 92 28 100 22" stroke="#2a4a10" strokeWidth="0.6" fill="none"/>
-    <path d="M 150 40 Q 138 56 148 64 Q 156 52 152 42 Z" fill="url(#bambooLeaf)" opacity="0.8"/>
-    <path d="M 172 44 Q 162 30 152 36 Q 164 40 170 46 Z" fill="url(#bambooLeaf)" opacity="0.7"/>
+    <path d="M 106 -8 Q 82 -16 76 -2 Q 96 2 110 -6 Z" fill="url(#bambooLeaf)"/>
+    <path d="M 82 -6 Q 98 -4 108 -7" stroke="#2a4a10" strokeWidth="0.6" fill="none"/>
+    <path d="M 98 2 Q 74 4 72 16 Q 92 14 102 4 Z" fill="url(#bambooLeaf)"/>
+    <path d="M 78 10 Q 92 10 100 4" stroke="#2a4a10" strokeWidth="0.6" fill="none"/>
+    <path d="M 150 22 Q 138 38 148 46 Q 156 34 152 24 Z" fill="url(#bambooLeaf)" opacity="0.8"/>
+    <path d="M 172 26 Q 162 12 152 18 Q 164 22 170 28 Z" fill="url(#bambooLeaf)" opacity="0.7"/>
   </svg>
 );
 
