@@ -785,26 +785,27 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   user-select: none;
 }
 
-.bend-img {
+.bend-img { display: none; }
+.rail-bamboo { display: none; }
+.bend-svg {
   position: absolute;
-  left: 52px;
-  top: -60px;
-  width: 320px;
-  height: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 86px;
+  width: 100%;
   z-index: 4;
   pointer-events: none;
   filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.55));
 }
-.rail-bamboo {
-  position: absolute;
-  left: 200px;
-  right: 0;
-  top: 76px;
-  height: 52px;
-  z-index: 2;
-  pointer-events: none;
-  background: url('assets/bamboo-horizontal.png') repeat-x left center;
-  background-size: auto 100%;
+.bend-svg .stalk      { stroke-linecap: round; fill: none; }
+.bend-svg .stalk-base { stroke: #324f17; }
+.bend-svg .stalk-shine{ stroke: rgba(255,255,255,0.25); }
+.bend-svg .stalk-shadow { stroke: rgba(0,0,0,0.4); }
+.bend-svg .node       { fill: #2a4a10; }
+.bend-svg .node-hi    { fill: #aedb78; opacity: 0.6; }
+.bend-svg .leaf       { fill: #6a8f3f; }
+.bend-svg .leaf-vein  { stroke: #2a4a10; stroke-width: 0.6; fill: none; }
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
 }
 
@@ -1517,10 +1518,52 @@ const CARD_META = [
 ];
 
 const BambooBend = () => (
-  <>
-    <img className="bend-img" src="assets/bamboo-bend.png" alt="" aria-hidden="true"/>
-    <div className="rail-bamboo" aria-hidden="true"></div>
-  </>
+  <svg
+    className="bend-svg"
+    viewBox="0 0 1200 90"
+    preserveAspectRatio="xMinYMid slice"
+    aria-hidden="true"
+  >
+    <defs>
+      <linearGradient id="bambooG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0"    stopColor="#b8d88a"/>
+        <stop offset="0.15" stopColor="#7aa85a"/>
+        <stop offset="0.35" stopColor="#4d7a2e"/>
+        <stop offset="0.5"  stopColor="#3d5e1d"/>
+        <stop offset="0.65" stopColor="#4d7a2e"/>
+        <stop offset="0.85" stopColor="#7aa85a"/>
+        <stop offset="1"    stopColor="#b8d88a"/>
+      </linearGradient>
+      <linearGradient id="bambooLeaf" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0"   stopColor="#7aa85a"/>
+        <stop offset="1"   stopColor="#4d7a2e"/>
+      </linearGradient>
+    </defs>
+    {/* Main bamboo stalk: vertical down then curve right */}
+    <path d="M 132 -20 V 22 Q 132 52 164 52 H 1200" stroke="#1e3a0e" strokeWidth="28" fill="none" strokeLinecap="round"/>
+    <path d="M 132 -20 V 22 Q 132 52 164 52 H 1200" stroke="url(#bambooG)" strokeWidth="24" fill="none" strokeLinecap="round"/>
+    <path d="M 132 -20 V 22 Q 132 52 164 52 H 1200" stroke="rgba(255,255,255,0.18)" strokeWidth="4" fill="none" strokeLinecap="round"/>
+
+    {/* Junction node */}
+    <ellipse cx="132" cy="18" rx="15" ry="4" fill="#2a4a10"/>
+    <ellipse cx="132" cy="16.5" rx="12" ry="1.4" fill="#aedb78" opacity="0.5"/>
+
+    {/* Bamboo segment nodes along horizontal rail */}
+    {[220, 340, 460, 580, 700, 820, 940, 1060].map((cx) => (
+      <g key={cx}>
+        <ellipse cx={cx} cy="52" rx="3.2" ry="14" fill="#2a4a10"/>
+        <ellipse cx={cx - 0.5} cy="52" rx="1.2" ry="12" fill="#aedb78" opacity="0.45"/>
+      </g>
+    ))}
+
+    {/* Leaves at the junction */}
+    <path d="M 106 10 Q 82 2 76 16 Q 96 20 110 12 Z" fill="url(#bambooLeaf)"/>
+    <path d="M 82 12 Q 98 14 108 11" stroke="#2a4a10" strokeWidth="0.6" fill="none"/>
+    <path d="M 98 20 Q 74 22 72 34 Q 92 32 102 22 Z" fill="url(#bambooLeaf)"/>
+    <path d="M 78 28 Q 92 28 100 22" stroke="#2a4a10" strokeWidth="0.6" fill="none"/>
+    <path d="M 150 40 Q 138 56 148 64 Q 156 52 152 42 Z" fill="url(#bambooLeaf)" opacity="0.8"/>
+    <path d="M 172 44 Q 162 30 152 36 Q 164 40 170 46 Z" fill="url(#bambooLeaf)" opacity="0.7"/>
+  </svg>
 );
 
 const BinderClipPair = () => (
