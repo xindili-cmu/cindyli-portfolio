@@ -1540,19 +1540,19 @@ const BambooBend = () => (
       </linearGradient>
     </defs>
     {/* Main bamboo stalk: vertical down then curve right */}
-    <path d="M 132 -20 V 22 Q 132 52 164 52 H 1200" stroke="#1e3a0e" strokeWidth="28" fill="none" strokeLinecap="round"/>
-    <path d="M 132 -20 V 22 Q 132 52 164 52 H 1200" stroke="url(#bambooG)" strokeWidth="24" fill="none" strokeLinecap="round"/>
-    <path d="M 132 -20 V 22 Q 132 52 164 52 H 1200" stroke="rgba(255,255,255,0.18)" strokeWidth="4" fill="none" strokeLinecap="round"/>
+    <path d="M 132 -20 V 18 Q 132 48 164 48 H 1200" stroke="#1e3a0e" strokeWidth="22.4" fill="none" strokeLinecap="round"/>
+    <path d="M 132 -20 V 18 Q 132 48 164 48 H 1200" stroke="url(#bambooG)" strokeWidth="19.2" fill="none" strokeLinecap="round"/>
+    <path d="M 132 -20 V 18 Q 132 48 164 48 H 1200" stroke="rgba(255,255,255,0.18)" strokeWidth="3.2" fill="none" strokeLinecap="round"/>
 
     {/* Junction node */}
-    <ellipse cx="132" cy="18" rx="15" ry="4" fill="#2a4a10"/>
-    <ellipse cx="132" cy="16.5" rx="12" ry="1.4" fill="#aedb78" opacity="0.5"/>
+    <ellipse cx="132" cy="14" rx="13" ry="3.5" fill="#2a4a10"/>
+    <ellipse cx="132" cy="12.5" rx="10" ry="1.2" fill="#aedb78" opacity="0.5"/>
 
     {/* Bamboo segment nodes along horizontal rail */}
     {[220, 340, 460, 580, 700, 820, 940, 1060].map((cx) => (
       <g key={cx}>
-        <ellipse cx={cx} cy="52" rx="3.2" ry="14" fill="#2a4a10"/>
-        <ellipse cx={cx - 0.5} cy="52" rx="1.2" ry="12" fill="#aedb78" opacity="0.45"/>
+        <ellipse cx={cx} cy="48" rx="2.8" ry="11.5" fill="#2a4a10"/>
+        <ellipse cx={cx - 0.5} cy="48" rx="1" ry="10" fill="#aedb78" opacity="0.45"/>
       </g>
     ))}
 
