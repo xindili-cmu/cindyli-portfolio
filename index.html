@@ -794,6 +794,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   z-index: 4;
   pointer-events: none;
   filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.55));
+  overflow: hidden;
 }
 .bend-svg .stalk      { stroke-linecap: round; fill: none; }
 .bend-svg .stalk-base { stroke: #324f17; }
@@ -1447,8 +1448,6 @@ const CARD_META = [
 const BambooBend = () => (
   <svg
     className="bend-svg"
-    viewBox="0 0 1200 90"
-    preserveAspectRatio="xMinYMid slice"
     aria-hidden="true"
   >
     <defs>
@@ -1461,13 +1460,13 @@ const BambooBend = () => (
       </linearGradient>
     </defs>
     {/* Dark outline behind the stalk */}
-    <path className="stalk stalk-base" d="M 132 -20 V 22 Q 132 50 168 50 H 1200" strokeWidth="26"/>
+    <path className="stalk stalk-base" d="M 132 -20 V 22 Q 132 50 168 50 H 3000" strokeWidth="26"/>
     {/* Main bamboo stroke */}
-    <path className="stalk" stroke="url(#bambooG)" d="M 132 -20 V 22 Q 132 50 168 50 H 1200" strokeWidth="22"/>
+    <path className="stalk" stroke="url(#bambooG)" d="M 132 -20 V 22 Q 132 50 168 50 H 3000" strokeWidth="22"/>
     {/* Highlight stripe along the stem */}
-    <path className="stalk stalk-shine" d="M 132 -20 V 22 Q 132 50 168 50 H 1200" strokeWidth="3"/>
+    <path className="stalk stalk-shine" d="M 132 -20 V 22 Q 132 50 168 50 H 3000" strokeWidth="3"/>
     {/* Subtle bottom shadow inside the rail */}
-    <path className="stalk stalk-shadow" d="M 168 56 H 1200" strokeWidth="3"/>
+    <path className="stalk stalk-shadow" d="M 168 56 H 3000" strokeWidth="3"/>
 
     {/* Junction node — where side branch grows from trunk */}
     <ellipse className="node" cx="132" cy="18" rx="14" ry="3.5"/>
