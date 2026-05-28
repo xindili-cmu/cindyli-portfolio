@@ -21,6 +21,8 @@
 img{-webkit-transform:translateZ(0);transform:translateZ(0)}
 :root{--bg:#000;--fg:#fff;--muted:rgba(255,255,255,0.45);
   --accent:#c8a2ff;--accent2:#ffb38a;--accent2-deep:#ff7a4d;
+  --accent-soft:#e0c4ff;--accent-deep:#9e7dd9;--accent2-warm:#ffd8a8;
+  --line-08:rgba(255,255,255,0.08);--line-12:rgba(255,255,255,0.12);
   --serif:'Fraunces',serif;--sans:'Inter',sans-serif;
   --serif-disp:'opsz' 144,'SOFT' 30;--serif-body:'opsz' 16,'SOFT' 50}
 html{scroll-behavior:smooth;background:var(--bg);color:var(--fg)}
@@ -632,6 +634,10 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   .pc-modal-media{min-height:240px}
   .pc-modal-body{padding:32px 28px}
 }
+/* ═════════════════════════════════════════════════════════════════
+   PART A · Vertical climbing timeline (items 1-6)
+   ═════════════════════════════════════════════════════════════════ */
+
 .tl-wrap { position: relative; display: flex; flex-direction: column; }
 
 .tl-vine {
@@ -639,7 +645,6 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   left: 92px;
   top: 0;
   width: 80px;
-  /* don't fill the whole timeline — stop at the last item's bottom */
   height: 100%;
   pointer-events: none;
   z-index: 0;
@@ -705,6 +710,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   font-style: italic; font-size: 12px; color: #1a0a2a; font-weight: 700;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45); overflow: hidden; letter-spacing: -0.01em;
 }
+.tl-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .tl-company { font-size: 0.9rem; color: var(--accent); font-weight: 400; }
 .tl-healthcare .tl-company { color: #ffd8a8; }
 
@@ -749,16 +755,15 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 
 .rail-section {
   position: relative;
-  margin-top: -36px;   /* hug the last vertical item */
+  margin-top: -36px;
   padding-top: 0;
 }
 
-/* Sectional label between vertical & horizontal */
 .rail-intro {
   display: flex;
   align-items: center;
   gap: 18px;
-  padding: 0 0 0 172px;     /* aligned past the bamboo column */
+  padding: 0 0 0 172px;
   margin-bottom: 20px;
   min-height: 28px;
   position: relative;
@@ -772,21 +777,13 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 .rail-intro .tl-eye .arc { color: var(--muted); margin: 0 8px; }
 .rail-intro .tl-eye .tag { color: var(--fg); }
 
-/* ── The bamboo bend / branch ──
-   A short SVG that visually shows the main trunk sprouting a node, then
-   a side-branch curving rightward to become the horizontal rail. The
-   "rail" portion is *part of* this SVG — the horizontal cards then hang
-   from that line. */
 .rail-stage {
   position: relative;
   width: 100%;
-  /* visible card area: rail at ~38px, cards from ~72px, card height ~540 → 660 */
   height: 700px;
   user-select: none;
 }
 
-.bend-img { display: none; }
-.rail-bamboo { display: none; }
 .bend-svg {
   position: absolute;
   left: 0;
@@ -800,7 +797,8 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 }
 .bend-svg .stalk      { stroke-linecap: round; fill: none; }
 .bend-svg .stalk-base { stroke: #324f17; }
-.bend-svg .stalk-shine{ stroke: rgba(255,255,255,0.25); }
+.bend-svg .stalk-fill { stroke: #6a8f3f; }
+.bend-svg .stalk-shine{ stroke: rgba(255,255,255,0.35); }
 .bend-svg .stalk-shadow { stroke: rgba(0,0,0,0.4); }
 .bend-svg .node       { fill: #2a4a10; }
 .bend-svg .node-hi    { fill: #aedb78; opacity: 0.6; }
@@ -812,7 +810,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   position: absolute;
   left: 0;
   right: 0;
-  top: 80px;   /* below the rail line */
+  top: 80px;
   bottom: 0;
   overflow-x: auto;
   overflow-y: hidden;
@@ -988,10 +986,10 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
               0 0 32px color-mix(in oklab, var(--accentC) 30%, transparent);
 }
 
-/* Nav, meter, hint */
+/* Nav, meter */
 .rail-nav {
   position: absolute;
-  top: calc(80px + 290px); /* near vertical-mid of cards */
+  top: calc(80px + 290px);
   transform: translateY(-50%);
   width: 40px; height: 40px; border-radius: 50%;
   border: 1px solid var(--line-12);
@@ -1029,7 +1027,6 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 
 /* ── Mobile ──────────────────────────────────────────────────────── */
 @media (max-width: 760px) {
-  .page { padding: 56px 5vw 100px; }
   .tl-item { grid-template-columns: 62px 36px minmax(0, 1fr); column-gap: 12px; padding-bottom: 48px; }
   .tl-year { padding-top: 10px; }
   .tl-year-num { font-size: 1.3rem; }
@@ -1165,7 +1162,7 @@ window.TimelineData = [
       'Supporting <strong>deSPAC transaction analysis</strong> for NuCube (SMR company).',
       'Building <strong>intelligence systems</strong> using n8n, SEC EDGAR API, NewsAPI, and PostgreSQL.',
     ] },
-  { period: '2026', current: true, healthcare: false, logo: 'A',
+  { period: '2026', current: true, healthcare: false, logo: 'A', logoImg: 'assets/logo_atlas.png',
     role: 'IR Associate',
     company: 'Atlas Coalition (WeTheAtlas)',
     bullets: [
@@ -1181,7 +1178,7 @@ window.TimelineData = [
       'Analyzed <b class="m">10+ competitor</b> consultation models across Avvo, FindLaw, and Justia; developed organic growth strategy with projected <b class="m">21% traffic growth</b>.',
       'Built an <strong>AI-powered CRM analytics agent</strong> on HubSpot + Claude API, automating weekly extraction, trend analysis, and reporting — <b class="m">~3 hours/week</b> saved.',
     ] },
-  { period: '2023 – 2025', healthcare: true, logo: 'M',
+  { period: '2023 – 2025', healthcare: true, logo: 'M', logoImg: 'assets/logo_msh.png',
     role: 'Business Development Manager (Full-Time)',
     company: 'MSH China (万欣和) · International Health Insurance',
     bullets: [
@@ -1190,7 +1187,7 @@ window.TimelineData = [
       'Analyzed group insurance client portfolios, synthesizing claims trends, utilization patterns, and risk profiles across <b class="m">50K+ insured lives</b> to inform underwriting and renewal strategy.',
       'Led end-to-end design of a customized corporate insurance plan for an enterprise with <b class="m">50K+ employees</b>, partnering with actuarial teams on risk assessment, pricing, and product structuring.',
     ] },
-  { period: '2024 – 2025', healthcare: false, logo: 'I',
+  { period: '2024 – 2025', healthcare: false, logo: 'I', logoImg: 'assets/logo_illuminera.png',
     role: 'Consulting Intern, Growth X',
     company: 'Illuminera Marketing Strategy Consulting (an IQVIA business) · Shanghai',
     bullets: [
@@ -1206,9 +1203,10 @@ window.TimelineData = [
       'Built and automated <strong>multi-scenario financial models (DCF, LBO)</strong> in Python, integrating data pipelines to execute valuation analytics and risk simulations across <strong>Mainland China, Taiwan, Southeast Asia, and UK</strong>.',
       'Produced and presented data-driven insights for <b class="m">4+ investment memorandums</b>, visualizing financial projections through <strong>Tableau dashboards</strong>.',
     ] },
-  { period: '2023', healthcare: true, logo: 'B',
+  { period: '2023', healthcare: true, logo: 'B', logoImg: 'assets/logo_eden.jpg',
     role: 'Sports Medicine Intern',
     company: 'Beijing Eden Hospital (怡德医院) · Beijing',
+    gallery: ['exp_beijing_united_1.jpg', 'exp_beijing_united_2.jpg'],
     bullets: [
       'Managed <b class="m">60+ patient case records</b> and operated the hospital registration system independently.',
       'Processed <b class="m">30+ commercial insurance pre-authorizations</b>.',
@@ -1223,24 +1221,26 @@ window.TimelineData = [
       'Managed B2B outreach for <b class="m">5+ enterprises</b> in Beijing.',
       'Specialized in <strong>lower-limb biomechanics testing</strong> and orthotic assessment.',
     ] },
-  { period: '2023', healthcare: true, logo: 'N',
+  { period: '2023', healthcare: true, logo: 'N', logoImg: 'assets/logo_winter.png',
     role: 'Research Staff (Intern)',
     company: 'National Winter Sports Training & Research Center · Beijing',
+    gallery: ['exp_research_center_1.jpg', 'exp_research_center_2.jpg', 'exp_research_center_3.jpg'],
     bullets: [
       'Executed <strong>sports injury prevention protocols</strong> — athletic taping, cryotherapy, pre-competition warm-ups, and post-event stretching (<b class="m">300+ event coverage hours</b>).',
       'Administered <strong>advanced modalities</strong>: therapeutic ultrasound, infrared therapy, high-intensity laser, shortwave diathermy, and interferential current therapy.',
       'Performed <strong>physiological assessments</strong> using Biodex isokinetic dynamometers, InBody body composition analyzers, and equine movement simulation systems.',
     ] },
-  { period: '2022 – 2023', healthcare: true, logo: 'D',
+  { period: '2022 – 2023', healthcare: true, logo: 'D', logoImg: 'assets/logo_disney.png',
     role: 'Athletic Trainer (Intern)',
     company: 'Shanghai Disney Resort · Shanghai',
+    gallery: ['disney.jpg'],
     bullets: [
       'Collaborated with <strong>senior athletic trainers</strong> and performance management teams.',
       'Leveraged <strong>Power BI and Excel</strong> to analyze injury incident data, identifying key risk factors and presenting data-driven insights.',
       'Designed and implemented <strong>targeted intervention programs</strong> based on data analysis — <b class="m">70% reduction</b> in knee injury frequency.',
       'Delivered <strong>rehabilitation and first-aid support</strong> to cast members.',
     ] },
-  { period: '2022 – 2023', healthcare: true, logo: 'S',
+  { period: '2022 – 2023', healthcare: true, logo: 'S', logoImg: 'assets/logo_spine.jpg',
     role: 'Physical Therapist (Intern)',
     company: 'Spine & Pain Rehabilitation Center (施柏恩) · Shanghai',
     bullets: [
@@ -1372,7 +1372,9 @@ const ExperienceRow = ({ entry, isLast, isActive, onMount }) => {
       <div className="tl-card">
         <div className="tl-role">{role}</div>
         <div className="tl-co">
-          <span className="tl-logo">{logo}</span>
+          <span className="tl-logo">
+            {entry.logoImg ? <img src={entry.logoImg} alt=""/> : logo}
+          </span>
           <div className="tl-company">{company}</div>
         </div>
         <ul className="tl-bullets">
@@ -1515,6 +1517,8 @@ const CARD_META = [
     transition: 'ASS → RX' },
 ];
 
+/* The bend: an SVG showing the main trunk sprouting a node + side branch
+   that curves rightward into a horizontal rail. */
 const BambooBend = () => (
   <svg
     className="bend-svg"
@@ -1524,43 +1528,41 @@ const BambooBend = () => (
   >
     <defs>
       <linearGradient id="bambooG" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0"    stopColor="#b8d88a"/>
-        <stop offset="0.15" stopColor="#7aa85a"/>
-        <stop offset="0.35" stopColor="#4d7a2e"/>
+        <stop offset="0"   stopColor="#aedb78"/>
+        <stop offset="0.18" stopColor="#6a8f3f"/>
         <stop offset="0.5"  stopColor="#3d5e1d"/>
-        <stop offset="0.65" stopColor="#4d7a2e"/>
-        <stop offset="0.85" stopColor="#7aa85a"/>
-        <stop offset="1"    stopColor="#b8d88a"/>
-      </linearGradient>
-      <linearGradient id="bambooLeaf" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0"   stopColor="#7aa85a"/>
-        <stop offset="1"   stopColor="#4d7a2e"/>
+        <stop offset="0.82" stopColor="#6a8f3f"/>
+        <stop offset="1"    stopColor="#aedb78"/>
       </linearGradient>
     </defs>
-    {/* Main bamboo stalk: vertical down then curve right */}
-    <path d="M 132 -20 V 0 Q 132 30 164 30 H 1200" stroke="#1e3a0e" strokeWidth="11.2" fill="none" strokeLinecap="round"/>
-    <path d="M 132 -20 V 0 Q 132 30 164 30 H 1200" stroke="url(#bambooG)" strokeWidth="9.6" fill="none" strokeLinecap="round"/>
-    <path d="M 132 -20 V 0 Q 132 30 164 30 H 1200" stroke="rgba(255,255,255,0.18)" strokeWidth="1.6" fill="none" strokeLinecap="round"/>
+    {/* Dark outline behind the stalk */}
+    <path className="stalk stalk-base" d="M 132 -20 V 22 Q 132 50 168 50 H 1200" strokeWidth="26"/>
+    {/* Main bamboo stroke */}
+    <path className="stalk" stroke="url(#bambooG)" d="M 132 -20 V 22 Q 132 50 168 50 H 1200" strokeWidth="22"/>
+    {/* Highlight stripe along the stem */}
+    <path className="stalk stalk-shine" d="M 132 -20 V 22 Q 132 50 168 50 H 1200" strokeWidth="3"/>
+    {/* Subtle bottom shadow inside the rail */}
+    <path className="stalk stalk-shadow" d="M 168 56 H 1200" strokeWidth="3"/>
 
-    {/* Junction node */}
-    <ellipse cx="132" cy="-4" rx="7" ry="2" fill="#2a4a10"/>
-    <ellipse cx="132" cy="-5" rx="5.5" ry="0.8" fill="#aedb78" opacity="0.5"/>
+    {/* Junction node — where side branch grows from trunk */}
+    <ellipse className="node" cx="132" cy="18" rx="14" ry="3.5"/>
+    <ellipse className="node-hi" cx="132" cy="16.5" rx="11" ry="1.2"/>
 
-    {/* Bamboo segment nodes along horizontal rail */}
-    {[220, 340, 460, 580, 700, 820, 940, 1060].map((cx) => (
+    {/* Bamboo ring-nodes along the horizontal rail */}
+    {[230, 360, 490, 620, 750, 880, 1010, 1140].map((cx) => (
       <g key={cx}>
-        <ellipse cx={cx} cy="30" rx="1.5" ry="6" fill="#2a4a10"/>
-        <ellipse cx={cx - 0.3} cy="30" rx="0.6" ry="5" fill="#aedb78" opacity="0.45"/>
+        <ellipse className="node" cx={cx} cy="50" rx="3" ry="13"/>
+        <ellipse className="node-hi" cx={cx - 0.6} cy="50" rx="1" ry="11"/>
       </g>
     ))}
 
-    {/* Leaves at the junction */}
-    <path d="M 106 -8 Q 82 -16 76 -2 Q 96 2 110 -6 Z" fill="url(#bambooLeaf)"/>
-    <path d="M 82 -6 Q 98 -4 108 -7" stroke="#2a4a10" strokeWidth="0.6" fill="none"/>
-    <path d="M 98 2 Q 74 4 72 16 Q 92 14 102 4 Z" fill="url(#bambooLeaf)"/>
-    <path d="M 78 10 Q 92 10 100 4" stroke="#2a4a10" strokeWidth="0.6" fill="none"/>
-    <path d="M 150 22 Q 138 38 148 46 Q 156 34 152 24 Z" fill="url(#bambooLeaf)" opacity="0.8"/>
-    <path d="M 172 26 Q 162 12 152 18 Q 164 22 170 28 Z" fill="url(#bambooLeaf)" opacity="0.7"/>
+    {/* A couple of small leaves at the junction to sell the "branching" */}
+    <g>
+      <path className="leaf" d="M 108 12 Q 86 4 78 16 Q 96 22 112 14 Z"/>
+      <path className="leaf-vein" d="M 84 14 Q 100 16 110 13"/>
+      <path className="leaf" d="M 100 22 Q 78 22 74 32 Q 92 32 104 24 Z"/>
+      <path className="leaf-vein" d="M 80 28 Q 94 28 102 24"/>
+    </g>
   </svg>
 );
 
@@ -1676,61 +1678,39 @@ const HangingRail = ({ items }) => {
     vp.scrollTo({ left: target, behavior: 'smooth' });
   }, []);
 
-  /* drag-to-scroll with momentum */
+  /* drag-to-scroll */
   useEffect(() => {
     const vp = viewportRef.current;
     if (!vp) return;
     let isDown = false, startX = 0, startScroll = 0, moved = false;
-    let lastX = 0, lastT = 0, velocity = 0, momentumRaf = 0;
-
-    const snapToNearest = () => {
-      const cards = trackRef.current.querySelectorAll('.exp-card');
-      const center = vp.scrollLeft + vp.clientWidth / 2;
-      let best = 0, bestDist = Infinity;
-      cards.forEach((el, i) => {
-        const c = el.offsetLeft + el.offsetWidth / 2;
-        const d = Math.abs(c - center);
-        if (d < bestDist) { bestDist = d; best = i; }
-      });
-      scrollToIndex(best);
-    };
-
-    const coastAndSnap = () => {
-      if (Math.abs(velocity) < 0.5) { snapToNearest(); return; }
-      vp.scrollLeft -= velocity;
-      velocity *= 0.92;
-      momentumRaf = requestAnimationFrame(coastAndSnap);
-    };
 
     const onDown = (e) => {
       isDown = true; moved = false;
-      cancelAnimationFrame(momentumRaf);
       const x = e.touches ? e.touches[0].clientX : e.clientX;
-      startX = x; lastX = x; startScroll = vp.scrollLeft;
-      lastT = Date.now(); velocity = 0;
+      startX = x; startScroll = vp.scrollLeft;
       vp.classList.add('is-grabbing');
-      vp.style.scrollBehavior = 'auto';
     };
     const onMove = (e) => {
       if (!isDown) return;
       const x = e.touches ? e.touches[0].clientX : e.clientX;
       const dx = x - startX;
       if (Math.abs(dx) > 4) moved = true;
-      const now = Date.now();
-      const dt = now - lastT || 1;
-      velocity = (x - lastX) / dt * 16;
-      lastX = x; lastT = now;
       vp.scrollLeft = startScroll - dx;
     };
     const onUp = () => {
       if (!isDown) return;
       isDown = false;
       vp.classList.remove('is-grabbing');
-      vp.style.scrollBehavior = '';
-      if (moved && Math.abs(velocity) > 1.5) {
-        momentumRaf = requestAnimationFrame(coastAndSnap);
-      } else if (moved) {
-        snapToNearest();
+      if (moved) {
+        const cards = trackRef.current.querySelectorAll('.exp-card');
+        const center = vp.scrollLeft + vp.clientWidth / 2;
+        let best = 0, bestDist = Infinity;
+        cards.forEach((el, i) => {
+          const c = el.offsetLeft + el.offsetWidth / 2;
+          const d = Math.abs(c - center);
+          if (d < bestDist) { bestDist = d; best = i; }
+        });
+        scrollToIndex(best);
       }
     };
 
@@ -1742,7 +1722,6 @@ const HangingRail = ({ items }) => {
     vp.addEventListener('touchend', onUp);
 
     return () => {
-      cancelAnimationFrame(momentumRaf);
       vp.removeEventListener('mousedown', onDown);
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseup', onUp);
