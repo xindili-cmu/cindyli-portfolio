@@ -780,7 +780,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 .rail-stage {
   position: relative;
   width: 100%;
-  height: 700px;
+  height: 440px;
   user-select: none;
 }
 
@@ -837,7 +837,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 /* ── Hanging card ──────────────────────────────────────────────── */
 .exp-card {
   position: relative;
-  width: 300px;
+  width: 180px;
   flex-shrink: 0;
   scroll-snap-align: center;
   scroll-snap-stop: always;
@@ -866,130 +866,56 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 }
 .rail-viewport.is-grabbing .exp-card { animation-play-state: paused; }
 
-/* Binder clips at top */
-.clip-pair {
-  position: absolute;
-  top: -36px; left: 50%; transform: translateX(-50%);
-  width: 72px; height: 44px; z-index: 12; pointer-events: none;
-}
-.clip { position: absolute; top: 0; width: 20px; height: 44px; }
-.clip.l { left: 6px; } .clip.r { right: 6px; }
-.clip-loop { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 14px; height: 20px; }
-.clip-loop::before {
-  content: ""; position: absolute; inset: 0 1px 2px 1px;
-  border: 2px solid #bbb; border-bottom-color: #888;
-  border-radius: 7px 7px 2px 2px; background: transparent;
-  box-shadow: inset 0 1px 1px rgba(255,255,255,0.3), 0 1px 2px rgba(0,0,0,0.4);
-}
-.clip-loop::after {
-  content: ""; position: absolute; top: 2px; left: 3px; right: 3px; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
-  border-radius: 4px;
-}
-.clip-body {
-  position: absolute; top: 14px; left: 0; width: 20px; height: 30px;
-  background: linear-gradient(180deg, #2a2a2a 0%, #161616 32%, #0a0a0a 62%, #131313 100%);
-  border-radius: 2px 2px 4px 4px;
-  box-shadow: inset 0 1px 2px rgba(255,255,255,0.1), inset 0 -2px 4px rgba(0,0,0,0.7), 0 4px 10px rgba(0,0,0,0.55);
-}
-.clip-body::before {
-  content: ""; position: absolute; top: 0; left: 2px; right: 2px; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-}
-.clip-body::after {
-  content: ""; position: absolute; bottom: 3px; left: 3px; right: 3px; height: 4px;
-  background: repeating-linear-gradient(90deg, transparent 0 1.4px, #333 1.4px 2.6px);
-  opacity: 0.55;
-}
-
-/* Color tag (gripped by clips) */
+/* Color tag hanging from rail */
 .exp-tag {
-  position: relative; width: 72px; height: 64px;
-  margin: 0 auto -18px; z-index: 10;
-  border-radius: 12px; background: var(--accentC);
+  position: relative; width: 64px; height: 56px;
+  margin: 0 auto -14px; z-index: 10;
+  border-radius: 10px; background: var(--accentC);
   box-shadow: 0 4px 14px color-mix(in oklab, var(--accentC) 50%, transparent),
               inset 0 1px 0 rgba(255, 255, 255, 0.35);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 3px; padding-top: 4px;
+  gap: 2px; padding-top: 2px;
 }
 .exp-tag::before, .exp-tag::after {
-  content: ""; position: absolute; top: 4px; width: 5px; height: 18px;
+  content: ""; position: absolute; top: 4px; width: 5px; height: 16px;
   border-radius: 0 3px 3px 0;
 }
 .exp-tag::before { left: -1px; background: linear-gradient(90deg, rgba(0,0,0,0.4), rgba(0,0,0,0.1) 75%, transparent); }
 .exp-tag::after  { right: -1px; border-radius: 3px 0 0 3px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1) 25%, rgba(0,0,0,0.4)); }
-.exp-tag-code { font-family: var(--sans); font-size: 11px; font-weight: 800; color: #0a0608; letter-spacing: 0.08em; line-height: 1; }
-.exp-tag-period { font-family: var(--sans); font-size: 8.5px; font-weight: 700; color: rgba(10, 6, 8, 0.78); letter-spacing: 0.08em; line-height: 1.15; text-align: center; font-variant-numeric: tabular-nums; }
+.exp-tag-code { font-family: var(--sans); font-size: 13px; font-weight: 800; color: #0a0608; letter-spacing: 0.04em; line-height: 1; }
+.exp-tag-period { font-family: var(--sans); font-size: 9px; font-weight: 700; color: rgba(10, 6, 8, 0.6); letter-spacing: 0.06em; line-height: 1; }
 
-/* Card body */
+/* Card body — compact */
 .exp-body {
-  position: relative; border-radius: 18px; overflow: hidden;
+  position: relative; border-radius: 14px; overflow: hidden;
   background: #0a0608;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
-}
-.exp-head {
-  position: relative;
-  padding: 26px 18px 16px;
-  background: radial-gradient(120% 80% at 50% 0%, color-mix(in oklab, var(--accentC) 12%, transparent) 0%, transparent 70%), #0a0608;
-}
-.exp-mono {
-  font-family: var(--serif); font-variation-settings: var(--serif-disp);
-  font-size: 68px; font-weight: 700; line-height: 0.92; letter-spacing: -0.05em;
-  color: var(--accentC); text-align: center;
-  text-shadow: 0 4px 24px color-mix(in oklab, var(--accentC) 35%, transparent);
-  padding: 4px 0 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  padding: 18px 16px 16px;
 }
 .exp-role {
   font-family: var(--serif); font-variation-settings: var(--serif-disp);
-  font-size: 1.02rem; font-weight: 600; line-height: 1.22; letter-spacing: -0.01em;
-  color: var(--fg); text-align: center; margin-bottom: 8px;
-  min-height: 2.6em; display: flex; align-items: center; justify-content: center;
-  text-wrap: pretty; padding: 0 6px;
+  font-size: 0.95rem; font-weight: 600; line-height: 1.22; letter-spacing: -0.01em;
+  color: var(--fg); text-align: center; margin-bottom: 6px;
+  text-wrap: pretty;
 }
 .exp-co {
   font-family: var(--serif); font-variation-settings: var(--serif-body);
   font-style: italic; font-size: 0.78rem; line-height: 1.35;
   color: var(--accentSoft); text-align: center;
-  min-height: 2.6em; display: flex; align-items: center; justify-content: center;
-  text-wrap: pretty; padding: 0 6px 4px;
+  text-wrap: pretty;
 }
-.exp-co em { font-style: normal; opacity: 0.78; }
-
-.exp-foot {
-  position: relative; padding: 18px 14px 14px;
-  background: linear-gradient(180deg, var(--tintTop) 0%, var(--tintBot) 100%);
-  border-top: 1px solid color-mix(in oklab, var(--accentC) 30%, transparent);
-}
-.exp-foot-label { font-family: var(--sans); font-size: 8.5px; font-weight: 700; color: var(--accentSoft); letter-spacing: 0.28em; text-transform: uppercase; margin-bottom: 4px; }
-.exp-foot-name  { font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--fg); letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.15; margin-bottom: 14px; }
-
-/* Skills triangle timeline */
-.exp-skills { position: relative; margin-bottom: 12px; }
-.exp-skills-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; align-items: end; }
-.exp-skills-row.bot { align-items: start; margin-top: 2px; }
-.exp-skills-cell { display: flex; flex-direction: column; align-items: center; min-width: 0; }
-.exp-skills-cell.bot { flex-direction: column-reverse; }
-.exp-skill { font-family: var(--sans); font-size: 7.5px; font-weight: 600; color: var(--fg); letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; line-height: 1.2; text-align: center; }
-.exp-tri { width: 0; height: 0; border-left: 3.5px solid transparent; border-right: 3.5px solid transparent; margin: 1px 0; }
-.exp-tri.up   { border-bottom: 5px solid var(--fg); }
-.exp-tri.down { border-top: 5px solid var(--fg); }
-.exp-skills-axis { height: 1px; background: rgba(255, 255, 255, 0.6); margin: 1px 0; position: relative; }
-.exp-skills-axis::before { content: ""; position: absolute; inset: 2px 0 0 0; height: 1px; background: rgba(255, 255, 255, 0.6); }
-
-.exp-divider { border-top: 1px dashed rgba(255, 255, 255, 0.22); margin: 12px -14px 8px; }
-.exp-transition { font-family: var(--sans); font-size: 28px; font-weight: 200; letter-spacing: 0.06em; color: rgba(255, 255, 255, 0.18); text-align: center; line-height: 1.1; padding: 2px 0 2px; }
 
 .exp-card:hover .exp-body,
 .exp-card.is-active .exp-body {
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65),
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6),
               0 0 0 1px color-mix(in oklab, var(--accentC) 50%, transparent),
-              0 0 32px color-mix(in oklab, var(--accentC) 30%, transparent);
+              0 0 24px color-mix(in oklab, var(--accentC) 25%, transparent);
 }
 
 /* Nav, meter */
 .rail-nav {
   position: absolute;
-  top: calc(80px + 290px);
+  top: calc(80px + 150px);
   transform: translateY(-50%);
   width: 40px; height: 40px; border-radius: 50%;
   border: 1px solid var(--line-12);
@@ -1038,10 +964,9 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   .tl-flower { width: 24px; height: 24px; }
 
   .rail-intro { padding-left: 116px; }
-  .rail-stage { height: 640px; }
-  .rail-viewport { padding: 0 calc(50% - 145px) 24px; }
-  .exp-card { width: 280px; }
-  .exp-mono { font-size: 58px; }
+  .rail-stage { height: 480px; }
+  .rail-viewport { padding: 0 calc(50% - 90px) 24px; }
+  .exp-card { width: 160px; }
   .rail-nav { display: none; }
 }
 </style>
@@ -1608,30 +1533,14 @@ const ExperienceCard = ({ entry, meta, isActive }) => {
   const coLoc  = parts.slice(1).join(' · ');
   return (
     <div className={`exp-card${healthcare ? ' thc' : ''}${isActive ? ' is-active' : ''}`}>
-      <BinderClipPair />
       <div className="exp-tag">
-        <span className="exp-tag-code">{meta.code}</span>
-        <span className="exp-tag-period">
-          {meta.period[0]}<br/>{meta.period[1]}
-        </span>
+        <span className="exp-tag-code">{meta.period[0]}</span>
+        <span className="exp-tag-period">{meta.period[1]}</span>
       </div>
       <div className="exp-body">
-        <div className="exp-head">
-          <div className="exp-mono">{meta.code}</div>
-          <div className="exp-role">{role}</div>
-          <div className="exp-co">
-            <span>
-              {coMain}
-              {coLoc && <><br/><em>{coLoc}</em></>}
-            </span>
-          </div>
-        </div>
-        <div className="exp-foot">
-          <div className="exp-foot-label">Experience</div>
-          <div className="exp-foot-name">{role.split(/\s*[(·]\s*/)[0]}</div>
-          <SkillsTimeline top={meta.skillsTop} bot={meta.skillsBot} />
-          <div className="exp-divider"></div>
-          <div className="exp-transition">{meta.transition}</div>
+        <div className="exp-role">{role}</div>
+        <div className="exp-co">
+          <em>{coMain}{coLoc ? ` · ${coLoc}` : ''}</em>
         </div>
       </div>
     </div>
