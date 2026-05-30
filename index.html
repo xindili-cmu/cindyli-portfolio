@@ -1508,7 +1508,7 @@ window.TimelineData = [
   { period: '2023', healthcare: true, logo: 'B', logoImg: 'assets/logo_eden.jpg',
     role: 'Sports Medicine Intern',
     company: 'Beijing Eden Hospital (怡德医院) · Beijing',
-    gallery: ['exp_beijing_united_1.jpg', 'exp_beijing_united_2.jpg'],
+    gallery: ['assets/exp_beijing_united_1.jpg', 'assets/exp_beijing_united_2.jpg'],
     bullets: [
       'Managed <b class="m">60+ patient case records</b> and operated the hospital registration system independently.',
       'Processed <b class="m">30+ commercial insurance pre-authorizations</b>.',
@@ -1517,16 +1517,26 @@ window.TimelineData = [
   { period: '2023', healthcare: true, logo: 'F',
     role: 'Sports Protection Specialist & AED Consultant',
     company: 'FuDao Health Consulting · Beijing & Shanghai',
+    gallery: ['assets/exp_fudao_1.jpg', 'assets/exp_fudao_2.jpg'],
     bullets: [
       'Earned <strong>first-aid instructor certification</strong>.',
       'Authored <b class="m">10 original WeChat articles</b> on AED policy — <b class="m">5,000+ views</b>, <b class="m">200+ shares</b>.',
       'Managed B2B outreach for <b class="m">5+ enterprises</b> in Beijing.',
       'Specialized in <strong>lower-limb biomechanics testing</strong> and orthotic assessment.',
     ] },
+  { period: '2023', healthcare: true, logo: 'R',
+    role: 'Sports Rehabilitation & Conditioning Intern',
+    company: 'National Sports Training Center · Beijing',
+    gallery: ['assets/exp_rehab_2.jpg', 'assets/exp_rehab_1.jpg', 'assets/exp_rehab_3.jpg'],
+    bullets: [
+      'Provided <strong>daily one-on-one rehabilitation</strong> and sport-specific training support for a junior basketball athlete, designing and adjusting recovery protocols for <strong>lumbar-spine and shoulder injuries</strong> under faculty supervision.',
+      'Monitored and documented <strong>daily physiological metrics</strong> across strength, conditioning, and sport-specific sessions, tracking recovery progress and informing <b class="m">training load decisions</b>.',
+      'Athlete returned to peak competition form and earned <b class="m">MVP at the U16 National Basketball Championship</b> that season.',
+    ] },
   { period: '2023', healthcare: true, logo: 'N', logoImg: 'assets/logo_winter.png',
     role: 'Research Staff (Intern)',
     company: 'National Winter Sports Training & Research Center · Beijing',
-    gallery: ['exp_research_center_1.jpg', 'exp_research_center_2.jpg', 'exp_research_center_3.jpg'],
+    gallery: ['assets/exp_research_center_1.jpg', 'assets/exp_research_center_2.jpg', 'assets/exp_research_center_3.jpg'],
     bullets: [
       'Executed <strong>sports injury prevention protocols</strong> — athletic taping, cryotherapy, pre-competition warm-ups, and post-event stretching (<b class="m">300+ event coverage hours</b>).',
       'Administered <strong>advanced modalities</strong>: therapeutic ultrasound, infrared therapy, high-intensity laser, shortwave diathermy, and interferential current therapy.',
@@ -1535,7 +1545,7 @@ window.TimelineData = [
   { period: '2022 – 2023', healthcare: true, logo: 'D', logoImg: 'assets/logo_disney.png',
     role: 'Athletic Trainer (Intern)',
     company: 'Shanghai Disney Resort · Shanghai',
-    gallery: ['disney.jpg'],
+    gallery: ['assets/disney.jpg'],
     bullets: [
       'Collaborated with <strong>senior athletic trainers</strong> and performance management teams.',
       'Leveraged <strong>Power BI and Excel</strong> to analyze injury incident data, identifying key risk factors and presenting data-driven insights.',
@@ -1771,11 +1781,12 @@ const VerticalTimeline = ({ items }) => {
 /* Card metadata for horizontal items (5 items: indices 6-10 of original data).
    Just a 3-letter code + a two-line period label that sits on the luggage tag. */
 const CARD_META = [
-  { code: 'EDN', period: ['2023', '·']  },   // 6 · Beijing Eden Hospital
-  { code: 'FUD', period: ['2023', '·']  },   // 7 · FuDao
-  { code: 'NTC', period: ['2023', '·']  },   // 8 · Winter Sports Training Center
-  { code: 'DIS', period: ['22—', '23'] },   // 9 · Disney
-  { code: 'SPN', period: ['22—', '23'] },   // 10 · Spine & Pain
+  { code: 'EDN', period: ['2023', '·']  },
+  { code: 'FUD', period: ['2023', '·']  },
+  { code: 'SRC', period: ['2023', '·']  },
+  { code: 'NTC', period: ['2023', '·']  },
+  { code: 'DIS', period: ['22—', '23'] },
+  { code: 'SPN', period: ['22—', '23'] },
 ];
 
 /* The bend: an SVG showing the main trunk sprouting a side branch that
