@@ -636,6 +636,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 }
 /* ═════════════════════════════════════════════════════════════════
    PART A · Vertical climbing timeline (items 1-6)
+   PART A · Vertical climbing timeline (items 1-6)
    ═════════════════════════════════════════════════════════════════ */
 
 .tl-wrap { position: relative; display: flex; flex-direction: column; }
@@ -652,6 +653,10 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   background-repeat: repeat-y;
   background-size: 100% auto;
   background-position: center top;
+  /* Fade the bottom so the last tile's half-cut leaves dissolve cleanly
+     instead of ending mid-leaf. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 88px), transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 calc(100% - 88px), transparent 100%);
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.55));
 }
 .tl-vine-path { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
@@ -664,7 +669,22 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   padding: 0 0 56px;
   z-index: 1;
 }
+.tl-item.tl-has-gallery { grid-template-columns: 80px 56px minmax(0, 1fr) 140px; }
 .tl-item.tl-last { padding-bottom: 24px; }
+
+/* Photo album in vertical timeline (fourth grid column) */
+.tl-album { position: relative; width: 140px; height: 180px; align-self: center; flex-shrink: 0; }
+.tl-album img {
+  position: absolute; width: 120px; height: 160px; object-fit: cover; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: all .4s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.tl-album img:nth-child(1) { top: 0; left: 0; z-index: 2; transform: rotate(-3deg); }
+.tl-album img:nth-child(2) { top: 8px; left: 16px; z-index: 1; transform: rotate(3deg); }
+.tl-album img:nth-child(3) { top: 4px; left: 8px; z-index: 0; transform: rotate(0deg); }
+.tl-album:hover img:nth-child(1) { transform: rotate(-6deg) translate(-12px,-4px); z-index: 3; }
+.tl-album:hover img:nth-child(2) { transform: rotate(6deg) translate(12px,-4px); z-index: 2; }
+.tl-album:hover img:nth-child(3) { transform: rotate(0deg) translate(0,8px); z-index: 1; }
 
 .tl-year { padding-top: 14px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; text-align: right; min-width: 0; }
 .tl-year-num {
@@ -724,199 +744,469 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 .tl-healthcare .tl-bullets .m { color: #ffd8a8; background: linear-gradient(transparent 70%, rgba(255, 216, 168, 0.18) 70%); }
 
 /* Panda climber */
-.tl-climber { position: absolute; top: 0; left: 0; width: 70px; height: 56px; pointer-events: none; z-index: 6; transition: transform .14s cubic-bezier(.2, .6, .3, 1), opacity .35s ease; will-change: transform; filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4)); }
-.tl-climber-bob { animation: tlBob 2.6s ease-in-out infinite; transform-origin: center; }
-@keyframes tlBob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-3px) rotate(2deg); } }
-.tl-climber-busy .tl-climber-bob { animation: tlBobBusy 0.42s ease-in-out infinite; }
-@keyframes tlBobBusy { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-2px) rotate(3deg); } }
-.tl-arm, .tl-leg, .tl-tail { transition: transform .35s ease; }
-.tl-arm-l { transform-origin: 18px 22px; } .tl-arm-r { transform-origin: 30px 22px; }
-.tl-leg-l { transform-origin: 19px 42px; } .tl-leg-r { transform-origin: 29px 42px; }
-.tl-climber-idle .tl-arm-l { animation: tlArmIdle 3.2s ease-in-out infinite; }
-.tl-climber-idle .tl-arm-r { animation: tlArmIdle 3.2s ease-in-out infinite -1.6s; }
-@keyframes tlArmIdle { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
-.tl-climber-busy .tl-arm-l { animation: tlArmSwingL 0.42s linear infinite; }
-.tl-climber-busy .tl-arm-r { animation: tlArmSwingR 0.42s linear infinite; }
-.tl-climber-busy .tl-leg-l { animation: tlLegKickL 0.42s linear infinite; }
-.tl-climber-busy .tl-leg-r { animation: tlLegKickR 0.42s linear infinite; }
-.tl-climber-busy .tl-tail  { animation: tlTail 0.42s linear infinite; }
-@keyframes tlArmSwingL { 0% { transform: rotate(-22deg) translateY(0); } 50% { transform: rotate(18deg) translateY(2px); } 100% { transform: rotate(-22deg) translateY(0); } }
-@keyframes tlArmSwingR { 0% { transform: rotate(18deg) translateY(2px); } 50% { transform: rotate(-22deg) translateY(0); } 100% { transform: rotate(18deg) translateY(2px); } }
-@keyframes tlLegKickL { 0% { transform: rotate(-12deg); } 50% { transform: rotate(14deg); } 100% { transform: rotate(-12deg); } }
-@keyframes tlLegKickR { 0% { transform: rotate(14deg); }  50% { transform: rotate(-12deg); } 100% { transform: rotate(14deg); } }
-@keyframes tlTail     { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(6deg); } }
-.tl-head { transition: opacity .35s ease; }
-.tl-climber-busy .tl-head-back  { opacity: 1; } .tl-climber-busy .tl-head-front { opacity: 0; }
-.tl-climber-idle .tl-head-back  { opacity: 0; } .tl-climber-idle .tl-head-front { opacity: 1; }
+.tl-climber { position: absolute; top: 0; left: 0; width: 62px; height: 84px; pointer-events: none; z-index: 6; transition: transform .14s cubic-bezier(.2, .6, .3, 1), opacity .35s ease; will-change: transform; filter: drop-shadow(0 7px 13px rgba(0, 0, 0, 0.45)); }
+.tl-climber-img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+/* ── Whole-image climb motion (single flat PNG, no separate limbs) ──
+   .tl-climber-bob is the only animated node: busy = active shimmy up the
+   pole, idle = slow breathing sway. transform-origin near the lower-right
+   (where the arms grip the bamboo) so the body pivots around its grip. */
+.tl-climber-bob { transform-origin: 72% 78%; will-change: transform; }
+
+/* Idle: gentle breathing + faint sway, like hanging on the stalk resting. */
+.tl-climber-idle .tl-climber-bob { animation: tlPandaIdle 3.4s ease-in-out infinite; }
+@keyframes tlPandaIdle {
+  0%, 100% { transform: rotate(-1.5deg) scale(1, 1) translateY(0); }
+  50%      { transform: rotate(1.5deg) scale(1.015, 0.985) translateY(-1px); }
+}
+
+/* Busy: fast climb shimmy — body twists L↔R (rotate + skew), surges UP in
+   little pulls, and squashes on each "grab" (scaleY dip) so a static image
+   reads as actively shimmying up the bamboo. */
+.tl-climber-busy .tl-climber-bob { animation: tlPandaClimb 0.5s ease-in-out infinite; }
+@keyframes tlPandaClimb {
+  0%   { transform: translateY(0)     rotate(-4deg) skewX(2deg)  scale(1, 1); }
+  25%  { transform: translateY(-4px)  rotate(0deg)  skewX(0deg)  scale(0.97, 1.05); }  /* reach + stretch up */
+  50%  { transform: translateY(-1px)  rotate(4deg)  skewX(-2deg) scale(1.04, 0.95); }  /* grab + squash */
+  75%  { transform: translateY(-4px)  rotate(0deg)  skewX(0deg)  scale(0.97, 1.05); }  /* reach other side */
+  100% { transform: translateY(0)     rotate(-4deg) skewX(2deg)  scale(1, 1); }
+}
+
 
 /* ═════════════════════════════════════════════════════════════════
-   PART B · Side-branch transition + horizontal rail (items 7-11)
+   PART B · Side-branch + hanging punched-hole tags (items 7-11)
    ═════════════════════════════════════════════════════════════════ */
 
 .rail-section {
   position: relative;
-  margin-top: -36px;
+  margin-top: 24px;
   padding-top: 0;
 }
 
-.rail-intro {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 0 0 0 172px;
-  margin-bottom: 20px;
-  min-height: 28px;
+/* Section header — flows in normal layout below the vertical bamboo (which
+   sits in .tl-wrap above). Left-aligned under the bamboo column (.tl-vine is
+   at left:92px), reading as a divider for the independent hanging-rail block
+   below it. */
+.rail-intro-inside {
   position: relative;
-  z-index: 2;
-}
-.rail-intro .tl-eye {
+  z-index: 5;
+  padding: 0 0 0 92px;
+  margin-bottom: 6px;
   font-family: var(--sans);
-  font-size: 0.62rem; letter-spacing: 0.32em; text-transform: uppercase;
+}
+/* Option D — large serif divider: big "Earlier" headline + a rule and the
+   small uppercase eyebrow beneath it. */
+.rail-intro-big {
+  font-family: var(--serif); font-variation-settings: 'opsz' 144;
+  font-size: 2.4rem; font-weight: 600; color: var(--fg); line-height: 1;
+  letter-spacing: -0.01em;
+}
+.rail-intro-sub {
+  display: flex; align-items: center; gap: 14px; margin-top: 10px;
+}
+.rail-intro-sub .rule {
+  width: 44px; height: 1px; background: var(--accent2); opacity: 0.6; flex: none;
+}
+.rail-intro-inside .tl-eye {
+  font-family: var(--sans);
+  font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
   color: var(--accent2); font-weight: 500;
 }
-.rail-intro .tl-eye .arc { color: var(--muted); margin: 0 8px; }
-.rail-intro .tl-eye .tag { color: var(--fg); }
+.rail-intro-inside .tl-eye .arc { color: var(--muted); margin: 0 8px; }
 
 .rail-stage {
   position: relative;
   width: 100%;
-  height: 420px;
+  height: 520px;
   user-select: none;
 }
 
-.bend-svg {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 86px;
-  width: 100%;
-  z-index: 4;
-  pointer-events: none;
-  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.55));
-  overflow: visible;
-}
-.bend-svg .stalk      { stroke-linecap: round; fill: none; }
-.bend-svg .stalk-base { stroke: #324f17; }
-.bend-svg .stalk-fill { stroke: #6a8f3f; }
-.bend-svg .stalk-shine{ stroke: rgba(255,255,255,0.35); }
-.bend-svg .stalk-shadow { stroke: rgba(0,0,0,0.4); }
-.bend-svg .node       { fill: #2a4a10; }
-.bend-svg .node-hi    { fill: #aedb78; opacity: 0.6; }
-.bend-svg .leaf       { fill: #6a8f3f; }
-.bend-svg .leaf-vein  { stroke: #2a4a10; stroke-width: 0.6; fill: none; }
+/* (Bamboo bend SVG + black coating removed — the vertical bamboo and the
+   horizontal hanging rail are now independent blocks, no longer joined.) */
 
 /* ── Scrollable card track ─────────────────────────────────────── */
 .rail-viewport {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 80px;
+  /* z-index sits above .bend-svg so cards + their fake-bamboo eyelets paint
+     on top of the real bamboo. The tag is opaque and covers the real bamboo;
+     the fake bamboo strip inside .exp-punch continues the line visually. */
+  z-index: 5;
+  left: 0; right: 0;
+  top: 4px;
   bottom: 0;
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
   cursor: grab;
-  padding: 0 calc(50% - 170px) 24px;
+  /* Left-aligned under the bamboo column (.tl-vine left:92px). The rail is
+     its own independent block now — the first card's rod simply starts at
+     its left edge (no bend, no cap), and the rail scrolls right to reveal
+     the rest. padding-top leaves clip-free room ABOVE the cards so the
+     on-rail flower clusters (which sit above the bamboo) aren't cut off. */
+  padding: 34px 32px 24px 92px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
 .rail-viewport::-webkit-scrollbar { display: none; }
-.rail-viewport.is-grabbing { cursor: grabbing; scroll-behavior: auto; }
-.rail-viewport.is-grabbing * { cursor: grabbing !important; }
 
 .rail-track {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 28px;
-  padding-top: 8px;
+  padding-top: 0;
   min-width: max-content;
 }
 
-/* ── Hanging card ──────────────────────────────────────────────── */
+/* ── Hanging card (compact tag → expandable) ──────────────────── */
 .exp-card {
   position: relative;
-  width: 180px;
+  width: 140px;
   flex-shrink: 0;
   scroll-snap-align: center;
-  scroll-snap-stop: always;
-  transform-origin: top center;
-  animation: cardSway 4.6s ease-in-out infinite;
-  transition: filter .4s ease;
+  /* No sway on the whole card — the tag + local rod must stay rigidly
+     aligned with the rail. Sway lives on .exp-label instead. */
+  transition: width .4s cubic-bezier(.4, 0, .2, 1);
+  cursor: pointer;
   --accentC: var(--accent);
-  --accentDeep: var(--accent-deep);
   --accentSoft: var(--accent-soft);
-  --tintTop: rgba(200, 162, 255, 0.32);
-  --tintBot: rgba(200, 162, 255, 0.10);
 }
 .exp-card.thc {
   --accentC: var(--accent2);
-  --accentDeep: var(--accent2-deep);
   --accentSoft: var(--accent2-warm);
-  --tintTop: rgba(255, 179, 138, 0.36);
-  --tintBot: rgba(255, 179, 138, 0.10);
 }
-.exp-card:nth-child(3n)   { animation-delay: -0.6s; animation-duration: 5.1s; }
-.exp-card:nth-child(3n+1) { animation-delay: -2.1s; animation-duration: 4.8s; }
-.exp-card:nth-child(3n+2) { animation-delay: -3.4s; animation-duration: 5.4s; }
-@keyframes cardSway {
-  0%, 100% { transform: rotate(-0.7deg) translateY(0px); }
-  50%      { transform: rotate(0.7deg) translateY(-2px); }
-}
-.rail-viewport.is-grabbing .exp-card { animation-play-state: paused; }
+.exp-card.expanded { width: 480px; }
 
-/* Color tag hanging from rail */
-.exp-tag {
-  position: relative; width: 64px; height: 56px;
-  margin: 0 auto -14px; z-index: 10;
-  border-radius: 10px; background: var(--accentC);
-  box-shadow: 0 4px 14px color-mix(in oklab, var(--accentC) 50%, transparent),
-              inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 2px; padding-top: 2px;
+/* ── Hanging polaroid: pendulum that swings from the tag ──
+   .exp-hang pivots at its TOP (where the string meets the tag); the rail's
+   inertial sway angle is fed in via the --sway custom property on the track.
+   --swayMul lets longer-stringed cards swing wider. */
+.exp-hang {
+  position: relative;
+  transform-origin: top center;
+  transform: rotate(calc(var(--rest, 0deg) + var(--sway, 0deg) * var(--swayMul, 1)));
+  will-change: transform;
 }
-.exp-tag::before, .exp-tag::after {
-  content: ""; position: absolute; top: 4px; width: 5px; height: 16px;
+.exp-card.expanded .exp-hang { display: none; }
+.exp-string {
+  width: 1.6px; height: var(--str, 30px); margin: 0 auto;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--accentC) 75%, transparent),
+    color-mix(in oklab, var(--accentC) 30%, transparent) 85%,
+    transparent
+  );
+}
+/* Year tab — peach sticker sticking up from the top edge of the polaroid
+   (Option E). Bottom is tucked behind the polaroid (negative margin + lower
+   z-index) so the photo frame overlaps it. Swings with .exp-hang. */
+.exp-yrtab {
+  position: relative; z-index: 0;
+  width: fit-content; margin: 0 auto -5px;
+  padding: 4px 13px 9px;
+  background: var(--accentC);
+  color: color-mix(in oklab, var(--accentC) 30%, #1a0f08);
+  font-family: var(--sans); font-size: 0.6rem; font-weight: 800; letter-spacing: 0.14em;
+  border-radius: 6px 6px 0 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+/* Polaroid frame */
+.exp-pola {
+  position: relative; z-index: 1;
+  background: #f6f3ec;
+  padding: 8px 8px 0;
+  border-radius: 3px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(0,0,0,0.04);
+  transition: box-shadow .3s, transform .3s;
+}
+.exp-card:hover .exp-pola { box-shadow: 0 20px 42px rgba(0, 0, 0, 0.65); }
+.exp-pola-photo {
+  position: relative; width: 100%; aspect-ratio: 4 / 3;
+  overflow: hidden; background: #e6ddcb; border-radius: 1px;
+}
+.exp-pola-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Monogram fallback when an item has no field photo */
+.exp-pola-mono {
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+  background:
+    radial-gradient(120% 100% at 50% 0%,
+      color-mix(in oklab, var(--accentC) 32%, #e6ddcb),
+      color-mix(in oklab, var(--accentC) 14%, #e6ddcb));
+}
+.exp-pola-mono span {
+  font-family: var(--serif); font-variation-settings: 'opsz' 144;
+  font-size: 2.4rem; font-weight: 700; font-style: italic;
+  color: color-mix(in oklab, var(--accentC) 55%, #5a4a32);
+}
+.exp-pola-mono img { width: 42px; height: 42px; object-fit: contain; border-radius: 6px; }
+.exp-pola-cap { padding: 9px 4px 12px; text-align: center; }
+.exp-pola-role {
+  font-family: var(--serif); font-style: italic; font-variation-settings: 'opsz' 40;
+  font-size: 0.86rem; font-weight: 500; color: #2b2418; line-height: 1.16;
+  margin-bottom: 3px;
+}
+.exp-pola-co {
+  font-family: var(--sans); font-size: 0.56rem; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #8a7d63; line-height: 1.3;
+}
+
+/* ── Orange flower spray sitting ON the rail (no stem) ── */
+.exp-flower {
+  position: absolute; top: -10px; z-index: 13;
+  width: 52px; height: 36px; pointer-events: none;
+}
+.exp-flower-left  { left: -22px; }
+.exp-flower-right { right: -22px; }
+.exp-flower-bob {
+  position: absolute; inset: 0;
+  transform-origin: bottom center;
+  animation: expFlowerSway 4.4s ease-in-out infinite;
+}
+@keyframes expFlowerSway { 0%,100% { transform: rotate(-1.6deg); } 50% { transform: rotate(1.6deg); } }
+.exp-flower span, .exp-flower-leaf { position: absolute; display: block; }
+.exp-flower-main { left: 8px;  bottom: 9px;  z-index: 3; }
+.exp-flower-side { left: 27px; bottom: 15px; z-index: 2; }
+.exp-flower-bud  { left: 1px;  bottom: 13px; z-index: 2; }
+/* Leaves tuck UNDER the blooms but angle up-and-outward (not drooping down). */
+.exp-flower-leaf.lf1 { left: -3px; bottom: 6px; transform: rotate(-148deg); z-index: 1; }
+.exp-flower-leaf.lf2 { left: 28px; bottom: 7px; transform: rotate(-34deg);  z-index: 1; }
+
+/* ── Local bamboo rod (each card carries its own) ──
+   Split into TWO z-layers to fake a "rod passing through the tag" 3D effect:
+     • .exp-rod       — z:1, extends across the full card. BEHIND the tag,
+                        so the tag covers it on both sides of the eyelet.
+                        Provides the seamless chain across the gap.
+     • .exp-rod-front — z:15, starts at the eyelet's RIGHT edge and extends
+                        right past the card. IN FRONT of the tag, so the
+                        tag's right half is covered by the rod (illusion:
+                        rod "emerged" from the hole and is now on top).
+   Combined with .exp-punch::before (rod slice inside the eyelet), the eye
+   reads: rod approaches from left → enters hole → emerges in front → exits
+   right. Adjacent cards' rods overlap in the gap (same gradient → invisible
+   seam) so the bamboo chain looks continuous. */
+.exp-rod,
+.exp-rod-front {
+  position: absolute;
+  /* Y maths: tag sits at card-top with margin-top:13, height:64. Eyelet
+     at tag_y=6 (top:6 + 22 ÷ 2 = 17 centre) → card_y = 13 + 17 = 30. */
+  top: 30px;
+  height: 18px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  /* Real bamboo art (rotated cane crop from assets/bamboo.png), scaled to
+     the rod height and tiled horizontally. A smooth internode segment so it
+     repeats seamlessly into a continuous bamboo pole. */
+  background: url('assets/bamboo-horizontal.png') 0 center / auto 100% repeat-x;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+.exp-rod {
+  left: -40px;
+  right: -40px;
+  z-index: 1;
+}
+.exp-rod-front {
+  left: calc(50% + 11px);
+  right: -40px;
+  z-index: 15;
+}
+/* (white centreline stripe removed — the bamboo image carries its own sheen) */
+.exp-rod::after,
+.exp-rod-front::after { display: none; }
+
+/* ── First-card chain start ──
+   First card's local rod extends FAR to the LEFT so the bamboo runs out to
+   the far-left edge of the rail with no empty gap before it. (overflow-x on
+   the viewport clips the part left of x=0, so it fills exactly to the edge.) */
+.exp-card.is-first .exp-rod { left: -480px; }
+
+/* ── Last-card chain closure ──
+   The right-most card terminates the rail. Both rods clamp to the card's
+   right edge (no overflow into thin air) and a darker bamboo "cap" is
+   inset into the very end to read as a closed bamboo node. */
+.exp-card.is-last .exp-rod { right: 0; }
+.exp-card.is-last .exp-rod-front {
+  right: 0;
+  /* End cap: dark green band inset on the right edge, with a faint outer
+     glow from box-shadow to suggest a closed bamboo node. */
+  box-shadow:
+    inset -2.5px 0 0 0 rgba(8, 18, 2, 0.9),
+    inset -4.5px 0 0 0 rgba(255, 255, 255, 0.18),
+    inset -6.5px 0 0 0 rgba(8, 18, 2, 0.45);
   border-radius: 0 3px 3px 0;
 }
-.exp-tag::before { left: -1px; background: linear-gradient(90deg, rgba(0,0,0,0.4), rgba(0,0,0,0.1) 75%, transparent); }
-.exp-tag::after  { right: -1px; border-radius: 3px 0 0 3px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1) 25%, rgba(0,0,0,0.4)); }
-.exp-tag-code { font-family: var(--sans); font-size: 13px; font-weight: 800; color: #0a0608; letter-spacing: 0.04em; line-height: 1; }
-.exp-tag-period { font-family: var(--sans); font-size: 9px; font-weight: 700; color: rgba(10, 6, 8, 0.6); letter-spacing: 0.06em; line-height: 1; }
 
-/* Card body — compact */
-.exp-body {
-  position: relative; border-radius: 14px; overflow: hidden;
-  background: #0a0608;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
-  padding: 18px 16px 16px;
+/* ── Punched-hole tag (luggage-tag at the top of each card) ──
+   "Layer Split" technique (a la Dave Holloway's service-card-hole):
+   The tag is FULLY OPAQUE and covers the real bamboo SVG behind it.
+   The "hole" is faked by:
+     1. A small dark circular eyelet drawn on top of the tag.
+     2. INSIDE that eyelet, a thin horizontal bamboo-coloured strip
+        that visually continues the real bamboo to the left and right
+        of the tag.
+   As the carousel scrolls, the fake strip translates with the card while
+   the real bamboo stays fixed — but because both use the same gradient
+   at the same screen-y, the rail looks continuous through every hole. */
+/* ── Punched-hole tag (luggage-tag at the top of each card) ──
+   Anatomy:
+     • Eyelet near the TOP of the tag (real luggage-tag geometry: hole is at
+       the top, tag body hangs below it).
+     • Reinforcement padding above + tag body below holds the date label.
+   Eyelet center sits at card_y = 30 (where the rod chain is); the tag is
+   pushed down via margin-top so the eyelet aligns with the rod while the
+   date area sits clearly below the hole. */
+.exp-tag {
+  position: relative; width: 64px; height: 64px;
+  margin: 13px auto 0; z-index: 14;
+  border-radius: 9px 9px 11px 11px;
+  background: var(--accentC);
+  box-shadow: 0 3px 10px color-mix(in oklab, var(--accentC) 45%, transparent),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
-.exp-role {
+.exp-punch {
+  /* Pinned near the top of the tag (top: 6px, translateX only) so the rod
+     threads through the upper area and the date sits cleanly below. */
+  position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+  width: 22px; height: 22px; border-radius: 50%;
+  background: #0a0604;             /* dark hole "bottom" */
+  overflow: hidden;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1.4px rgba(30, 20, 12, 0.9),
+    inset 0 1.6px 2px rgba(0, 0, 0, 0.55),
+    inset 0 -1px 1.2px rgba(255, 255, 255, 0.14),
+    0 0 0 1px rgba(0, 0, 0, 0.3);
+}
+/* Bamboo cane slice passing horizontally through the hole — same asset as
+   the rod, so the bamboo reads continuous through the punched eyelet. */
+.exp-punch::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -6px; right: -6px;
+  height: 18px;
+  transform: translateY(-50%);
+  background: url('assets/bamboo-horizontal.png') 0 center / auto 100% repeat-x;
+}
+/* (centre highlight stripe removed — bamboo image carries its own sheen) */
+.exp-punch::after { display: none; }
+.exp-tag-period {
+  /* Sits in the lower portion of the tag, well below the eyelet (which now
+     occupies the top 6–28px area). */
+  position: absolute; left: 0; right: 0; bottom: 8px;
+  font-family: var(--sans); font-size: 10px; font-weight: 700;
+  color: rgba(10, 6, 8, 0.78); letter-spacing: 0.04em;
+  line-height: 1.18; text-align: center; font-variant-numeric: tabular-nums;
+}
+
+/* ── Compact label (visible when collapsed) ── */
+.exp-label {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px; padding: 10px 8px 10px; text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color .3s, background .3s;
+}
+.exp-card:hover .exp-label,
+.exp-card.is-active .exp-label {
+  border-color: color-mix(in oklab, var(--accentC) 35%, transparent);
+  background: rgba(255, 255, 255, 0.05);
+}
+.exp-label-role {
   font-family: var(--serif); font-variation-settings: var(--serif-disp);
-  font-size: 0.95rem; font-weight: 600; line-height: 1.22; letter-spacing: -0.01em;
-  color: var(--fg); text-align: center; margin-bottom: 6px;
-  text-wrap: pretty;
+  font-size: 0.68rem; font-weight: 600; color: var(--fg); line-height: 1.22;
+  margin-bottom: 3px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
-.exp-co {
+.exp-label-co {
   font-family: var(--serif); font-variation-settings: var(--serif-body);
-  font-style: italic; font-size: 0.78rem; line-height: 1.35;
-  color: var(--accentSoft); text-align: center;
-  text-wrap: pretty;
+  font-style: italic; font-size: 0.58rem; color: var(--accentSoft); line-height: 1.25;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.exp-card.expanded .exp-label { display: none; }
+
+/* ── Expanded detail panel ── */
+.exp-detail {
+  display: none; border-radius: 14px; overflow: hidden;
+  background: #0a0608;
+  border: 1px solid color-mix(in oklab, var(--accentC) 25%, transparent);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+  max-height: 380px; overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+.exp-detail::-webkit-scrollbar { width: 4px; }
+.exp-detail::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 2px; }
+.exp-card.expanded .exp-detail { display: block; }
+
+.exp-detail-head {
+  position: sticky; top: 0; z-index: 2;
+  padding: 16px 18px 12px;
+  background: linear-gradient(180deg, #0a0608 80%, transparent);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.exp-detail-role {
+  font-family: var(--serif); font-variation-settings: var(--serif-disp);
+  font-size: 1.05rem; font-weight: 600; color: var(--fg); line-height: 1.2;
+  margin-bottom: 6px;
+}
+.exp-detail-co { display: flex; align-items: center; gap: 8px; }
+.exp-detail-logo {
+  width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+  background: #fff; display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-variation-settings: var(--serif-disp);
+  font-style: italic; font-size: 10px; color: #1a0a2a; font-weight: 700;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4); overflow: hidden;
+}
+.exp-detail-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.exp-detail-company {
+  font-size: 0.78rem; color: var(--accentSoft); font-weight: 400;
+}
+.exp-card.thc .exp-detail-company { color: #ffd8a8; }
+
+.exp-detail-body {
+  display: grid; grid-template-columns: 1fr; gap: 0;
+  padding: 0 18px 16px;
+}
+.exp-card.expanded.has-gallery .exp-detail-body {
+  grid-template-columns: 1fr 130px;
 }
 
-.exp-card:hover .exp-body,
-.exp-card.is-active .exp-body {
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6),
-              0 0 0 1px color-mix(in oklab, var(--accentC) 50%, transparent),
-              0 0 24px color-mix(in oklab, var(--accentC) 25%, transparent);
+.exp-detail-bullets {
+  list-style: none; margin: 0; padding: 12px 0 0;
+  display: flex; flex-direction: column; gap: 7px;
+  font-size: 0.8rem; line-height: 1.65; color: rgba(255, 255, 255, 0.62); font-weight: 300;
 }
+.exp-detail-bullets li { position: relative; padding-left: 16px; }
+.exp-detail-bullets li::before {
+  content: ''; position: absolute; left: 0; top: 10px;
+  width: 8px; height: 1px; background: var(--accentC); border-radius: 1px;
+}
+.exp-detail-bullets strong { color: var(--fg); font-weight: 500; }
+.exp-detail-bullets .m { color: #dfc9ff; font-weight: 600; font-variant-numeric: tabular-nums; background: linear-gradient(transparent 70%, rgba(223, 201, 255, 0.18) 70%); padding: 0 2px; }
+.exp-detail-bullets .m-peach,
+.exp-card.thc .exp-detail-bullets .m { color: #ffd8a8; background: linear-gradient(transparent 70%, rgba(255, 216, 168, 0.18) 70%); }
 
-/* Nav, meter */
+/* ── Polaroid album inside the detail panel ── */
+.exp-detail-album {
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 14px;
+}
+.exp-detail-album-stack {
+  position: relative; width: 110px; height: 145px;
+}
+.exp-detail-album-stack img {
+  position: absolute; width: 100px; height: 130px; object-fit: cover; border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08); cursor: pointer;
+  transition: all .4s ease; box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+}
+.exp-detail-album-stack img:nth-child(1) { top: 0; left: 0; z-index: 2; transform: rotate(-3deg); }
+.exp-detail-album-stack img:nth-child(2) { top: 6px; left: 12px; z-index: 1; transform: rotate(3deg); }
+.exp-detail-album-stack img:nth-child(3) { top: 3px; left: 6px; z-index: 0; }
+.exp-detail-album-stack:hover img:nth-child(1) { transform: rotate(-6deg) translate(-8px, -3px); z-index: 3; }
+.exp-detail-album-stack:hover img:nth-child(2) { transform: rotate(6deg) translate(8px, -3px); z-index: 2; }
+.exp-detail-album-stack:hover img:nth-child(3) { transform: translate(0, 6px); z-index: 1; }
+
+/* ── Nav arrows ── */
 .rail-nav {
   position: absolute;
-  top: calc(80px + 150px);
+  top: calc(36px + 160px);
   transform: translateY(-50%);
   width: 40px; height: 40px; border-radius: 50%;
   border: 1px solid var(--line-12);
@@ -933,41 +1223,126 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 .rail-nav.next { right: 6px; }
 .rail-nav[disabled] { opacity: 0.25; pointer-events: none; }
 
-.rail-meter {
+/* ── Lightbox (full-screen image viewer) ── */
+.tl-lightbox {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0, 0, 0, 0.88);
+  display: flex; align-items: center; justify-content: center;
+  cursor: zoom-out;
+  animation: tlLightboxIn .25s ease-out;
+}
+@keyframes tlLightboxIn { from { opacity: 0; } to { opacity: 1; } }
+.tl-lightbox img {
+  max-width: 88vw; max-height: 88vh;
+  border-radius: 8px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
+  cursor: zoom-out;
+}
+
+/* ═════════════════════════════════════════════════════════════════
+   LAYOUT VARIANTS — switched via [data-layout] on .rail-section
+   ═════════════════════════════════════════════════════════════════ */
+
+/* ─── A · Spacious (舒展) ─────────────────────────────────────────
+   Uniform layout, just give everything more room: wider cards,
+   bigger gap, tag has clean breathing room above the label.       */
+.rail-section[data-layout="spacious"] {
+  margin-top: -12px;
+}
+.rail-section[data-layout="spacious"] .rail-stage { height: 560px; }
+.rail-section[data-layout="spacious"] .rail-intro-inside { top: -12px; }
+.rail-section[data-layout="spacious"] .rail-track { gap: 48px; }
+.rail-section[data-layout="spacious"] .exp-card { width: 172px; }
+.rail-section[data-layout="spacious"] .exp-card.expanded { width: 520px; }
+.rail-section[data-layout="spacious"] .exp-tag {
+  margin: -6px auto 14px;   /* clear gap between tag and label */
+}
+.rail-section[data-layout="spacious"] .exp-label {
+  padding: 14px 12px 16px;
+}
+.rail-section[data-layout="spacious"] .exp-label-role { font-size: 0.74rem; margin-bottom: 4px; }
+.rail-section[data-layout="spacious"] .exp-label-co { font-size: 0.62rem; }
+.rail-section[data-layout="spacious"] .rail-nav { top: calc(36px + 170px); }
+
+/* ─── B · Stringed (吊绳) ─────────────────────────────────────────
+   Tag stays threaded on the rail; label drops further below with a
+   visible thin string connecting the two. Reads like a real
+   luggage tag dangling from a label.                              */
+.rail-section[data-layout="stringed"] {
+  margin-top: -12px;
+}
+.rail-section[data-layout="stringed"] .rail-stage { height: 580px; }
+.rail-section[data-layout="stringed"] .rail-intro-inside { top: -12px; }
+.rail-section[data-layout="stringed"] .rail-track { gap: 40px; }
+.rail-section[data-layout="stringed"] .exp-card { width: 160px; }
+.rail-section[data-layout="stringed"] .exp-card.expanded { width: 500px; }
+.rail-section[data-layout="stringed"] .exp-tag {
+  margin: -6px auto 38px;   /* long gap, bridged visually by string */
+  position: relative;
+}
+/* the string */
+.rail-section[data-layout="stringed"] .exp-tag::after {
+  content: '';
   position: absolute;
-  left: 50%; bottom: 0;
+  left: 50%; top: 100%;
+  width: 1.5px; height: 34px;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--accentC) 70%, transparent) 0%,
+    color-mix(in oklab, var(--accentC) 35%, transparent) 70%,
+    transparent 100%
+  );
   transform: translateX(-50%);
-  display: flex; align-items: center; gap: 12px; z-index: 5;
-  font-family: var(--sans); font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase;
-  color: var(--muted); font-weight: 500;
+  pointer-events: none;
+  z-index: 13;
 }
-.rail-meter-count { font-variant-numeric: tabular-nums; color: var(--fg); }
-.rail-meter-bar {
-  width: 180px; height: 1px; background: var(--line-08);
-  position: relative; overflow: hidden;
+.rail-section[data-layout="stringed"] .exp-label {
+  padding: 12px 10px 14px;
 }
-.rail-meter-bar::after {
-  content: ""; position: absolute; left: 0; top: 0; bottom: 0;
-  width: var(--p, 0%); background: linear-gradient(to right, var(--accent), var(--accent2));
-  transition: width .25s ease;
+.rail-section[data-layout="stringed"] .rail-nav { top: calc(36px + 190px); }
+
+/* ─── C · Staggered (错落) ────────────────────────────────────────
+   Each card = a luggage tag rigidly threaded on the bamboo rail, with a
+   polaroid hanging from it on a string. Per-card string length & resting
+   tilt (set inline from JSX via --str/--rest) give the row a natural,
+   uneven rhythm; the whole row swings with rail inertia via --sway.      */
+.rail-section[data-layout="stagger"] {
+  margin-top: 8px;
 }
+.rail-section[data-layout="stagger"] .rail-stage { height: 600px; }
+.rail-section[data-layout="stagger"] .rail-track { gap: 30px; align-items: flex-start; }
+.rail-section[data-layout="stagger"] .exp-card { width: 168px; }
+.rail-section[data-layout="stagger"] .exp-card.expanded { width: 540px; }
+/* Tag stays rigid on the rail; small gap to the hanging string below. */
+.rail-section[data-layout="stagger"] .exp-tag {
+  position: relative;
+  margin: 13px auto 0;
+}
+.rail-section[data-layout="stagger"] .rail-nav { top: calc(36px + 230px); }
 
 /* ── Mobile ──────────────────────────────────────────────────────── */
 @media (max-width: 760px) {
+  .page { padding: 56px 5vw 100px; }
   .tl-item { grid-template-columns: 62px 36px minmax(0, 1fr); column-gap: 12px; padding-bottom: 48px; }
+  .tl-item.tl-has-gallery { grid-template-columns: 62px 36px minmax(0, 1fr); }
+  .tl-album { grid-column: 3; width: 100px; height: 130px; margin-top: 12px; }
+  .tl-album img { width: 85px; height: 115px; }
   .tl-year { padding-top: 10px; }
   .tl-year-num { font-size: 1.3rem; }
   .tl-year-range { font-size: 0.9rem; }
   .tl-role { font-size: 1.05rem; }
   .tl-card { padding: 14px 16px 18px; }
-  .tl-vine   { left: 56px; width: 60px; }
+  .tl-vine { left: 56px; width: 60px; }
   .tl-rail { width: 36px; }
   .tl-flower { width: 24px; height: 24px; }
 
-  .rail-intro { padding-left: 116px; }
-  .rail-stage { height: 380px; }
-  .rail-viewport { padding: 0 calc(50% - 90px) 24px; }
-  .exp-card { width: 160px; }
+  .rail-intro-inside { padding-left: 116px; }
+  .rail-stage { height: 560px; }
+  .rail-viewport { padding: 0 calc(50% - 145px) 24px; }
+  .exp-card { width: 110px; }
+  .exp-card.expanded { width: 300px; }
+  .exp-card.expanded.has-gallery .exp-detail-body { grid-template-columns: 1fr; }
+  .exp-detail-album { padding-top: 6px; }
   .rail-nav { display: none; }
 }
 </style>
@@ -1175,14 +1550,16 @@ window.TimelineData = [
       'Independently managed <b class="m">30+ patient cases</b> through full treatment cycles.',
     ] },
 ];
-/* Timeline.jsx — hybrid experience timeline.
+/* Timeline.jsx — hybrid experience timeline (v3).
    ─────────────────────────────────────────────────────────
-   Items 1-6  → vertical climbing-bamboo timeline (panda + flowers)
+   Items 1-6  → vertical climbing-bamboo timeline (panda + flowers).
                 These are the most recent / weight-bearing roles.
-   BEND      → A short SVG showing the main trunk sprouting a
+   BEND       → A short SVG showing the main trunk sprouting a
                 side-branch that curves rightward into a horizontal rail.
-   Items 7-11 → Hang from the side-branch as binder-clipped cards
-                you drag, swipe, or arrow through.
+   Items 7-11 → Hang from the side-branch as punched-hole luggage tags.
+                Click a tag to expand its detail panel (bullets + photo
+                polaroid stack). Click again, click another, or press Esc
+                to collapse.
 */
 
 const { useEffect, useRef, useState, useCallback } = React;
@@ -1190,7 +1567,29 @@ const { useEffect, useRef, useState, useCallback } = React;
 const SPLIT_AT = 6;   // first N items render as vertical, rest hang horizontal
 
 /* ─────────────────────────────────────────────────────────
-   Part A · Vertical climbing timeline atoms (from v1)
+   Lightbox helper — overlays the full-resolution image
+   over the page until the user clicks or presses Esc.
+   Lives on window so any descendant can call it without prop drilling.
+   ───────────────────────────────────────────────────────── */
+window.showLightbox = window.showLightbox || function (src) {
+  const overlay = document.createElement('div');
+  overlay.className = 'tl-lightbox';
+  const img = document.createElement('img');
+  img.src = src;
+  overlay.appendChild(img);
+  const close = () => {
+    overlay.style.opacity = '0';
+    setTimeout(() => overlay.remove(), 200);
+    document.removeEventListener('keydown', onKey);
+  };
+  const onKey = (e) => { if (e.key === 'Escape') close(); };
+  overlay.addEventListener('click', close);
+  document.addEventListener('keydown', onKey);
+  document.body.appendChild(overlay);
+};
+
+/* ─────────────────────────────────────────────────────────
+   Part A · Vertical climbing timeline atoms
    ───────────────────────────────────────────────────────── */
 
 const FlowerNode = ({ color, active }) => {
@@ -1214,66 +1613,13 @@ const FlowerNode = ({ color, active }) => {
 };
 
 const PandaClimber = ({ refCb, isIdle }) => (
+  // Cute panda hugging the bamboo, photographed from behind — a single flat
+  // image, so "climbing energy" comes from whole-body transforms (no separate
+  // limbs). .tl-climber-bob carries the busy/idle motion; the outer .tl-climber
+  // is positioned along the bamboo path by JS (translate + rotate by scroll).
   <div className={`tl-climber ${isIdle ? 'tl-climber-idle' : 'tl-climber-busy'}`} ref={refCb} aria-hidden="true">
     <div className="tl-climber-bob">
-      <svg viewBox="0 0 70 56" width="70" height="56">
-        <defs>
-          <radialGradient id="tlPandaWhite" cx="50%" cy="35%" r="65%">
-            <stop offset="0%"  stopColor="#ffffff"/>
-            <stop offset="100%" stopColor="#ece9de"/>
-          </radialGradient>
-          <radialGradient id="tlPandaBlack" cx="50%" cy="35%" r="65%">
-            <stop offset="0%"  stopColor="#3a2f24"/>
-            <stop offset="100%" stopColor="#120b06"/>
-          </radialGradient>
-          <radialGradient id="tlPandaEye" cx="50%" cy="35%" r="65%">
-            <stop offset="0%"  stopColor="#e0a040"/>
-            <stop offset="100%" stopColor="#8a5a1f"/>
-          </radialGradient>
-        </defs>
-        <circle className="tl-tail" cx="6" cy="36" r="2.2" fill="url(#tlPandaBlack)" stroke="#0a0604" strokeWidth="0.8"/>
-        <g className="tl-leg tl-leg-l">
-          <ellipse cx="13" cy="49" rx="5.2" ry="4.2" fill="url(#tlPandaBlack)" stroke="#0a0604" strokeWidth="1.2"/>
-          <ellipse cx="13" cy="48" rx="2" ry="1.4" fill="#f7d3a8" opacity="0.6"/>
-        </g>
-        <g className="tl-leg tl-leg-r">
-          <ellipse cx="28" cy="50" rx="5" ry="4" fill="url(#tlPandaBlack)" stroke="#0a0604" strokeWidth="1.2"/>
-          <ellipse cx="28" cy="49" rx="1.8" ry="1.3" fill="#f7d3a8" opacity="0.6"/>
-        </g>
-        <ellipse cx="22" cy="38" rx="14" ry="11.5" fill="url(#tlPandaWhite)" stroke="#0a0604" strokeWidth="1.5"/>
-        <g className="tl-arm tl-arm-r">
-          <path d="M 32 36 Q 48 30, 58 36" stroke="#0a0604" strokeWidth="7" fill="none" strokeLinecap="round"/>
-          <path d="M 32 36 Q 48 30, 58 36" stroke="url(#tlPandaBlack)" strokeWidth="5.4" fill="none" strokeLinecap="round"/>
-          <ellipse cx="58" cy="36" rx="3.6" ry="3" fill="url(#tlPandaBlack)" stroke="#0a0604" strokeWidth="1"/>
-        </g>
-        <g className="tl-arm tl-arm-l">
-          <path d="M 28 24 Q 44 18, 56 24" stroke="#0a0604" strokeWidth="7" fill="none" strokeLinecap="round"/>
-          <path d="M 28 24 Q 44 18, 56 24" stroke="url(#tlPandaBlack)" strokeWidth="5.4" fill="none" strokeLinecap="round"/>
-          <ellipse cx="56" cy="24" rx="3.6" ry="3" fill="url(#tlPandaBlack)" stroke="#0a0604" strokeWidth="1"/>
-        </g>
-        <g className="tl-head tl-head-front">
-          <circle cx="13" cy="9" r="5.4" fill="url(#tlPandaBlack)" stroke="#0a0604" strokeWidth="1.4"/>
-          <circle cx="33" cy="9" r="5.4" fill="url(#tlPandaBlack)" stroke="#0a0604" strokeWidth="1.4"/>
-          <circle cx="13" cy="9" r="2.4" fill="#2a1f15"/>
-          <circle cx="33" cy="9" r="2.4" fill="#2a1f15"/>
-          <circle cx="23" cy="18" r="13.2" fill="url(#tlPandaWhite)" stroke="#0a0604" strokeWidth="1.6"/>
-          <ellipse cx="17" cy="18" rx="3.8" ry="4.8" fill="url(#tlPandaBlack)" stroke="#0a0604" strokeWidth="0.8" transform="rotate(-22 17 18)"/>
-          <ellipse cx="29" cy="18" rx="3.8" ry="4.8" fill="url(#tlPandaBlack)" stroke="#0a0604" strokeWidth="0.8" transform="rotate(22 29 18)"/>
-          <circle cx="17.5" cy="17.6" r="2.2" fill="#fff"/>
-          <circle cx="29.5" cy="17.6" r="2.2" fill="#fff"/>
-          <circle cx="18" cy="18" r="1.5" fill="url(#tlPandaEye)"/>
-          <circle cx="30" cy="18" r="1.5" fill="url(#tlPandaEye)"/>
-          <circle cx="18.1" cy="18.2" r="0.7" fill="#0a0604"/>
-          <circle cx="30.1" cy="18.2" r="0.7" fill="#0a0604"/>
-          <circle cx="18.6" cy="17.2" r="0.55" fill="#fff"/>
-          <circle cx="30.6" cy="17.2" r="0.55" fill="#fff"/>
-          <ellipse cx="14" cy="23.5" rx="2.6" ry="1.5" fill="#ffadb8" opacity="0.8"/>
-          <ellipse cx="32" cy="23.5" rx="2.6" ry="1.5" fill="#ffadb8" opacity="0.8"/>
-          <path d="M 21.6 21.6 Q 23 23.4, 24.4 21.6 Q 23 22.6, 21.6 21.6 Z" fill="#0a0604"/>
-          <path d="M 23 23.6 L 23 24.6" stroke="#0a0604" strokeWidth="0.7" strokeLinecap="round"/>
-          <path d="M 21 25.4 Q 23 26.6, 25 25.4" stroke="#0a0604" strokeWidth="0.8" fill="none" strokeLinecap="round"/>
-        </g>
-      </svg>
+      <img className="tl-climber-img" src="assets/panda.png" alt="" draggable="false"/>
     </div>
   </div>
 );
@@ -1281,12 +1627,13 @@ const PandaClimber = ({ refCb, isIdle }) => (
 const ExperienceRow = ({ entry, isLast, isActive, onMount }) => {
   const ref = useRef(null);
   useEffect(() => { if (onMount && ref.current) onMount(ref.current); }, []);
-  const { period, role, company, bullets, healthcare, current, logo } = entry;
+  const { period, role, company, bullets, healthcare, current, logo, logoImg, gallery } = entry;
+  const hasGallery = gallery && gallery.length > 0;
   const color = healthcare ? 'peach' : 'lavender';
   const parts = period.split(/\s*–\s*/);
   return (
     <div ref={ref}
-         className={`tl-item${current ? ' tl-current' : ''}${isLast ? ' tl-last' : ''}${healthcare ? ' tl-healthcare' : ''}${isActive ? ' tl-active' : ''}`}>
+         className={`tl-item${current ? ' tl-current' : ''}${isLast ? ' tl-last' : ''}${healthcare ? ' tl-healthcare' : ''}${isActive ? ' tl-active' : ''}${hasGallery ? ' tl-has-gallery' : ''}`}>
       <div className="tl-year">
         <span className="tl-year-num">
           {parts[0]}
@@ -1299,7 +1646,7 @@ const ExperienceRow = ({ entry, isLast, isActive, onMount }) => {
         <div className="tl-role">{role}</div>
         <div className="tl-co">
           <span className="tl-logo">
-            {entry.logoImg ? <img src={entry.logoImg} alt=""/> : logo}
+            {logoImg ? <img src={logoImg} alt=""/> : logo}
           </span>
           <div className="tl-company">{company}</div>
         </div>
@@ -1307,6 +1654,11 @@ const ExperienceRow = ({ entry, isLast, isActive, onMount }) => {
           {bullets.map((b, i) => <li key={i} dangerouslySetInnerHTML={{ __html: b }}/>)}
         </ul>
       </div>
+      {hasGallery && (
+        <div className="tl-album" onClick={(e) => { if (e.target.tagName === 'IMG') window.showLightbox(e.target.src); }}>
+          {gallery.map((src, i) => <img key={i} src={src} alt="" loading="lazy"/>)}
+        </div>
+      )}
     </div>
   );
 };
@@ -1352,7 +1704,10 @@ const VerticalTimeline = ({ items }) => {
       angle = Math.max(-12, Math.min(12, angle));
       const offsetLeft = svgRect.left - wrapRect.left;
       const offsetTop  = svgRect.top  - wrapRect.top;
-      climber.style.transform = `translate(${offsetLeft + px - 64}px, ${offsetTop + py - 30}px) rotate(${angle}deg)`;
+      // Panda PNG is ~62×84, hugging the stalk with its RIGHT side. Anchor so
+      // that right-of-centre contour sits on the stalk's left edge (px), and
+      // the body is vertically centred on the contact point (py).
+      climber.style.transform = `translate(${offsetLeft + px - 50}px, ${offsetTop + py - 46}px) rotate(${angle}deg)`;
       climber.style.opacity = t > 0.005 && t < 0.998 ? '1' : '0.6';
 
       const focusY = vh * 0.4;
@@ -1409,150 +1764,225 @@ const VerticalTimeline = ({ items }) => {
 };
 
 /* ─────────────────────────────────────────────────────────
-   Part B · Bend transition + hanging-card rail
+   Part B · Bend transition + hanging punched-hole tags
    ───────────────────────────────────────────────────────── */
 
 /* Card metadata for horizontal items (5 items: indices 6-10 of original data).
-   Each gets a 3-letter code, period label, mini skills timeline, and a
-   transition watermark. */
+   Just a 3-letter code + a two-line period label that sits on the luggage tag. */
 const CARD_META = [
-  // 6 · Beijing Eden Hospital · Sports Medicine Intern · 2023
-  { code: 'EDN', period: ['2023', '·'],
-    skillsTop: ['Cases', 'Reg', '60+', 'Intl'],
-    skillsBot: ['Pre-Auth', 'Claims', 'Rehab', 'Care'],
-    transition: 'REG → REH' },
-  // 7 · FuDao · Sports Protection & AED · 2023
-  { code: 'FUD', period: ['2023', '·'],
-    skillsTop: ['First-Aid', 'AED', 'Articles', '5K+'],
-    skillsBot: ['B2B', 'Policy', 'Biomech', 'Orthotic'],
-    transition: 'AED → B2B' },
-  // 8 · Winter Sports Training Center · Research · 2023
-  { code: 'NTC', period: ['2023', '·'],
-    skillsTop: ['Taping', 'Cryo', 'Warm-up', '300h+'],
-    skillsBot: ['Biodex', 'InBody', 'Laser', 'Ultra'],
-    transition: 'EVT → ASS' },
-  // 9 · Disney · Athletic Trainer · 2022-2023
-  { code: 'DIS', period: ['22—', '23'],
-    skillsTop: ['Power BI', 'Excel', 'Data', 'Risk'],
-    skillsBot: ['Rehab', '−70%', 'Aid', 'Cast'],
-    transition: 'INJ → ITV' },
-  // 10 · Spine · Physical Therapist · 2022-2023
-  { code: 'SPN', period: ['22—', '23'],
-    skillsTop: ['Assess', 'Mobility', '60+', 'Cases'],
-    skillsBot: ['Rx', 'Co-Plan', 'PT', 'Cycle'],
-    transition: 'ASS → RX' },
+  { code: 'EDN', period: ['2023', '·']  },   // 6 · Beijing Eden Hospital
+  { code: 'FUD', period: ['2023', '·']  },   // 7 · FuDao
+  { code: 'NTC', period: ['2023', '·']  },   // 8 · Winter Sports Training Center
+  { code: 'DIS', period: ['22—', '23'] },   // 9 · Disney
+  { code: 'SPN', period: ['22—', '23'] },   // 10 · Spine & Pain
 ];
 
-/* The bend: an SVG showing the main trunk sprouting a node + side branch
-   that curves rightward into a horizontal rail. */
+/* The bend: an SVG showing the main trunk sprouting a side branch that
+   curves rightward and becomes the horizontal rail. Punched holes on each
+   card visually "thread" the rail line. */
 const BambooBend = () => (
   <svg
     className="bend-svg"
+    viewBox="0 -90 1200 180"
+    preserveAspectRatio="xMinYMid slice"
     aria-hidden="true"
   >
     <defs>
       <linearGradient id="bambooG" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0"   stopColor="#aedb78"/>
-        <stop offset="0.18" stopColor="#6a8f3f"/>
+        <stop offset="0"    stopColor="#b8d88a"/>
+        <stop offset="0.15" stopColor="#7aa85a"/>
+        <stop offset="0.35" stopColor="#4d7a2e"/>
         <stop offset="0.5"  stopColor="#3d5e1d"/>
-        <stop offset="0.82" stopColor="#6a8f3f"/>
-        <stop offset="1"    stopColor="#aedb78"/>
+        <stop offset="0.65" stopColor="#4d7a2e"/>
+        <stop offset="0.85" stopColor="#7aa85a"/>
+        <stop offset="1"    stopColor="#b8d88a"/>
+      </linearGradient>
+      <linearGradient id="bambooLeaf" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stopColor="#7aa85a"/>
+        <stop offset="1" stopColor="#4d7a2e"/>
       </linearGradient>
     </defs>
-    {/* Dark outline behind the stalk */}
-    <path className="stalk stalk-base" d="M 132 -80 V 22 Q 132 50 168 50 H 3000" strokeWidth="26"/>
-    {/* Main bamboo stroke */}
-    <path className="stalk" stroke="url(#bambooG)" d="M 132 -80 V 22 Q 132 50 168 50 H 3000" strokeWidth="22"/>
-    {/* Highlight stripe along the stem */}
-    <path className="stalk stalk-shine" d="M 132 -80 V 22 Q 132 50 168 50 H 3000" strokeWidth="3"/>
-    {/* Subtle bottom shadow inside the rail */}
-    <path className="stalk stalk-shadow" d="M 168 56 H 3000" strokeWidth="3"/>
 
-    {/* Junction node — where side branch grows from trunk */}
-    <ellipse className="node" cx="132" cy="18" rx="14" ry="3.5"/>
-    <ellipse className="node-hi" cx="132" cy="16.5" rx="11" ry="1.2"/>
+    {/* Bamboo: vertical stub + bend curve + a short horizontal stub that
+        meets the first hanging card. Past the bend, each card carries its
+        OWN local rod (.exp-rod) which chains horizontally to the next —
+        that's what creates the "thread-through-the-eyelet" illusion. */}
+    <path d="M 132 -90 V 38 Q 132 66 164 66 H 248" stroke="#1e3a0e" strokeWidth="11.2" fill="none" strokeLinecap="round"/>
+    <path d="M 132 -90 V 38 Q 132 66 164 66 H 248" stroke="url(#bambooG)" strokeWidth="9.6" fill="none" strokeLinecap="round"/>
+    <path d="M 132 -90 V 38 Q 132 66 164 66 H 248" stroke="rgba(255,255,255,0.18)" strokeWidth="1.6" fill="none" strokeLinecap="round"/>
 
-    {/* Bamboo ring-nodes along the horizontal rail */}
-    {[230, 360, 490, 620, 750, 880, 1010, 1140].map((cx) => (
-      <g key={cx}>
-        <ellipse className="node" cx={cx} cy="50" rx="3" ry="13"/>
-        <ellipse className="node-hi" cx={cx - 0.6} cy="50" rx="1" ry="11"/>
-      </g>
-    ))}
+    {/* Junction node — sits where the side branch sprouts from the trunk */}
+    <ellipse cx="132" cy="33" rx="7" ry="2" fill="#2a4a10"/>
+    <ellipse cx="132" cy="32" rx="5.5" ry="0.8" fill="#aedb78" opacity="0.5"/>
 
-    {/* A couple of small leaves at the junction to sell the "branching" */}
+    {/* Single bamboo node on the short horizontal stub before it meets the
+        first card. (Nodes past the stub were removed — each card now carries
+        its own rod + nodes.) */}
     <g>
-      <path className="leaf" d="M 108 12 Q 86 4 78 16 Q 96 22 112 14 Z"/>
-      <path className="leaf-vein" d="M 84 14 Q 100 16 110 13"/>
-      <path className="leaf" d="M 100 22 Q 78 22 74 32 Q 92 32 104 24 Z"/>
-      <path className="leaf-vein" d="M 80 28 Q 94 28 102 24"/>
+      <ellipse cx="220" cy="66" rx="1.5" ry="6" fill="#2a4a10"/>
+      <ellipse cx="219.7" cy="66" rx="0.6" ry="5" fill="#aedb78" opacity="0.45"/>
     </g>
+
+    {/* A handful of leaves at the junction to sell the "branching" */}
+    <path d="M 106 28 Q 82 20 76 34 Q 96 38 110 30 Z" fill="url(#bambooLeaf)"/>
+    <path d="M 82 31 Q 98 33 108 30" stroke="#2a4a10" strokeWidth="0.6" fill="none"/>
+    <path d="M 98 39 Q 74 41 72 53 Q 92 51 102 41 Z" fill="url(#bambooLeaf)"/>
+    <path d="M 78 47 Q 92 47 100 41" stroke="#2a4a10" strokeWidth="0.6" fill="none"/>
+    <path d="M 150 60 Q 138 76 148 84 Q 156 72 152 62 Z" fill="url(#bambooLeaf)" opacity="0.8"/>
+    <path d="M 172 64 Q 162 50 152 56 Q 164 60 170 66 Z" fill="url(#bambooLeaf)" opacity="0.7"/>
   </svg>
 );
 
-const BinderClipPair = () => (
-  <div className="clip-pair" aria-hidden="true">
-    <div className="clip l">
-      <div className="clip-loop"></div>
-      <div className="clip-body"></div>
-    </div>
-    <div className="clip r">
-      <div className="clip-loop"></div>
-      <div className="clip-body"></div>
+/* ── Orange flower spray that sits ON the horizontal rail (no stem) ──
+   Reuses the 5-petal flower shape; a main bloom + small bloom + bud + two
+   leaves, nestled directly on the bamboo. side = 'left' | 'right' shifts it
+   into the gap on either side of the tag for an alternating rhythm. */
+const RailPetals = ({ s }) => (
+  <svg width={s} height={s} viewBox="0 0 32 32" aria-hidden="true">
+    <g transform="translate(16 16)">
+      {[0, 72, 144, 216, 288].map((a) => <ellipse key={a} cx="0" cy="-8" rx="3.8" ry="6" fill="#f5b491" transform={`rotate(${a})`}/>)}
+      {[36, 108, 180, 252, 324].map((a) => <ellipse key={a} cx="0" cy="-6.5" rx="2.2" ry="4.2" fill="#d68260" opacity="0.55" transform={`rotate(${a})`}/>)}
+      <circle r="3" fill="#fff3d6"/>
+      <circle r="1.6" fill="#d68260" opacity="0.8"/>
+    </g>
+  </svg>
+);
+const RailFlowerCluster = ({ side = 'left' }) => (
+  <div className={`exp-flower exp-flower-${side}`} aria-hidden="true">
+    <div className="exp-flower-bob">
+      <svg className="exp-flower-leaf lf1" width="23" height="13" viewBox="0 0 22 12"><path d="M1 6 Q11 -3 21 6 Q11 15 1 6 Z" fill="#6e9e4a"/><path d="M3 6 Q11 6 19 6" stroke="#4f7a32" strokeWidth="0.7" fill="none"/></svg>
+      <svg className="exp-flower-leaf lf2" width="18" height="10" viewBox="0 0 22 12"><path d="M1 6 Q11 -3 21 6 Q11 15 1 6 Z" fill="#6e9e4a"/></svg>
+      <span className="exp-flower-bud"><svg width="15" height="15" viewBox="0 0 20 20"><ellipse cx="10" cy="8" rx="5" ry="6.2" fill="#f5b491"/><ellipse cx="10" cy="7" rx="2.4" ry="3.6" fill="#d68260" opacity="0.5"/></svg></span>
+      <span className="exp-flower-side"><RailPetals s={21}/></span>
+      <span className="exp-flower-main"><RailPetals s={30}/></span>
     </div>
   </div>
 );
 
-const SkillsTimeline = ({ top, bot }) => (
-  <div className="exp-skills">
-    <div className="exp-skills-row top">
-      {top.map((s, i) => (
-        <div key={i} className="exp-skills-cell">
-          <span className="exp-skill">{s}</span>
-          <span className="exp-tri up"></span>
-        </div>
-      ))}
-    </div>
-    <div className="exp-skills-axis"></div>
-    <div className="exp-skills-row bot">
-      {bot.map((s, i) => (
-        <div key={i} className="exp-skills-cell bot">
-          <span className="exp-skill">{s}</span>
-          <span className="exp-tri down"></span>
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
-const ExperienceCard = ({ entry, meta, isActive }) => {
-  const { role, company, healthcare } = entry;
+const ExperienceCard = ({ entry, meta, idx = 0, flower = null, isActive, isExpanded, isFirst, isLast, onToggle }) => {
+  const { role, company, healthcare, bullets, logo, logoImg, gallery } = entry;
   const parts = company.split(/\s*·\s*/);
   const coMain = parts[0];
   const coLoc  = parts.slice(1).join(' · ');
+  const hasGallery = gallery && gallery.length > 0;
+  const photo = hasGallery ? gallery[0] : null;
+  const roleShort = role.split(/\s*[(]\s*/)[0];
+  /* Compact year for the polaroid tab: "2022 – 2023" → "’22–’23", else "2023" */
+  const yrParts = (entry.period || '').split(/\s*[–—-]\s*/);
+  const yearTab = yrParts.length > 1
+    ? `’${yrParts[0].slice(-2)}–’${yrParts[1].slice(-2)}`
+    : entry.period;
+  const cls = `exp-card${healthcare ? ' thc' : ''}${isActive ? ' is-active' : ''}${isExpanded ? ' expanded' : ''}${isExpanded && hasGallery ? ' has-gallery' : ''}${isFirst ? ' is-first' : ''}${isLast ? ' is-last' : ''}`;
+  /* Deterministic per-card variation: resting tilt, string length & sway gain
+     so a row of polaroids reads natural rather than mechanically uniform. */
+  const tilts = [-2.4, 1.8, -1.2, 2.6, -2.0, 1.4, -2.8, 2.0, -1.6];
+  const strings = [30, 46, 24, 52, 34, 44, 28, 50, 38];
+  const swayMul = [1.0, 1.28, 0.86, 1.34, 1.05, 1.22, 0.92, 1.3, 1.12];
+  const rest = tilts[idx % tilts.length];
+  const hangStyle = {
+    '--rest': `${rest}deg`,
+    '--str': `${strings[idx % strings.length]}px`,
+    '--swayMul': swayMul[idx % swayMul.length],
+  };
   return (
-    <div className={`exp-card${healthcare ? ' thc' : ''}${isActive ? ' is-active' : ''}`}>
+    <div className={cls} onClick={onToggle}>
+      {/* Local bamboo rod — split into two z-layers to create the
+          "rod going through the tag" 3D illusion:
+            • .exp-rod (z:1)       — LEFT of eyelet, behind the tag
+            • .exp-rod-front (z:15) — RIGHT of eyelet, in front of the tag
+          The eyelet shows the rod's cross-section via .exp-punch::before;
+          left half = "entering the hole", right half = "emerging in front". */}
+      <div className="exp-rod" aria-hidden="true"></div>
+      <div className="exp-rod-front" aria-hidden="true"></div>
+      {flower && <RailFlowerCluster side={flower}/>}
+      {/* Luggage tag with punched hole that threads the bamboo rail (year removed) */}
       <div className="exp-tag">
-        <span className="exp-tag-code">{meta.period[0]}</span>
-        <span className="exp-tag-period">{meta.period[1]}</span>
+        <div className="exp-punch" aria-hidden="true"></div>
       </div>
-      <div className="exp-body">
-        <div className="exp-role">{role}</div>
-        <div className="exp-co">
-          <em>{coMain}{coLoc ? ` · ${coLoc}` : ''}</em>
+
+      {/* Hanging polaroid — swings from the tag with inertia (shown collapsed) */}
+      <div className="exp-hang" style={hangStyle}>
+        <div className="exp-string" aria-hidden="true"></div>
+        <div className="exp-yrtab">{yearTab}</div>
+        <div className="exp-pola">
+          <div className="exp-pola-photo">
+            {photo
+              ? <img src={photo} alt="" loading="lazy"
+                     onError={(e) => {
+                       const ph = e.target.closest('.exp-pola-photo');
+                       e.target.remove();
+                       const m = document.createElement('div');
+                       m.className = 'exp-pola-mono';
+                       m.innerHTML = `<span>${logo}</span>`;
+                       ph.appendChild(m);
+                     }}/>
+              : <div className="exp-pola-mono">{logoImg ? <img src={logoImg} alt=""/> : <span>{logo}</span>}</div>}
+          </div>
+          <div className="exp-pola-cap">
+            <div className="exp-pola-role">{roleShort}</div>
+            <div className="exp-pola-co">{coMain}</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Expanded detail — shown when .expanded */}
+      <div className="exp-detail">
+        <div className="exp-detail-head">
+          <div className="exp-detail-role">{role}</div>
+          <div className="exp-detail-co">
+            <span className="exp-detail-logo">
+              {logoImg ? <img src={logoImg} alt=""/> : logo}
+            </span>
+            <span className="exp-detail-company">
+              {coMain}{coLoc ? ` · ${coLoc}` : ''}
+            </span>
+          </div>
+        </div>
+        <div className="exp-detail-body">
+          {bullets && (
+            <ul className="exp-detail-bullets">
+              {bullets.map((b, i) => <li key={i} dangerouslySetInnerHTML={{ __html: b }}/>)}
+            </ul>
+          )}
+          {hasGallery && (
+            <div className="exp-detail-album">
+              <div className="exp-detail-album-stack"
+                   onClick={(e) => { e.stopPropagation(); if (e.target.tagName === 'IMG') window.showLightbox(e.target.src); }}>
+                {gallery.map((src, i) => <img key={i} src={src} alt="" loading="lazy"/>)}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-const HangingRail = ({ items }) => {
+const HangingRail = ({ items, layout }) => {
   const viewportRef = useRef(null);
   const trackRef = useRef(null);
   const [activeIdx, setActiveIdx] = useState(0);
-  const [progress, setProgress] = useState(0);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
+  const [expandedIdx, setExpandedIdx] = useState(null);
+
+  /* Smooth-scroll engine (matches Projects Carousel feel) */
+  const scrollRef = useRef(0);
+  const targetRef = useRef(0);
+  const isDraggingRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const dragStartScrollRef = useRef(0);
+  const dragMovedRef = useRef(false);
+  const rafRef = useRef(0);
+  /* Pendulum sway state for the hanging polaroids (driven by rail motion) */
+  const swayRef = useRef({ angle: 0, vel: 0, prevScroll: 0, prevV: 0, t: 0 });
+
+  const getMax = useCallback(() => {
+    const vp = viewportRef.current;
+    return vp ? Math.max(0, vp.scrollWidth - vp.clientWidth) : 0;
+  }, []);
+
+  const clampTarget = useCallback((v) => Math.max(0, Math.min(v, getMax())), [getMax]);
 
   const recompute = useCallback(() => {
     const vp = viewportRef.current;
@@ -1560,7 +1990,7 @@ const HangingRail = ({ items }) => {
     if (!vp || !track) return;
     const cards = track.querySelectorAll('.exp-card');
     if (!cards.length) return;
-    const center = vp.scrollLeft + vp.clientWidth / 2;
+    const center = scrollRef.current + vp.clientWidth / 2;
     let best = 0, bestDist = Infinity;
     cards.forEach((el, i) => {
       const c = el.offsetLeft + el.offsetWidth / 2;
@@ -1568,58 +1998,81 @@ const HangingRail = ({ items }) => {
       if (d < bestDist) { bestDist = d; best = i; }
     });
     setActiveIdx(best);
-    const max = vp.scrollWidth - vp.clientWidth;
-    const p = max > 0 ? vp.scrollLeft / max : 0;
-    setProgress(p);
-    setCanPrev(vp.scrollLeft > 4);
-    setCanNext(vp.scrollLeft < max - 4);
-  }, []);
+    const max = getMax();
+    setCanPrev(scrollRef.current > 4);
+    setCanNext(scrollRef.current < max - 4);
+  }, [getMax]);
 
-  const scrollToIndex = useCallback((i) => {
+  const getCardScroll = useCallback((i) => {
     const vp = viewportRef.current;
     const track = trackRef.current;
-    if (!vp || !track) return;
+    if (!vp || !track) return 0;
     const cards = track.querySelectorAll('.exp-card');
     const el = cards[Math.max(0, Math.min(cards.length - 1, i))];
-    if (!el) return;
-    const target = el.offsetLeft + el.offsetWidth / 2 - vp.clientWidth / 2;
-    vp.scrollTo({ left: target, behavior: 'smooth' });
-  }, []);
+    if (!el) return 0;
+    return clampTarget(el.offsetLeft + el.offsetWidth / 2 - vp.clientWidth / 2);
+  }, [clampTarget]);
 
-  /* drag-to-scroll */
+  const scrollToIndex = useCallback((i) => {
+    targetRef.current = getCardScroll(i);
+  }, [getCardScroll]);
+
+  /* All input + animation in ONE effect — no stale closures */
   useEffect(() => {
     const vp = viewportRef.current;
     if (!vp) return;
-    let isDown = false, startX = 0, startScroll = 0, moved = false;
 
+    /* Animation loop (lerp 0.06 = silky) */
+    const animate = () => {
+      const diff = targetRef.current - scrollRef.current;
+      scrollRef.current += diff * 0.06;
+      if (Math.abs(diff) < 0.4) scrollRef.current = targetRef.current;
+      vp.scrollLeft = scrollRef.current;
+
+      /* ── Inertial pendulum sway ──
+         The rail's horizontal JERK (change in velocity) kicks the hanging
+         polaroids; a low-stiffness / low-damping spring lets them swing wide
+         and settle slowly. Idle adds a faint breath so they're never dead. */
+      const s = swayRef.current;
+      const v = scrollRef.current - s.prevScroll;
+      const accel = v - s.prevV;
+      s.t += 1;
+      const K = 0.0085, C = 0.040, DRIVE = 1.15;
+      s.vel += -K * s.angle - C * s.vel - DRIVE * accel;
+      s.angle += s.vel;
+      if (s.angle > 24) { s.angle = 24; s.vel *= -0.4; }
+      if (s.angle < -24) { s.angle = -24; s.vel *= -0.4; }
+      s.prevScroll = scrollRef.current;
+      s.prevV = v;
+      const idle = Math.sin(s.t * 0.017) * 0.45;
+      const track = trackRef.current;
+      if (track) track.style.setProperty('--sway', (s.angle + idle).toFixed(3) + 'deg');
+
+      recompute();
+      rafRef.current = requestAnimationFrame(animate);
+    };
+    rafRef.current = requestAnimationFrame(animate);
+
+    /* Drag */
     const onDown = (e) => {
-      isDown = true; moved = false;
+      isDraggingRef.current = true;
+      dragMovedRef.current = false;
       const x = e.touches ? e.touches[0].clientX : e.clientX;
-      startX = x; startScroll = vp.scrollLeft;
-      vp.classList.add('is-grabbing');
+      dragStartXRef.current = x;
+      dragStartScrollRef.current = targetRef.current;
+      vp.style.cursor = 'grabbing';
     };
     const onMove = (e) => {
-      if (!isDown) return;
+      if (!isDraggingRef.current) return;
       const x = e.touches ? e.touches[0].clientX : e.clientX;
-      const dx = x - startX;
-      if (Math.abs(dx) > 4) moved = true;
-      vp.scrollLeft = startScroll - dx;
+      const dx = x - dragStartXRef.current;
+      if (Math.abs(dx) > 4) dragMovedRef.current = true;
+      targetRef.current = clampTarget(dragStartScrollRef.current - dx);
     };
     const onUp = () => {
-      if (!isDown) return;
-      isDown = false;
-      vp.classList.remove('is-grabbing');
-      if (moved) {
-        const cards = trackRef.current.querySelectorAll('.exp-card');
-        const center = vp.scrollLeft + vp.clientWidth / 2;
-        let best = 0, bestDist = Infinity;
-        cards.forEach((el, i) => {
-          const c = el.offsetLeft + el.offsetWidth / 2;
-          const d = Math.abs(c - center);
-          if (d < bestDist) { bestDist = d; best = i; }
-        });
-        scrollToIndex(best);
-      }
+      if (!isDraggingRef.current) return;
+      isDraggingRef.current = false;
+      vp.style.cursor = 'grab';
     };
 
     vp.addEventListener('mousedown', onDown);
@@ -1629,72 +2082,67 @@ const HangingRail = ({ items }) => {
     vp.addEventListener('touchmove', onMove, { passive: true });
     vp.addEventListener('touchend', onUp);
 
+    /* Wheel with momentum decay (matches carousel) */
+    let wheelAccum = 0, wheelRaf = 0, wheelActive = false;
+    const applyWheel = () => {
+      if (Math.abs(wheelAccum) < 0.3) { wheelAccum = 0; wheelActive = false; return; }
+      targetRef.current = clampTarget(targetRef.current + wheelAccum);
+      wheelAccum *= 0.88;
+      wheelRaf = requestAnimationFrame(applyWheel);
+    };
+    const onWheel = (e) => {
+      const total = e.deltaX + e.deltaY * 0.4;
+      if (Math.abs(total) > 0.5) {
+        e.preventDefault();
+        wheelAccum += total * 1.2;
+        if (!wheelActive) { wheelActive = true; wheelRaf = requestAnimationFrame(applyWheel); }
+      }
+    };
+    vp.addEventListener('wheel', onWheel, { passive: false });
+
     return () => {
+      cancelAnimationFrame(rafRef.current);
+      cancelAnimationFrame(wheelRaf);
       vp.removeEventListener('mousedown', onDown);
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseup', onUp);
       vp.removeEventListener('touchstart', onDown);
       vp.removeEventListener('touchmove', onMove);
       vp.removeEventListener('touchend', onUp);
+      vp.removeEventListener('wheel', onWheel);
     };
-  }, [scrollToIndex]);
+  }, [recompute, clampTarget]);
 
+  /* Arrow keys + Esc — separate effect so we always read the current activeIdx */
   useEffect(() => {
     const vp = viewportRef.current;
     if (!vp) return;
-    let raf = 0;
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(() => { raf = 0; recompute(); });
-    };
-    vp.addEventListener('scroll', onScroll, { passive: true });
-    recompute();
-    return () => { vp.removeEventListener('scroll', onScroll); if (raf) cancelAnimationFrame(raf); };
-  }, [recompute]);
-
-  /* Arrow-key nav — only when the rail viewport is near viewport center */
-  useEffect(() => {
     const onKey = (e) => {
-      const vp = viewportRef.current;
-      if (!vp) return;
       const r = vp.getBoundingClientRect();
       const inView = r.top < window.innerHeight * 0.85 && r.bottom > window.innerHeight * 0.15;
       if (!inView) return;
+      if (e.key === 'Escape' && expandedIdx !== null) { setExpandedIdx(null); return; }
       if (e.key === 'ArrowRight') { e.preventDefault(); scrollToIndex(activeIdx + 1); }
       else if (e.key === 'ArrowLeft') { e.preventDefault(); scrollToIndex(activeIdx - 1); }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [activeIdx, scrollToIndex]);
-
-  /* Wheel: prefer vertical pass-through; only catch when horizontal intent. */
-  useEffect(() => {
-    const vp = viewportRef.current;
-    if (!vp) return;
-    const onWheel = (e) => {
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-        vp.scrollLeft += e.deltaX;
-        e.preventDefault();
-      }
-    };
-    vp.addEventListener('wheel', onWheel, { passive: false });
-    return () => vp.removeEventListener('wheel', onWheel);
-  }, []);
+  }, [activeIdx, expandedIdx, scrollToIndex]);
 
   return (
-    <div className="rail-section">
-      <div className="rail-intro">
-        <span className="tl-eye">
-          <span className="tag">Earlier</span>
-          <span className="arc">·</span>
-          2022 — 2023
-          <span className="arc">·</span>
-          Sports-medicine roots
-        </span>
+    <div className="rail-section" data-layout={layout}>
+      {/* Section header — sits below the vertical climbing bamboo. The
+          horizontal hanging rail below is now its OWN independent block,
+          no longer joined to the vertical bamboo by a bend. */}
+      <div className="rail-intro-inside">
+        <div className="rail-intro-big">Earlier</div>
+        <div className="rail-intro-sub">
+          <span className="rule" aria-hidden="true"></span>
+          <span className="tl-eye">2022 — 2023<span className="arc">·</span>Sports-medicine roots</span>
+        </div>
       </div>
 
       <div className="rail-stage">
-        <BambooBend />
-
         <button className="rail-nav prev" onClick={() => scrollToIndex(activeIdx - 1)} disabled={!canPrev} aria-label="Previous role">←</button>
         <button className="rail-nav next" onClick={() => scrollToIndex(activeIdx + 1)} disabled={!canNext} aria-label="Next role">→</button>
 
@@ -1704,18 +2152,20 @@ const HangingRail = ({ items }) => {
               <ExperienceCard
                 key={i}
                 entry={entry}
+                idx={i}
+                flower={({0:'left',2:'left',4:'left'})[i] || null}
                 meta={CARD_META[i] || CARD_META[0]}
                 isActive={i === activeIdx}
+                isExpanded={expandedIdx === i}
+                isFirst={i === 0}
+                isLast={i === items.length - 1}
+                onToggle={() => {
+                  if (dragMovedRef.current) return;
+                  setExpandedIdx(expandedIdx === i ? null : i);
+                }}
               />
             ))}
           </div>
-        </div>
-
-        <div className="rail-meter">
-          <span className="rail-meter-count">
-            {String(activeIdx + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}
-          </span>
-          <span className="rail-meter-bar" style={{ '--p': `${progress * 100}%` }}></span>
         </div>
       </div>
     </div>
@@ -1735,7 +2185,7 @@ const TimelinePage = () => {
 
       <VerticalTimeline items={vertical}/>
 
-      {horizontal.length > 0 && <HangingRail items={horizontal}/>}
+      {horizontal.length > 0 && <HangingRail items={horizontal} layout="stagger"/>}
     </div>
   );
 };
