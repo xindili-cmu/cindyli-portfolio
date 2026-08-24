@@ -2960,13 +2960,25 @@ document.querySelectorAll('section').forEach(section => {
 
 // ═══ TRIPTYCH REVEAL ═══
 function updateTriReveal(card, cx, cy){
-  const rect=card.getBoundingClientRect();
   const rev=card.querySelector('.tri-reveal');
   if(!rev)return;
-  // Check if cursor is near the card
-  const localX=cx-rect.left;
-  const localY=cy-rect.top;
-  const inBounds=localX>-80&&localX<rect.width+80&&localY>-80&&localY<rect.height+80;
+  const rect=card.getBoundingClientRect();
+  const w=card.offsetWidth, h=card.offsetHeight;
+  // The cards are rotated / scaled, so getBoundingClientRect() returns the
+  // axis-aligned bounding box, not the card's own box. mask-position is applied
+  // in the card's *untransformed* coordinate space, so undo the transform's
+  // linear part (translation cancels: the AABB centre is the transformed centre).
+  let localX, localY;
+  const t=getComputedStyle(card).transform;
+  if(t && t!=='none' && typeof DOMMatrix!=='undefined'){
+    const m=new DOMMatrix(t); m.e=0; m.f=0;
+    const p=m.inverse().transformPoint(
+      new DOMPoint(cx-(rect.left+rect.width/2), cy-(rect.top+rect.height/2)));
+    localX=p.x+w/2; localY=p.y+h/2;
+  }else{
+    localX=cx-rect.left; localY=cy-rect.top;
+  }
+  const inBounds=localX>-80&&localX<w+80&&localY>-80&&localY<h+80;
   if(inBounds){
     rev.style.webkitMaskPosition=`${localX-140}px ${localY-140}px`;
     rev.style.maskPosition=`${localX-140}px ${localY-140}px`;
