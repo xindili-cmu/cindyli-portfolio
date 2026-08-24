@@ -1913,9 +1913,9 @@ header { background: var(--surface-100); border-bottom: 1px solid var(--border-s
   <div class="network-controls">
     <div class="ctrl-group">
       <span class="ctrl-label">Tier</span>
-      <div class="net-chip active" data-tier="Tier 1,Tier 2" onclick="setNetFilter('tier',this)">Tier 1 + 2</div>
-      <div class="net-chip" data-tier="Tier 1" onclick="setNetFilter('tier',this)">Tier 1 only</div>
-      <div class="net-chip" data-tier="all" onclick="setNetFilter('tier',this)">All Tiers</div>
+      <div class="net-chip active" data-tier="all" onclick="setNetFilter('tier',this)">All Tiers</div>
+      <div class="net-chip" data-tier="Sovereign,Billionaire" onclick="setNetFilter('tier',this)">Sovereign + Billionaire</div>
+      <div class="net-chip" data-tier="Major,Corporate" onclick="setNetFilter('tier',this)">Major + Corporate</div>
     </div>
     <div class="ctrl-group">
       <span class="ctrl-label">Role</span>
@@ -5043,7 +5043,7 @@ function renderDashboard() {
 }
 
 // ── Network Graph ──
-let netTierFilter = 'Tier 1,Tier 2';
+let netTierFilter = 'all';
 let netRoleFilter = 'all';
 let netSimulation = null;
 
@@ -5218,8 +5218,8 @@ function renderNetwork() {
     .attr('fill', 'var(--gold-dim)')
     .attr('stroke', '#fff').attr('stroke-width', 1.5);
 
-  // Tier 1 ring
-  nodeG.filter(d => d.type === 'person' && d.contact.tier === 'Tier 1').append('circle')
+  // Top-tier ring (Sovereign = "Tier 1 — top priority")
+  nodeG.filter(d => d.type === 'person' && d.contact.tier === 'Sovereign').append('circle')
     .attr('r', d => d.r + 3).attr('fill', 'none').attr('stroke', 'var(--red)').attr('stroke-width', 1.5);
 
   // Tooltip
