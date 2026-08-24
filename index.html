@@ -3078,8 +3078,12 @@ function animate(){
   const heroRect=heroSection.getBoundingClientRect();
   const inHero=heroRect.top<innerHeight&&heroRect.bottom>0;
 
-  // Triptych reveal
-  triCards.forEach(card=>updateTriReveal(card,cursor.x,cursor.y));
+  // Triptych reveal — track `dot` (the same follower that positions the visible
+  // cursor glyph, easing .25), not `cursor` (easing .08). `cursor` lags the real
+  // pointer by ~200ms, so on a fast sweep the reveal circle trailed the glyph by
+  // over 100px. The native cursor is hidden (body{cursor:none}), so the glyph is
+  // the only pointer the user sees and the circle has to sit under it.
+  triCards.forEach(card=>updateTriReveal(card,dot.x,dot.y));
 
   cursorGlyph.style.left=dot.x+'px';cursorGlyph.style.top=dot.y+'px';
 
