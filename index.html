@@ -594,6 +594,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 .pc-scene{position:relative;width:0;height:0;transform-style:preserve-3d;transform:rotateX(-24deg);cursor:grab;touch-action:none;user-select:none}
 .pc-card{position:absolute;top:0;left:0;width:clamp(220px,22vw,320px);height:clamp(150px,15vw,215px);margin-left:calc(clamp(220px,22vw,320px) * -0.5);margin-top:calc(clamp(150px,15vw,215px) * -0.5);border-radius:16px;overflow:hidden;transform-style:preserve-3d;backface-visibility:hidden;will-change:transform,opacity;box-shadow:0 30px 80px rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.08)}
 .pc-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;mix-blend-mode:luminosity;opacity:0.92}
+.pc-thumb.raw{mix-blend-mode:normal;opacity:1}
 .pc-numeral{position:absolute;top:50%;left:50%;transform:translate(-50%,-58%);font-family:var(--serif);font-size:clamp(72px,9vw,128px);font-weight:700;color:rgba(255,255,255,0.18);line-height:1;letter-spacing:-0.04em;pointer-events:none}
 .pc-veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.78) 0%,rgba(0,0,0,0.25) 38%,rgba(0,0,0,0) 60%);pointer-events:none}
 .pc-label{position:absolute;left:18px;right:18px;bottom:16px;pointer-events:none;display:flex;flex-direction:column;gap:6px}
@@ -2223,7 +2224,7 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
       cta: { label: 'View Live Demo', href: 'https://climate-finance-agent-3si7owfgvopjqrgcqc9wg8.streamlit.app/' } },
     { tag: 'Full-Stack / CRM', name: 'Meridian — Relationship Intelligence CRM',
       desc: 'Relationship-intelligence CRM built for a venture coalition\'s investor-relations team. Eight views spanning contact management, investor↔founder matching, intro-path tracking, an outreach queue, and two D3 force-directed graphs for the network and capital map. Public demo runs on fully fictional data.',
-      tech: ['React', 'Vite', 'D3.js', 'Apps Script'], thumb: 'meridian-network.png',
+      tech: ['React', 'Vite', 'D3.js', 'Apps Script'], thumb: 'meridian-network.png', rawThumb: true,
       cta: { label: 'View Live Demo', href: 'meridian/' } },
     { tag: 'NLP / RAG', name: 'Hybrid RAG Pipeline (CMU 11-711)',
       desc: 'BM25 + FAISS hybrid retrieval with Qwen2.5-3B-Instruct, achieving 95% accuracy. Deployed on AWS EC2.',
@@ -2422,7 +2423,7 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
                 style={{ background: TINTS[i % TINTS.length] }}
               >
                 {p.thumb
-                  ? <img src={p.thumb} alt="" className="pc-thumb"/>
+                  ? <img src={p.thumb} alt="" className={p.rawThumb ? 'pc-thumb raw' : 'pc-thumb'}/>
                   : <div className="pc-numeral">{String(i + 1).padStart(2, '0')}</div>}
                 <div className="pc-veil"></div>
                 <div className="pc-label">
