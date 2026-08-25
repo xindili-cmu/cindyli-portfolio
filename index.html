@@ -2217,6 +2217,10 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
   const { useEffect, useRef, useState, useCallback } = React;
 
   const PROJECTS = [
+    { tag: 'AI Product', name: 'Cadence 步频 - PT Evidence Curation',
+      desc: 'Daily physical-therapy evidence curation, in production since June 2026. A cron-driven pipeline searches, dedupes, and scores new literature; every issue is human-reviewed before it ships to the website, WeChat, Xiaohongshu, and LinkedIn. 900+ items curated to date, with assertion gates and wiring tests keeping the unattended pipeline honest.',
+      tech: ['GitHub Actions', 'Exa API', 'React', 'Cloudflare Pages'], thumb: 'cadence-cover.jpg', theme: 'healthcare', rawThumb: true,
+      cta: { label: 'View Live Site', href: 'https://incadencept.com/' } },
     { tag: 'AI / NLP', name: 'Climate Finance Research Agent',
       desc: 'LLM-powered agent for climate finance research. Tavily search, Claude Sonnet, Chroma Cloud vector DB with Streamlit interface.',
       tech: ['Python', 'Claude API', 'Chroma', 'Streamlit'], thumb: 'Climate Finance Research Agent.png', rawThumb: true,
