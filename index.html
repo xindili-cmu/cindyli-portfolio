@@ -1881,7 +1881,7 @@ const ExperienceCard = ({ entry, meta, idx = 0, flower = null, isActive, isExpan
   /* Compact year for the polaroid tab: "2022 – 2023" → "’22–’23", else "2023" */
   const yrParts = (entry.period || '').split(/\s*[–—-]\s*/);
   const yearTab = yrParts.length > 1
-    ? `’${yrParts[0].slice(-2)}–’${yrParts[1].slice(-2)}`
+    ? `’${yrParts[0].slice(-2)}-’${yrParts[1].slice(-2)}`
     : entry.period;
   const cls = `exp-card${healthcare ? ' thc' : ''}${isActive ? ' is-active' : ''}${isExpanded ? ' expanded' : ''}${isExpanded && hasGallery ? ' has-gallery' : ''}${isFirst ? ' is-first' : ''}${isLast ? ' is-last' : ''}`;
   /* Deterministic per-card variation: resting tilt, string length & sway gain
@@ -2149,7 +2149,7 @@ const HangingRail = ({ items, layout }) => {
         <div className="rail-intro-big">Earlier</div>
         <div className="rail-intro-sub">
           <span className="rule" aria-hidden="true"></span>
-          <span className="tl-eye">2022 — 2023<span className="arc">·</span>Sports-medicine roots</span>
+          <span className="tl-eye">2022 - 2023<span className="arc">·</span>Sports-medicine roots</span>
         </div>
       </div>
 
