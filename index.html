@@ -1354,8 +1354,70 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 </style>
 <script defer src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script defer src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<style>
+/* PRELOADER */
+#preloader{position:fixed;inset:0;z-index:99999;background:var(--bg);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:18px;transition:opacity .7s ease;cursor:none}
+#preloader.done{opacity:0;pointer-events:none}
+#preloader .pl-num{font-family:var(--serif);font-variation-settings:var(--serif-disp);
+  font-size:clamp(3.5rem,10vw,7rem);font-weight:600;letter-spacing:-.03em;color:var(--fg);
+  font-variant-numeric:tabular-nums;line-height:1}
+#preloader .pl-num sup{font-size:.35em;font-weight:400;font-style:italic;color:var(--muted);margin-left:.08em}
+#preloader .pl-bar{width:min(260px,60vw);height:1px;background:var(--line-12);overflow:hidden}
+#preloader .pl-bar i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+#preloader .pl-tag{font-family:var(--sans);font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+body.is-loading{overflow:hidden}
+</style>
 </head>
-<body>
+<body class="is-loading">
+
+<div id="preloader" aria-hidden="true">
+  <div class="pl-num"><span id="plCount">0</span><sup>%</sup></div>
+  <div class="pl-bar"><i id="plFill"></i></div>
+  <div class="pl-tag">Cindy Li · Portfolio</div>
+</div>
+<script>
+(function(){
+  var pl=document.getElementById('preloader');
+  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seen=false;
+  try{seen=sessionStorage.getItem('pl-seen')==='1'}catch(e){}
+  function finish(instant){
+    document.body.classList.remove('is-loading');
+    try{sessionStorage.setItem('pl-seen','1')}catch(e){}
+    if(instant){pl.remove();return}
+    pl.classList.add('done');
+    setTimeout(function(){pl.remove()},750);
+  }
+  if(seen||reduced){finish(true);return}
+  var assets=['icon_medkit.png','icon_laptop.png','icon_bulb.png',
+    '22070137a0675c9a19215c2a121509b5.jpg','a3acf861148f2eff266ebd3303d08a5c.jpg',
+    'tri_base1.jpg','tri_rev1.jpg','tri_base2.jpg','tri_rev2.jpg'];
+  var loaded=0,total=assets.length,t0=performance.now();
+  var MIN=900,MAX=2500; /* ceremony floor, patience ceiling */
+  assets.forEach(function(src){
+    var im=new Image();
+    im.onload=im.onerror=function(){loaded++};
+    im.src=src;
+  });
+  var countEl=document.getElementById('plCount'),fillEl=document.getElementById('plFill'),shown=0;
+  function tick(){
+    var el=performance.now()-t0;
+    var real=loaded/total*100;
+    var timeCap=Math.min(el/MIN,1)*100;          /* never outrun the ceremony floor */
+    var target=Math.min(real,timeCap);
+    if(el>=MAX)target=100;                        /* never hold visitors past the ceiling */
+    shown+=(target-shown)*0.12;
+    if(target>=100&&target-shown<0.5)shown=100;
+    var n=Math.floor(shown);
+    countEl.textContent=n;
+    fillEl.style.width=shown+'%';
+    if(shown>=100){finish(false);return}
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
 
 <div class="grid-bg"><canvas id="gridCanvas"></canvas></div>
 <div class="cursor-glyph" id="cursorGlyph">x</div>
