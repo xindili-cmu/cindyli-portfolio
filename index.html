@@ -1352,9 +1352,8 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   .rail-nav { display: none; }
 }
 </style>
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+<script defer src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script defer src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -1456,108 +1455,101 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   </div>
 </section>
 
-<script type="text/babel">
+<script>
+document.addEventListener('DOMContentLoaded', function(){
 /* timeline-data.js — all 10 experience entries, distilled from source. */
 
-window.TimelineData = [
-  { period: '2026', current: true, healthcare: false, logo: 'A', logoImg: 'assets/logo_atlas.png',
-    role: 'IR Associate',
-    company: 'Atlas Coalition (WeTheAtlas)',
-    bullets: [
-      'Consolidated <b class="m">12 data sources</b> across 4 files into a unified CRM database - <b class="m">17,000+ contacts</b>, 30+ events, 1,600+ attendance records - via a <strong>Python ETL pipeline</strong> with email dedup, field standardization and priority-based merge rules.',
-      'Built the CRM on a <strong>Google Apps Script API layer</strong>: filterable contacts view, founder-investor matching, Claude-powered semantic match, intro pipeline tracking, KPI dashboard, and a <strong>D3 force-directed network graph</strong>.',
-      'Shipped <strong>The Atlas Capital Matrix</strong>, a public Top 100 family-office ranking with source-linked evidence tags and an activity-weighted score; cut the AI verification agent\'s running cost by roughly <b class="m">75%</b> through reduced search depth and rolling re-verification.',
-      'Automated a daily <strong>SEC EDGAR + NewsAPI</strong> intelligence digest into Slack via n8n.',
-    ] },
-  { period: '2025', healthcare: false, logo: 'T',
-    role: 'Data Analyst Intern',
-    company: 'Thiele Law PLLC · Pittsburgh, PA',
-    bullets: [
-      'Managed HubSpot CRM with <b class="m">3,500+ leads</b> and integrated Mailchimp campaigns (<b class="m">18% open rate</b>); ran cleaning, segmentation, and lead scoring to optimize the acquisition funnel.',
-      'Analyzed <b class="m">10+ competitor</b> consultation models across Avvo, FindLaw, and Justia; developed organic growth strategy with projected <b class="m">21% traffic growth</b>.',
-      'Built an <strong>AI-powered CRM analytics agent</strong> on HubSpot + Claude API, automating weekly extraction, trend analysis, and reporting - <b class="m">~3 hours/week</b> saved.',
-    ] },
-  { period: '2023 - 2025', healthcare: true, logo: 'M', logoImg: 'assets/logo_msh.png',
-    role: 'Business Development Manager (Full-Time)',
-    company: 'MSH China (万欣和) · International Health Insurance',
-    bullets: [
-      'Exceeded annual targets by <b class="m-peach">239%</b>, generating over <b class="m-peach">$1M</b> in new business through strategic client acquisition and data-driven market positioning.',
-      'Managed a global portfolio of <b class="m">2,000+</b> high-net-worth and corporate clients, delivering tailored medical insurance solutions to support retention and revenue growth, leveraging comprehensive knowledge of <strong>China\'s tiered healthcare network and provider landscape</strong>.',
-      'Analyzed group insurance client portfolios, synthesizing claims trends, utilization patterns, and risk profiles across <b class="m">50K+ insured lives</b> to inform underwriting and renewal strategy.',
-      'Led end-to-end design of a customized corporate insurance plan for an enterprise with <b class="m">50K+ employees</b>, partnering with actuarial teams on risk assessment, pricing, and product structuring.',
-    ] },
-  { period: '2024 - 2025', healthcare: false, logo: 'I', logoImg: 'assets/logo_illuminera.png',
-    role: 'Consulting Intern, Growth X',
-    company: 'Illuminera Marketing Strategy Consulting (an IQVIA business) · Shanghai',
-    bullets: [
-      'Analyzed customer engagement data for brand-marketing projects, contributing to a projected <b class="m">15% engagement lift</b> for a major consumer goods client.',
-      'Automated social-media data extraction (Chanmama) with Python; uncovered a <strong>high-value consumer segment</strong> responsible for <b class="m">30% of client revenue</b>.',
-      'Co-authored <b class="m">4 market-trend papers</b> with senior consultants using corporate filings (10-K / 20-F); led <b class="m">10+ expert interviews</b> shaping strategy.',
-    ] },
-  { period: '2025', healthcare: false, logo: '\u2295',
-    role: 'PE Due Diligence Analyst',
-    company: 'Multiple Firms · China, SE Asia, UK',
-    bullets: [
-      'Conducted end-to-end <strong>analytical due diligence</strong> for <b class="m">3 cross-sector investment opportunities</b> - TMT, automotive overseas expansion, and waste-to-energy - evaluating market trends, operational metrics, and financial viability.',
-      'Built and automated <strong>multi-scenario financial models (DCF, LBO)</strong> in Python, integrating data pipelines to execute valuation analytics and risk simulations across <strong>Mainland China, Taiwan, Southeast Asia, and UK</strong>.',
-      'Produced and presented data-driven insights for <b class="m">4+ investment memorandums</b>, visualizing financial projections through <strong>Tableau dashboards</strong>.',
-    ] },
-  { period: '2023', healthcare: true, logo: 'B', logoImg: 'assets/logo_eden.jpg',
-    role: 'Sports Medicine Intern',
-    company: 'Beijing Eden Hospital (怡德医院) · Beijing',
-    gallery: ['assets/exp_beijing_united_1.jpg', 'assets/exp_beijing_united_2.jpg'],
-    bullets: [
-      'Managed <b class="m">60+ patient case records</b> and operated the hospital registration system independently.',
-      'Processed <b class="m">30+ commercial insurance pre-authorizations</b>.',
-      'Delivered <strong>rehabilitation training</strong> to Chinese and international patients.',
-    ] },
-  { period: '2023', healthcare: true, logo: 'F',
-    role: 'Sports Protection Specialist & AED Consultant',
-    company: 'FuDao Health Consulting · Beijing & Shanghai',
-    gallery: ['assets/exp_fudao_1.jpg', 'assets/exp_fudao_2.jpg'],
-    bullets: [
-      'Earned <strong>first-aid instructor certification</strong>.',
-      'Authored <b class="m">10 original WeChat articles</b> on AED policy - <b class="m">5,000+ views</b>, <b class="m">200+ shares</b>.',
-      'Managed B2B outreach for <b class="m">5+ enterprises</b> in Beijing.',
-      'Specialized in <strong>lower-limb biomechanics testing</strong> and orthotic assessment.',
-    ] },
-  { period: '2023', healthcare: true, logo: 'R',
-    role: 'Sports Rehabilitation & Conditioning Intern',
-    company: 'National Sports Training Center · Beijing',
-    gallery: ['assets/exp_rehab_2.jpg', 'assets/exp_rehab_1.jpg', 'assets/exp_rehab_3.jpg'],
-    bullets: [
-      'Provided <strong>daily one-on-one rehabilitation</strong> and sport-specific training support for a junior basketball athlete, designing and adjusting recovery protocols for <strong>lumbar-spine and shoulder injuries</strong> under faculty supervision.',
-      'Monitored and documented <strong>daily physiological metrics</strong> across strength, conditioning, and sport-specific sessions, tracking recovery progress and informing <b class="m">training load decisions</b>.',
-      'Athlete returned to peak competition form and earned <b class="m">MVP at the U16 National Basketball Championship</b> that season.',
-    ] },
-  { period: '2023', healthcare: true, logo: 'N', logoImg: 'assets/logo_winter.png',
-    role: 'Research Staff (Intern)',
-    company: 'National Winter Sports Training & Research Center · Beijing',
-    gallery: ['assets/exp_research_center_1.jpg', 'assets/exp_research_center_2.jpg', 'assets/exp_research_center_3.jpg'],
-    bullets: [
-      'Executed <strong>sports injury prevention protocols</strong> - athletic taping, cryotherapy, pre-competition warm-ups, and post-event stretching (<b class="m">300+ event coverage hours</b>).',
-      'Administered <strong>advanced modalities</strong>: therapeutic ultrasound, infrared therapy, high-intensity laser, shortwave diathermy, and interferential current therapy.',
-      'Performed <strong>physiological assessments</strong> using Biodex isokinetic dynamometers, InBody body composition analyzers, and equine movement simulation systems.',
-    ] },
-  { period: '2022 - 2023', healthcare: true, logo: 'D', logoImg: 'assets/logo_disney.png',
-    role: 'Athletic Trainer (Intern)',
-    company: 'Shanghai Disney Resort · Shanghai',
-    gallery: ['assets/disney.jpg'],
-    bullets: [
-      'Collaborated with <strong>senior athletic trainers</strong> and performance management teams.',
-      'Leveraged <strong>Power BI and Excel</strong> to analyze injury incident data, identifying key risk factors and presenting data-driven insights.',
-      'Designed and implemented <strong>targeted intervention programs</strong> based on data analysis - <b class="m">70% reduction</b> in knee injury frequency.',
-      'Delivered <strong>rehabilitation and first-aid support</strong> to cast members.',
-    ] },
-  { period: '2022 - 2023', healthcare: true, logo: 'S', logoImg: 'assets/logo_spine.jpg',
-    role: 'Physical Therapist (Intern)',
-    company: 'Spine & Pain Rehabilitation Center (施柏恩) · Shanghai',
-    bullets: [
-      'Assessed <strong>physiological function and mobility data</strong> for <b class="m">60+ patients</b>.',
-      'Co-designed physical therapy prescriptions with physicians.',
-      'Independently managed <b class="m">30+ patient cases</b> through full treatment cycles.',
-    ] },
-];
+window.TimelineData = [{
+  period: '2026',
+  current: true,
+  healthcare: false,
+  logo: 'A',
+  logoImg: 'assets/logo_atlas.png',
+  role: 'IR Associate',
+  company: 'Atlas Coalition (WeTheAtlas)',
+  bullets: ['Consolidated <b class="m">12 data sources</b> across 4 files into a unified CRM database - <b class="m">17,000+ contacts</b>, 30+ events, 1,600+ attendance records - via a <strong>Python ETL pipeline</strong> with email dedup, field standardization and priority-based merge rules.', 'Built the CRM on a <strong>Google Apps Script API layer</strong>: filterable contacts view, founder-investor matching, Claude-powered semantic match, intro pipeline tracking, KPI dashboard, and a <strong>D3 force-directed network graph</strong>.', 'Shipped <strong>The Atlas Capital Matrix</strong>, a public Top 100 family-office ranking with source-linked evidence tags and an activity-weighted score; cut the AI verification agent\'s running cost by roughly <b class="m">75%</b> through reduced search depth and rolling re-verification.', 'Automated a daily <strong>SEC EDGAR + NewsAPI</strong> intelligence digest into Slack via n8n.']
+}, {
+  period: '2025',
+  healthcare: false,
+  logo: 'T',
+  role: 'Data Analyst Intern',
+  company: 'Thiele Law PLLC · Pittsburgh, PA',
+  bullets: ['Managed HubSpot CRM with <b class="m">3,500+ leads</b> and integrated Mailchimp campaigns (<b class="m">18% open rate</b>); ran cleaning, segmentation, and lead scoring to optimize the acquisition funnel.', 'Analyzed <b class="m">10+ competitor</b> consultation models across Avvo, FindLaw, and Justia; developed organic growth strategy with projected <b class="m">21% traffic growth</b>.', 'Built an <strong>AI-powered CRM analytics agent</strong> on HubSpot + Claude API, automating weekly extraction, trend analysis, and reporting - <b class="m">~3 hours/week</b> saved.']
+}, {
+  period: '2023 - 2025',
+  healthcare: true,
+  logo: 'M',
+  logoImg: 'assets/logo_msh.png',
+  role: 'Business Development Manager (Full-Time)',
+  company: 'MSH China (万欣和) · International Health Insurance',
+  bullets: ['Exceeded annual targets by <b class="m-peach">239%</b>, generating over <b class="m-peach">$1M</b> in new business through strategic client acquisition and data-driven market positioning.', 'Managed a global portfolio of <b class="m">2,000+</b> high-net-worth and corporate clients, delivering tailored medical insurance solutions to support retention and revenue growth, leveraging comprehensive knowledge of <strong>China\'s tiered healthcare network and provider landscape</strong>.', 'Analyzed group insurance client portfolios, synthesizing claims trends, utilization patterns, and risk profiles across <b class="m">50K+ insured lives</b> to inform underwriting and renewal strategy.', 'Led end-to-end design of a customized corporate insurance plan for an enterprise with <b class="m">50K+ employees</b>, partnering with actuarial teams on risk assessment, pricing, and product structuring.']
+}, {
+  period: '2024 - 2025',
+  healthcare: false,
+  logo: 'I',
+  logoImg: 'assets/logo_illuminera.png',
+  role: 'Consulting Intern, Growth X',
+  company: 'Illuminera Marketing Strategy Consulting (an IQVIA business) · Shanghai',
+  bullets: ['Analyzed customer engagement data for brand-marketing projects, contributing to a projected <b class="m">15% engagement lift</b> for a major consumer goods client.', 'Automated social-media data extraction (Chanmama) with Python; uncovered a <strong>high-value consumer segment</strong> responsible for <b class="m">30% of client revenue</b>.', 'Co-authored <b class="m">4 market-trend papers</b> with senior consultants using corporate filings (10-K / 20-F); led <b class="m">10+ expert interviews</b> shaping strategy.']
+}, {
+  period: '2025',
+  healthcare: false,
+  logo: '\u2295',
+  role: 'PE Due Diligence Analyst',
+  company: 'Multiple Firms · China, SE Asia, UK',
+  bullets: ['Conducted end-to-end <strong>analytical due diligence</strong> for <b class="m">3 cross-sector investment opportunities</b> - TMT, automotive overseas expansion, and waste-to-energy - evaluating market trends, operational metrics, and financial viability.', 'Built and automated <strong>multi-scenario financial models (DCF, LBO)</strong> in Python, integrating data pipelines to execute valuation analytics and risk simulations across <strong>Mainland China, Taiwan, Southeast Asia, and UK</strong>.', 'Produced and presented data-driven insights for <b class="m">4+ investment memorandums</b>, visualizing financial projections through <strong>Tableau dashboards</strong>.']
+}, {
+  period: '2023',
+  healthcare: true,
+  logo: 'B',
+  logoImg: 'assets/logo_eden.jpg',
+  role: 'Sports Medicine Intern',
+  company: 'Beijing Eden Hospital (怡德医院) · Beijing',
+  gallery: ['assets/exp_beijing_united_1.jpg', 'assets/exp_beijing_united_2.jpg'],
+  bullets: ['Managed <b class="m">60+ patient case records</b> and operated the hospital registration system independently.', 'Processed <b class="m">30+ commercial insurance pre-authorizations</b>.', 'Delivered <strong>rehabilitation training</strong> to Chinese and international patients.']
+}, {
+  period: '2023',
+  healthcare: true,
+  logo: 'F',
+  role: 'Sports Protection Specialist & AED Consultant',
+  company: 'FuDao Health Consulting · Beijing & Shanghai',
+  gallery: ['assets/exp_fudao_1.jpg', 'assets/exp_fudao_2.jpg'],
+  bullets: ['Earned <strong>first-aid instructor certification</strong>.', 'Authored <b class="m">10 original WeChat articles</b> on AED policy - <b class="m">5,000+ views</b>, <b class="m">200+ shares</b>.', 'Managed B2B outreach for <b class="m">5+ enterprises</b> in Beijing.', 'Specialized in <strong>lower-limb biomechanics testing</strong> and orthotic assessment.']
+}, {
+  period: '2023',
+  healthcare: true,
+  logo: 'R',
+  role: 'Sports Rehabilitation & Conditioning Intern',
+  company: 'National Sports Training Center · Beijing',
+  gallery: ['assets/exp_rehab_2.jpg', 'assets/exp_rehab_1.jpg', 'assets/exp_rehab_3.jpg'],
+  bullets: ['Provided <strong>daily one-on-one rehabilitation</strong> and sport-specific training support for a junior basketball athlete, designing and adjusting recovery protocols for <strong>lumbar-spine and shoulder injuries</strong> under faculty supervision.', 'Monitored and documented <strong>daily physiological metrics</strong> across strength, conditioning, and sport-specific sessions, tracking recovery progress and informing <b class="m">training load decisions</b>.', 'Athlete returned to peak competition form and earned <b class="m">MVP at the U16 National Basketball Championship</b> that season.']
+}, {
+  period: '2023',
+  healthcare: true,
+  logo: 'N',
+  logoImg: 'assets/logo_winter.png',
+  role: 'Research Staff (Intern)',
+  company: 'National Winter Sports Training & Research Center · Beijing',
+  gallery: ['assets/exp_research_center_1.jpg', 'assets/exp_research_center_2.jpg', 'assets/exp_research_center_3.jpg'],
+  bullets: ['Executed <strong>sports injury prevention protocols</strong> - athletic taping, cryotherapy, pre-competition warm-ups, and post-event stretching (<b class="m">300+ event coverage hours</b>).', 'Administered <strong>advanced modalities</strong>: therapeutic ultrasound, infrared therapy, high-intensity laser, shortwave diathermy, and interferential current therapy.', 'Performed <strong>physiological assessments</strong> using Biodex isokinetic dynamometers, InBody body composition analyzers, and equine movement simulation systems.']
+}, {
+  period: '2022 - 2023',
+  healthcare: true,
+  logo: 'D',
+  logoImg: 'assets/logo_disney.png',
+  role: 'Athletic Trainer (Intern)',
+  company: 'Shanghai Disney Resort · Shanghai',
+  gallery: ['assets/disney.jpg'],
+  bullets: ['Collaborated with <strong>senior athletic trainers</strong> and performance management teams.', 'Leveraged <strong>Power BI and Excel</strong> to analyze injury incident data, identifying key risk factors and presenting data-driven insights.', 'Designed and implemented <strong>targeted intervention programs</strong> based on data analysis - <b class="m">70% reduction</b> in knee injury frequency.', 'Delivered <strong>rehabilitation and first-aid support</strong> to cast members.']
+}, {
+  period: '2022 - 2023',
+  healthcare: true,
+  logo: 'S',
+  logoImg: 'assets/logo_spine.jpg',
+  role: 'Physical Therapist (Intern)',
+  company: 'Spine & Pain Rehabilitation Center (施柏恩) · Shanghai',
+  bullets: ['Assessed <strong>physiological function and mobility data</strong> for <b class="m">60+ patients</b>.', 'Co-designed physical therapy prescriptions with physicians.', 'Independently managed <b class="m">30+ patient cases</b> through full treatment cycles.']
+}];
 /* Timeline.jsx — hybrid experience timeline (v3).
    ─────────────────────────────────────────────────────────
    Items 1-6  → vertical climbing-bamboo timeline (panda + flowers).
@@ -1570,9 +1562,13 @@ window.TimelineData = [
                 to collapse.
 */
 
-const { useEffect, useRef, useState, useCallback } = React;
-
-const SPLIT_AT = 6;   // first N items render as vertical, rest hang horizontal
+const {
+  useEffect,
+  useRef,
+  useState,
+  useCallback
+} = React;
+const SPLIT_AT = 6; // first N items render as vertical, rest hang horizontal
 
 /* ─────────────────────────────────────────────────────────
    Lightbox helper — overlays the full-resolution image
@@ -1590,7 +1586,9 @@ window.showLightbox = window.showLightbox || function (src) {
     setTimeout(() => overlay.remove(), 200);
     document.removeEventListener('keydown', onKey);
   };
-  const onKey = (e) => { if (e.key === 'Escape') close(); };
+  const onKey = e => {
+    if (e.key === 'Escape') close();
+  };
   overlay.addEventListener('click', close);
   document.addEventListener('keydown', onKey);
   document.body.appendChild(overlay);
@@ -1600,78 +1598,147 @@ window.showLightbox = window.showLightbox || function (src) {
    Part A · Vertical climbing timeline atoms
    ───────────────────────────────────────────────────────── */
 
-const FlowerNode = ({ color, active }) => {
-  const palette = color === 'peach'
-    ? { petal: '#f5b491', petalDeep: '#d68260', center: '#fff3d6' }
-    : { petal: '#c8a2ff', petalDeep: '#9e7dd9', center: '#fff3d6' };
-  return (
-    <svg className={`tl-flower tl-flower-${color}${active ? ' tl-flower-active' : ''}`} viewBox="0 0 32 32" aria-hidden="true">
-      <g transform="translate(16 16)">
-        {[0, 72, 144, 216, 288].map((a) => (
-          <ellipse key={a} cx="0" cy="-8" rx="3.8" ry="6" fill={palette.petal} transform={`rotate(${a})`}/>
-        ))}
-        {[36, 108, 180, 252, 324].map((a) => (
-          <ellipse key={a} cx="0" cy="-6.5" rx="2.2" ry="4.2" fill={palette.petalDeep} opacity="0.55" transform={`rotate(${a})`}/>
-        ))}
-        <circle r="3" fill={palette.center}/>
-        <circle r="1.6" fill={palette.petalDeep} opacity="0.8"/>
-      </g>
-    </svg>
-  );
+const FlowerNode = ({
+  color,
+  active
+}) => {
+  const palette = color === 'peach' ? {
+    petal: '#f5b491',
+    petalDeep: '#d68260',
+    center: '#fff3d6'
+  } : {
+    petal: '#c8a2ff',
+    petalDeep: '#9e7dd9',
+    center: '#fff3d6'
+  };
+  return /*#__PURE__*/React.createElement("svg", {
+    className: `tl-flower tl-flower-${color}${active ? ' tl-flower-active' : ''}`,
+    viewBox: "0 0 32 32",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("g", {
+    transform: "translate(16 16)"
+  }, [0, 72, 144, 216, 288].map(a => /*#__PURE__*/React.createElement("ellipse", {
+    key: a,
+    cx: "0",
+    cy: "-8",
+    rx: "3.8",
+    ry: "6",
+    fill: palette.petal,
+    transform: `rotate(${a})`
+  })), [36, 108, 180, 252, 324].map(a => /*#__PURE__*/React.createElement("ellipse", {
+    key: a,
+    cx: "0",
+    cy: "-6.5",
+    rx: "2.2",
+    ry: "4.2",
+    fill: palette.petalDeep,
+    opacity: "0.55",
+    transform: `rotate(${a})`
+  })), /*#__PURE__*/React.createElement("circle", {
+    r: "3",
+    fill: palette.center
+  }), /*#__PURE__*/React.createElement("circle", {
+    r: "1.6",
+    fill: palette.petalDeep,
+    opacity: "0.8"
+  })));
 };
-
-const PandaClimber = ({ refCb, isIdle }) => (
-  // Cute panda hugging the bamboo, photographed from behind — a single flat
-  // image, so "climbing energy" comes from whole-body transforms (no separate
-  // limbs). .tl-climber-bob carries the busy/idle motion; the outer .tl-climber
-  // is positioned along the bamboo path by JS (translate + rotate by scroll).
-  <div className={`tl-climber ${isIdle ? 'tl-climber-idle' : 'tl-climber-busy'}`} ref={refCb} aria-hidden="true">
-    <div className="tl-climber-bob">
-      <img className="tl-climber-img" src="assets/panda.png" alt="" draggable="false"/>
-    </div>
-  </div>
-);
-
-const ExperienceRow = ({ entry, isLast, isActive, onMount }) => {
+const PandaClimber = ({
+  refCb,
+  isIdle
+}) =>
+/*#__PURE__*/
+// Cute panda hugging the bamboo, photographed from behind — a single flat
+// image, so "climbing energy" comes from whole-body transforms (no separate
+// limbs). .tl-climber-bob carries the busy/idle motion; the outer .tl-climber
+// is positioned along the bamboo path by JS (translate + rotate by scroll).
+React.createElement("div", {
+  className: `tl-climber ${isIdle ? 'tl-climber-idle' : 'tl-climber-busy'}`,
+  ref: refCb,
+  "aria-hidden": "true"
+}, /*#__PURE__*/React.createElement("div", {
+  className: "tl-climber-bob"
+}, /*#__PURE__*/React.createElement("img", {
+  className: "tl-climber-img",
+  src: "assets/panda.png",
+  alt: "",
+  draggable: "false"
+})));
+const ExperienceRow = ({
+  entry,
+  isLast,
+  isActive,
+  onMount
+}) => {
   const ref = useRef(null);
-  useEffect(() => { if (onMount && ref.current) onMount(ref.current); }, []);
-  const { period, role, company, bullets, healthcare, current, logo, logoImg, gallery } = entry;
+  useEffect(() => {
+    if (onMount && ref.current) onMount(ref.current);
+  }, []);
+  const {
+    period,
+    role,
+    company,
+    bullets,
+    healthcare,
+    current,
+    logo,
+    logoImg,
+    gallery
+  } = entry;
   const hasGallery = gallery && gallery.length > 0;
   const color = healthcare ? 'peach' : 'lavender';
   const parts = period.split(/\s*[-–—]\s*/);
-  return (
-    <div ref={ref}
-         className={`tl-item${current ? ' tl-current' : ''}${isLast ? ' tl-last' : ''}${healthcare ? ' tl-healthcare' : ''}${isActive ? ' tl-active' : ''}${hasGallery ? ' tl-has-gallery' : ''}`}>
-      <div className="tl-year">
-        <span className="tl-year-num">
-          {parts[0]}
-          {parts[1] && <span className="tl-year-range">- {parts[1]}</span>}
-        </span>
-        {current && <span className="tl-now">Now</span>}
-      </div>
-      <div className="tl-rail"><FlowerNode color={color} active={isActive}/></div>
-      <div className="tl-card">
-        <div className="tl-role">{role}</div>
-        <div className="tl-co">
-          <span className="tl-logo">
-            {logoImg ? <img src={logoImg} alt=""/> : logo}
-          </span>
-          <div className="tl-company">{company}</div>
-        </div>
-        <ul className="tl-bullets">
-          {bullets.map((b, i) => <li key={i} dangerouslySetInnerHTML={{ __html: b }}/>)}
-        </ul>
-      </div>
-      {hasGallery && (
-        <div className="tl-album" onClick={(e) => { if (e.target.tagName === 'IMG') window.showLightbox(e.target.src); }}>
-          {gallery.map((src, i) => <img key={i} src={src} alt="" loading="lazy"/>)}
-        </div>
-      )}
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    ref: ref,
+    className: `tl-item${current ? ' tl-current' : ''}${isLast ? ' tl-last' : ''}${healthcare ? ' tl-healthcare' : ''}${isActive ? ' tl-active' : ''}${hasGallery ? ' tl-has-gallery' : ''}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "tl-year"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "tl-year-num"
+  }, parts[0], parts[1] && /*#__PURE__*/React.createElement("span", {
+    className: "tl-year-range"
+  }, "- ", parts[1])), current && /*#__PURE__*/React.createElement("span", {
+    className: "tl-now"
+  }, "Now")), /*#__PURE__*/React.createElement("div", {
+    className: "tl-rail"
+  }, /*#__PURE__*/React.createElement(FlowerNode, {
+    color: color,
+    active: isActive
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "tl-card"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "tl-role"
+  }, role), /*#__PURE__*/React.createElement("div", {
+    className: "tl-co"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "tl-logo"
+  }, logoImg ? /*#__PURE__*/React.createElement("img", {
+    src: logoImg,
+    alt: ""
+  }) : logo), /*#__PURE__*/React.createElement("div", {
+    className: "tl-company"
+  }, company)), /*#__PURE__*/React.createElement("ul", {
+    className: "tl-bullets"
+  }, bullets.map((b, i) => /*#__PURE__*/React.createElement("li", {
+    key: i,
+    dangerouslySetInnerHTML: {
+      __html: b
+    }
+  })))), hasGallery && /*#__PURE__*/React.createElement("div", {
+    className: "tl-album",
+    onClick: e => {
+      if (e.target.tagName === 'IMG') window.showLightbox(e.target.src);
+    }
+  }, gallery.map((src, i) => /*#__PURE__*/React.createElement("img", {
+    key: i,
+    src: src,
+    alt: "",
+    loading: "lazy"
+  }))));
 };
-
-const VerticalTimeline = ({ items }) => {
+const VerticalTimeline = ({
+  items
+}) => {
   const wrapRef = useRef(null);
   const vineRef = useRef(null);
   const climberRef = useRef(null);
@@ -1679,57 +1746,58 @@ const VerticalTimeline = ({ items }) => {
   const [isIdle, setIsIdle] = useState(true);
   const [activeIdx, setActiveIdx] = useState(0);
   const idleTimerRef = useRef(0);
-
   useEffect(() => {
     const wrap = wrapRef.current;
-    const svg  = vineRef.current;
+    const svg = vineRef.current;
     const climber = climberRef.current;
     if (!wrap || !svg || !climber) return;
     const path = svg.querySelector('path');
     if (!path) return;
-
-    const VB_W = 40, VB_H = 100;
+    const VB_W = 40,
+      VB_H = 100;
     let totalLen = path.getTotalLength();
     let raf = 0;
-
     const update = () => {
       raf = 0;
       const wrapRect = wrap.getBoundingClientRect();
-      const svgRect  = svg.getBoundingClientRect();
+      const svgRect = svg.getBoundingClientRect();
       const vh = window.innerHeight;
       const start = vh * 0.75;
-      const end   = -wrapRect.height + vh * 0.25;
+      const end = -wrapRect.height + vh * 0.25;
       const t = Math.max(0, Math.min(1, (start - wrapRect.top) / (start - end)));
       const dist = t * totalLen;
       const p1 = path.getPointAtLength(dist);
       const p2 = path.getPointAtLength(Math.min(totalLen, dist + 1));
       const sx = svgRect.width / VB_W;
       const sy = svgRect.height / VB_H;
-      const px = p1.x * sx, py = p1.y * sy;
+      const px = p1.x * sx,
+        py = p1.y * sy;
       const dx = (p2.x - p1.x) * sx;
       const dy = (p2.y - p1.y) * sy;
       let angle = Math.atan2(dx, dy) * 180 / Math.PI;
       angle = Math.max(-12, Math.min(12, angle));
       const offsetLeft = svgRect.left - wrapRect.left;
-      const offsetTop  = svgRect.top  - wrapRect.top;
+      const offsetTop = svgRect.top - wrapRect.top;
       // Panda PNG is ~62×84, hugging the stalk with its RIGHT side. Anchor so
       // that right-of-centre contour sits on the stalk's left edge (px), and
       // the body is vertically centred on the contact point (py).
       climber.style.transform = `translate(${offsetLeft + px - 50}px, ${offsetTop + py - 46}px) rotate(${angle}deg)`;
       climber.style.opacity = t > 0.005 && t < 0.998 ? '1' : '0.6';
-
       const focusY = vh * 0.4;
-      let bestI = 0, bestDist = Infinity;
+      let bestI = 0,
+        bestDist = Infinity;
       itemRefs.current.forEach((el, i) => {
         if (!el) return;
         const r = el.getBoundingClientRect();
         const center = r.top + r.height / 2;
         const d = Math.abs(center - focusY);
-        if (d < bestDist) { bestDist = d; bestI = i; }
+        if (d < bestDist) {
+          bestDist = d;
+          bestI = i;
+        }
       });
       setActiveIdx(bestI);
     };
-
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
       setIsIdle(false);
@@ -1737,10 +1805,18 @@ const VerticalTimeline = ({ items }) => {
       idleTimerRef.current = setTimeout(() => setIsIdle(true), 550);
     };
     update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    const onResize = () => { totalLen = path.getTotalLength(); if (!raf) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', onScroll, {
+      passive: true
+    });
+    const onResize = () => {
+      totalLen = path.getTotalLength();
+      if (!raf) raf = requestAnimationFrame(update);
+    };
     window.addEventListener('resize', onResize);
-    const settle = setTimeout(() => { totalLen = path.getTotalLength(); update(); }, 400);
+    const settle = setTimeout(() => {
+      totalLen = path.getTotalLength();
+      update();
+    }, 400);
     return () => {
       cancelAnimationFrame(raf);
       clearTimeout(settle);
@@ -1749,26 +1825,34 @@ const VerticalTimeline = ({ items }) => {
       window.removeEventListener('resize', onResize);
     };
   }, []);
-
-  return (
-    <div className="tl-wrap" ref={wrapRef}>
-      <div className="tl-vine" ref={vineRef} aria-hidden="true">
-        <svg className="tl-vine-path" viewBox="0 0 40 100" preserveAspectRatio="none">
-          <path d="M 20 0 L 20 100" fill="none" stroke="transparent" strokeWidth="0"/>
-        </svg>
-      </div>
-      <PandaClimber refCb={climberRef} isIdle={isIdle}/>
-      {items.map((e, i) => (
-        <ExperienceRow
-          key={i}
-          entry={e}
-          isLast={i === items.length - 1}
-          isActive={i === activeIdx}
-          onMount={(el) => { itemRefs.current[i] = el; }}
-        />
-      ))}
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "tl-wrap",
+    ref: wrapRef
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "tl-vine",
+    ref: vineRef,
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("svg", {
+    className: "tl-vine-path",
+    viewBox: "0 0 40 100",
+    preserveAspectRatio: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M 20 0 L 20 100",
+    fill: "none",
+    stroke: "transparent",
+    strokeWidth: "0"
+  }))), /*#__PURE__*/React.createElement(PandaClimber, {
+    refCb: climberRef,
+    isIdle: isIdle
+  }), items.map((e, i) => /*#__PURE__*/React.createElement(ExperienceRow, {
+    key: i,
+    entry: e,
+    isLast: i === items.length - 1,
+    isActive: i === activeIdx,
+    onMount: el => {
+      itemRefs.current[i] = el;
+    }
+  })));
 };
 
 /* ─────────────────────────────────────────────────────────
@@ -1777,110 +1861,266 @@ const VerticalTimeline = ({ items }) => {
 
 /* Card metadata for horizontal items (5 items: indices 6-10 of original data).
    Just a 3-letter code + a two-line period label that sits on the luggage tag. */
-const CARD_META = [
-  { code: 'EDN', period: ['2023', '·']  },
-  { code: 'FUD', period: ['2023', '·']  },
-  { code: 'SRC', period: ['2023', '·']  },
-  { code: 'NTC', period: ['2023', '·']  },
-  { code: 'DIS', period: ['22-', '23'] },
-  { code: 'SPN', period: ['22-', '23'] },
-];
+const CARD_META = [{
+  code: 'EDN',
+  period: ['2023', '·']
+}, {
+  code: 'FUD',
+  period: ['2023', '·']
+}, {
+  code: 'SRC',
+  period: ['2023', '·']
+}, {
+  code: 'NTC',
+  period: ['2023', '·']
+}, {
+  code: 'DIS',
+  period: ['22-', '23']
+}, {
+  code: 'SPN',
+  period: ['22-', '23']
+}];
 
 /* The bend: an SVG showing the main trunk sprouting a side branch that
    curves rightward and becomes the horizontal rail. Punched holes on each
    card visually "thread" the rail line. */
-const BambooBend = () => (
-  <svg
-    className="bend-svg"
-    viewBox="0 -90 1200 180"
-    preserveAspectRatio="xMinYMid slice"
-    aria-hidden="true"
-  >
-    <defs>
-      <linearGradient id="bambooG" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0"    stopColor="#b8d88a"/>
-        <stop offset="0.15" stopColor="#7aa85a"/>
-        <stop offset="0.35" stopColor="#4d7a2e"/>
-        <stop offset="0.5"  stopColor="#3d5e1d"/>
-        <stop offset="0.65" stopColor="#4d7a2e"/>
-        <stop offset="0.85" stopColor="#7aa85a"/>
-        <stop offset="1"    stopColor="#b8d88a"/>
-      </linearGradient>
-      <linearGradient id="bambooLeaf" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stopColor="#7aa85a"/>
-        <stop offset="1" stopColor="#4d7a2e"/>
-      </linearGradient>
-    </defs>
-
-    {/* Bamboo: vertical stub + bend curve + a short horizontal stub that
-        meets the first hanging card. Past the bend, each card carries its
-        OWN local rod (.exp-rod) which chains horizontally to the next —
-        that's what creates the "thread-through-the-eyelet" illusion. */}
-    <path d="M 132 -90 V 38 Q 132 66 164 66 H 248" stroke="#1e3a0e" strokeWidth="11.2" fill="none" strokeLinecap="round"/>
-    <path d="M 132 -90 V 38 Q 132 66 164 66 H 248" stroke="url(#bambooG)" strokeWidth="9.6" fill="none" strokeLinecap="round"/>
-    <path d="M 132 -90 V 38 Q 132 66 164 66 H 248" stroke="rgba(255,255,255,0.18)" strokeWidth="1.6" fill="none" strokeLinecap="round"/>
-
-    {/* Junction node — sits where the side branch sprouts from the trunk */}
-    <ellipse cx="132" cy="33" rx="7" ry="2" fill="#2a4a10"/>
-    <ellipse cx="132" cy="32" rx="5.5" ry="0.8" fill="#aedb78" opacity="0.5"/>
-
-    {/* Single bamboo node on the short horizontal stub before it meets the
-        first card. (Nodes past the stub were removed — each card now carries
-        its own rod + nodes.) */}
-    <g>
-      <ellipse cx="220" cy="66" rx="1.5" ry="6" fill="#2a4a10"/>
-      <ellipse cx="219.7" cy="66" rx="0.6" ry="5" fill="#aedb78" opacity="0.45"/>
-    </g>
-
-    {/* A handful of leaves at the junction to sell the "branching" */}
-    <path d="M 106 28 Q 82 20 76 34 Q 96 38 110 30 Z" fill="url(#bambooLeaf)"/>
-    <path d="M 82 31 Q 98 33 108 30" stroke="#2a4a10" strokeWidth="0.6" fill="none"/>
-    <path d="M 98 39 Q 74 41 72 53 Q 92 51 102 41 Z" fill="url(#bambooLeaf)"/>
-    <path d="M 78 47 Q 92 47 100 41" stroke="#2a4a10" strokeWidth="0.6" fill="none"/>
-    <path d="M 150 60 Q 138 76 148 84 Q 156 72 152 62 Z" fill="url(#bambooLeaf)" opacity="0.8"/>
-    <path d="M 172 64 Q 162 50 152 56 Q 164 60 170 66 Z" fill="url(#bambooLeaf)" opacity="0.7"/>
-  </svg>
-);
+const BambooBend = () => /*#__PURE__*/React.createElement("svg", {
+  className: "bend-svg",
+  viewBox: "0 -90 1200 180",
+  preserveAspectRatio: "xMinYMid slice",
+  "aria-hidden": "true"
+}, /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("linearGradient", {
+  id: "bambooG",
+  x1: "0",
+  y1: "0",
+  x2: "0",
+  y2: "1"
+}, /*#__PURE__*/React.createElement("stop", {
+  offset: "0",
+  stopColor: "#b8d88a"
+}), /*#__PURE__*/React.createElement("stop", {
+  offset: "0.15",
+  stopColor: "#7aa85a"
+}), /*#__PURE__*/React.createElement("stop", {
+  offset: "0.35",
+  stopColor: "#4d7a2e"
+}), /*#__PURE__*/React.createElement("stop", {
+  offset: "0.5",
+  stopColor: "#3d5e1d"
+}), /*#__PURE__*/React.createElement("stop", {
+  offset: "0.65",
+  stopColor: "#4d7a2e"
+}), /*#__PURE__*/React.createElement("stop", {
+  offset: "0.85",
+  stopColor: "#7aa85a"
+}), /*#__PURE__*/React.createElement("stop", {
+  offset: "1",
+  stopColor: "#b8d88a"
+})), /*#__PURE__*/React.createElement("linearGradient", {
+  id: "bambooLeaf",
+  x1: "0",
+  y1: "0",
+  x2: "1",
+  y2: "1"
+}, /*#__PURE__*/React.createElement("stop", {
+  offset: "0",
+  stopColor: "#7aa85a"
+}), /*#__PURE__*/React.createElement("stop", {
+  offset: "1",
+  stopColor: "#4d7a2e"
+}))), /*#__PURE__*/React.createElement("path", {
+  d: "M 132 -90 V 38 Q 132 66 164 66 H 248",
+  stroke: "#1e3a0e",
+  strokeWidth: "11.2",
+  fill: "none",
+  strokeLinecap: "round"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M 132 -90 V 38 Q 132 66 164 66 H 248",
+  stroke: "url(#bambooG)",
+  strokeWidth: "9.6",
+  fill: "none",
+  strokeLinecap: "round"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M 132 -90 V 38 Q 132 66 164 66 H 248",
+  stroke: "rgba(255,255,255,0.18)",
+  strokeWidth: "1.6",
+  fill: "none",
+  strokeLinecap: "round"
+}), /*#__PURE__*/React.createElement("ellipse", {
+  cx: "132",
+  cy: "33",
+  rx: "7",
+  ry: "2",
+  fill: "#2a4a10"
+}), /*#__PURE__*/React.createElement("ellipse", {
+  cx: "132",
+  cy: "32",
+  rx: "5.5",
+  ry: "0.8",
+  fill: "#aedb78",
+  opacity: "0.5"
+}), /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("ellipse", {
+  cx: "220",
+  cy: "66",
+  rx: "1.5",
+  ry: "6",
+  fill: "#2a4a10"
+}), /*#__PURE__*/React.createElement("ellipse", {
+  cx: "219.7",
+  cy: "66",
+  rx: "0.6",
+  ry: "5",
+  fill: "#aedb78",
+  opacity: "0.45"
+})), /*#__PURE__*/React.createElement("path", {
+  d: "M 106 28 Q 82 20 76 34 Q 96 38 110 30 Z",
+  fill: "url(#bambooLeaf)"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M 82 31 Q 98 33 108 30",
+  stroke: "#2a4a10",
+  strokeWidth: "0.6",
+  fill: "none"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M 98 39 Q 74 41 72 53 Q 92 51 102 41 Z",
+  fill: "url(#bambooLeaf)"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M 78 47 Q 92 47 100 41",
+  stroke: "#2a4a10",
+  strokeWidth: "0.6",
+  fill: "none"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M 150 60 Q 138 76 148 84 Q 156 72 152 62 Z",
+  fill: "url(#bambooLeaf)",
+  opacity: "0.8"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M 172 64 Q 162 50 152 56 Q 164 60 170 66 Z",
+  fill: "url(#bambooLeaf)",
+  opacity: "0.7"
+}));
 
 /* ── Orange flower spray that sits ON the horizontal rail (no stem) ──
    Reuses the 5-petal flower shape; a main bloom + small bloom + bud + two
    leaves, nestled directly on the bamboo. side = 'left' | 'right' shifts it
    into the gap on either side of the tag for an alternating rhythm. */
-const RailPetals = ({ s }) => (
-  <svg width={s} height={s} viewBox="0 0 32 32" aria-hidden="true">
-    <g transform="translate(16 16)">
-      {[0, 72, 144, 216, 288].map((a) => <ellipse key={a} cx="0" cy="-8" rx="3.8" ry="6" fill="#f5b491" transform={`rotate(${a})`}/>)}
-      {[36, 108, 180, 252, 324].map((a) => <ellipse key={a} cx="0" cy="-6.5" rx="2.2" ry="4.2" fill="#d68260" opacity="0.55" transform={`rotate(${a})`}/>)}
-      <circle r="3" fill="#fff3d6"/>
-      <circle r="1.6" fill="#d68260" opacity="0.8"/>
-    </g>
-  </svg>
-);
-const RailFlowerCluster = ({ side = 'left' }) => (
-  <div className={`exp-flower exp-flower-${side}`} aria-hidden="true">
-    <div className="exp-flower-bob">
-      <svg className="exp-flower-leaf lf1" width="23" height="13" viewBox="0 0 22 12"><path d="M1 6 Q11 -3 21 6 Q11 15 1 6 Z" fill="#6e9e4a"/><path d="M3 6 Q11 6 19 6" stroke="#4f7a32" strokeWidth="0.7" fill="none"/></svg>
-      <svg className="exp-flower-leaf lf2" width="18" height="10" viewBox="0 0 22 12"><path d="M1 6 Q11 -3 21 6 Q11 15 1 6 Z" fill="#6e9e4a"/></svg>
-      <span className="exp-flower-bud"><svg width="15" height="15" viewBox="0 0 20 20"><ellipse cx="10" cy="8" rx="5" ry="6.2" fill="#f5b491"/><ellipse cx="10" cy="7" rx="2.4" ry="3.6" fill="#d68260" opacity="0.5"/></svg></span>
-      <span className="exp-flower-side"><RailPetals s={21}/></span>
-      <span className="exp-flower-main"><RailPetals s={30}/></span>
-    </div>
-  </div>
-);
-
-const ExperienceCard = ({ entry, meta, idx = 0, flower = null, isActive, isExpanded, isFirst, isLast, onToggle }) => {
-  const { role, company, healthcare, bullets, logo, logoImg, gallery } = entry;
+const RailPetals = ({
+  s
+}) => /*#__PURE__*/React.createElement("svg", {
+  width: s,
+  height: s,
+  viewBox: "0 0 32 32",
+  "aria-hidden": "true"
+}, /*#__PURE__*/React.createElement("g", {
+  transform: "translate(16 16)"
+}, [0, 72, 144, 216, 288].map(a => /*#__PURE__*/React.createElement("ellipse", {
+  key: a,
+  cx: "0",
+  cy: "-8",
+  rx: "3.8",
+  ry: "6",
+  fill: "#f5b491",
+  transform: `rotate(${a})`
+})), [36, 108, 180, 252, 324].map(a => /*#__PURE__*/React.createElement("ellipse", {
+  key: a,
+  cx: "0",
+  cy: "-6.5",
+  rx: "2.2",
+  ry: "4.2",
+  fill: "#d68260",
+  opacity: "0.55",
+  transform: `rotate(${a})`
+})), /*#__PURE__*/React.createElement("circle", {
+  r: "3",
+  fill: "#fff3d6"
+}), /*#__PURE__*/React.createElement("circle", {
+  r: "1.6",
+  fill: "#d68260",
+  opacity: "0.8"
+})));
+const RailFlowerCluster = ({
+  side = 'left'
+}) => /*#__PURE__*/React.createElement("div", {
+  className: `exp-flower exp-flower-${side}`,
+  "aria-hidden": "true"
+}, /*#__PURE__*/React.createElement("div", {
+  className: "exp-flower-bob"
+}, /*#__PURE__*/React.createElement("svg", {
+  className: "exp-flower-leaf lf1",
+  width: "23",
+  height: "13",
+  viewBox: "0 0 22 12"
+}, /*#__PURE__*/React.createElement("path", {
+  d: "M1 6 Q11 -3 21 6 Q11 15 1 6 Z",
+  fill: "#6e9e4a"
+}), /*#__PURE__*/React.createElement("path", {
+  d: "M3 6 Q11 6 19 6",
+  stroke: "#4f7a32",
+  strokeWidth: "0.7",
+  fill: "none"
+})), /*#__PURE__*/React.createElement("svg", {
+  className: "exp-flower-leaf lf2",
+  width: "18",
+  height: "10",
+  viewBox: "0 0 22 12"
+}, /*#__PURE__*/React.createElement("path", {
+  d: "M1 6 Q11 -3 21 6 Q11 15 1 6 Z",
+  fill: "#6e9e4a"
+})), /*#__PURE__*/React.createElement("span", {
+  className: "exp-flower-bud"
+}, /*#__PURE__*/React.createElement("svg", {
+  width: "15",
+  height: "15",
+  viewBox: "0 0 20 20"
+}, /*#__PURE__*/React.createElement("ellipse", {
+  cx: "10",
+  cy: "8",
+  rx: "5",
+  ry: "6.2",
+  fill: "#f5b491"
+}), /*#__PURE__*/React.createElement("ellipse", {
+  cx: "10",
+  cy: "7",
+  rx: "2.4",
+  ry: "3.6",
+  fill: "#d68260",
+  opacity: "0.5"
+}))), /*#__PURE__*/React.createElement("span", {
+  className: "exp-flower-side"
+}, /*#__PURE__*/React.createElement(RailPetals, {
+  s: 21
+})), /*#__PURE__*/React.createElement("span", {
+  className: "exp-flower-main"
+}, /*#__PURE__*/React.createElement(RailPetals, {
+  s: 30
+}))));
+const ExperienceCard = ({
+  entry,
+  meta,
+  idx = 0,
+  flower = null,
+  isActive,
+  isExpanded,
+  isFirst,
+  isLast,
+  onToggle
+}) => {
+  const {
+    role,
+    company,
+    healthcare,
+    bullets,
+    logo,
+    logoImg,
+    gallery
+  } = entry;
   const parts = company.split(/\s*·\s*/);
   const coMain = parts[0];
-  const coLoc  = parts.slice(1).join(' · ');
+  const coLoc = parts.slice(1).join(' · ');
   const hasGallery = gallery && gallery.length > 0;
   const photo = hasGallery ? gallery[0] : null;
   const roleShort = role.split(/\s*[(]\s*/)[0];
   /* Compact year for the polaroid tab: "2022 – 2023" → "’22–’23", else "2023" */
   const yrParts = (entry.period || '').split(/\s*[–—-]\s*/);
-  const yearTab = yrParts.length > 1
-    ? `’${yrParts[0].slice(-2)}-’${yrParts[1].slice(-2)}`
-    : entry.period;
+  const yearTab = yrParts.length > 1 ? `’${yrParts[0].slice(-2)}-’${yrParts[1].slice(-2)}` : entry.period;
   const cls = `exp-card${healthcare ? ' thc' : ''}${isActive ? ' is-active' : ''}${isExpanded ? ' expanded' : ''}${isExpanded && hasGallery ? ' has-gallery' : ''}${isFirst ? ' is-first' : ''}${isLast ? ' is-last' : ''}`;
   /* Deterministic per-card variation: resting tilt, string length & sway gain
      so a row of polaroids reads natural rather than mechanically uniform. */
@@ -1891,83 +2131,102 @@ const ExperienceCard = ({ entry, meta, idx = 0, flower = null, isActive, isExpan
   const hangStyle = {
     '--rest': `${rest}deg`,
     '--str': `${strings[idx % strings.length]}px`,
-    '--swayMul': swayMul[idx % swayMul.length],
+    '--swayMul': swayMul[idx % swayMul.length]
   };
-  return (
-    <div className={cls} onClick={onToggle}>
-      {/* Local bamboo rod — split into two z-layers to create the
-          "rod going through the tag" 3D illusion:
-            • .exp-rod (z:1)       — LEFT of eyelet, behind the tag
-            • .exp-rod-front (z:15) — RIGHT of eyelet, in front of the tag
-          The eyelet shows the rod's cross-section via .exp-punch::before;
-          left half = "entering the hole", right half = "emerging in front". */}
-      <div className="exp-rod" aria-hidden="true"></div>
-      <div className="exp-rod-front" aria-hidden="true"></div>
-      {flower && <RailFlowerCluster side={flower}/>}
-      {/* Luggage tag with punched hole that threads the bamboo rail (year removed) */}
-      <div className="exp-tag">
-        <div className="exp-punch" aria-hidden="true"></div>
-      </div>
-
-      {/* Hanging polaroid — swings from the tag with inertia (shown collapsed) */}
-      <div className="exp-hang" style={hangStyle}>
-        <div className="exp-string" aria-hidden="true"></div>
-        <div className="exp-yrtab">{yearTab}</div>
-        <div className="exp-pola">
-          <div className="exp-pola-photo">
-            {photo
-              ? <img src={photo} alt="" loading="lazy"
-                     onError={(e) => {
-                       const ph = e.target.closest('.exp-pola-photo');
-                       e.target.remove();
-                       const m = document.createElement('div');
-                       m.className = 'exp-pola-mono';
-                       m.innerHTML = `<span>${logo}</span>`;
-                       ph.appendChild(m);
-                     }}/>
-              : <div className="exp-pola-mono">{logoImg ? <img src={logoImg} alt=""/> : <span>{logo}</span>}</div>}
-          </div>
-          <div className="exp-pola-cap">
-            <div className="exp-pola-role">{roleShort}</div>
-            <div className="exp-pola-co">{coMain}</div>
-          </div>
-        </div>
-      </div>
-
-      {/* Expanded detail — shown when .expanded */}
-      <div className="exp-detail">
-        <div className="exp-detail-head">
-          <div className="exp-detail-role">{role}</div>
-          <div className="exp-detail-co">
-            <span className="exp-detail-logo">
-              {logoImg ? <img src={logoImg} alt=""/> : logo}
-            </span>
-            <span className="exp-detail-company">
-              {coMain}{coLoc ? ` · ${coLoc}` : ''}
-            </span>
-          </div>
-        </div>
-        <div className="exp-detail-body">
-          {bullets && (
-            <ul className="exp-detail-bullets">
-              {bullets.map((b, i) => <li key={i} dangerouslySetInnerHTML={{ __html: b }}/>)}
-            </ul>
-          )}
-          {hasGallery && (
-            <div className="exp-detail-album">
-              <div className="exp-detail-album-stack"
-                   onClick={(e) => { e.stopPropagation(); if (e.target.tagName === 'IMG') window.showLightbox(e.target.src); }}>
-                {gallery.map((src, i) => <img key={i} src={src} alt="" loading="lazy"/>)}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: cls,
+    onClick: onToggle
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "exp-rod",
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "exp-rod-front",
+    "aria-hidden": "true"
+  }), flower && /*#__PURE__*/React.createElement(RailFlowerCluster, {
+    side: flower
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "exp-tag"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "exp-punch",
+    "aria-hidden": "true"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "exp-hang",
+    style: hangStyle
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "exp-string",
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "exp-yrtab"
+  }, yearTab), /*#__PURE__*/React.createElement("div", {
+    className: "exp-pola"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "exp-pola-photo"
+  }, photo ? /*#__PURE__*/React.createElement("img", {
+    src: photo,
+    alt: "",
+    loading: "lazy",
+    onError: e => {
+      const ph = e.target.closest('.exp-pola-photo');
+      e.target.remove();
+      const m = document.createElement('div');
+      m.className = 'exp-pola-mono';
+      m.innerHTML = `<span>${logo}</span>`;
+      ph.appendChild(m);
+    }
+  }) : /*#__PURE__*/React.createElement("div", {
+    className: "exp-pola-mono"
+  }, logoImg ? /*#__PURE__*/React.createElement("img", {
+    src: logoImg,
+    alt: ""
+  }) : /*#__PURE__*/React.createElement("span", null, logo))), /*#__PURE__*/React.createElement("div", {
+    className: "exp-pola-cap"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "exp-pola-role"
+  }, roleShort), /*#__PURE__*/React.createElement("div", {
+    className: "exp-pola-co"
+  }, coMain)))), /*#__PURE__*/React.createElement("div", {
+    className: "exp-detail"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "exp-detail-head"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "exp-detail-role"
+  }, role), /*#__PURE__*/React.createElement("div", {
+    className: "exp-detail-co"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "exp-detail-logo"
+  }, logoImg ? /*#__PURE__*/React.createElement("img", {
+    src: logoImg,
+    alt: ""
+  }) : logo), /*#__PURE__*/React.createElement("span", {
+    className: "exp-detail-company"
+  }, coMain, coLoc ? ` · ${coLoc}` : ''))), /*#__PURE__*/React.createElement("div", {
+    className: "exp-detail-body"
+  }, bullets && /*#__PURE__*/React.createElement("ul", {
+    className: "exp-detail-bullets"
+  }, bullets.map((b, i) => /*#__PURE__*/React.createElement("li", {
+    key: i,
+    dangerouslySetInnerHTML: {
+      __html: b
+    }
+  }))), hasGallery && /*#__PURE__*/React.createElement("div", {
+    className: "exp-detail-album"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "exp-detail-album-stack",
+    onClick: e => {
+      e.stopPropagation();
+      if (e.target.tagName === 'IMG') window.showLightbox(e.target.src);
+    }
+  }, gallery.map((src, i) => /*#__PURE__*/React.createElement("img", {
+    key: i,
+    src: src,
+    alt: "",
+    loading: "lazy"
+  })))))));
 };
-
-const HangingRail = ({ items, layout }) => {
+const HangingRail = ({
+  items,
+  layout
+}) => {
   const viewportRef = useRef(null);
   const trackRef = useRef(null);
   const [activeIdx, setActiveIdx] = useState(0);
@@ -1984,15 +2243,18 @@ const HangingRail = ({ items, layout }) => {
   const dragMovedRef = useRef(false);
   const rafRef = useRef(0);
   /* Pendulum sway state for the hanging polaroids (driven by rail motion) */
-  const swayRef = useRef({ angle: 0, vel: 0, prevScroll: 0, prevV: 0, t: 0 });
-
+  const swayRef = useRef({
+    angle: 0,
+    vel: 0,
+    prevScroll: 0,
+    prevV: 0,
+    t: 0
+  });
   const getMax = useCallback(() => {
     const vp = viewportRef.current;
     return vp ? Math.max(0, vp.scrollWidth - vp.clientWidth) : 0;
   }, []);
-
-  const clampTarget = useCallback((v) => Math.max(0, Math.min(v, getMax())), [getMax]);
-
+  const clampTarget = useCallback(v => Math.max(0, Math.min(v, getMax())), [getMax]);
   const recompute = useCallback(() => {
     const vp = viewportRef.current;
     const track = trackRef.current;
@@ -2000,19 +2262,22 @@ const HangingRail = ({ items, layout }) => {
     const cards = track.querySelectorAll('.exp-card');
     if (!cards.length) return;
     const center = scrollRef.current + vp.clientWidth / 2;
-    let best = 0, bestDist = Infinity;
+    let best = 0,
+      bestDist = Infinity;
     cards.forEach((el, i) => {
       const c = el.offsetLeft + el.offsetWidth / 2;
       const d = Math.abs(c - center);
-      if (d < bestDist) { bestDist = d; best = i; }
+      if (d < bestDist) {
+        bestDist = d;
+        best = i;
+      }
     });
     setActiveIdx(best);
     const max = getMax();
     setCanPrev(scrollRef.current > 4);
     setCanNext(scrollRef.current < max - 4);
   }, [getMax]);
-
-  const getCardScroll = useCallback((i) => {
+  const getCardScroll = useCallback(i => {
     const vp = viewportRef.current;
     const track = trackRef.current;
     if (!vp || !track) return 0;
@@ -2021,8 +2286,7 @@ const HangingRail = ({ items, layout }) => {
     if (!el) return 0;
     return clampTarget(el.offsetLeft + el.offsetWidth / 2 - vp.clientWidth / 2);
   }, [clampTarget]);
-
-  const scrollToIndex = useCallback((i) => {
+  const scrollToIndex = useCallback(i => {
     targetRef.current = getCardScroll(i);
   }, [getCardScroll]);
 
@@ -2046,24 +2310,31 @@ const HangingRail = ({ items, layout }) => {
       const v = scrollRef.current - s.prevScroll;
       const accel = v - s.prevV;
       s.t += 1;
-      const K = 0.0085, C = 0.040, DRIVE = 1.15;
+      const K = 0.0085,
+        C = 0.040,
+        DRIVE = 1.15;
       s.vel += -K * s.angle - C * s.vel - DRIVE * accel;
       s.angle += s.vel;
-      if (s.angle > 24) { s.angle = 24; s.vel *= -0.4; }
-      if (s.angle < -24) { s.angle = -24; s.vel *= -0.4; }
+      if (s.angle > 24) {
+        s.angle = 24;
+        s.vel *= -0.4;
+      }
+      if (s.angle < -24) {
+        s.angle = -24;
+        s.vel *= -0.4;
+      }
       s.prevScroll = scrollRef.current;
       s.prevV = v;
       const idle = Math.sin(s.t * 0.017) * 0.45;
       const track = trackRef.current;
       if (track) track.style.setProperty('--sway', (s.angle + idle).toFixed(3) + 'deg');
-
       recompute();
       rafRef.current = requestAnimationFrame(animate);
     };
     rafRef.current = requestAnimationFrame(animate);
 
     /* Drag */
-    const onDown = (e) => {
+    const onDown = e => {
       isDraggingRef.current = true;
       dragMovedRef.current = false;
       const x = e.touches ? e.touches[0].clientX : e.clientX;
@@ -2071,7 +2342,7 @@ const HangingRail = ({ items, layout }) => {
       dragStartScrollRef.current = targetRef.current;
       vp.style.cursor = 'grabbing';
     };
-    const onMove = (e) => {
+    const onMove = e => {
       if (!isDraggingRef.current) return;
       const x = e.touches ? e.touches[0].clientX : e.clientX;
       const dx = x - dragStartXRef.current;
@@ -2083,32 +2354,45 @@ const HangingRail = ({ items, layout }) => {
       isDraggingRef.current = false;
       vp.style.cursor = 'grab';
     };
-
     vp.addEventListener('mousedown', onDown);
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
-    vp.addEventListener('touchstart', onDown, { passive: true });
-    vp.addEventListener('touchmove', onMove, { passive: true });
+    vp.addEventListener('touchstart', onDown, {
+      passive: true
+    });
+    vp.addEventListener('touchmove', onMove, {
+      passive: true
+    });
     vp.addEventListener('touchend', onUp);
 
     /* Wheel with momentum decay (matches carousel) */
-    let wheelAccum = 0, wheelRaf = 0, wheelActive = false;
+    let wheelAccum = 0,
+      wheelRaf = 0,
+      wheelActive = false;
     const applyWheel = () => {
-      if (Math.abs(wheelAccum) < 0.3) { wheelAccum = 0; wheelActive = false; return; }
+      if (Math.abs(wheelAccum) < 0.3) {
+        wheelAccum = 0;
+        wheelActive = false;
+        return;
+      }
       targetRef.current = clampTarget(targetRef.current + wheelAccum);
       wheelAccum *= 0.88;
       wheelRaf = requestAnimationFrame(applyWheel);
     };
-    const onWheel = (e) => {
+    const onWheel = e => {
       const total = e.deltaX + e.deltaY * 0.4;
       if (Math.abs(total) > 0.5) {
         e.preventDefault();
         wheelAccum += total * 1.2;
-        if (!wheelActive) { wheelActive = true; wheelRaf = requestAnimationFrame(applyWheel); }
+        if (!wheelActive) {
+          wheelActive = true;
+          wheelRaf = requestAnimationFrame(applyWheel);
+        }
       }
     };
-    vp.addEventListener('wheel', onWheel, { passive: false });
-
+    vp.addEventListener('wheel', onWheel, {
+      passive: false
+    });
     return () => {
       cancelAnimationFrame(rafRef.current);
       cancelAnimationFrame(wheelRaf);
@@ -2126,59 +2410,78 @@ const HangingRail = ({ items, layout }) => {
   useEffect(() => {
     const vp = viewportRef.current;
     if (!vp) return;
-    const onKey = (e) => {
+    const onKey = e => {
       const r = vp.getBoundingClientRect();
       const inView = r.top < window.innerHeight * 0.85 && r.bottom > window.innerHeight * 0.15;
       if (!inView) return;
-      if (e.key === 'Escape' && expandedIdx !== null) { setExpandedIdx(null); return; }
-      if (e.key === 'ArrowRight') { e.preventDefault(); scrollToIndex(activeIdx + 1); }
-      else if (e.key === 'ArrowLeft') { e.preventDefault(); scrollToIndex(activeIdx - 1); }
+      if (e.key === 'Escape' && expandedIdx !== null) {
+        setExpandedIdx(null);
+        return;
+      }
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        scrollToIndex(activeIdx + 1);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        scrollToIndex(activeIdx - 1);
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [activeIdx, expandedIdx, scrollToIndex]);
-
-  return (
-    <div className="rail-section" data-layout={layout}>
-      {/* Section header — sits below the vertical climbing bamboo. The
-          horizontal hanging rail below is now its OWN independent block,
-          no longer joined to the vertical bamboo by a bend. */}
-      <div className="rail-intro-inside">
-        <div className="rail-intro-big">Earlier</div>
-        <div className="rail-intro-sub">
-          <span className="rule" aria-hidden="true"></span>
-          <span className="tl-eye">2022 - 2023<span className="arc">·</span>Sports-medicine roots</span>
-        </div>
-      </div>
-
-      <div className="rail-stage">
-        <button className="rail-nav prev" onClick={() => scrollToIndex(activeIdx - 1)} disabled={!canPrev} aria-label="Previous role">←</button>
-        <button className="rail-nav next" onClick={() => scrollToIndex(activeIdx + 1)} disabled={!canNext} aria-label="Next role">→</button>
-
-        <div className="rail-viewport" ref={viewportRef}>
-          <div className="rail-track" ref={trackRef}>
-            {items.map((entry, i) => (
-              <ExperienceCard
-                key={i}
-                entry={entry}
-                idx={i}
-                flower={({0:'left',2:'left',4:'left'})[i] || null}
-                meta={CARD_META[i] || CARD_META[0]}
-                isActive={i === activeIdx}
-                isExpanded={expandedIdx === i}
-                isFirst={i === 0}
-                isLast={i === items.length - 1}
-                onToggle={() => {
-                  if (dragMovedRef.current) return;
-                  setExpandedIdx(expandedIdx === i ? null : i);
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "rail-section",
+    "data-layout": layout
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "rail-intro-inside"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "rail-intro-big"
+  }, "Earlier"), /*#__PURE__*/React.createElement("div", {
+    className: "rail-intro-sub"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "rule",
+    "aria-hidden": "true"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "tl-eye"
+  }, "2022 - 2023", /*#__PURE__*/React.createElement("span", {
+    className: "arc"
+  }, "·"), "Sports-medicine roots"))), /*#__PURE__*/React.createElement("div", {
+    className: "rail-stage"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "rail-nav prev",
+    onClick: () => scrollToIndex(activeIdx - 1),
+    disabled: !canPrev,
+    "aria-label": "Previous role"
+  }, "←"), /*#__PURE__*/React.createElement("button", {
+    className: "rail-nav next",
+    onClick: () => scrollToIndex(activeIdx + 1),
+    disabled: !canNext,
+    "aria-label": "Next role"
+  }, "→"), /*#__PURE__*/React.createElement("div", {
+    className: "rail-viewport",
+    ref: viewportRef
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "rail-track",
+    ref: trackRef
+  }, items.map((entry, i) => /*#__PURE__*/React.createElement(ExperienceCard, {
+    key: i,
+    entry: entry,
+    idx: i,
+    flower: {
+      0: 'left',
+      2: 'left',
+      4: 'left'
+    }[i] || null,
+    meta: CARD_META[i] || CARD_META[0],
+    isActive: i === activeIdx,
+    isExpanded: expandedIdx === i,
+    isFirst: i === 0,
+    isLast: i === items.length - 1,
+    onToggle: () => {
+      if (dragMovedRef.current) return;
+      setExpandedIdx(expandedIdx === i ? null : i);
+    }
+  }))))));
 };
 
 /* ─────────────────────────────────────────────────────────
@@ -2188,18 +2491,20 @@ const TimelinePage = () => {
   const all = window.TimelineData || [];
   const vertical = all.slice(0, SPLIT_AT);
   const horizontal = all.slice(SPLIT_AT);
-  return (
-    <div className="page" data-screen-label="Experience timeline (hybrid)">
-      <div className="page-head"></div>
-
-      <VerticalTimeline items={vertical}/>
-
-      {horizontal.length > 0 && <HangingRail items={horizontal} layout="stagger"/>}
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "page",
+    "data-screen-label": "Experience timeline (hybrid)"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "page-head"
+  }), /*#__PURE__*/React.createElement(VerticalTimeline, {
+    items: vertical
+  }), horizontal.length > 0 && /*#__PURE__*/React.createElement(HangingRail, {
+    items: horizontal,
+    layout: "stagger"
+  }));
 };
-
-ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(<TimelinePage/>);
+ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(/*#__PURE__*/React.createElement(TimelinePage, null));
+});
 </script>
 
 <!-- ═══ PROJECTS ═══ -->
@@ -2212,60 +2517,128 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
   </div>
 </section>
 
-<script type="text/babel">
+<script>
+document.addEventListener('DOMContentLoaded', function(){
 (() => {
-  const { useEffect, useRef, useState, useCallback } = React;
-
-  const PROJECTS = [
-    { tag: 'AI Product', name: 'Cadence 步频 - PT Evidence Curation',
-      desc: 'Daily physical-therapy evidence curation, in production since June 2026. A cron-driven pipeline searches, dedupes, and scores new literature; every issue is human-reviewed before it ships to the website, WeChat, Xiaohongshu, and LinkedIn. 900+ items curated to date, with assertion gates and wiring tests keeping the unattended pipeline honest.',
-      tech: ['GitHub Actions', 'Exa API', 'React', 'Cloudflare Pages'], thumb: 'cadence-cover.jpg', theme: 'healthcare', rawThumb: true,
-      cta: { label: 'View Live Site', href: 'https://incadencept.com/' } },
-    { tag: 'AI / NLP', name: 'Climate Finance Research Agent',
-      desc: 'LLM-powered agent for climate finance research. Tavily search, Claude Sonnet, Chroma Cloud vector DB with Streamlit interface.',
-      tech: ['Python', 'Claude API', 'Chroma', 'Streamlit'], thumb: 'Climate Finance Research Agent.png', rawThumb: true,
-      cta: { label: 'View Live Demo', href: 'https://climate-finance-agent-3si7owfgvopjqrgcqc9wg8.streamlit.app/' } },
-    { tag: 'Full-Stack / CRM', name: 'Meridian - Relationship Intelligence CRM',
-      desc: 'Relationship-intelligence CRM built for a venture coalition\'s investor-relations team. Eight views spanning contact management, investor↔founder matching, intro-path tracking, an outreach queue, and two D3 force-directed graphs for the network and capital map. Public demo runs on fully fictional data.',
-      tech: ['React', 'Vite', 'D3.js', 'Apps Script'], thumb: 'meridian-network.png', rawThumb: true,
-      cta: { label: 'View Live Demo', href: 'meridian/' } },
-    { tag: 'Data Product', name: 'The Atlas Capital Matrix',
-      desc: 'Public Top 100 family-office ranking. Every researched row carries a source link and a Confirmed / Reported / Inferred evidence tag; an activity-weighted Atlas Score re-ranks the list as an AI verification agent re-checks recent deals and scouts new entrants each week.',
-      tech: ['Node/Fastify', 'PostgreSQL', 'Railway', 'Claude API'], thumb: 'atlas-matrix.png', rawThumb: true,
-      cta: { label: 'View Live Site', href: 'https://top-100-fo-ranking.netlify.app/' } },
-    { tag: 'NLP / RAG', name: 'Hybrid RAG Pipeline (CMU 11-711)',
-      desc: 'BM25 + FAISS hybrid retrieval with Qwen2.5-3B-Instruct, achieving 95% accuracy. Deployed on AWS EC2.',
-      tech: ['Python', 'FAISS', 'HuggingFace', 'AWS'], thumb: '3.png', rawThumb: true },
-    { tag: 'Energy & Health', name: 'The Changing Landscape of U.S. Power Generation',
-      desc: 'Long-form policy analysis paired with an interactive county-level dashboard combining EIA, EPA eGRID, and CDC PLACES data for the energy-health nexus.',
-      tech: ['R', 'Posit', 'EIA API', 'eGRID'], thumb: 'US energy & health.jpeg', theme: 'healthcare', rawThumb: true,
-      cta: { label: 'View Live Dashboard', href: 'https://xindili-pa-electric-station.share.connect.posit.cloud/' } },
-    { tag: 'Automation', name: 'Climate Deal Intelligence System',
-      desc: 'Automated deal intelligence pipeline using n8n, SEC EDGAR API, and NewsAPI for climate / energy deSPAC monitoring.',
-      tech: ['n8n', 'PostgreSQL', 'EDGAR', 'NewsAPI'], thumb: '2.png', rawThumb: true },
-    { tag: 'Web Design & Dev', name: 'Fusion Park - Corporate Website',
-      desc: 'End-to-end design and build of the corporate site for a climate, energy and hard-tech financial advisory firm. Scroll-driven 3D interactions across services, investment focus, team and contact sections.',
-      tech: ['React', 'Vite', 'GSAP', 'Netlify'], thumb: 'fusionpark-hero.jpg', rawThumb: true,
-      cta: { label: 'View Live Site', href: 'https://fp-web-v5.netlify.app/' } },
-    { tag: 'CRM', name: 'AI-Powered CRM Analytics System',
-      desc: 'Claude-driven analytics agent over the HubSpot API. Automates weekly extraction, trend analysis and report generation across 3,500+ leads.',
-      tech: ['HubSpot', 'Claude API', 'Tableau'], thumb: '1.png', rawThumb: true },
-    { tag: 'Research', name: 'IRCoT Multi-Hop QA',
-      desc: 'Reproduced IRCoT baseline on HotpotQA. Debugged BM25 retriever, improved EM from 12.0% to 21.8%.',
-      tech: ['Python', 'BM25', 'HotpotQA'], thumb: 'IRCoT Multi-Hop QA.png', rawThumb: true },
-    { tag: 'Sales Analytics', name: 'Health Insurance Enrollment Dashboard',
-      desc: 'Interactive HTML/Chart.js sales dashboard tracking 401 leads and 72.8% enrollment rate. Key insight: group chat engagement lifts conversion from 53% to 90%.',
-      tech: ['HTML', 'Chart.js', 'Sales Analytics', 'CRM'], thumb: 'healthcare dashboard.png', theme: 'healthcare', rawThumb: true,
-      cta: { label: 'View Live Demo', href: 'https://soft-moxie-5a3def.netlify.app/' } }
-  ];
-
-  const TINTS = [
-    'oklch(0.32 0.08 290)', 'oklch(0.30 0.07 330)', 'oklch(0.35 0.09 55)',
-    'oklch(0.31 0.07 270)', 'oklch(0.30 0.08 40)',  'oklch(0.31 0.06 200)',
-    'oklch(0.35 0.09 55)'
-  ];
-
-  function ProjectsCarousel({ projects }) {
+  const {
+    useEffect,
+    useRef,
+    useState,
+    useCallback
+  } = React;
+  const PROJECTS = [{
+    tag: 'AI Product',
+    name: 'Cadence 步频 - PT Evidence Curation',
+    desc: 'Daily physical-therapy evidence curation, in production since June 2026. A cron-driven pipeline searches, dedupes, and scores new literature; every issue is human-reviewed before it ships to the website, WeChat, Xiaohongshu, and LinkedIn. 900+ items curated to date, with assertion gates and wiring tests keeping the unattended pipeline honest.',
+    tech: ['GitHub Actions', 'Exa API', 'React', 'Cloudflare Pages'],
+    thumb: 'cadence-cover.jpg',
+    theme: 'healthcare',
+    rawThumb: true,
+    cta: {
+      label: 'View Live Site',
+      href: 'https://incadencept.com/'
+    }
+  }, {
+    tag: 'AI / NLP',
+    name: 'Climate Finance Research Agent',
+    desc: 'LLM-powered agent for climate finance research. Tavily search, Claude Sonnet, Chroma Cloud vector DB with Streamlit interface.',
+    tech: ['Python', 'Claude API', 'Chroma', 'Streamlit'],
+    thumb: 'Climate Finance Research Agent.png',
+    rawThumb: true,
+    cta: {
+      label: 'View Live Demo',
+      href: 'https://climate-finance-agent-3si7owfgvopjqrgcqc9wg8.streamlit.app/'
+    }
+  }, {
+    tag: 'Full-Stack / CRM',
+    name: 'Meridian - Relationship Intelligence CRM',
+    desc: 'Relationship-intelligence CRM built for a venture coalition\'s investor-relations team. Eight views spanning contact management, investor↔founder matching, intro-path tracking, an outreach queue, and two D3 force-directed graphs for the network and capital map. Public demo runs on fully fictional data.',
+    tech: ['React', 'Vite', 'D3.js', 'Apps Script'],
+    thumb: 'meridian-network.png',
+    rawThumb: true,
+    cta: {
+      label: 'View Live Demo',
+      href: 'meridian/'
+    }
+  }, {
+    tag: 'Data Product',
+    name: 'The Atlas Capital Matrix',
+    desc: 'Public Top 100 family-office ranking. Every researched row carries a source link and a Confirmed / Reported / Inferred evidence tag; an activity-weighted Atlas Score re-ranks the list as an AI verification agent re-checks recent deals and scouts new entrants each week.',
+    tech: ['Node/Fastify', 'PostgreSQL', 'Railway', 'Claude API'],
+    thumb: 'atlas-matrix.png',
+    rawThumb: true,
+    cta: {
+      label: 'View Live Site',
+      href: 'https://top-100-fo-ranking.netlify.app/'
+    }
+  }, {
+    tag: 'NLP / RAG',
+    name: 'Hybrid RAG Pipeline (CMU 11-711)',
+    desc: 'BM25 + FAISS hybrid retrieval with Qwen2.5-3B-Instruct, achieving 95% accuracy. Deployed on AWS EC2.',
+    tech: ['Python', 'FAISS', 'HuggingFace', 'AWS'],
+    thumb: '3.png',
+    rawThumb: true
+  }, {
+    tag: 'Energy & Health',
+    name: 'The Changing Landscape of U.S. Power Generation',
+    desc: 'Long-form policy analysis paired with an interactive county-level dashboard combining EIA, EPA eGRID, and CDC PLACES data for the energy-health nexus.',
+    tech: ['R', 'Posit', 'EIA API', 'eGRID'],
+    thumb: 'US energy & health.jpeg',
+    theme: 'healthcare',
+    rawThumb: true,
+    cta: {
+      label: 'View Live Dashboard',
+      href: 'https://xindili-pa-electric-station.share.connect.posit.cloud/'
+    }
+  }, {
+    tag: 'Automation',
+    name: 'Climate Deal Intelligence System',
+    desc: 'Automated deal intelligence pipeline using n8n, SEC EDGAR API, and NewsAPI for climate / energy deSPAC monitoring.',
+    tech: ['n8n', 'PostgreSQL', 'EDGAR', 'NewsAPI'],
+    thumb: '2.png',
+    rawThumb: true
+  }, {
+    tag: 'Web Design & Dev',
+    name: 'Fusion Park - Corporate Website',
+    desc: 'End-to-end design and build of the corporate site for a climate, energy and hard-tech financial advisory firm. Scroll-driven 3D interactions across services, investment focus, team and contact sections.',
+    tech: ['React', 'Vite', 'GSAP', 'Netlify'],
+    thumb: 'fusionpark-hero.jpg',
+    rawThumb: true,
+    cta: {
+      label: 'View Live Site',
+      href: 'https://fp-web-v5.netlify.app/'
+    }
+  }, {
+    tag: 'CRM',
+    name: 'AI-Powered CRM Analytics System',
+    desc: 'Claude-driven analytics agent over the HubSpot API. Automates weekly extraction, trend analysis and report generation across 3,500+ leads.',
+    tech: ['HubSpot', 'Claude API', 'Tableau'],
+    thumb: '1.png',
+    rawThumb: true
+  }, {
+    tag: 'Research',
+    name: 'IRCoT Multi-Hop QA',
+    desc: 'Reproduced IRCoT baseline on HotpotQA. Debugged BM25 retriever, improved EM from 12.0% to 21.8%.',
+    tech: ['Python', 'BM25', 'HotpotQA'],
+    thumb: 'IRCoT Multi-Hop QA.png',
+    rawThumb: true
+  }, {
+    tag: 'Sales Analytics',
+    name: 'Health Insurance Enrollment Dashboard',
+    desc: 'Interactive HTML/Chart.js sales dashboard tracking 401 leads and 72.8% enrollment rate. Key insight: group chat engagement lifts conversion from 53% to 90%.',
+    tech: ['HTML', 'Chart.js', 'Sales Analytics', 'CRM'],
+    thumb: 'healthcare dashboard.png',
+    theme: 'healthcare',
+    rawThumb: true,
+    cta: {
+      label: 'View Live Demo',
+      href: 'https://soft-moxie-5a3def.netlify.app/'
+    }
+  }];
+  const TINTS = ['oklch(0.32 0.08 290)', 'oklch(0.30 0.07 330)', 'oklch(0.35 0.09 55)', 'oklch(0.31 0.07 270)', 'oklch(0.30 0.08 40)', 'oklch(0.31 0.06 200)', 'oklch(0.35 0.09 55)'];
+  function ProjectsCarousel({
+    projects
+  }) {
     const sceneRef = useRef(null);
     const cardsRef = useRef([]);
     const angleRef = useRef(0);
@@ -2278,24 +2651,22 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
     const rxRef = useRef(0);
     const rzRef = useRef(0);
     const lastFrontRef = useRef(-1);
-
     const [frontIdx, setFrontIdx] = useState(0);
     const [expandedIdx, setExpandedIdx] = useState(null);
-
     const count = projects.length;
-    const angleStep = (Math.PI * 2) / count;
-
+    const angleStep = Math.PI * 2 / count;
     const computeDimensions = useCallback(() => {
       const vw = window.innerWidth;
       rxRef.current = Math.max(vw * 0.26, 320);
       rzRef.current = Math.max(vw * 0.12, 150);
     }, []);
-
     const positionCards = useCallback(() => {
-      const rx = rxRef.current, rz = rzRef.current;
+      const rx = rxRef.current,
+        rz = rzRef.current;
       if (!rx || !rz) return;
       const base = angleRef.current;
-      let bestI = 0, bestZ = -Infinity;
+      let bestI = 0,
+        bestZ = -Infinity;
       cardsRef.current.forEach((card, i) => {
         if (!card) return;
         const theta = base + i * angleStep;
@@ -2310,14 +2681,16 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
         card.style.zIndex = String(Math.round(zN * 50));
         card.style.filter = `brightness(${brightness})`;
         card.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${-Math.sin(theta) * 14}deg) scale(${scale})`;
-        if (z > bestZ) { bestZ = z; bestI = i; }
+        if (z > bestZ) {
+          bestZ = z;
+          bestI = i;
+        }
       });
       if (bestI !== lastFrontRef.current) {
         lastFrontRef.current = bestI;
         setFrontIdx(bestI);
       }
     }, [angleStep]);
-
     useEffect(() => {
       computeDimensions();
       const animate = () => {
@@ -2330,66 +2703,77 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
         rafRef.current = requestAnimationFrame(animate);
       };
       rafRef.current = requestAnimationFrame(animate);
-
       const scene = sceneRef.current;
       if (!scene) return;
-
-      const onPointerDown = (e) => {
+      const onPointerDown = e => {
         isDraggingRef.current = true;
         dragMovedRef.current = false;
         dragStartXRef.current = e.clientX;
         dragStartAngleRef.current = targetAngleRef.current;
         scene.style.cursor = 'grabbing';
       };
-      const onPointerMove = (e) => {
+      const onPointerMove = e => {
         if (!isDraggingRef.current) return;
         const dx = e.clientX - dragStartXRef.current;
         if (Math.abs(dx) > 4) {
           if (!dragMovedRef.current) {
             dragMovedRef.current = true;
-            try { scene.setPointerCapture(e.pointerId); } catch (_) {}
+            try {
+              scene.setPointerCapture(e.pointerId);
+            } catch (_) {}
           }
           targetAngleRef.current = dragStartAngleRef.current + dx * 0.0025;
         }
       };
-      const onPointerUp = (e) => {
+      const onPointerUp = e => {
         isDraggingRef.current = false;
-        try { scene.releasePointerCapture(e.pointerId); } catch (_) {}
+        try {
+          scene.releasePointerCapture(e.pointerId);
+        } catch (_) {}
         scene.style.cursor = 'grab';
       };
       scene.addEventListener('pointerdown', onPointerDown);
       scene.addEventListener('pointermove', onPointerMove);
       scene.addEventListener('pointerup', onPointerUp);
       scene.addEventListener('pointercancel', onPointerUp);
-
-      let wheelAccum = 0, wheelRaf = 0, wheelActive = false;
+      let wheelAccum = 0,
+        wheelRaf = 0,
+        wheelActive = false;
       const applyWheel = () => {
-        if (Math.abs(wheelAccum) < 0.0003) { wheelAccum = 0; wheelActive = false; return; }
+        if (Math.abs(wheelAccum) < 0.0003) {
+          wheelAccum = 0;
+          wheelActive = false;
+          return;
+        }
         targetAngleRef.current += wheelAccum;
         wheelAccum *= 0.9;
         wheelRaf = requestAnimationFrame(applyWheel);
       };
-      const onWheel = (e) => {
+      const onWheel = e => {
         const total = e.deltaX + e.deltaY * 0.3;
         if (Math.abs(total) > 0.5) {
           e.preventDefault();
           wheelAccum += total * 0.003;
-          if (!wheelActive) { wheelActive = true; wheelRaf = requestAnimationFrame(applyWheel); }
+          if (!wheelActive) {
+            wheelActive = true;
+            wheelRaf = requestAnimationFrame(applyWheel);
+          }
         }
       };
-      scene.addEventListener('wheel', onWheel, { passive: false });
-
-      const onKey = (e) => {
+      scene.addEventListener('wheel', onWheel, {
+        passive: false
+      });
+      const onKey = e => {
         if (document.activeElement && /input|textarea/i.test(document.activeElement.tagName)) return;
-        if (e.key === 'Escape') { setExpandedIdx(null); return; }
-        if (e.key === 'ArrowRight') targetAngleRef.current -= angleStep;
-        else if (e.key === 'ArrowLeft') targetAngleRef.current += angleStep;
+        if (e.key === 'Escape') {
+          setExpandedIdx(null);
+          return;
+        }
+        if (e.key === 'ArrowRight') targetAngleRef.current -= angleStep;else if (e.key === 'ArrowLeft') targetAngleRef.current += angleStep;
       };
       window.addEventListener('keydown', onKey);
-
       const onResize = () => computeDimensions();
       window.addEventListener('resize', onResize);
-
       return () => {
         cancelAnimationFrame(rafRef.current);
         cancelAnimationFrame(wheelRaf);
@@ -2402,116 +2786,198 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
         window.removeEventListener('resize', onResize);
       };
     }, [computeDimensions, positionCards, angleStep]);
-
-    const goPrev = () => { targetAngleRef.current += angleStep; };
-    const goNext = () => { targetAngleRef.current -= angleStep; };
+    const goPrev = () => {
+      targetAngleRef.current += angleStep;
+    };
+    const goNext = () => {
+      targetAngleRef.current -= angleStep;
+    };
     const front = projects[frontIdx] || projects[0];
-
-    return (
-      <div className="pc-shell">
-        <div className="pc-hint">
-          <span className="pc-hint-item"><kbd className="pc-kbd">Drag</kbd> or <kbd className="pc-kbd">←</kbd> <kbd className="pc-kbd">→</kbd> to rotate</span>
-          <span className="pc-hint-sep">·</span>
-          <span className="pc-hint-item"><kbd className="pc-kbd">Click</kbd> a card to expand</span>
-        </div>
-
-        <div className="pc-stage">
-          <div ref={sceneRef} className="pc-scene">
-            {projects.map((p, i) => (
-              <div
-                key={i}
-                ref={(el) => { cardsRef.current[i] = el; }}
-                className={`pc-card${p.theme === 'healthcare' ? ' pc-healthcare' : ''}`}
-                onClick={() => {
-                  if (dragMovedRef.current) return;
-                  if (i !== frontIdx) targetAngleRef.current = -i * angleStep;
-                  else setExpandedIdx(i);
-                }}
-                style={{ background: TINTS[i % TINTS.length] }}
-              >
-                {p.thumb
-                  ? <img src={p.thumb} alt="" className={p.rawThumb ? 'pc-thumb raw' : 'pc-thumb'}/>
-                  : <div className="pc-numeral">{String(i + 1).padStart(2, '0')}</div>}
-                <div className="pc-veil"></div>
-                <div className="pc-label">
-                  <span className="pc-tag">{p.tag}</span>
-                  <div className="pc-name">{p.name}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <button className="pc-arrow pc-arrow-prev" onClick={goPrev} aria-label="Previous">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button className="pc-arrow pc-arrow-next" onClick={goNext} aria-label="Next">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-        </div>
-
-        <div className={`pc-detail${front.theme === 'healthcare' ? ' pc-healthcare' : ''}`} key={frontIdx}>
-          <div className="pc-detail-meta">
-            <span className="pc-detail-idx">{String(frontIdx + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}</span>
-            <span className="pc-detail-tag">{front.tag}</span>
-          </div>
-          <h3 className="pc-detail-name">{front.name}</h3>
-          <p className="pc-detail-desc">{front.desc}</p>
-          <div className="pc-detail-foot">
-            {front.tech && (
-              <div className="pc-detail-tech">
-                {front.tech.map((t) => <span key={t}>{t}</span>)}
-              </div>
-            )}
-            {front.cta && (
-              <a className="pc-detail-cta" href={front.cta.href} target="_blank" rel="noopener">{front.cta.label} →</a>
-            )}
-          </div>
-        </div>
-
-        {expandedIdx !== null && (() => {
-          const ep = projects[expandedIdx];
-          return (
-            <div className="pc-modal" onClick={() => setExpandedIdx(null)}>
-              <div className={`pc-modal-inner${ep.theme === 'healthcare' ? ' pc-healthcare' : ''}`} onClick={(e) => e.stopPropagation()}>
-                <button className="pc-modal-close" onClick={() => setExpandedIdx(null)} aria-label="Close">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                  </svg>
-                </button>
-                <div className="pc-modal-media" style={{ background: TINTS[expandedIdx % TINTS.length] }}>
-                  {ep.thumb
-                    ? <img src={ep.thumb} alt="" className="pc-modal-img"/>
-                    : <div className="pc-modal-numeral">{String(expandedIdx + 1).padStart(2, '0')}</div>}
-                </div>
-                <div className="pc-modal-body">
-                  <div className="pc-modal-meta">
-                    <span className="pc-detail-idx">{String(expandedIdx + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}</span>
-                    <span className="pc-detail-tag">{ep.tag}</span>
-                  </div>
-                  <h3 className="pc-modal-name">{ep.name}</h3>
-                  <p className="pc-modal-desc">{ep.desc}</p>
-                  <div className="pc-detail-foot" style={{ justifyContent: 'flex-start', marginTop: 24 }}>
-                    {ep.tech && (
-                      <div className="pc-detail-tech" style={{ justifyContent: 'flex-start' }}>
-                        {ep.tech.map((t) => <span key={t}>{t}</span>)}
-                      </div>
-                    )}
-                    {ep.cta && (
-                      <a className="pc-detail-cta" href={ep.cta.href} target="_blank" rel="noopener">{ep.cta.label} →</a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })()}
-      </div>
-    );
+    return /*#__PURE__*/React.createElement("div", {
+      className: "pc-shell"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pc-hint"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "pc-hint-item"
+    }, /*#__PURE__*/React.createElement("kbd", {
+      className: "pc-kbd"
+    }, "Drag"), " or ", /*#__PURE__*/React.createElement("kbd", {
+      className: "pc-kbd"
+    }, "←"), " ", /*#__PURE__*/React.createElement("kbd", {
+      className: "pc-kbd"
+    }, "→"), " to rotate"), /*#__PURE__*/React.createElement("span", {
+      className: "pc-hint-sep"
+    }, "·"), /*#__PURE__*/React.createElement("span", {
+      className: "pc-hint-item"
+    }, /*#__PURE__*/React.createElement("kbd", {
+      className: "pc-kbd"
+    }, "Click"), " a card to expand")), /*#__PURE__*/React.createElement("div", {
+      className: "pc-stage"
+    }, /*#__PURE__*/React.createElement("div", {
+      ref: sceneRef,
+      className: "pc-scene"
+    }, projects.map((p, i) => /*#__PURE__*/React.createElement("div", {
+      key: i,
+      ref: el => {
+        cardsRef.current[i] = el;
+      },
+      className: `pc-card${p.theme === 'healthcare' ? ' pc-healthcare' : ''}`,
+      onClick: () => {
+        if (dragMovedRef.current) return;
+        if (i !== frontIdx) targetAngleRef.current = -i * angleStep;else setExpandedIdx(i);
+      },
+      style: {
+        background: TINTS[i % TINTS.length]
+      }
+    }, p.thumb ? /*#__PURE__*/React.createElement("img", {
+      src: p.thumb,
+      alt: "",
+      className: p.rawThumb ? 'pc-thumb raw' : 'pc-thumb'
+    }) : /*#__PURE__*/React.createElement("div", {
+      className: "pc-numeral"
+    }, String(i + 1).padStart(2, '0')), /*#__PURE__*/React.createElement("div", {
+      className: "pc-veil"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "pc-label"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "pc-tag"
+    }, p.tag), /*#__PURE__*/React.createElement("div", {
+      className: "pc-name"
+    }, p.name))))), /*#__PURE__*/React.createElement("button", {
+      className: "pc-arrow pc-arrow-prev",
+      onClick: goPrev,
+      "aria-label": "Previous"
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "14",
+      height: "14",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "1.6",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
+    }, /*#__PURE__*/React.createElement("polyline", {
+      points: "15 18 9 12 15 6"
+    }))), /*#__PURE__*/React.createElement("button", {
+      className: "pc-arrow pc-arrow-next",
+      onClick: goNext,
+      "aria-label": "Next"
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "14",
+      height: "14",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "1.6",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
+    }, /*#__PURE__*/React.createElement("polyline", {
+      points: "9 18 15 12 9 6"
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: `pc-detail${front.theme === 'healthcare' ? ' pc-healthcare' : ''}`,
+      key: frontIdx
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pc-detail-meta"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "pc-detail-idx"
+    }, String(frontIdx + 1).padStart(2, '0'), " / ", String(count).padStart(2, '0')), /*#__PURE__*/React.createElement("span", {
+      className: "pc-detail-tag"
+    }, front.tag)), /*#__PURE__*/React.createElement("h3", {
+      className: "pc-detail-name"
+    }, front.name), /*#__PURE__*/React.createElement("p", {
+      className: "pc-detail-desc"
+    }, front.desc), /*#__PURE__*/React.createElement("div", {
+      className: "pc-detail-foot"
+    }, front.tech && /*#__PURE__*/React.createElement("div", {
+      className: "pc-detail-tech"
+    }, front.tech.map(t => /*#__PURE__*/React.createElement("span", {
+      key: t
+    }, t))), front.cta && /*#__PURE__*/React.createElement("a", {
+      className: "pc-detail-cta",
+      href: front.cta.href,
+      target: "_blank",
+      rel: "noopener"
+    }, front.cta.label, " →"))), expandedIdx !== null && (() => {
+      const ep = projects[expandedIdx];
+      return /*#__PURE__*/React.createElement("div", {
+        className: "pc-modal",
+        onClick: () => setExpandedIdx(null)
+      }, /*#__PURE__*/React.createElement("div", {
+        className: `pc-modal-inner${ep.theme === 'healthcare' ? ' pc-healthcare' : ''}`,
+        onClick: e => e.stopPropagation()
+      }, /*#__PURE__*/React.createElement("button", {
+        className: "pc-modal-close",
+        onClick: () => setExpandedIdx(null),
+        "aria-label": "Close"
+      }, /*#__PURE__*/React.createElement("svg", {
+        width: "16",
+        height: "16",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "1.6",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      }, /*#__PURE__*/React.createElement("line", {
+        x1: "18",
+        y1: "6",
+        x2: "6",
+        y2: "18"
+      }), /*#__PURE__*/React.createElement("line", {
+        x1: "6",
+        y1: "6",
+        x2: "18",
+        y2: "18"
+      }))), /*#__PURE__*/React.createElement("div", {
+        className: "pc-modal-media",
+        style: {
+          background: TINTS[expandedIdx % TINTS.length]
+        }
+      }, ep.thumb ? /*#__PURE__*/React.createElement("img", {
+        src: ep.thumb,
+        alt: "",
+        className: "pc-modal-img"
+      }) : /*#__PURE__*/React.createElement("div", {
+        className: "pc-modal-numeral"
+      }, String(expandedIdx + 1).padStart(2, '0'))), /*#__PURE__*/React.createElement("div", {
+        className: "pc-modal-body"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "pc-modal-meta"
+      }, /*#__PURE__*/React.createElement("span", {
+        className: "pc-detail-idx"
+      }, String(expandedIdx + 1).padStart(2, '0'), " / ", String(count).padStart(2, '0')), /*#__PURE__*/React.createElement("span", {
+        className: "pc-detail-tag"
+      }, ep.tag)), /*#__PURE__*/React.createElement("h3", {
+        className: "pc-modal-name"
+      }, ep.name), /*#__PURE__*/React.createElement("p", {
+        className: "pc-modal-desc"
+      }, ep.desc), /*#__PURE__*/React.createElement("div", {
+        className: "pc-detail-foot",
+        style: {
+          justifyContent: 'flex-start',
+          marginTop: 24
+        }
+      }, ep.tech && /*#__PURE__*/React.createElement("div", {
+        className: "pc-detail-tech",
+        style: {
+          justifyContent: 'flex-start'
+        }
+      }, ep.tech.map(t => /*#__PURE__*/React.createElement("span", {
+        key: t
+      }, t))), ep.cta && /*#__PURE__*/React.createElement("a", {
+        className: "pc-detail-cta",
+        href: ep.cta.href,
+        target: "_blank",
+        rel: "noopener"
+      }, ep.cta.label, " →")))));
+    })());
   }
-
   const mount = document.getElementById('projects-carousel-root');
-  ReactDOM.createRoot(mount).render(<ProjectsCarousel projects={PROJECTS}/>);
+  ReactDOM.createRoot(mount).render(/*#__PURE__*/React.createElement(ProjectsCarousel, {
+    projects: PROJECTS
+  }));
 })();
+});
 </script>
 
 <!-- ═══ SKILLS ═══ -->
@@ -2583,10 +3049,10 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
             <div class="pc-desc">Designed physical therapy protocols and delivered specialized courses - <strong style="color:var(--fg);font-weight:500">CPR</strong>, <strong style="color:var(--fg);font-weight:500">Hyperblade myofascial release</strong>, myofascial decompression. Proficient in <strong style="color:var(--fg);font-weight:500">thoracic &amp; cervical spine thrust</strong> manipulation. Clinical PT services and course consulting, part-time.</div>
           </div>
           <div class="pc-media">
-            <img src="IMG_5795.GIF" alt="" onclick="showLightbox(this.src)">
-            <img src="IMG_5796.GIF" alt="" onclick="showLightbox(this.src)">
-            <img src="IMG_5797.GIF" alt="" onclick="showLightbox(this.src)">
-            <img src="thrust_cropped.GIF" alt="" onclick="showLightbox(this.src)">
+            <img loading="lazy" src="IMG_5795.GIF" alt="" onclick="showLightbox(this.src)">
+            <img loading="lazy" src="IMG_5796.GIF" alt="" onclick="showLightbox(this.src)">
+            <img loading="lazy" src="IMG_5797.GIF" alt="" onclick="showLightbox(this.src)">
+            <img loading="lazy" src="thrust_cropped.GIF" alt="" onclick="showLightbox(this.src)">
           </div>
         </div>
         <div class="practice-card album">
@@ -2597,9 +3063,9 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
             <div class="pc-desc">Coaching experience with <strong style="color:var(--fg);font-weight:500">recreational and competitive players</strong> - technical training, match strategy, and injury prevention.</div>
           </div>
           <div class="pc-media">
-            <img src="badminton1.JPG" alt="" onclick="showLightbox(this.src)">
-            <img src="badminton2.jpg" alt="" onclick="showLightbox(this.src)">
-            <img src="badminton3.JPG" alt="" onclick="showLightbox(this.src)">
+            <img loading="lazy" src="badminton1.JPG" alt="" onclick="showLightbox(this.src)">
+            <img loading="lazy" src="badminton2.jpg" alt="" onclick="showLightbox(this.src)">
+            <img loading="lazy" src="badminton3.JPG" alt="" onclick="showLightbox(this.src)">
           </div>
         </div>
       </div>
@@ -2639,8 +3105,8 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
       <div class="project-name" style="font-size:0.88rem;font-weight:400;color:var(--muted);margin-bottom:14px;font-family:var(--sans)">优秀青少年篮球运动员慢性腰痛运动康复个案分析</div>
       <div class="project-desc" style="margin-bottom:12px">Selected as <strong style="color:var(--fg)">Outstanding Undergraduate Thesis</strong> by the BSU School of Sports Medicine & Rehabilitation (Class of 2023). The athlete treated during this study went on to earn <strong style="color:var(--fg)">Most Valuable Player</strong> at the 2023 National U17 Women's Basketball League Top-16 Finals.</div>
       <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
-      <img src="elite athlete·.JPG" style="height:150px;width:auto;border-radius:8px;cursor:pointer" alt="Elite Athlete Case Study" onclick="showLightbox(this.src)">
-      <img src="thesis_main.jpg" style="height:150px;width:auto;border-radius:8px;cursor:pointer" alt="Basketball rehabilitation"><img src="thesis_basketball.jpg" style="height:150px;width:auto;border-radius:8px;cursor:pointer" alt="Thesis defense">
+      <img loading="lazy" src="elite athlete·.JPG" style="height:150px;width:auto;border-radius:8px;cursor:pointer" alt="Elite Athlete Case Study" onclick="showLightbox(this.src)">
+      <img loading="lazy" src="thesis_main.jpg" style="height:150px;width:auto;border-radius:8px;cursor:pointer" alt="Basketball rehabilitation"><img loading="lazy" src="thesis_basketball.jpg" style="height:150px;width:auto;border-radius:8px;cursor:pointer" alt="Thesis defense">
       </div>
       </div>
       </div>
@@ -2654,7 +3120,7 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
     <div class="section-divider"></div>
     <div class="edu-grid">
       <div class="edu-card">
-        <div class="edu-seal-wrap"><img class="edu-seal-img" src="edu_cmu.png" alt="CMU"></div>
+        <div class="edu-seal-wrap"><img loading="lazy" class="edu-seal-img" src="edu_cmu.png" alt="CMU"></div>
         <div class="edu-body">
           <div class="edu-period">Class of 2027 <span class="sep">·</span> Pittsburgh, PA <span class="sep">·</span> STEM-designated</div>
           <div class="edu-degree">M.S. Public Policy &amp; Management, Data Analytics</div>
@@ -2677,7 +3143,7 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
       </div>
 
       <div class="edu-card peach">
-        <div class="edu-seal-wrap"><img class="edu-seal-img" src="edu_bsu.png" alt="BSU" style="object-fit:contain;background:#fff;padding:6px"></div>
+        <div class="edu-seal-wrap"><img loading="lazy" class="edu-seal-img" src="edu_bsu.png" alt="BSU" style="object-fit:contain;background:#fff;padding:6px"></div>
         <div class="edu-body">
           <div class="edu-period">2019 - 2023 <span class="sep">·</span> Beijing, China</div>
           <div class="edu-degree">B.S. Sports Rehabilitation / Exercise Science</div>
@@ -2698,7 +3164,7 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
             <div class="gpa-lbl">Graduated</div>
           </div>
           <div class="extra">
-            <img src="edu_sydney.jpg" alt="Sydney DPT Offer" onclick="showLightbox(this.src)">
+            <img loading="lazy" src="edu_sydney.jpg" alt="Sydney DPT Offer" onclick="showLightbox(this.src)">
             <div class="extra-cap">USyd DPT<br>Offer</div>
           </div>
         </div>
@@ -2732,14 +3198,14 @@ ReactDOM.createRoot(document.getElementById('experience-timeline-root')).render(
       </style>
       <div style="overflow:hidden;margin-top:24px;width:100%">
         <div style="display:flex;gap:24px;animation:scroll-left 20s linear infinite;width:max-content" onmouseenter="this.style.animationPlayState='paused'" onmouseleave="this.style.animationPlayState='running'">
-          <img src="esg cfa.png" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
-          <img src="claude certificate.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
-          <img src="aha certified.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
-          <img src="wset.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
-          <img src="esg cfa.png" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
-          <img src="claude certificate.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
-          <img src="aha certified.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
-          <img src="wset.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img loading="lazy" src="esg cfa.png" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img loading="lazy" src="claude certificate.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img loading="lazy" src="aha certified.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img loading="lazy" src="wset.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img loading="lazy" src="esg cfa.png" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img loading="lazy" src="claude certificate.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img loading="lazy" src="aha certified.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
+          <img loading="lazy" src="wset.jpg" style="height:200px;width:auto;border-radius:8px;flex-shrink:0">
         </div>
       </div>
       </div>
