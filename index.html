@@ -1513,9 +1513,18 @@ body.is-loading{overflow:hidden}
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
-/* timeline-data.js — all 10 experience entries, distilled from source. */
+/* timeline-data.js — all 12 experience entries, distilled from source. */
 
 window.TimelineData = [{
+  period: '2026 - Present',
+  current: true,
+  healthcare: true,
+  logo: 'C',
+  logoImg: 'edu_cmu.png',
+  role: 'Graduate Research Assistant, Operations Research and Health Policy',
+  company: 'Carnegie Mellon University, Heinz College · Pittsburgh, PA',
+  bullets: ['Built an end-to-end <strong>patient-selection and demand-forecasting pipeline</strong> for hospital-at-home care on a <b class="m-peach">153,980-admission</b> MIMIC-IV v3.1 extract; engineered a <b class="m-peach">190-column</b> day-level feature table from 10 raw clinical tables for a <b class="m-peach">36,027-admission</b> heart failure cohort.', 'Trained and validated two <strong>clinical risk gates</strong> (ICU escalation or in-hospital death; need for care not deliverable at home) using <strong>gradient-boosted trees and logistic regression</strong> under 5-fold patient-grouped cross-validation, reaching <b class="m-peach">AUROC 0.731 and 0.743</b> with bootstrap confidence intervals driving model selection.', 'Developed a <strong>21-quantile regression model</strong> forecasting remaining resource consumption, holding mean absolute coverage deviation to <b class="m-peach">0.0005</b> and cutting 90th-percentile pinball loss <b class="m-peach">13.9%</b> below a patient-blind baseline; delivered methods, ablations, and diagnostics to faculty in recurring written reports.']
+}, {
   period: '2026',
   current: true,
   healthcare: false,
