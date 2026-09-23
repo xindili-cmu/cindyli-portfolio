@@ -1379,17 +1379,11 @@ body.is-loading{overflow:hidden}
 <script>
 (function(){
   var pl=document.getElementById('preloader');
-  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var seen=false;
-  try{seen=sessionStorage.getItem('pl-seen')==='1'}catch(e){}
-  function finish(instant){
+  function finish(){
     document.body.classList.remove('is-loading');
-    try{sessionStorage.setItem('pl-seen','1')}catch(e){}
-    if(instant){pl.remove();return}
     pl.classList.add('done');
     setTimeout(function(){pl.remove()},750);
   }
-  if(seen||reduced){finish(true);return}
   var assets=['icon_medkit.png','icon_laptop.png','icon_bulb.png',
     '22070137a0675c9a19215c2a121509b5.jpg','a3acf861148f2eff266ebd3303d08a5c.jpg',
     'tri_base1.jpg','tri_rev1.jpg','tri_base2.jpg','tri_rev2.jpg'];
@@ -1412,7 +1406,7 @@ body.is-loading{overflow:hidden}
     var n=Math.floor(shown);
     countEl.textContent=n;
     fillEl.style.width=shown+'%';
-    if(shown>=100){finish(false);return}
+    if(shown>=100){finish();return}
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
