@@ -1257,7 +1257,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
    LAYOUT VARIANTS — switched via [data-layout] on .rail-section
    ═════════════════════════════════════════════════════════════════ */
 
-/* ─── A · Spacious (舒展) ─────────────────────────────────────────
+/* ─── A · Spacious ─────────────────────────────────────────
    Uniform layout, just give everything more room: wider cards,
    bigger gap, tag has clean breathing room above the label.       */
 .rail-section[data-layout="spacious"] {
@@ -1278,7 +1278,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 .rail-section[data-layout="spacious"] .exp-label-co { font-size: 0.62rem; }
 .rail-section[data-layout="spacious"] .rail-nav { top: calc(36px + 170px); }
 
-/* ─── B · Stringed (吊绳) ─────────────────────────────────────────
+/* ─── B · Stringed ─────────────────────────────────────────
    Tag stays threaded on the rail; label drops further below with a
    visible thin string connecting the two. Reads like a real
    luggage tag dangling from a label.                              */
@@ -1315,7 +1315,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 }
 .rail-section[data-layout="stringed"] .rail-nav { top: calc(36px + 190px); }
 
-/* ─── C · Staggered (错落) ────────────────────────────────────────
+/* ─── C · Staggered ────────────────────────────────────────
    Each card = a luggage tag rigidly threaded on the bamboo rail, with a
    polaroid hanging from it on a string. Per-card string length & resting
    tilt (set inline from JSX via --str/--rest) give the row a natural,
@@ -1554,7 +1554,7 @@ window.TimelineData = [{
   logo: 'M',
   logoImg: 'assets/logo_msh.png',
   role: 'Business Development Manager (Full-Time)',
-  company: 'MSH China (万欣和) · International Health Insurance',
+  company: 'MSH China · International Health Insurance',
   bullets: ['Exceeded annual targets by <b class="m-peach">239%</b>, generating over <b class="m-peach">$1M</b> in new business through strategic client acquisition and data-driven market positioning.', 'Managed a global portfolio of <b class="m">2,000+</b> high-net-worth and corporate clients, delivering tailored medical insurance solutions to support retention and revenue growth, leveraging comprehensive knowledge of <strong>China\'s tiered healthcare network and provider landscape</strong>.', 'Analyzed group insurance client portfolios, synthesizing claims trends, utilization patterns, and risk profiles across <b class="m">50K+ insured lives</b> to inform underwriting and renewal strategy.', 'Led end-to-end design of a customized corporate insurance plan for an enterprise with <b class="m">50K+ employees</b>, partnering with actuarial teams on risk assessment, pricing, and product structuring.']
 }, {
   period: '2024 - 2025',
@@ -1577,7 +1577,7 @@ window.TimelineData = [{
   logo: 'B',
   logoImg: 'assets/logo_eden.jpg',
   role: 'Sports Medicine Intern',
-  company: 'Beijing Eden Hospital (怡德医院) · Beijing',
+  company: 'Beijing Eden Hospital · Beijing',
   gallery: ['assets/exp_beijing_united_1.jpg', 'assets/exp_beijing_united_2.jpg'],
   bullets: ['Managed <b class="m">60+ patient case records</b> and operated the hospital registration system independently.', 'Processed <b class="m">30+ commercial insurance pre-authorizations</b>.', 'Delivered <strong>rehabilitation training</strong> to Chinese and international patients.']
 }, {
@@ -1620,7 +1620,7 @@ window.TimelineData = [{
   logo: 'S',
   logoImg: 'assets/logo_spine.jpg',
   role: 'Physical Therapist (Intern)',
-  company: 'Spine & Pain Rehabilitation Center (施柏恩) · Shanghai',
+  company: 'Spine & Pain Rehabilitation Center · Shanghai',
   bullets: ['Assessed <strong>physiological function and mobility data</strong> for <b class="m">60+ patients</b>.', 'Co-designed physical therapy prescriptions with physicians.', 'Independently managed <b class="m">30+ patient cases</b> through full treatment cycles.']
 }];
 /* Timeline.jsx — hybrid experience timeline (v3).
@@ -2600,12 +2600,12 @@ document.addEventListener('DOMContentLoaded', function(){
     useCallback
   } = React;
   const PROJECTS = [{
-    tag: 'AI Product',
+    tag: 'PT & Rehab AI Startup',
     cat: 'health',
-    name: 'Cadence 步频 - PT Evidence Curation',
+    name: 'Cadence Evidence',
     desc: 'Daily physical-therapy evidence curation, in production since June 2026. A cron-driven pipeline searches, dedupes, and scores new literature; every issue is human-reviewed before it ships to the website, WeChat, Xiaohongshu, and LinkedIn. 900+ items curated to date, with assertion gates and wiring tests keeping the unattended pipeline honest.',
     tech: ['GitHub Actions', 'Exa API', 'React', 'Cloudflare Pages'],
-    thumb: 'cadence-cover.jpg',
+    thumb: 'cadence-evidence-cover.jpg',
     theme: 'healthcare',
     rawThumb: true,
     cta: {
@@ -3166,7 +3166,7 @@ document.addEventListener('DOMContentLoaded', function(){
           <div class="pc-body">
             <div class="pc-meta">2023 - 2025 · Shanghai</div>
             <div class="pc-role">Physical Therapist &amp; Course Instructor</div>
-            <div class="pc-org">True Health Chiropractic <em>(凯诺康美式整脊中心)</em></div>
+            <div class="pc-org">True Health Chiropractic</div>
             <div class="pc-desc">Designed physical therapy protocols and delivered specialized courses - <strong style="color:var(--fg);font-weight:500">CPR</strong>, <strong style="color:var(--fg);font-weight:500">Hyperblade myofascial release</strong>, myofascial decompression. Proficient in <strong style="color:var(--fg);font-weight:500">thoracic &amp; cervical spine thrust</strong> manipulation. Clinical PT services and course consulting, part-time.</div>
           </div>
           <div class="pc-media">
@@ -3207,10 +3207,9 @@ document.addEventListener('DOMContentLoaded', function(){
         <span class="project-tag" style="border-color:rgba(255,179,138,0.4);color:var(--accent2)">First Prize Paper</span>
         <span class="project-tag" style="border-color:rgba(255,179,138,0.4);color:var(--accent2)">Core Journal</span>
       </div>
-      <div class="project-name">Comparative Effects of Exercise Therapies on Flexible Flatfoot in College Students</div>
-      <div class="project-name" style="font-size:0.88rem;font-weight:400;color:var(--muted);margin-bottom:14px;font-family:var(--sans)">不同运动疗法对大学生柔性扁平足干预效果对比</div>
+      <div class="project-name" style="margin-bottom:14px">Comparative Effects of Exercise Therapies on Flexible Flatfoot in College Students</div>
       <div class="project-desc" style="margin-bottom:12px">Core member of this research project (2021-2022), which received <strong style="color:var(--fg)">national-level funding</strong> under China's College Student Innovation & Entrepreneurship Program. The study was awarded <strong style="color:var(--fg)">First Prize for Outstanding Paper</strong> at the 2022 Chinese Association of Rehabilitation Medicine Annual Conference.</div>
-      <div class="project-desc">Published in <strong style="color:var(--fg)">Chinese Journal of Sports Medicine</strong> (中国运动医学杂志), 2024 Vol.9, a core Chinese academic journal (CNKI indexed).</div>
+      <div class="project-desc">Published in <strong style="color:var(--fg)">Chinese Journal of Sports Medicine</strong>, 2024 Vol.9, a core Chinese academic journal (CNKI indexed).</div>
       <div class="project-tech" style="margin-top:16px">
         <span>DOI: 10.16038/j.1000-6710.2024.09.010</span>
         <span>CNKI: 10.26914/c.cnkihy.2023.001876</span>
@@ -3222,8 +3221,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <span class="project-tag">Thesis · Outstanding</span>
         <span class="project-tag" style="border-color:rgba(255,179,138,0.4);color:var(--accent2)">Case Study</span>
       </div>
-      <div class="project-name">Chronic Low Back Pain Rehabilitation Case Study: Elite Youth Basketball Athlete</div>
-      <div class="project-name" style="font-size:0.88rem;font-weight:400;color:var(--muted);margin-bottom:14px;font-family:var(--sans)">优秀青少年篮球运动员慢性腰痛运动康复个案分析</div>
+      <div class="project-name" style="margin-bottom:14px">Chronic Low Back Pain Rehabilitation Case Study: Elite Youth Basketball Athlete</div>
       <div class="project-desc" style="margin-bottom:12px">Selected as <strong style="color:var(--fg)">Outstanding Undergraduate Thesis</strong> by the BSU School of Sports Medicine & Rehabilitation (Class of 2023). The athlete treated during this study went on to earn <strong style="color:var(--fg)">Most Valuable Player</strong> at the 2023 National U17 Women's Basketball League Top-16 Finals.</div>
       <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
       <img loading="lazy" src="elite athlete·.JPG" style="height:150px;width:auto;border-radius:8px;cursor:pointer" alt="Elite Athlete Case Study" onclick="showLightbox(this.src)">
@@ -3268,7 +3266,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <div class="edu-body">
           <div class="edu-period">2019 - 2023 <span class="sep">·</span> Beijing, China</div>
           <div class="edu-degree">B.S. Sports Rehabilitation / Exercise Science</div>
-          <div class="edu-school"><em>Beijing Sport University</em> <span class="zh">(北京体育大学)</span> · School of Sports Medicine &amp; Rehabilitation</div>
+          <div class="edu-school"><em>Beijing Sport University</em> · School of Sports Medicine &amp; Rehabilitation</div>
           <div class="edu-honors">
             <span class="h-pill">4-Yr Scholarship</span>
             <span class="h-pill">Outstanding Student ×4</span>
