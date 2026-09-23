@@ -268,9 +268,9 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 .practice-card .pc-org em{font-style:normal;color:var(--fg-dim)}
 .practice-card .pc-desc{font-size:.86rem;line-height:1.7;color:rgba(255,255,255,0.6);font-weight:300}
 .practice-card .pc-media{display:flex;gap:0;padding:0 28px 26px}
-.practice-card .pc-media img{flex:1;min-width:0;height:120px;object-fit:cover;border-radius:6px;border:1px solid rgba(255,255,255,0.08);filter:saturate(.85);transition:filter .3s,transform .3s;cursor:pointer}
-.practice-card .pc-media img:not(:last-child){margin-right:6px}
-.practice-card .pc-media img:hover{filter:saturate(1.15);transform:translateY(-2px)}
+.practice-card .pc-media img,.practice-card .pc-media video{flex:1;min-width:0;height:120px;object-fit:cover;border-radius:6px;border:1px solid rgba(255,255,255,0.08);filter:saturate(.85);transition:filter .3s,transform .3s;cursor:pointer}
+.practice-card .pc-media img:not(:last-child),.practice-card .pc-media video:not(:last-child){margin-right:6px}
+.practice-card .pc-media img:hover,.practice-card .pc-media video:hover{filter:saturate(1.15);transform:translateY(-2px)}
 .practice-card.album .pc-media{position:relative;height:140px;padding:0 28px 28px}
 .practice-card.album .pc-media img{position:absolute;width:96px;height:120px;flex:none;transition:transform .35s ease,filter .3s}
 .practice-card.album .pc-media img:nth-child(1){left:28px;top:0;transform:rotate(-4deg);z-index:3}
@@ -314,6 +314,8 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 @media(max-width:680px){.vol-row-item{grid-template-columns:64px 1fr;gap:14px}.vol-row-item .v-tag{display:none}}
 
 /* Certs photo carousel — kept from original */
+.certs-other{margin-top:14px;font-size:.78rem;color:var(--muted);font-weight:300}
+.certs-other .lbl{font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;margin-right:12px;opacity:.8}
 .certs-gallery{margin-top:24px;padding-top:22px;border-top:1px solid rgba(255,255,255,0.04)}
 .certs-gallery > div{overflow:hidden;width:100%;mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent)}
 .certs-gallery img{height:140px !important;border-radius:8px;flex-shrink:0;filter:saturate(.85);transition:filter .3s}
@@ -1524,7 +1526,7 @@ document.addEventListener('DOMContentLoaded', function(){
 /* timeline-data.js — all 12 experience entries, distilled from source. */
 
 window.TimelineData = [{
-  period: '2026 - Present',
+  period: '2026',
   current: true,
   healthcare: true,
   logo: 'C',
@@ -1534,7 +1536,6 @@ window.TimelineData = [{
   bullets: ['Built an end-to-end <strong>patient-selection and demand-forecasting pipeline</strong> for hospital-at-home care on a <b class="m-peach">153,980-admission</b> MIMIC-IV v3.1 extract; engineered a <b class="m-peach">190-column</b> day-level feature table from 10 raw clinical tables for a <b class="m-peach">36,027-admission</b> heart failure cohort.', 'Trained and validated two <strong>clinical risk gates</strong> (ICU escalation or in-hospital death; need for care not deliverable at home) using <strong>gradient-boosted trees and logistic regression</strong> under 5-fold patient-grouped cross-validation, reaching <b class="m-peach">AUROC 0.731 and 0.743</b> with bootstrap confidence intervals driving model selection.', 'Developed a <strong>21-quantile regression model</strong> forecasting remaining resource consumption, holding mean absolute coverage deviation to <b class="m-peach">0.0005</b> and cutting 90th-percentile pinball loss <b class="m-peach">13.9%</b> below a patient-blind baseline; delivered methods, ablations, and diagnostics to faculty in recurring written reports.']
 }, {
   period: '2026',
-  current: true,
   healthcare: false,
   logo: 'A',
   logoImg: 'assets/logo_atlas.png',
@@ -1651,8 +1652,10 @@ const SPLIT_AT = 6; // first N items render as vertical, rest hang horizontal
 window.showLightbox = window.showLightbox || function (src) {
   const overlay = document.createElement('div');
   overlay.className = 'tl-lightbox';
-  const img = document.createElement('img');
+  const isVid = /\.mp4(\?|$)/i.test(src);
+  const img = document.createElement(isVid ? 'video' : 'img');
   img.src = src;
+  if (isVid) { img.autoplay = true; img.muted = true; img.loop = true; img.playsInline = true; }
   overlay.appendChild(img);
   const close = () => {
     overlay.style.opacity = '0';
@@ -3119,8 +3122,19 @@ document.addEventListener('DOMContentLoaded', function(){
         </ul>
       </div>
       <div class="skill-group" data-num="02">
+        <div class="sg-tag">Modeling</div>
+        <h3>Operations Research &amp; ML</h3>
+        <ul class="skill-pills">
+          <li class="featured">Optimization · Gurobi</li>
+          <li class="featured">Gradient-Boosted Trees · Logistic Regression</li>
+          <li>Quantile Regression</li>
+          <li>Patient-Grouped Cross-Validation · Bootstrap CIs</li>
+          <li>Clinical Data · MIMIC-IV</li>
+        </ul>
+      </div>
+      <div class="skill-group" data-num="03">
         <div class="sg-tag">Intelligence</div>
-        <h3>AI / ML / NLP</h3>
+        <h3>AI / NLP</h3>
         <ul class="skill-pills">
           <li class="featured">LLM APIs · Claude, OpenAI</li>
           <li class="featured">RAG Systems · FAISS, Chroma</li>
@@ -3129,7 +3143,7 @@ document.addEventListener('DOMContentLoaded', function(){
           <li>Neural Networks &amp; Vision Models</li>
         </ul>
       </div>
-      <div class="skill-group" data-num="03">
+      <div class="skill-group" data-num="04">
         <div class="sg-tag">Stack</div>
         <h3>Tools &amp; Platforms</h3>
         <ul class="skill-pills">
@@ -3140,7 +3154,7 @@ document.addEventListener('DOMContentLoaded', function(){
           <li>Git / GitHub</li>
         </ul>
       </div>
-      <div class="skill-group warm" data-num="04">
+      <div class="skill-group warm" data-num="05" style="grid-column:1/-1">
         <div class="sg-tag">Clinical</div>
         <h3>Sports Medicine &amp; Rehabilitation</h3>
         <ul class="skill-pills">
@@ -3169,10 +3183,10 @@ document.addEventListener('DOMContentLoaded', function(){
             <div class="pc-desc">Designed physical therapy protocols and delivered specialized courses - <strong style="color:var(--fg);font-weight:500">CPR</strong>, <strong style="color:var(--fg);font-weight:500">Hyperblade myofascial release</strong>, myofascial decompression. Proficient in <strong style="color:var(--fg);font-weight:500">thoracic &amp; cervical spine thrust</strong> manipulation. Clinical PT services and course consulting, part-time.</div>
           </div>
           <div class="pc-media">
-            <img loading="lazy" src="IMG_5795.GIF" alt="" onclick="showLightbox(this.src)">
-            <img loading="lazy" src="IMG_5796.GIF" alt="" onclick="showLightbox(this.src)">
-            <img loading="lazy" src="IMG_5797.GIF" alt="" onclick="showLightbox(this.src)">
-            <img loading="lazy" src="thrust_cropped.GIF" alt="" onclick="showLightbox(this.src)">
+            <video src="IMG_5795.mp4" autoplay muted loop playsinline preload="metadata" onclick="showLightbox(this.currentSrc||this.src)"></video>
+            <video src="IMG_5796.mp4" autoplay muted loop playsinline preload="metadata" onclick="showLightbox(this.currentSrc||this.src)"></video>
+            <video src="IMG_5797.mp4" autoplay muted loop playsinline preload="metadata" onclick="showLightbox(this.currentSrc||this.src)"></video>
+            <video src="thrust_cropped.mp4" autoplay muted loop playsinline preload="metadata" onclick="showLightbox(this.currentSrc||this.src)"></video>
           </div>
         </div>
         <div class="practice-card album">
@@ -3199,6 +3213,23 @@ document.addEventListener('DOMContentLoaded', function(){
     <span class="section-label">05 / Research & Publications</span>
     <h2 class="section-title">Academic Research</h2>
     <div class="section-divider"></div>
+
+    <div class="project-card healthcare" style="margin-bottom:32px">
+      <div style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+        <span class="project-tag">Current · Graduate Research</span>
+        <span class="project-tag" style="border-color:rgba(255,179,138,0.4);color:var(--accent2)">Hospital-at-Home</span>
+        <span class="project-tag" style="border-color:rgba(255,179,138,0.4);color:var(--accent2)">Operations Research</span>
+      </div>
+      <div class="project-name" style="margin-bottom:14px">Patient Selection &amp; Demand Forecasting for Hospital-at-Home Care</div>
+      <div class="project-desc" style="margin-bottom:12px">Graduate research in Operations Research and Health Policy at <strong style="color:var(--fg)">Carnegie Mellon University, Heinz College</strong> (2026 - Present). An end-to-end pipeline built on a <strong style="color:var(--fg)">153,980-admission MIMIC-IV v3.1</strong> extract, with a 190-column day-level feature table for a <strong style="color:var(--fg)">36,027-admission heart failure cohort</strong>.</div>
+      <div class="project-desc">Two clinical risk gates (ICU escalation or in-hospital death; need for care not deliverable at home) reach <strong style="color:var(--fg)">AUROC 0.731 and 0.743</strong> under 5-fold patient-grouped cross-validation. A 21-quantile regression model forecasts remaining resource consumption, cutting 90th-percentile pinball loss <strong style="color:var(--fg)">13.9%</strong> below a patient-blind baseline.</div>
+      <div class="project-tech" style="margin-top:16px">
+        <span>Gradient-Boosted Trees</span>
+        <span>Logistic Regression</span>
+        <span>Quantile Regression</span>
+        <span>MIMIC-IV v3.1</span>
+      </div>
+    </div>
 
     <div class="project-card healthcare" style="margin-bottom:32px">
       <div style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap">
@@ -3269,7 +3300,6 @@ document.addEventListener('DOMContentLoaded', function(){
           <div class="edu-honors">
             <span class="h-pill">4-Yr Scholarship</span>
             <span class="h-pill">Outstanding Student ×4</span>
-            <span class="h-pill">USyd DPT Offer</span>
           </div>
           <div class="edu-roles">
             <div class="r"><strong>Head of Rehabilitation Division</strong>, Student Union <span class="m">2019-2022</span> - organized campus rehab skills competitions; coordinated first-aid coverage for <span class="m">100+ sporting events</span>.</div>
@@ -3292,7 +3322,7 @@ document.addEventListener('DOMContentLoaded', function(){
     <div class="certs-row">
       <div class="certs-head">
         <div class="lbl">Certifications</div>
-        <div class="cnt">- ten credentials, across finance, clinical, and sport</div>
+        <div class="cnt">- eleven credentials, across finance, clinical, sport, and AI</div>
       </div>
       <div class="certs-grid">
         <div class="cert-card featured" data-cat="Finance"><div class="c-name">ESG CFA Holder</div><div class="c-detail">CFA Institute · Sustainability-focused</div></div>
@@ -3303,9 +3333,9 @@ document.addEventListener('DOMContentLoaded', function(){
         <div class="cert-card peach" data-cat="Sport"><div class="c-name">Tennis Referee · L3</div><div class="c-detail">National Referee Certification</div></div>
         <div class="cert-card peach" data-cat="Sport"><div class="c-name">Badminton Referee · L3</div><div class="c-detail">National Referee Certification</div></div>
         <div class="cert-card peach" data-cat="Sport"><div class="c-name">Table Tennis Referee · L3</div><div class="c-detail">National Referee Certification</div></div>
-        <div class="cert-card" data-cat="Wine"><div class="c-name">WSET Level 2</div><div class="c-detail">Pass with Distinction</div></div>
-        <div class="cert-card" data-cat="License"><div class="c-name">Motorcycle License</div><div class="c-detail">Class E · Road permit</div></div>
+        <div class="cert-card" data-cat="AI"><div class="c-name">Claude with the Anthropic API</div><div class="c-detail">Anthropic · Certificate of Completion</div></div>
       </div>
+      <div class="certs-other"><span class="lbl">Other</span>WSET Level 2 (Pass with Distinction) · Motorcycle License (Class E)</div>
 
       <div class="certs-gallery">
 <style>
@@ -3649,8 +3679,9 @@ function updateTriReveal(card, cx, cy){
 function showLightbox(src){
   let overlay=document.createElement('div');
   overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:pointer';
-  let img=document.createElement('img');
+  let img=document.createElement(/\.mp4(\?|$)/i.test(src)?'video':'img');
   img.src=src;
+  if(img.tagName==='VIDEO'){img.autoplay=true;img.muted=true;img.loop=true;img.playsInline=true;}
   img.style.cssText='max-width:90vw;max-height:85vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.6)';
   overlay.appendChild(img);
   overlay.onclick=function(){document.body.removeChild(overlay)};
