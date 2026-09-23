@@ -585,6 +585,14 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 }
 
 /* projects carousel */
+.pc-wrap{display:flex;flex-direction:column;align-items:center;gap:40px;width:100%}
+.pc-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.pc-tab{font-family:var(--sans);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;color:var(--muted);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-radius:100px;padding:9px 18px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:color .25s,border-color .25s,background .25s}
+.pc-tab:hover{color:var(--fg);border-color:rgba(255,255,255,0.3)}
+.pc-tab.on{color:var(--accent);border-color:var(--accent);background:rgba(200,162,255,0.08)}
+.pc-tab-health.on{color:var(--accent2);border-color:var(--accent2);background:rgba(255,179,138,0.08)}
+.pc-tab-n{font-size:0.62rem;opacity:.6;font-variant-numeric:tabular-nums}
+@media(max-width:600px){.pc-tab{padding:7px 12px;font-size:0.64rem;letter-spacing:0.1em}}
 .pc-shell{display:flex;flex-direction:column;align-items:center;gap:48px;width:100%}
 .pc-hint{display:flex;align-items:center;gap:14px;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500;flex-wrap:wrap;justify-content:center;margin-bottom:-40px}
 .pc-hint-item{display:inline-flex;align-items:center;gap:6px}
@@ -2593,6 +2601,7 @@ document.addEventListener('DOMContentLoaded', function(){
   } = React;
   const PROJECTS = [{
     tag: 'AI Product',
+    cat: 'health',
     name: 'Cadence 步频 - PT Evidence Curation',
     desc: 'Daily physical-therapy evidence curation, in production since June 2026. A cron-driven pipeline searches, dedupes, and scores new literature; every issue is human-reviewed before it ships to the website, WeChat, Xiaohongshu, and LinkedIn. 900+ items curated to date, with assertion gates and wiring tests keeping the unattended pipeline honest.',
     tech: ['GitHub Actions', 'Exa API', 'React', 'Cloudflare Pages'],
@@ -2605,6 +2614,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }, {
     tag: 'AI / NLP',
+    cat: 'ai',
     name: 'Climate Finance Research Agent',
     desc: 'LLM-powered agent for climate finance research. Tavily search, Claude Sonnet, Chroma Cloud vector DB with Streamlit interface.',
     tech: ['Python', 'Claude API', 'Chroma', 'Streamlit'],
@@ -2616,6 +2626,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }, {
     tag: 'Full-Stack / CRM',
+    cat: 'web',
     name: 'Meridian - Relationship Intelligence CRM',
     desc: 'Relationship-intelligence CRM built for a venture coalition\'s investor-relations team. Eight views spanning contact management, investor↔founder matching, intro-path tracking, an outreach queue, and two D3 force-directed graphs for the network and capital map. Public demo runs on fully fictional data.',
     tech: ['React', 'Vite', 'D3.js', 'Apps Script'],
@@ -2627,6 +2638,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }, {
     tag: 'Data Product',
+    cat: 'climate',
     name: 'The Atlas Capital Matrix',
     desc: 'Public Top 100 family-office ranking. Every researched row carries a source link and a Confirmed / Reported / Inferred evidence tag; an activity-weighted Atlas Score re-ranks the list as an AI verification agent re-checks recent deals and scouts new entrants each week.',
     tech: ['Node/Fastify', 'PostgreSQL', 'Railway', 'Claude API'],
@@ -2638,6 +2650,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }, {
     tag: 'NLP / RAG',
+    cat: 'ai',
     name: 'Hybrid RAG Pipeline (CMU 11-711)',
     desc: 'BM25 + FAISS hybrid retrieval with Qwen2.5-3B-Instruct, achieving 95% accuracy. Deployed on AWS EC2.',
     tech: ['Python', 'FAISS', 'HuggingFace', 'AWS'],
@@ -2645,6 +2658,7 @@ document.addEventListener('DOMContentLoaded', function(){
     rawThumb: true
   }, {
     tag: 'Energy & Health',
+    cat: 'health',
     name: 'The Changing Landscape of U.S. Power Generation',
     desc: 'Long-form policy analysis paired with an interactive county-level dashboard combining EIA, EPA eGRID, and CDC PLACES data for the energy-health nexus.',
     tech: ['R', 'Posit', 'EIA API', 'eGRID'],
@@ -2657,6 +2671,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }, {
     tag: 'Automation',
+    cat: 'climate',
     name: 'Climate Deal Intelligence System',
     desc: 'Automated deal intelligence pipeline using n8n, SEC EDGAR API, and NewsAPI for climate / energy deSPAC monitoring.',
     tech: ['n8n', 'PostgreSQL', 'EDGAR', 'NewsAPI'],
@@ -2664,6 +2679,7 @@ document.addEventListener('DOMContentLoaded', function(){
     rawThumb: true
   }, {
     tag: 'Web Design & Dev',
+    cat: 'web',
     name: 'Fusion Park - Corporate Website',
     desc: 'End-to-end design and build of the corporate site for a climate, energy and hard-tech financial advisory firm. Scroll-driven 3D interactions across services, investment focus, team and contact sections.',
     tech: ['React', 'Vite', 'GSAP', 'Netlify'],
@@ -2675,6 +2691,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }, {
     tag: 'CRM',
+    cat: 'web',
     name: 'AI-Powered CRM Analytics System',
     desc: 'Claude-driven analytics agent over the HubSpot API. Automates weekly extraction, trend analysis and report generation across 3,500+ leads.',
     tech: ['HubSpot', 'Claude API', 'Tableau'],
@@ -2682,6 +2699,7 @@ document.addEventListener('DOMContentLoaded', function(){
     rawThumb: true
   }, {
     tag: 'Research',
+    cat: 'ai',
     name: 'IRCoT Multi-Hop QA',
     desc: 'Reproduced IRCoT baseline on HotpotQA. Debugged BM25 retriever, improved EM from 12.0% to 21.8%.',
     tech: ['Python', 'BM25', 'HotpotQA'],
@@ -2689,6 +2707,7 @@ document.addEventListener('DOMContentLoaded', function(){
     rawThumb: true
   }, {
     tag: 'Sales Analytics',
+    cat: 'health',
     name: 'Health Insurance Enrollment Dashboard',
     desc: 'Interactive HTML/Chart.js sales dashboard tracking 401 leads and 72.8% enrollment rate. Key insight: group chat engagement lifts conversion from 53% to 90%.',
     tech: ['HTML', 'Chart.js', 'Sales Analytics', 'CRM'],
@@ -3037,10 +3056,47 @@ document.addEventListener('DOMContentLoaded', function(){
       }, ep.cta.label, " →")))));
     })());
   }
+  const CATS = [{
+    id: 'health',
+    label: 'Healthcare'
+  }, {
+    id: 'ai',
+    label: 'AI & NLP'
+  }, {
+    id: 'climate',
+    label: 'Climate & Finance Data'
+  }, {
+    id: 'web',
+    label: 'Web & CRM'
+  }, {
+    id: 'all',
+    label: 'All'
+  }];
+  const ORDER = CATS.map(c => c.id);
+  const SORTED = PROJECTS.slice().sort((a, b) => ORDER.indexOf(a.cat) - ORDER.indexOf(b.cat));
+  function ProjectsSection() {
+    const [cat, setCat] = useState('health');
+    const list = cat === 'all' ? SORTED : PROJECTS.filter(p => p.cat === cat);
+    return /*#__PURE__*/React.createElement("div", {
+      className: "pc-wrap"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "pc-tabs",
+      role: "tablist"
+    }, CATS.map(c => /*#__PURE__*/React.createElement("button", {
+      key: c.id,
+      role: "tab",
+      "aria-selected": cat === c.id,
+      className: `pc-tab${cat === c.id ? ' on' : ''}${c.id === 'health' ? ' pc-tab-health' : ''}`,
+      onClick: () => setCat(c.id)
+    }, c.label, /*#__PURE__*/React.createElement("span", {
+      className: "pc-tab-n"
+    }, c.id === 'all' ? PROJECTS.length : PROJECTS.filter(p => p.cat === c.id).length)))), /*#__PURE__*/React.createElement(ProjectsCarousel, {
+      key: cat,
+      projects: list
+    }));
+  }
   const mount = document.getElementById('projects-carousel-root');
-  ReactDOM.createRoot(mount).render(/*#__PURE__*/React.createElement(ProjectsCarousel, {
-    projects: PROJECTS
-  }));
+  ReactDOM.createRoot(mount).render(/*#__PURE__*/React.createElement(ProjectsSection, null));
 })();
 });
 </script>
