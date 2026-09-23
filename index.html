@@ -3056,6 +3056,9 @@ document.addEventListener('DOMContentLoaded', function(){
     })());
   }
   const CATS = [{
+    id: 'all',
+    label: 'All'
+  }, {
     id: 'health',
     label: 'Healthcare'
   }, {
@@ -3067,14 +3070,11 @@ document.addEventListener('DOMContentLoaded', function(){
   }, {
     id: 'web',
     label: 'Web & CRM'
-  }, {
-    id: 'all',
-    label: 'All'
   }];
   const ORDER = CATS.map(c => c.id);
   const SORTED = PROJECTS.slice().sort((a, b) => ORDER.indexOf(a.cat) - ORDER.indexOf(b.cat));
   function ProjectsSection() {
-    const [cat, setCat] = useState('health');
+    const [cat, setCat] = useState('all');
     const list = cat === 'all' ? SORTED : PROJECTS.filter(p => p.cat === cat);
     return /*#__PURE__*/React.createElement("div", {
       className: "pc-wrap"
