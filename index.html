@@ -754,6 +754,17 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 .co-arrow { font-size: .75em; margin-left: 3px; opacity: .7; }
 .co-tagline { font-size: .78rem; font-style: italic; opacity: .7; margin: -4px 0 10px; }
 
+.tl-collapsible { cursor: pointer; padding-top: 14px; padding-bottom: 14px; }
+.tl-collapsible:hover { border-color: rgba(200, 162, 255, 0.22); background: rgba(255, 255, 255, 0.035); }
+.tl-collapsible:focus-visible { outline: 1px solid var(--accent); outline-offset: 2px; }
+.tl-toggle { position: absolute; top: 16px; right: 22px; font-size: .72rem; letter-spacing: .04em; color: var(--accent); opacity: .75; }
+.tl-collapsible:hover .tl-toggle { opacity: 1; }
+.tl-collapsible .tl-role { padding-right: 76px; }
+.tl-collapsible .tl-co { margin-bottom: 0; }
+.tl-collapsible .tl-collapse { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+.tl-collapsible .tl-collapse > .tl-bullets { overflow: hidden; min-height: 0; }
+.tl-collapsible.tl-open .tl-collapse { grid-template-rows: 1fr; }
+.tl-collapsible.tl-open .tl-collapse > .tl-bullets { padding-top: 16px; }
 .tl-bullets { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 0.9rem; line-height: 1.72; color: rgba(255, 255, 255, 0.66); font-weight: 300; }
 .tl-bullets li { position: relative; padding-left: 20px; }
 .tl-bullets li::before { content: ''; position: absolute; left: 0; top: 11px; width: 11px; height: 1px; background: var(--accent); border-radius: 1px; }
@@ -1554,6 +1565,7 @@ window.TimelineData = [{
   logo: 'T',
   role: 'Data Analyst Intern',
   company: 'Thiele Law PLLC · Pittsburgh, PA',
+  collapsible: true,
   bullets: ['Managed HubSpot CRM with <b class="m">3,500+ leads</b> and integrated Mailchimp campaigns (<b class="m">18% open rate</b>); ran cleaning, segmentation, and lead scoring to optimize the acquisition funnel.', 'Analyzed <b class="m">10+ competitor</b> consultation models across Avvo, FindLaw, and Justia; developed organic growth strategy with projected <b class="m">21% traffic growth</b>.', 'Built an <strong>AI-powered CRM analytics agent</strong> on HubSpot + Claude API, automating weekly extraction, trend analysis, and reporting - <b class="m">~3 hours/week</b> saved.']
 }, {
   period: '2023 - 2025',
@@ -1572,6 +1584,7 @@ window.TimelineData = [{
   logoImg: 'assets/logo_illuminera.png',
   role: 'Consulting Intern, Growth X',
   company: 'Illuminera Marketing Strategy Consulting (an IQVIA business) · Shanghai',
+  collapsible: true,
   url: 'https://www.illuminera.com/',
   bullets: ['Analyzed customer engagement data for brand-marketing projects, contributing to a projected <b class="m">15% engagement lift</b> for a major consumer goods client.', 'Automated social-media data extraction (Chanmama) with Python; uncovered a <strong>high-value consumer segment</strong> responsible for <b class="m">30% of client revenue</b>.', 'Co-authored <b class="m">4 market-trend papers</b> with senior consultants using corporate filings (10-K / 20-F); led <b class="m">10+ expert interviews</b> shaping strategy.']
 }, {
@@ -1580,6 +1593,7 @@ window.TimelineData = [{
   logo: '\u2295',
   role: 'PE Due Diligence Analyst',
   company: 'Multiple Firms · China, SE Asia, UK',
+  collapsible: true,
   bullets: ['Conducted end-to-end <strong>analytical due diligence</strong> for <b class="m">3 cross-sector investment opportunities</b> - TMT, automotive overseas expansion, and waste-to-energy - evaluating market trends, operational metrics, and financial viability.', 'Built and automated <strong>multi-scenario financial models (DCF, LBO)</strong> in Python, integrating data pipelines to execute valuation analytics and risk simulations across <strong>Mainland China, Taiwan, Southeast Asia, and UK</strong>.', 'Produced and presented data-driven insights for <b class="m">4+ investment memorandums</b>, visualizing financial projections through <strong>Tableau dashboards</strong>.']
 }, {
   period: '2023',
@@ -1771,8 +1785,10 @@ const ExperienceRow = ({
     logoImg,
     gallery,
     url,
-    tagline
+    tagline,
+    collapsible
   } = entry;
+  const [open, setOpen] = useState(false);
   const hasGallery = gallery && gallery.length > 0;
   const color = healthcare ? 'peach' : 'lavender';
   const parts = period.split(/\s*[-–—]\s*/);
@@ -1793,8 +1809,24 @@ const ExperienceRow = ({
     color: color,
     active: isActive
   })), /*#__PURE__*/React.createElement("div", {
-    className: "tl-card"
-  }, /*#__PURE__*/React.createElement("div", {
+    className: `tl-card${collapsible ? ' tl-collapsible' : ''}${collapsible && open ? ' tl-open' : ''}`,
+    onClick: collapsible ? e => {
+      if (e.target.closest('a')) return;
+      setOpen(o => !o);
+    } : undefined,
+    role: collapsible ? 'button' : undefined,
+    tabIndex: collapsible ? 0 : undefined,
+    "aria-expanded": collapsible ? open : undefined,
+    onKeyDown: collapsible ? e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setOpen(o => !o);
+      }
+    } : undefined
+  }, collapsible && /*#__PURE__*/React.createElement("span", {
+    className: "tl-toggle",
+    "aria-hidden": "true"
+  }, open ? 'Hide \u2212' : 'Details +'), /*#__PURE__*/React.createElement("div", {
     className: "tl-role"
   }, role), /*#__PURE__*/React.createElement("div", {
     className: "tl-co"
@@ -1816,14 +1848,16 @@ const ExperienceRow = ({
     "aria-hidden": "true"
   }, "\u2197")) : company)), tagline && /*#__PURE__*/React.createElement("div", {
     className: "co-tagline"
-  }, tagline), /*#__PURE__*/React.createElement("ul", {
+  }, tagline), /*#__PURE__*/React.createElement("div", {
+    className: "tl-collapse"
+  }, /*#__PURE__*/React.createElement("ul", {
     className: "tl-bullets"
   }, bullets.map((b, i) => /*#__PURE__*/React.createElement("li", {
     key: i,
     dangerouslySetInnerHTML: {
       __html: b
     }
-  })))), hasGallery && /*#__PURE__*/React.createElement("div", {
+  }))))), hasGallery && /*#__PURE__*/React.createElement("div", {
     className: "tl-album",
     onClick: e => {
       if (e.target.tagName === 'IMG') window.showLightbox(e.target.src);
