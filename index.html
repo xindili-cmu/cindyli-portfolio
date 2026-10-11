@@ -1538,7 +1538,7 @@ body.is-loading{overflow:hidden}
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
-/* timeline-data.js — all 12 experience entries, distilled from source. */
+/* timeline-data.js — all 13 experience entries, distilled from source. */
 
 window.TimelineData = [{
   period: '2026',
@@ -1567,6 +1567,15 @@ window.TimelineData = [{
   company: 'Thiele Law PLLC · Pittsburgh, PA',
   collapsible: true,
   bullets: ['Managed HubSpot CRM with <b class="m">3,500+ leads</b> and integrated Mailchimp campaigns (<b class="m">18% open rate</b>); ran cleaning, segmentation, and lead scoring to optimize the acquisition funnel.', 'Analyzed <b class="m">10+ competitor</b> consultation models across Avvo, FindLaw, and Justia; developed organic growth strategy with projected <b class="m">21% traffic growth</b>.', 'Built an <strong>AI-powered CRM analytics agent</strong> on HubSpot + Claude API, automating weekly extraction, trend analysis, and reporting - <b class="m">~3 hours/week</b> saved.']
+}, {
+  period: '2025',
+  healthcare: true,
+  logo: 'F',
+  role: 'Consulting Intern, Healthcare Group',
+  company: 'Frost & Sullivan · Shanghai',
+  url: 'https://www.frost.com/',
+  collapsible: true,
+  bullets: ['Analyzed market data for a <strong>new medical device</strong>, forecasting a potential market size and identifying growth drivers to inform the client\'s <strong>go-to-market strategy</strong>.', 'Synthesized insights from <b class="m-peach">30+ in-depth interviews</b> with Key Opinion Leaders (KOLs) and industry experts to validate market hypotheses and gather critical qualitative data.', 'Created client-facing reports and presentations using <strong>PowerPoint and ThinkCell</strong>, visualizing complex data and communicating strategic recommendations to senior client leadership.']
 }, {
   period: '2023 - 2025',
   healthcare: true,
@@ -1666,7 +1675,7 @@ const {
   useState,
   useCallback
 } = React;
-const SPLIT_AT = 6; // first N items render as vertical, rest hang horizontal
+const SPLIT_AT = 7; // first N items render as vertical, rest hang horizontal
 
 /* ─────────────────────────────────────────────────────────
    Lightbox helper — overlays the full-resolution image
