@@ -749,6 +749,10 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 .tl-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .tl-company { font-size: 0.9rem; color: var(--accent); font-weight: 400; }
 .tl-healthcare .tl-company { color: #ffd8a8; }
+.co-link { color: inherit; text-decoration: none; border-bottom: 1px dashed currentColor; transition: opacity .2s; }
+.co-link:hover { opacity: .75; border-bottom-style: solid; }
+.co-arrow { font-size: .75em; margin-left: 3px; opacity: .7; }
+.co-tagline { font-size: .78rem; font-style: italic; opacity: .7; margin: -4px 0 10px; }
 
 .tl-bullets { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 0.9rem; line-height: 1.72; color: rgba(255, 255, 255, 0.66); font-weight: 300; }
 .tl-bullets li { position: relative; padding-left: 20px; }
@@ -1533,6 +1537,7 @@ window.TimelineData = [{
   logoImg: 'edu_cmu.png',
   role: 'Graduate Research Assistant, Operations Research and Health Policy',
   company: 'Carnegie Mellon University, Heinz College · Pittsburgh, PA',
+  url: 'https://www.heinz.cmu.edu/',
   bullets: ['Built an end-to-end <strong>patient-selection and demand-forecasting pipeline</strong> for hospital-at-home care on a <b class="m-peach">153,980-admission</b> MIMIC-IV v3.1 extract; engineered a <b class="m-peach">190-column</b> day-level feature table from 10 raw clinical tables for a <b class="m-peach">36,027-admission</b> heart failure cohort.', 'Trained and validated two <strong>clinical risk gates</strong> (ICU escalation or in-hospital death; need for care not deliverable at home) using <strong>gradient-boosted trees and logistic regression</strong> under 5-fold patient-grouped cross-validation, reaching <b class="m-peach">AUROC 0.731 and 0.743</b> with bootstrap confidence intervals driving model selection.', 'Developed a <strong>21-quantile regression model</strong> forecasting remaining resource consumption, holding mean absolute coverage deviation to <b class="m-peach">0.0005</b> and cutting 90th-percentile pinball loss <b class="m-peach">13.9%</b> below a patient-blind baseline; delivered methods, ablations, and diagnostics to faculty in recurring written reports.']
 }, {
   period: '2026',
@@ -1541,6 +1546,7 @@ window.TimelineData = [{
   logoImg: 'assets/logo_atlas.png',
   role: 'IR Associate',
   company: 'Atlas Coalition (WeTheAtlas)',
+  url: 'https://wetheatlas.com/',
   bullets: ['Consolidated <b class="m">12 data sources</b> across 4 files into a unified CRM database - <b class="m">17,000+ contacts</b>, 30+ events, 1,600+ attendance records - via a <strong>Python ETL pipeline</strong> with email dedup, field standardization and priority-based merge rules.', 'Built the CRM on a <strong>Google Apps Script API layer</strong>: filterable contacts view, founder-investor matching, Claude-powered semantic match, intro pipeline tracking, KPI dashboard, and a <strong>D3 force-directed network graph</strong>.', 'Shipped <strong>The Atlas Capital Matrix</strong>, a public Top 100 family-office ranking with source-linked evidence tags and an activity-weighted score; cut the AI verification agent\'s running cost by roughly <b class="m">75%</b> through reduced search depth and rolling re-verification.', 'Automated a daily <strong>SEC EDGAR + NewsAPI</strong> intelligence digest into Slack via n8n.']
 }, {
   period: '2025',
@@ -1556,6 +1562,8 @@ window.TimelineData = [{
   logoImg: 'assets/logo_msh.png',
   role: 'Business Development Manager (Full-Time)',
   company: 'MSH China · International Health Insurance',
+  url: 'https://www.mshasia.com/',
+  tagline: 'The largest TPA and Direct Billing Network for High-End Health Insurance',
   bullets: ['Exceeded annual targets by <b class="m-peach">239%</b>, generating over <b class="m-peach">$1M</b> in new business through strategic client acquisition and data-driven market positioning.', 'Managed a global portfolio of <b class="m">2,000+</b> high-net-worth and corporate clients, delivering tailored medical insurance solutions to support retention and revenue growth, leveraging comprehensive knowledge of <strong>China\'s tiered healthcare network and provider landscape</strong>.', 'Analyzed group insurance client portfolios, synthesizing claims trends, utilization patterns, and risk profiles across <b class="m">50K+ insured lives</b> to inform underwriting and renewal strategy.', 'Led end-to-end design of a customized corporate insurance plan for an enterprise with <b class="m">50K+ employees</b>, partnering with actuarial teams on risk assessment, pricing, and product structuring.']
 }, {
   period: '2024 - 2025',
@@ -1613,6 +1621,7 @@ window.TimelineData = [{
   logoImg: 'assets/logo_disney.png',
   role: 'Athletic Trainer (Intern)',
   company: 'Shanghai Disney Resort · Shanghai',
+  url: 'https://www.shanghaidisneyresort.com/',
   gallery: ['assets/disney.jpg'],
   bullets: ['Collaborated with <strong>senior athletic trainers</strong> and performance management teams.', 'Leveraged <strong>Power BI and Excel</strong> to analyze injury incident data, identifying key risk factors and presenting data-driven insights.', 'Designed and implemented <strong>targeted intervention programs</strong> based on data analysis - <b class="m">70% reduction</b> in knee injury frequency.', 'Delivered <strong>rehabilitation and first-aid support</strong> to cast members.']
 }, {
@@ -1759,7 +1768,9 @@ const ExperienceRow = ({
     current,
     logo,
     logoImg,
-    gallery
+    gallery,
+    url,
+    tagline
   } = entry;
   const hasGallery = gallery && gallery.length > 0;
   const color = healthcare ? 'peach' : 'lavender';
@@ -1793,7 +1804,18 @@ const ExperienceRow = ({
     alt: ""
   }) : logo), /*#__PURE__*/React.createElement("div", {
     className: "tl-company"
-  }, company)), /*#__PURE__*/React.createElement("ul", {
+  }, url ? /*#__PURE__*/React.createElement("a", {
+    className: "co-link",
+    href: url,
+    target: "_blank",
+    rel: "noopener",
+    onClick: e => e.stopPropagation()
+  }, company, /*#__PURE__*/React.createElement("span", {
+    className: "co-arrow",
+    "aria-hidden": "true"
+  }, "\u2197")) : company)), tagline && /*#__PURE__*/React.createElement("div", {
+    className: "co-tagline"
+  }, tagline), /*#__PURE__*/React.createElement("ul", {
     className: "tl-bullets"
   }, bullets.map((b, i) => /*#__PURE__*/React.createElement("li", {
     key: i,
@@ -2186,7 +2208,9 @@ const ExperienceCard = ({
     bullets,
     logo,
     logoImg,
-    gallery
+    gallery,
+    url,
+    tagline
   } = entry;
   const parts = company.split(/\s*·\s*/);
   const coMain = parts[0];
@@ -2275,7 +2299,18 @@ const ExperienceCard = ({
     alt: ""
   }) : logo), /*#__PURE__*/React.createElement("span", {
     className: "exp-detail-company"
-  }, coMain, coLoc ? ` · ${coLoc}` : ''))), /*#__PURE__*/React.createElement("div", {
+  }, url ? /*#__PURE__*/React.createElement("a", {
+    className: "co-link",
+    href: url,
+    target: "_blank",
+    rel: "noopener",
+    onClick: e => e.stopPropagation()
+  }, coMain, /*#__PURE__*/React.createElement("span", {
+    className: "co-arrow",
+    "aria-hidden": "true"
+  }, "\u2197")) : coMain, coLoc ? ` · ${coLoc}` : '')), tagline && /*#__PURE__*/React.createElement("div", {
+    className: "co-tagline"
+  }, tagline)), /*#__PURE__*/React.createElement("div", {
     className: "exp-detail-body"
   }, bullets && /*#__PURE__*/React.createElement("ul", {
     className: "exp-detail-bullets"
