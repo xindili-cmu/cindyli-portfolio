@@ -2279,7 +2279,8 @@ const ExperienceCard = ({
   const roleShort = role.split(/\s*[(]\s*/)[0];
   /* Compact year for the polaroid tab: "2022 – 2023" → "’22–’23", else "2023" */
   const yrParts = (entry.period || '').split(/\s*[–—-]\s*/);
-  const yearTab = yrParts.length > 1 ? `’${yrParts[0].slice(-2)}-’${yrParts[1].slice(-2)}` : entry.period;
+  const yrEnd = yrParts.length > 1 ? (/\d/.test(yrParts[1]) ? `’${yrParts[1].slice(-2)}` : 'Now') : '';
+  const yearTab = yrParts.length > 1 ? `’${yrParts[0].slice(-2)}-${yrEnd}` : entry.period;
   const cls = `exp-card${healthcare ? ' thc' : ''}${isActive ? ' is-active' : ''}${isExpanded ? ' expanded' : ''}${isExpanded && hasGallery ? ' has-gallery' : ''}${isFirst ? ' is-first' : ''}${isLast ? ' is-last' : ''}`;
   /* Deterministic per-card variation: resting tilt, string length & sway gain
      so a row of polaroids reads natural rather than mechanically uniform. */
