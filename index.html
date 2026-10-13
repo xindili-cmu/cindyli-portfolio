@@ -955,6 +955,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
   overflow: hidden; background: #e6ddcb; border-radius: 1px;
 }
 .exp-pola-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.exp-pola-photo img[src*="logo_"] { object-fit: contain; background: #fff; padding: 10%; box-sizing: border-box; }
 /* Monogram fallback when an item has no field photo */
 .exp-pola-mono {
   width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
@@ -1661,8 +1662,10 @@ window.TimelineData = [{
   period: '2020 - Present',
   healthcare: true,
   logo: 'T',
+  logoImg: 'assets/logo_tsinghua.png',
   role: 'Volunteering Health Instructor',
   company: 'Tsinghua University Social Sciences Academy: Community Management Research Center, Beijing',
+  gallery: ['assets/logo_tsinghua.png'],
   bullets: ['Analyzed and interpreted up-to-date local policies issued by government organizations (the <strong>National Health Commission</strong>, the <strong>General Administration of Sport of China</strong>, etc.) to align projects with policy trends.', '<strong>"Public Welfare into Communities"</strong> Project: compiled health-related presentation materials; delivered public health education sessions in multiple communities across Shijingshan District, providing guidance on health knowledge and rehabilitation training; authored articles for health-related outreach.', '<strong>Beijing Children\'s Hospital Collaborative Project</strong>: co-authored <b class="m">three manuals</b> on body posture assessment; conducted posture evaluation projects for children, delivering individualized assessment reports and corrective training plans, including comprehensive movement libraries for upper limbs, spine, and lower limbs.', '<strong>"Science Popularization into Schools"</strong> Project: assisted the General Administration of Sport of China in conducting physical fitness tests (BMI, blood pressure, cardiopulmonary function, bone density, flexibility) at Xixin Primary School in Shunyi District; analyzed collected data to create evaluation and improvement suggestion reports; supported educational science initiatives for primary school students.']
 }, {
   period: '2020',
@@ -1670,6 +1673,7 @@ window.TimelineData = [{
   logo: 'S',
   role: 'Studio Community Connector',
   company: 'SPACE CYCLE Fitness Management Co., Ltd., Shanghai',
+  gallery: ['assets/exp_spacecycle.jpg'],
   bullets: ['Used the internal system to track and analyze member <strong>attendance, course participation, and retention</strong> data, identifying trends to optimize class scheduling and member engagement.', 'Conducted quantitative analysis on membership data, including <strong>onboarding rates, renewal rates, and demographic breakdowns</strong>, to improve member retention strategies.', 'Applied data-driven insights to segment the member base, creating targeted follow-up strategies that led to a <b class="m">20% increase</b> in renewal rates during the internship period.', 'Maintained <strong>Excel dashboards</strong> visualizing KPIs such as new member sign-ins (<b class="m">12 members</b>) and membership renewals (<b class="m">20 members</b>), tracking progress against targets.']
 }];
 /* Timeline.jsx — hybrid experience timeline (v3).
