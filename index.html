@@ -614,6 +614,7 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 .pc-healthcare .pc-detail-idx{color:var(--accent2)}
 .pc-healthcare .pc-detail-cta{color:var(--accent2);border-color:rgba(255,179,138,0.35)}
 .pc-healthcare .pc-detail-cta:hover{background:var(--accent2);color:#3d1f08}
+.pc-cta-row{display:flex;flex-wrap:wrap;gap:8px}
 .pc-healthcare .pc-detail-tech span{border-color:rgba(255,179,138,0.2);color:rgba(255,179,138,0.7)}
 .pc-name{font-family:var(--serif);font-size:clamp(15px,1.4vw,20px);font-weight:600;color:#fff;line-height:1.15;text-shadow:0 2px 12px rgba(0,0,0,0.7)}
 .pc-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);color:var(--fg);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;opacity:0.7;transition:opacity 0.3s,border-color 0.3s,background 0.3s;backdrop-filter:blur(6px)}
@@ -2744,6 +2745,10 @@ document.addEventListener('DOMContentLoaded', function(){
     rawThumb: true,
     gallery: ['ctrl-alt-cure-cover.jpg', 'ctrl-alt-cure-flow.jpg'],
     cta: {
+      label: 'View Live App',
+      href: 'https://frontier-hypothesis-engine-819870e1.base44.app'
+    },
+    cta2: {
       label: 'View on GitHub',
       href: 'https://github.com/vidhi-ds-24/Ctrl-Alt-Cure'
     }
@@ -3140,12 +3145,19 @@ document.addEventListener('DOMContentLoaded', function(){
       className: "pc-detail-tech"
     }, front.tech.map(t => /*#__PURE__*/React.createElement("span", {
       key: t
-    }, t))), front.cta && /*#__PURE__*/React.createElement("a", {
+    }, t))), front.cta && /*#__PURE__*/React.createElement("div", {
+      className: "pc-cta-row"
+    }, /*#__PURE__*/React.createElement("a", {
       className: "pc-detail-cta",
       href: front.cta.href,
       target: "_blank",
       rel: "noopener"
-    }, front.cta.label, " →"))), expandedIdx !== null && (() => {
+    }, front.cta.label, " →"), front.cta2 && /*#__PURE__*/React.createElement("a", {
+      className: "pc-detail-cta",
+      href: front.cta2.href,
+      target: "_blank",
+      rel: "noopener"
+    }, front.cta2.label, " →")))), expandedIdx !== null && (() => {
       const ep = projects[expandedIdx];
       return /*#__PURE__*/React.createElement("div", {
         className: "pc-modal",
@@ -3214,12 +3226,19 @@ document.addEventListener('DOMContentLoaded', function(){
         }
       }, ep.tech.map(t => /*#__PURE__*/React.createElement("span", {
         key: t
-      }, t))), ep.cta && /*#__PURE__*/React.createElement("a", {
-        className: "pc-detail-cta",
-        href: ep.cta.href,
-        target: "_blank",
-        rel: "noopener"
-      }, ep.cta.label, " →")))));
+      }, t))), ep.cta && /*#__PURE__*/React.createElement("div", {
+        className: "pc-cta-row"
+      }, /*#__PURE__*/React.createElement("a", {
+      className: "pc-detail-cta",
+      href: ep.cta.href,
+      target: "_blank",
+      rel: "noopener"
+    }, ep.cta.label, " →"), ep.cta2 && /*#__PURE__*/React.createElement("a", {
+      className: "pc-detail-cta",
+      href: ep.cta2.href,
+      target: "_blank",
+      rel: "noopener"
+    }, ep.cta2.label, " →"))))));
     })());
   }
   const CATS = [{
