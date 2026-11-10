@@ -2785,6 +2785,15 @@ document.addEventListener('DOMContentLoaded', function(){
       href: 'https://github.com/vidhi-ds-24/Ctrl-Alt-Cure'
     }
   }, {
+    tag: 'Optimization / Public Policy',
+    cat: 'policy',
+    name: 'Where Should Pittsburgh Pave Next?',
+    desc: 'Which streets should Pittsburgh repave when the $16.26M 2026 budget covers about 6% of need? A two-stage predict-then-optimize model: gradient boosting predicts daily traffic for 13,548 eligible street segments, then a 0-1 integer program selects segments under the budget, a set-up cost per paving job, and council-district spending floors. A balanced strategy lifts spending in Justice40 areas from 30% to 78% while keeping 89% of the maximum driver benefit. Team of four (CMU 94-867); I collected and cleaned the city, PennDOT, 311 and Census data into one table per street segment, built the income join, and worked on the optimization model.',
+    tech: ['Python', 'Integer Programming (HiGHS)', 'Gradient Boosting', 'GeoPandas'],
+    thumb: 'pave-next-cover.jpg',
+    rawThumb: true,
+    gallery: ['pave-next-cover.jpg', 'pave-next-maps.png', 'pave-next-tradeoff.png', 'pave-next-strategies.png']
+  }, {
     tag: 'AI / NLP',
     cat: 'ai',
     name: 'Climate Finance Research Agent',
@@ -3279,6 +3288,9 @@ document.addEventListener('DOMContentLoaded', function(){
   }, {
     id: 'health',
     label: 'Healthcare'
+  }, {
+    id: 'policy',
+    label: 'OR & Policy'
   }, {
     id: 'ai',
     label: 'AI & NLP'
