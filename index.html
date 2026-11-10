@@ -4,15 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Cindy Li | Portfolio</title>
-<meta name="description" content="Xindi (Cindy) Li | CMU MSPPM-DA candidate bridging healthcare, AI/NLP, and climate finance. Portfolio showcasing data-driven research, ESG analysis, and full-stack projects.">
+<meta name="description" content="Xindi (Cindy) Li | CMU MSPPM-DA candidate bringing data science, OR/ML, and data-driven policy analysis to healthcare. Trained physical therapist; portfolio of research, data pipelines, and LLM-powered projects.">
 <meta name="author" content="Xindi Li">
 <meta property="og:title" content="Cindy Li | Portfolio">
-<meta property="og:description" content="Healthcare × AI × Climate Finance | CMU MSPPM-DA candidate building end-to-end data pipelines and LLM-powered research agents.">
+<meta property="og:description" content="Healthcare, OR/ML, and data analytics | CMU MSPPM-DA candidate building end-to-end data pipelines and LLM-powered research agents.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cindy Li | Portfolio">
-<meta name="twitter:description" content="Healthcare × AI × Climate Finance | CMU MSPPM-DA candidate building end-to-end data pipelines and LLM-powered research agents.">
+<meta name="twitter:description" content="Healthcare, OR/ML, and data analytics | CMU MSPPM-DA candidate building end-to-end data pipelines and LLM-powered research agents.">
 <meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='44' fill='%23c8a2ff'%3Ex%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -1364,20 +1365,21 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 /* ── Mobile ──────────────────────────────────────────────────────── */
 @media (max-width: 760px) {
   .page { padding: 56px 5vw 100px; }
-  .tl-item { grid-template-columns: 62px 36px minmax(0, 1fr); column-gap: 12px; padding-bottom: 48px; }
-  .tl-item.tl-has-gallery { grid-template-columns: 62px 36px minmax(0, 1fr); }
-  .tl-album { grid-column: 3; width: 100px; height: 130px; margin-top: 12px; }
-  .tl-album img { width: 85px; height: 115px; }
-  .tl-year { padding-top: 10px; }
-  .tl-year-num { font-size: 1.3rem; }
+  /* Year sits above the card so the card gets the full width; bamboo slims to a left rail */
+  .tl-item, .tl-item.tl-has-gallery { grid-template-columns: 28px minmax(0, 1fr); column-gap: 14px; padding-bottom: 40px; }
+  .tl-year { grid-column: 2; grid-row: 1; flex-direction: row; align-items: center; justify-content: flex-start; gap: 10px; padding-top: 8px; margin-bottom: 10px; text-align: left; }
+  .tl-year-num { font-size: 1.3rem; flex-direction: row; align-items: baseline; gap: 6px; }
   .tl-year-range { font-size: 0.9rem; }
+  .tl-rail { grid-column: 1; grid-row: 1 / span 2; width: 28px; }
+  .tl-card { grid-column: 2; grid-row: 2; padding: 14px 16px 18px; }
+  .tl-album { grid-column: 2; grid-row: 3; width: 100px; height: 130px; margin-top: 12px; }
+  .tl-album img { width: 85px; height: 115px; }
   .tl-role { font-size: 1.05rem; }
-  .tl-card { padding: 14px 16px 18px; }
-  .tl-vine { left: 56px; width: 60px; }
-  .tl-rail { width: 36px; }
+  .tl-vine { left: -9px; width: 46px; }
   .tl-flower { width: 24px; height: 24px; }
+  .tl-climber { width: 46px; height: 62px; }
 
-  .rail-intro-inside { padding-left: 116px; }
+  .rail-intro-inside { padding-left: 42px; }
   .rail-stage { height: 560px; }
   .rail-viewport { padding: 0 calc(50% - 145px) 24px; }
   .exp-card { width: 110px; }
@@ -1402,6 +1404,29 @@ section{position:relative;z-index:1;padding:120px 8vw;max-width:1200px;margin:0 
 #preloader .pl-bar i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
 #preloader .pl-tag{font-family:var(--sans);font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
 body.is-loading{overflow:hidden}
+
+/* TOP NAV - desktop sticky bar, slides in after the hero */
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 56px;background:rgba(0,0,0,0.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-08);transform:translateY(-100%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.top-nav.show{transform:none}
+.top-nav a{text-decoration:none;cursor:none}
+.tn-name{font-family:var(--serif);font-variation-settings:var(--serif-disp);font-weight:600;font-size:1.05rem;color:var(--fg);letter-spacing:-.01em}
+.tn-name em{font-weight:400;color:var(--muted);margin-left:4px}
+.tn-links{display:flex;gap:26px}
+.tn-links a{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.tn-links a:hover,.tn-links a.on{color:var(--fg)}
+.tn-links a.on{box-shadow:0 5px 0 -4px var(--accent)}
+@media(max-width:1024px){.top-nav{padding:14px 28px}.tn-links{gap:18px}}
+@media(min-width:769px) and (max-width:1000px){.hero-nav{gap:14px}.hero-nav a{font-size:.66rem;letter-spacing:.06em}.tn-links{gap:12px}.tn-links a{letter-spacing:.06em;font-size:.66rem}}
+@media(max-width:768px){.top-nav{display:none}}
+
+/* REDUCED MOTION - respect the OS setting */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .cursor-trail,.data-rain{display:none!important}
+}
 </style>
 </head>
 <body class="is-loading">
@@ -1448,6 +1473,13 @@ body.is-loading{overflow:hidden}
 })();
 </script>
 
+<nav class="top-nav" id="topNav" aria-label="Sections">
+  <a class="tn-name" href="#hero">Xindi Li <em>(Cindy)</em></a>
+  <div class="tn-links">
+    <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a>
+    <a href="#skills">Skills</a><a href="#research">Research</a><a href="#education">Education</a><a href="#contact">Contact</a>
+  </div>
+</nav>
 <div class="grid-bg"><canvas id="gridCanvas"></canvas></div>
 <div class="cursor-glyph" id="cursorGlyph">x</div>
 
@@ -1478,10 +1510,10 @@ body.is-loading{overflow:hidden}
       </div>
     </div>
   </div>
-  <div class="hero-ui hero-name" id="nameEl"><span class="full">Xindi Li</span><span class="nick">(Cindy)</span></div>
+  <h1 class="hero-ui hero-name" id="nameEl"><span class="full">Xindi Li</span><span class="nick">(Cindy)</span></h1>
   <nav class="hero-ui hero-nav" id="navEl">
     <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a>
-    <a href="#skills">Skills</a><a href="#research">Research</a>
+    <a href="#skills">Skills</a><a href="#research">Research</a><a href="#education">Education</a><a href="#contact">Contact</a>
   </nav>
   <div class="hero-ui hero-socials" id="socialsEl">
     <a href="https://x.com/cindyyyyy111" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
@@ -3944,12 +3976,26 @@ document.querySelectorAll('a,.project-card,.tri-card').forEach(el=>{
   el.addEventListener('mouseleave',()=>cursorGlyph.classList.remove('is-link'));
 });
 
+// ═══ TOP NAV (desktop) ═══
+(function(){
+  var tn=document.getElementById('topNav'),hero=document.getElementById('hero');
+  if(!tn||!('IntersectionObserver' in window))return;
+  new IntersectionObserver(function(en){tn.classList.toggle('show',!en[0].isIntersecting)},{threshold:0.05}).observe(hero);
+  var links={};tn.querySelectorAll('.tn-links a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){
+    if(e.isIntersecting){for(var k in links)links[k].classList.toggle('on',k===e.target.id)}
+  })},{rootMargin:'-45% 0px -50% 0px'});
+  for(var id in links){var el=document.getElementById(id);if(el)io.observe(el)}
+})();
+
 // ═══ MOBILE NAV TOGGLE ═══
 (function(){
   if(window.innerWidth>768) return;
   var nav=document.getElementById('navEl');
   // Remove hero-ui class on mobile to avoid pointer-events:none conflict
   nav.classList.remove('hero-ui');
+  // Lift the menu out of #hero's stacking context so later sections can't paint over it
+  document.body.appendChild(nav);
   var toggle=document.createElement('button');
   toggle.className='nav-toggle';
   toggle.setAttribute('aria-label','Menu');
